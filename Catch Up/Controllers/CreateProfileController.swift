@@ -10,21 +10,52 @@ import UIKit
 
 class CreateProfileController: UIViewController {
 
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var gradientCurveView: GradientView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        nameField.delegate = self
+        
+        roundedTop(targetView: gradientCurveView, desiredCurve: 1)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func roundedTop(targetView:UIView?, desiredCurve:CGFloat?){
+        
+        let offset:CGFloat =  targetView!.frame.width/desiredCurve!
+        let bounds: CGRect = targetView!.bounds
+        let rectBounds: CGRect = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width, height: bounds.size.height / 2)
+        let rectPath: UIBezierPath = UIBezierPath(rect: rectBounds)
+        let ovalBounds: CGRect = CGRect(x:bounds.origin.x - offset / 2,y: bounds.origin.y, width : bounds.size.width + offset, height :bounds.size.height)
+        
+        let ovalPath: UIBezierPath = UIBezierPath(ovalIn: ovalBounds)
+        rectPath.append(ovalPath)
+        
+        // Create the shape layer and set its path
+        let maskLayer: CAShapeLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = rectPath.cgPath
+        
+        targetView!.layer.mask = maskLayer
     }
-    */
+}
 
+extension CreateProfileController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        nameField.resignFirstResponder()
+    }
 }

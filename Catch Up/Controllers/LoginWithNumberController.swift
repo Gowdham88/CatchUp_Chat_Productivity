@@ -26,11 +26,14 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
         
         phoneNumText.delegate = self
         
-//        let colorTop =  UIColor(hex: "5FABFF")
-//
-//        let colorBottom = UIColor(hex: "007AFF")
+        let phoneNumber = "+919597496508"
         
-//        setGradientBackground(colorTop: colorTop, colorBottom: colorBottom)
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
+            if let error = error {
+                print("error occurred while signing in",error)
+                return
+            }
+        }
         
         roundedTop(targetView: curveView, desiredCurve: 1)
 

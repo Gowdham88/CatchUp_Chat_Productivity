@@ -7,23 +7,33 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
-class LoginWithNumberController: UIViewController {
+class LoginWithNumberController: UIViewController,UITextFieldDelegate {
 
     
     @IBOutlet weak var curveView: GradientView!
     
+    @IBOutlet weak var nextButton: UIButton!
+    
+    @IBOutlet weak var phoneNumText: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        let colorTop =  UIColor(hex: "5FABFF")
+        phoneNumText.delegate = self
         
-        let colorBottom = UIColor(hex: "007AFF")
+        let phoneNumber = "+919597496508"
         
-//        setGradientBackground(colorTop: colorTop, colorBottom: colorBottom)
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
+            if let error = error {
+                print("error occurred while signing in",error)
+                return
+            }
+        }
         
         roundedTop(targetView: curveView, desiredCurve: 1)
 
@@ -49,6 +59,45 @@ class LoginWithNumberController: UIViewController {
         targetView!.layer.mask = maskLayer
     }
 
+    @IBAction func didTappedNext(_ sender: Any) {
+        
+        let sb = UIStoryboard(name: "Auth", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "VerifyOTPVController")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+}
+
+extension LoginWithNumberController {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
+            
+            self.nextButton.frame.origin.y = self.nextButton.frame.origin.y - 280
+            
+        })
+        
+       
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 5.0, initialSpringVelocity: 5.0, options: .curveEaseIn, animations: {
+            
+            self.nextButton.frame.origin.y = self.nextButton.frame.origin.y + 280
+            
+        })
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        phoneNumText.resignFirstResponder()
+    }
 }
 
 
@@ -74,12 +123,4 @@ class LoginWithNumberController: UIViewController {
 //        self.curveView.layer.insertSublayer(gradientLayer, at:0)
 //    }
 
-extension UIView {
-    
-    func rotate(angle: CGFloat) {
-        let radians = angle / 180.0 * CGFloat.pi
-        let rotation = self.transform.rotated(by: radians)
-        self.transform = rotation
-    }
-    
-}
+

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240113C5221AB7A25252B540 /* Pods_Catch_Up.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */; };
+		B42A9D0C228C1AB600C869F4 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42A9D0B228C1AB600C869F4 /* SelectContactTableViewCell.swift */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
 		B48205E2228A7383003A1680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48205E0228A7383003A1680 /* Main.storyboard */; };
@@ -19,9 +21,18 @@
 		B48205FE228A8883003A1680 /* CurveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205FD228A8883003A1680 /* CurveView.swift */; };
 		B4820600228A9507003A1680 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205FF228A9507003A1680 /* GradientView.swift */; };
 		B4820602228AAFA5003A1680 /* DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4820601228AAFA5003A1680 /* DropShadow.swift */; };
+		B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4820603228AC8D5003A1680 /* CreateProfileController.swift */; };
+		B48D9064228D29CB001B0EEC /* MainChatScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48D9063228D29CB001B0EEC /* MainChatScreenController.swift */; };
+		B4DCF162228BE172009B97CE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4DCF161228BE172009B97CE /* Chat.storyboard */; };
+		B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DCF163228BE193009B97CE /* ChatDashboardController.swift */; };
+		B4DCF166228BFA31009B97CE /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DCF165228BFA31009B97CE /* ChatTableViewCell.swift */; };
+		B4DCF168228C16B7009B97CE /* SelectContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DCF167228C16B7009B97CE /* SelectContactController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
+		A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.debug.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.debug.xcconfig"; sourceTree = "<group>"; };
+		B42A9D0B228C1AB600C869F4 /* SelectContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectContactTableViewCell.swift; path = "Catch Up/Controllers/SelectContactTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205DC228A7383003A1680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B48205DE228A7383003A1680 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +47,27 @@
 		B48205FD228A8883003A1680 /* CurveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveView.swift; sourceTree = "<group>"; };
 		B48205FF228A9507003A1680 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		B4820601228AAFA5003A1680 /* DropShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadow.swift; sourceTree = "<group>"; };
+		B4820603228AC8D5003A1680 /* CreateProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileController.swift; sourceTree = "<group>"; };
+		B48D9055228D1DDC001B0EEC /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
+		B48D9056228D1E8F001B0EEC /* Muli-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-BlackItalic.ttf"; sourceTree = "<group>"; };
+		B48D9057228D1E8F001B0EEC /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
+		B48D9058228D1E8F001B0EEC /* Muli-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		B48D9059228D1E8F001B0EEC /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Light.ttf"; sourceTree = "<group>"; };
+		B48D905A228D1E8F001B0EEC /* Muli-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-LightItalic.ttf"; sourceTree = "<group>"; };
+		B48D905B228D1E8F001B0EEC /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Bold.ttf"; sourceTree = "<group>"; };
+		B48D905C228D1E8F001B0EEC /* Muli-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Italic.ttf"; sourceTree = "<group>"; };
+		B48D905D228D1E8F001B0EEC /* Muli-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		B48D905E228D1E8F001B0EEC /* Muli-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-BoldItalic.ttf"; sourceTree = "<group>"; };
+		B48D905F228D1E8F001B0EEC /* Muli-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Regular.ttf"; sourceTree = "<group>"; };
+		B48D9060228D1E8F001B0EEC /* Muli-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Black.ttf"; sourceTree = "<group>"; };
+		B48D9061228D1E8F001B0EEC /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBold.ttf"; sourceTree = "<group>"; };
+		B48D9062228D1E96001B0EEC /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		B48D9063228D29CB001B0EEC /* MainChatScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChatScreenController.swift; sourceTree = "<group>"; };
+		B4DCF161228BE172009B97CE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		B4DCF163228BE193009B97CE /* ChatDashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDashboardController.swift; sourceTree = "<group>"; };
+		B4DCF165228BFA31009B97CE /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatTableViewCell.swift; path = "Catch Up/Controllers/ChatTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		B4DCF167228C16B7009B97CE /* SelectContactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectContactController.swift; sourceTree = "<group>"; };
+		C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Catch_Up.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +75,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				240113C5221AB7A25252B540 /* Pods_Catch_Up.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B6EE85014391CEC5B832B2B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8BB6BF7B6BB90359B0E99DD3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */,
+				2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B48205D0228A7383003A1680 = {
 			isa = PBXGroup;
 			children = (
 				B48205DB228A7383003A1680 /* Catch Up */,
 				B48205DA228A7383003A1680 /* Products */,
+				8BB6BF7B6BB90359B0E99DD3 /* Pods */,
+				1B6EE85014391CEC5B832B2B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +120,7 @@
 		B48205DB228A7383003A1680 /* Catch Up */ = {
 			isa = PBXGroup;
 			children = (
+				B48D9054228D1DC8001B0EEC /* Fonts */,
 				B48205F4228A76F4003A1680 /* Models */,
 				B48205F3228A76EA003A1680 /* Views */,
 				B48205F2228A76DC003A1680 /* Storyboards */,
@@ -114,6 +167,10 @@
 				B48205DE228A7383003A1680 /* ViewController.swift */,
 				B48205F9228A86E4003A1680 /* LoginWithNumberController.swift */,
 				B48205FB228A8704003A1680 /* VerifyOTPVController.swift */,
+				B4820603228AC8D5003A1680 /* CreateProfileController.swift */,
+				B4DCF163228BE193009B97CE /* ChatDashboardController.swift */,
+				B4DCF167228C16B7009B97CE /* SelectContactController.swift */,
+				B48D9063228D29CB001B0EEC /* MainChatScreenController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -123,6 +180,7 @@
 			children = (
 				B48205E0228A7383003A1680 /* Main.storyboard */,
 				B48205F7228A855C003A1680 /* Auth.storyboard */,
+				B4DCF161228BE172009B97CE /* Chat.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -130,6 +188,8 @@
 		B48205F3228A76EA003A1680 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B4DCF165228BFA31009B97CE /* ChatTableViewCell.swift */,
+				B42A9D0B228C1AB600C869F4 /* SelectContactTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -141,6 +201,27 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		B48D9054228D1DC8001B0EEC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B48D9055228D1DDC001B0EEC /* Muli-SemiBold.ttf */,
+				B48D9060228D1E8F001B0EEC /* Muli-Black.ttf */,
+				B48D9056228D1E8F001B0EEC /* Muli-BlackItalic.ttf */,
+				B48D905B228D1E8F001B0EEC /* Muli-Bold.ttf */,
+				B48D905E228D1E8F001B0EEC /* Muli-BoldItalic.ttf */,
+				B48D9061228D1E8F001B0EEC /* Muli-ExtraBold.ttf */,
+				B48D905D228D1E8F001B0EEC /* Muli-ExtraBoldItalic.ttf */,
+				B48D9057228D1E8F001B0EEC /* Muli-ExtraLight.ttf */,
+				B48D9058228D1E8F001B0EEC /* Muli-ExtraLightItalic.ttf */,
+				B48D905C228D1E8F001B0EEC /* Muli-Italic.ttf */,
+				B48D9059228D1E8F001B0EEC /* Muli-Light.ttf */,
+				B48D905A228D1E8F001B0EEC /* Muli-LightItalic.ttf */,
+				B48D905F228D1E8F001B0EEC /* Muli-Regular.ttf */,
+				B48D9062228D1E96001B0EEC /* Muli-SemiBoldItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -148,9 +229,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B48205EB228A7384003A1680 /* Build configuration list for PBXNativeTarget "Catch Up" */;
 			buildPhases = (
+				FD84632DF2B00DC8A94D5C6F /* [CP] Check Pods Manifest.lock */,
 				B48205D5228A7383003A1680 /* Sources */,
 				B48205D6228A7383003A1680 /* Frameworks */,
 				B48205D7228A7383003A1680 /* Resources */,
+				13836A2CDA5207BA28196405 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -202,23 +285,81 @@
 				B48205F8228A855C003A1680 /* Auth.storyboard in Resources */,
 				B48205E7228A7384003A1680 /* LaunchScreen.storyboard in Resources */,
 				B48205E4228A7384003A1680 /* Assets.xcassets in Resources */,
+				B4DCF162228BE172009B97CE /* Chat.storyboard in Resources */,
 				B48205E2228A7383003A1680 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		13836A2CDA5207BA28196405 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Catch Up/Pods-Catch Up-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Catch Up/Pods-Catch Up-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD84632DF2B00DC8A94D5C6F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Catch Up-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B48205D5228A7383003A1680 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4DCF168228C16B7009B97CE /* SelectContactController.swift in Sources */,
 				B48205FE228A8883003A1680 /* CurveView.swift in Sources */,
 				B48205FA228A86E4003A1680 /* LoginWithNumberController.swift in Sources */,
+				B42A9D0C228C1AB600C869F4 /* SelectContactTableViewCell.swift in Sources */,
 				B48205DF228A7383003A1680 /* ViewController.swift in Sources */,
 				B48205FC228A8704003A1680 /* VerifyOTPVController.swift in Sources */,
 				B4820600228A9507003A1680 /* GradientView.swift in Sources */,
+				B4DCF166228BFA31009B97CE /* ChatTableViewCell.swift in Sources */,
+				B48D9064228D29CB001B0EEC /* MainChatScreenController.swift in Sources */,
 				B48205F6228A83D3003A1680 /* HexColorextension.swift in Sources */,
+				B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */,
+				B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */,
 				B4820602228AAFA5003A1680 /* DropShadow.swift in Sources */,
 				B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */,
 			);
@@ -364,6 +505,7 @@
 		};
 		B48205EC228A7384003A1680 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -382,6 +524,7 @@
 		};
 		B48205ED228A7384003A1680 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

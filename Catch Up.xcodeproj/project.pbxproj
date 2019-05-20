@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		240113C5221AB7A25252B540 /* Pods_Catch_Up.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */; };
 		B42A9D0C228C1AB600C869F4 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42A9D0B228C1AB600C869F4 /* SelectContactTableViewCell.swift */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
@@ -27,7 +26,21 @@
 		B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DCF163228BE193009B97CE /* ChatDashboardController.swift */; };
 		B4DCF166228BFA31009B97CE /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DCF165228BFA31009B97CE /* ChatTableViewCell.swift */; };
 		B4DCF168228C16B7009B97CE /* SelectContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DCF167228C16B7009B97CE /* SelectContactController.swift */; };
+		B81B68888E8A9CFFD12C5434 /* Pods_Catch_Up.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B4B3E5D32292B72500DE7789 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				240113C5221AB7A25252B540 /* Pods_Catch_Up.framework in Frameworks */,
+				B81B68888E8A9CFFD12C5434 /* Pods_Catch_Up.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +247,7 @@
 				B48205D6228A7383003A1680 /* Frameworks */,
 				B48205D7228A7383003A1680 /* Resources */,
 				13836A2CDA5207BA28196405 /* [CP] Embed Pods Frameworks */,
+				B4B3E5D32292B72500DE7789 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -302,6 +316,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Catch Up/Pods-Catch Up-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CameraManager/CameraManager.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -310,6 +325,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CameraManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",

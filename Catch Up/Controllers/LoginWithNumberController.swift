@@ -59,19 +59,19 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
         
         var phoneNumber : String?
         
-//        if let num = phoneNumText.text {
+        if let num = phoneNumText.text {
         
-//            phoneNumber = "+91" + num
+            phoneNumber = "+91" + num
         
-        phoneNumber = "+91" + "9597496508"
+//        phoneNumber = "+91" + "9597496508"
 
         
-//        }else {
-        
-//            phoneNumber = "+91" + ""
-        
-//        }
-                
+        }else {
+    
+            phoneNumber = "+91" + ""
+    
+        }
+    
         UserDefaults.standard.set(phoneNumber!, forKey: "phone")
         
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber!, uiDelegate: nil) { (verificationID, error) in

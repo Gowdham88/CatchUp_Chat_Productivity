@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
+import CameraManager
+
+
 
 class MainChatScreenController: UIViewController {
     
@@ -23,6 +28,24 @@ class MainChatScreenController: UIViewController {
     @IBOutlet weak var threadMainImageView: UIImageView!
     
     @IBOutlet weak var bottomBarView: UIView!
+    
+    
+    // bottom bar outlets
+    
+    @IBOutlet weak var emojiButton: UIButton!
+    
+    @IBOutlet weak var typeMessageTextField: UITextField!
+    
+    @IBOutlet weak var attachmentButton: UIButton!
+    
+    @IBOutlet weak var cameraButton: UIButton!
+    
+    @IBOutlet weak var recordButton: UIButton!
+    
+    var cameraManager : CameraManager!
+    
+    
+    var picker:UIImagePickerController?=UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +67,12 @@ class MainChatScreenController: UIViewController {
         }
         bottomBarView.layer.masksToBounds = false
         
+        picker?.delegate = self
+        
+        cameraManager = CameraManager()
+        
+        cameraManager.shouldFlipFrontCameraImage = true
+    
     }
     
     @IBAction func didTappedBack(_ sender: Any) {
@@ -51,16 +80,60 @@ class MainChatScreenController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func didTappedEmoji(_ sender: Any) {
+        
+        
     }
-    */
+    
+    @IBAction func didTappedAttchments(_ sender: Any) {
+        
+        // for image
+        
+        let myPickerController = UIImagePickerController()
+        myPickerController.delegate = self;
+        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
+        addChild(myPickerController)
+        threadMainImageView.addSubview(myPickerController.view)
+        
+        myPickerController.view.frame = threadMainImageView.bounds
+        
+        myPickerController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        //        self.present(myPickerController, animated: true, completion: nil)
+        
+        myPickerController.didMove(toParent: self)
+    }
+    
+    @IBAction func didTappedCamera(_ sender: Any) {
+        
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
+            
+            cameraManager.addPreviewLayerToView(self.view)
+            cameraManager.shouldFlipFrontCameraImage = true
+            picker!.sourceType = UIImagePickerController.SourceType.camera
+            self .present(picker!, animated: true, completion: nil)
+        }
 
+   
+    }
+    
+    @IBAction func didTappedAudioRecord(_ sender: Any) {
+        
+        
+        
+    }
+}
+
+extension MainChatScreenController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        
+     
+        
+    }
+    
+    
+    
+    
 }

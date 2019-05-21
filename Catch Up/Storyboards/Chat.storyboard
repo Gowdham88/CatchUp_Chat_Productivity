@@ -606,6 +606,9 @@
                                                         <rect key="frame" x="15" y="19" width="21" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="smile"/>
+                                                        <connections>
+                                                            <action selector="didTappedEmoji:" destination="PEs-1i-fPb" eventType="touchUpInside" id="U1Y-Mh-XFu"/>
+                                                        </connections>
                                                     </button>
                                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   Message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D4a-IP-u3j">
                                                         <rect key="frame" x="45" y="0.0" width="219" height="60"/>
@@ -626,16 +629,25 @@
                                                         <rect key="frame" x="12" y="18" width="22" height="23"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="attachment"/>
+                                                        <connections>
+                                                            <action selector="didTappedAttchments:" destination="PEs-1i-fPb" eventType="touchUpInside" id="tDO-L5-J5N"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uio-xG-WRf">
                                                         <rect key="frame" x="54" y="19" width="24" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="camera_bottom"/>
+                                                        <connections>
+                                                            <action selector="didTappedCamera:" destination="PEs-1i-fPb" eventType="touchUpInside" id="TeJ-iH-SZ3"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHs-pA-r8e">
                                                         <rect key="frame" x="92" y="10" width="45" height="42"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="btn voice"/>
+                                                        <connections>
+                                                            <action selector="didTappedAudioRecord:" destination="PEs-1i-fPb" eventType="touchUpInside" id="dmg-Ly-w7o"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -698,13 +710,18 @@
                     </view>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
+                        <outlet property="attachmentButton" destination="6Ce-9c-kGV" id="RcR-cA-S8P"/>
                         <outlet property="backButton" destination="8J5-Au-IcI" id="BK6-To-m4f"/>
                         <outlet property="bottomBarView" destination="AnR-DI-Uf4" id="Crj-D8-dEI"/>
+                        <outlet property="cameraButton" destination="Uio-xG-WRf" id="vKv-vF-qYl"/>
+                        <outlet property="emojiButton" destination="ngW-Lt-qJY" id="pe9-WD-upO"/>
                         <outlet property="groupButton" destination="pgi-1x-U3u" id="UCC-pk-0d5"/>
                         <outlet property="navProfileImage" destination="Kqf-0c-z8D" id="nTo-TF-PBF"/>
                         <outlet property="navigationView" destination="RSO-JI-Smt" id="5tq-0g-S1Q"/>
+                        <outlet property="recordButton" destination="uHs-pA-r8e" id="cpz-nq-IA2"/>
                         <outlet property="threadBackupView" destination="BW2-lO-1lp" id="JDF-SQ-JSH"/>
                         <outlet property="threadMainImageView" destination="bpv-gd-EJV" id="aYy-cg-FDK"/>
+                        <outlet property="typeMessageTextField" destination="D4a-IP-u3j" id="g6T-Ag-5Jf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXu-iH-jtU" userLabel="First Responder" sceneMemberID="firstResponder"/>

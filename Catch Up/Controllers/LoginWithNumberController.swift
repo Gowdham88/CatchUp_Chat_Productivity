@@ -26,18 +26,14 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
         
         phoneNumText.delegate = self
         
-        let phoneNumber = "+919597496508"
-        
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-            if let error = error {
-                print("error occurred while signing in",error)
-                return
-            }
-        }
-        
         roundedTop(targetView: curveView, desiredCurve: 1)
-
-
+        
+        if let StatusbarView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+            
+            StatusbarView.backgroundColor = UIColor(red: 15/255, green: 110/255, blue: 255/255, alpha: 1)
+            StatusbarView.setGradientBackground(view: StatusbarView)
+        }
+        self.navigationController?.navigationBar.barStyle = .black
     }
     
     func roundedTop(targetView:UIView?, desiredCurve:CGFloat?){
@@ -61,9 +57,42 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
 
     @IBAction func didTappedNext(_ sender: Any) {
         
-        let sb = UIStoryboard(name: "Auth", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "VerifyOTPVController")
-        self.navigationController?.pushViewController(vc, animated: true)
+        var phoneNumber : String?
+        
+//        if let num = phoneNumText.text {
+        
+//            phoneNumber = "+91" + num
+        
+        phoneNumber = "+91" + "9597496508"
+
+        
+//        }else {
+        
+//            phoneNumber = "+91" + ""
+        
+//        }
+                
+        UserDefaults.standard.set(phoneNumber!, forKey: "phone")
+        
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber!, uiDelegate: nil) { (verificationID, error) in
+            
+            if let error = error {
+                
+                print("error occurred while signing in",error)
+                
+                return
+            }
+            
+            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+
+            let sb = UIStoryboard(name: "Auth", bundle: nil)
+            
+            let vc = sb.instantiateViewController(withIdentifier: "VerifyOTPVController")
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+      
     }
     
     

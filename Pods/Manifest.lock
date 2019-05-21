@@ -66,6 +66,7 @@ DEPENDENCIES:
   - CameraManager (~> 4.4)
   - Firebase
   - Firebase/Auth
+  - Firebase/Core
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -94,6 +95,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: 2939f864a7ff7b75ad6a620e0d038fbb4567b5ec
+PODFILE CHECKSUM: c94e1e7fcc1e1bdb96ffee52f02b10e1146415b5
 
 COCOAPODS: 1.6.0.rc.1

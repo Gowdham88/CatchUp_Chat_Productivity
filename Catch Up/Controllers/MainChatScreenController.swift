@@ -106,8 +106,7 @@ class MainChatScreenController: UIViewController {
     
     @IBAction func didTappedCamera(_ sender: Any) {
         
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
-        {
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
             
             cameraManager.addPreviewLayerToView(self.view)
             cameraManager.shouldFlipFrontCameraImage = true
@@ -115,9 +114,7 @@ class MainChatScreenController: UIViewController {
             self .present(picker!, animated: true, completion: nil)
         }
 
-        
-     
-        
+   
     }
     
     @IBAction func didTappedAudioRecord(_ sender: Any) {

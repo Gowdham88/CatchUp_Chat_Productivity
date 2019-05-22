@@ -19,6 +19,10 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var phoneNumText: UITextField!
     
+    var keyboardHeight : CGFloat = 0.0
+    
+    var isKeyBoardOn : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +39,18 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
         }
         self.navigationController?.navigationBar.barStyle = .black
         
+//        phoneNumText.textColor = UIColor(named: "Light")
+        
+        let colorr = UIColor(named: "anotherMode")
+        
+        phoneNumText.textColor = colorr
+        
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
         //notification for keyboard
         
         NotificationCenter.default.addObserver(
@@ -50,22 +66,15 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
         
-        //test common class
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(UITextField.showKeyboard(_:button:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(UITextField.showKeyboard(_:button:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
+        
     }
     
     func roundedTop(targetView:UIView?, desiredCurve:CGFloat?){
@@ -96,7 +105,6 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
             phoneNumber = "+91" + num
         
 //        phoneNumber = "+91" + "9597496508"
-
         
         }else {
     
@@ -119,15 +127,13 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
 
             let sb = UIStoryboard(name: "Auth", bundle: nil)
             
-            let vc = sb.instantiateViewController(withIdentifier: "VerifyOTPVController")
+            let vc = sb.instantiateViewController(withIdentifier: "VerifyOTPVController") as! VerifyOTPVController
+            
+            vc.keyboardHeight = self.keyboardHeight
             
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        
-      
     }
-    
-    
 }
 
 extension LoginWithNumberController {
@@ -140,18 +146,17 @@ extension LoginWithNumberController {
 //
 //        })
         
-       
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        
         
 //        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 5.0, initialSpringVelocity: 5.0, options: .curveEaseIn, animations: {
 //
 //            self.nextButton.frame.origin.y = self.nextButton.frame.origin.y + 280
 //
 //        })
+        
+        phoneNumText.resignFirstResponder()
         
     }
     
@@ -160,7 +165,6 @@ extension LoginWithNumberController {
         phoneNumText.resignFirstResponder()
     }
 }
-
 
 //    func setGradientBackground() {
 //
@@ -187,45 +191,39 @@ extension LoginWithNumberController {
 extension LoginWithNumberController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
-                self.nextButton.frame.origin.y = self.nextButton.frame.origin.y - keyboardHeight
-            })
+        
+        if isKeyBoardOn == false{
+            
+            if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+               
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                
+                keyboardHeight = keyboardRectangle.height
+
+                    self.nextButton.frame.origin.y = self.nextButton.frame.origin.y - self.keyboardHeight
+
+            }
+            
+             isKeyBoardOn = true
         }
+        
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
-                self.nextButton.frame.origin.y = self.nextButton.frame.origin.y + keyboardHeight
-            })
+        
+        if isKeyBoardOn == true {
+            
+                self.nextButton.frame.origin.y = self.nextButton.frame.origin.y + self.keyboardHeight
+            
+            isKeyBoardOn = false
         }
+  
+        
+//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+//            let keyboardRectangle = keyboardFrame.cgRectValue
+//            let keyboardHeight = keyboardRectangle.height
+//
+//        }
     }
 }
 
-extension UITextField {
-    
-    @objc func showKeyboard(_ notification: Notification,button: UIButton) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
-                button.frame.origin.y = button.frame.origin.y - keyboardHeight
-            })
-        }
-    }
-    
-    @objc func hideKeyboard(_ notification: Notification,button: UIButton) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
-                button.frame.origin.y = button.frame.origin.y + keyboardHeight
-            })
-        }
-    }
-}

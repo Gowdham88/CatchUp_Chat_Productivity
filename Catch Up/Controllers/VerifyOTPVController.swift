@@ -93,8 +93,6 @@ class VerifyOTPVController: UIViewController {
                 
             }
         }
-        
-
     }
     
     @IBAction func phoneNumberEditButton(_ sender: Any) {
@@ -111,8 +109,9 @@ class VerifyOTPVController: UIViewController {
             verificationCode: enterOTPField.text!)
         
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+            
             if let error = error {
-                // ...
+               
                 print("error occured while verifying OTP",error)
                 
                 return
@@ -120,7 +119,6 @@ class VerifyOTPVController: UIViewController {
             
             // User is signed in
             
-            print("login successfull \(authResult)")
             let sb = UIStoryboard(name: "Auth", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "CreateProfileController")
             self.navigationController?.pushViewController(vc, animated: true)
@@ -156,8 +154,7 @@ extension VerifyOTPVController: UITextFieldDelegate {
         
         UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
             
-            self.sendButton.frame.origin.y = (self.sendButton.frame.origin.y) - 280
-            
+            self.sendButton.frame.origin.y = (self.sendButton.frame.origin.y) - self.keyboardHeight!
         })
     }
     
@@ -165,7 +162,7 @@ extension VerifyOTPVController: UITextFieldDelegate {
         
         UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
             
-            self.sendButton.frame.origin.y = (self.sendButton.frame.origin.y) +  280
+            self.sendButton.frame.origin.y = (self.sendButton.frame.origin.y) +  self.keyboardHeight!
             
         })
     }

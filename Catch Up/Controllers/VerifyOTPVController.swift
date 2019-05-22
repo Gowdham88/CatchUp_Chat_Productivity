@@ -36,6 +36,10 @@ class VerifyOTPVController: UIViewController {
     var summedCount = ""
     
     var savedPhoneNumber: String?
+    
+    //get keyboard's height
+    
+    var keyboardHeight: CGFloat?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,7 +156,7 @@ extension VerifyOTPVController: UITextFieldDelegate {
         
         UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
             
-            self.sendButton.frame.origin.y = self.sendButton.frame.origin.y - 280
+            self.sendButton.frame.origin.y = (self.sendButton.frame.origin.y) - 280
             
         })
     }
@@ -161,7 +165,7 @@ extension VerifyOTPVController: UITextFieldDelegate {
         
         UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
             
-            self.sendButton.frame.origin.y = self.sendButton.frame.origin.y + 280
+            self.sendButton.frame.origin.y = (self.sendButton.frame.origin.y) +  280
             
         })
     }

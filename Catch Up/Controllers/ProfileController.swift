@@ -13,18 +13,25 @@ import Firebase
 class ProfileController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var profileImage: UIImageView!
-    
+    @IBOutlet weak var supportView: UIView!
     
     var profileitems = ["Chat", "Invite Friends", "Theme", "Help", "Log Out"]
+    var iconImages : [UIImage] = [UIImage(named: "message-square")!, UIImage(named: "users")!, UIImage(named: "sliders")!, UIImage(named: "help-circle")!, UIImage(named: "power")!]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        profileImage.layer.borderWidth = 1
-        profileImage.layer.masksToBounds = false
-        profileImage.layer.borderColor = UIColor.clear.cgColor
-        profileImage.layer.cornerRadius = profileImage.frame.height/2
-        profileImage.clipsToBounds = true
+//        profileImage.layer.borderWidth = 1
+//        profileImage.layer.masksToBounds = false
+//        profileImage.layer.borderColor = UIColor.clear.cgColor
+//        profileImage.layer.cornerRadius = profileImage.frame.height/2
+//        profileImage.clipsToBounds = true
+        
+        profileImage.roundCorners(corners: [.topRight, .topLeft, .bottomLeft, .bottomRight], radius: profileImage.frame.height/2)
+        
+        supportView.roundCorners(corners: [.topRight, .topLeft], radius: 20)
+        
+
         
         // Do any additional setup after loading the view.
     }
@@ -52,6 +59,7 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
         uploadTask.observe(.success) { snapshot in
             
             print("Success")
+            
             
         }
         
@@ -107,13 +115,19 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ProfileTableViewCell
         
-        cell.textLabel?.text = profileitems[indexPath.row]
+        cell.iconImage.image = iconImages[indexPath.row]
+
+        cell.ProfileText.text = profileitems[indexPath.row]
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 100
+    }
     /*
     // MARK: - Navigation
 

@@ -1,5 +1,4 @@
 PODS:
-  - CameraManager (4.4.0)
   - Firebase (5.16.0):
     - Firebase/Core (= 5.16.0)
   - Firebase/Auth (5.16.0):
@@ -63,14 +62,12 @@ PODS:
   - nanopb/encode (0.3.901)
 
 DEPENDENCIES:
-  - CameraManager (~> 4.4)
   - Firebase
   - Firebase/Auth
   - Firebase/Core
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - CameraManager
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -83,7 +80,6 @@ SPEC REPOS:
     - nanopb
 
 SPEC CHECKSUMS:
-  CameraManager: 583710502c42178d12ef046d9d4f7893feff8354
   Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
   FirebaseAnalytics: d35d47c03c50c73c14a7fd31463c5775843e78a9
   FirebaseAuth: c9b3ff063c223d2841d97240af547ce511bce19a
@@ -95,6 +91,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: c94e1e7fcc1e1bdb96ffee52f02b10e1146415b5
+PODFILE CHECKSUM: 8e872eea0012616a9fe950c309c70da63ea224eb
 
-COCOAPODS: 1.6.0.rc.1
+COCOAPODS: 1.6.1

@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
-import CameraManager
+//import CameraManager
 
 
 
@@ -42,7 +42,7 @@ class MainChatScreenController: UIViewController {
     
     @IBOutlet weak var recordButton: UIButton!
     
-    var cameraManager : CameraManager!
+//    var cameraManager : CameraManager!
     
     
     var picker:UIImagePickerController?=UIImagePickerController()
@@ -69,9 +69,9 @@ class MainChatScreenController: UIViewController {
         
         picker?.delegate = self
         
-        cameraManager = CameraManager()
+//        cameraManager = CameraManager()
         
-        cameraManager.shouldFlipFrontCameraImage = true
+//        cameraManager.shouldFlipFrontCameraImage = true
     
     }
     
@@ -108,10 +108,10 @@ class MainChatScreenController: UIViewController {
         
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
             
-            cameraManager.addPreviewLayerToView(self.view)
-            cameraManager.shouldFlipFrontCameraImage = true
-            picker!.sourceType = UIImagePickerController.SourceType.camera
-            self .present(picker!, animated: true, completion: nil)
+//            cameraManager.addPreviewLayerToView(self.view)
+//            cameraManager.shouldFlipFrontCameraImage = true
+//            picker!.sourceType = UIImagePickerController.SourceType.camera
+//            self .present(picker!, animated: true, completion: nil)
         }
 
    

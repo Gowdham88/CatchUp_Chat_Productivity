@@ -22,7 +22,7 @@ class TaskViewController: UIViewController {
         profileImgView.setRounded()
         
     }
-}
+}//class
 
 extension UIImageView {
     

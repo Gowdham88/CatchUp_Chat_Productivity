@@ -13,4 +13,9 @@ class GroupedUsersCell: UICollectionViewCell {
     
     @IBOutlet weak var groupedUserImageView: UIImageView!
     
+    override func awakeFromNib() {
+        
+        groupedUserImageView.layer.cornerRadius = groupedUserImageView.frame.height/2
+    }
+    
 }

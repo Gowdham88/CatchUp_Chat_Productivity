@@ -8,12 +8,13 @@
 
 import UIKit
 import Firebase
-
+import BottomPopup
 
 class ProfileController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var supportView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     var profileitems = ["Chat", "Invite Friends", "Theme", "Help", "Log Out"]
     var iconImages : [UIImage] = [UIImage(named: "message-square")!, UIImage(named: "users")!, UIImage(named: "sliders")!, UIImage(named: "help-circle")!, UIImage(named: "power")!]
@@ -26,12 +27,11 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
 //        profileImage.layer.borderColor = UIColor.clear.cgColor
 //        profileImage.layer.cornerRadius = profileImage.frame.height/2
 //        profileImage.clipsToBounds = true
-        
+
         profileImage.roundCorners(corners: [.topRight, .topLeft, .bottomLeft, .bottomRight], radius: profileImage.frame.height/2)
         
         supportView.roundCorners(corners: [.topRight, .topLeft], radius: 20)
         
-
         
         // Do any additional setup after loading the view.
     }
@@ -91,13 +91,16 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
             }
         }
         
+    }
+    
+    @IBAction func backPressed(_ sender: Any) {
         
         
     }
     
     @IBAction func editPressed(_ sender: Any) {
         
-        
+        PresentPopup(Alertheader: "Edit Profile")
         
     }
     
@@ -109,7 +112,7 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return profileitems.count
         
     }
     
@@ -126,16 +129,78 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        
         return 100
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+   
+    func PresentPopup(Alertheader: String) {
+        
+        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "secondVC") as? PopUpViewcontrollerViewController else { return }
+        
+        popupVC.popupDelegate = self as? BottomPopupDelegate
+        popupVC.PageHeader = Alertheader
+        present(popupVC, animated: true, completion: nil)
+        
     }
-    */
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let index = self.tableView.indexPathForSelectedRow{
+            self.tableView.deselectRow(at: index, animated: true)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath.row {
+            
+        case 0  :
+            PresentPopup(Alertheader: "Chat")
+        case 1  :
+            PresentPopup(Alertheader: "Invite Friends")
+        case 2  :
+            PresentPopup(Alertheader: "Theme")
+        case 3  :
+            PresentPopup(Alertheader: "Help")
+            
+        case 4  :
+            PresentPopup(Alertheader: "Log Out")
+            
+        default:
+            break
+            
+        }
+        
+        
+    }
+    
+}
 
+
+extension ViewController: BottomPopupDelegate {
+    
+    func bottomPopupViewLoaded() {
+        print("bottomPopupViewLoaded")
+    }
+    
+    func bottomPopupWillAppear() {
+        print("bottomPopupWillAppear")
+    }
+    
+    func bottomPopupDidAppear() {
+        print("bottomPopupDidAppear")
+    }
+    
+    func bottomPopupWillDismiss() {
+        print("bottomPopupWillDismiss")
+    }
+    
+    func bottomPopupDidDismiss() {
+        print("bottomPopupDidDismiss")
+    }
+    
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        print("bottomPopupDismissInteractionPercentChanged fromValue: \(oldValue) to: \(newValue)")
+    }
 }

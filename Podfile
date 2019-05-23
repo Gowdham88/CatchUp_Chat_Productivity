@@ -12,5 +12,7 @@ target 'Catch Up' do
   pod 'CameraManager', '~> 4.4'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
+  pod 'BottomPopup'
+
 
 end

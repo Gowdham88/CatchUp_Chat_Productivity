@@ -9,7 +9,6 @@ target 'Catch Up' do
 
 	pod 'Firebase'
 	pod 'Firebase/Auth'
-  pod 'CameraManager', '~> 4.4'
   pod 'Firebase/Core'
 
 end

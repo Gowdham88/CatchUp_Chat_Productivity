@@ -65,6 +65,11 @@ extension UIView {
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         layer.mask = mask
+        
+//        layer.shadowColor = UIColor.black.cgColor
+//        layer.shadowOffset = CGSize(width: 0, height: 0)
+//        layer.shadowOpacity = 10.0
+//        layer.shadowRadius = 4.0
     }
 }
 

@@ -38,6 +38,14 @@ class GroupingViewController: UIViewController {
         
         bottomBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
+        
+        
+        if let StatusbarView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+            StatusbarView.backgroundColor = UIColor(red: 15/255, green: 110/255, blue: 255/255, alpha: 1)
+            
+            StatusbarView.setGradientBackground(view: StatusbarView)
+        }
+
 
     }
     

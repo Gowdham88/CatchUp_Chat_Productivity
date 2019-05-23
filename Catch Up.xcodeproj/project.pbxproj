@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */; };
 		2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */; };
+		6F53146E2296C5BC00D51798 /* SelectGroupedUsersTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F53146D2296C5BC00D51798 /* SelectGroupedUsersTableCell.swift */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
 		B48205E2228A7383003A1680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48205E0228A7383003A1680 /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 		2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectContactTableViewCell.swift; sourceTree = "<group>"; };
 		2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
+		6F53146D2296C5BC00D51798 /* SelectGroupedUsersTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGroupedUsersTableCell.swift; sourceTree = "<group>"; };
 		A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.debug.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.debug.xcconfig"; sourceTree = "<group>"; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205DC228A7383003A1680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */,
 				B48C281022954E6200426E48 /* NewGroupTableCell.swift */,
 				B48C281E22955B1700426E48 /* GroupedUsersCell.swift */,
+				6F53146D2296C5BC00D51798 /* SelectGroupedUsersTableCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				B48C2809229547F200426E48 /* GroupingViewController.swift in Sources */,
 				B48205FE228A8883003A1680 /* CurveView.swift in Sources */,
 				2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */,
+				6F53146E2296C5BC00D51798 /* SelectGroupedUsersTableCell.swift in Sources */,
 				B48205FA228A86E4003A1680 /* LoginWithNumberController.swift in Sources */,
 				B48205DF228A7383003A1680 /* ViewController.swift in Sources */,
 				B4EEFA5D229416BF00631A51 /* ProfileController.swift in Sources */,

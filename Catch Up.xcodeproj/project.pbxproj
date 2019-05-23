@@ -36,6 +36,8 @@
 		B4EEFA5B229415DB00631A51 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4EEFA5A229415DB00631A51 /* Profile.storyboard */; };
 		B4EEFA5D229416BF00631A51 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEFA5C229416BF00631A51 /* ProfileController.swift */; };
 		B81B68888E8A9CFFD12C5434 /* Pods_Catch_Up.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */; };
+		CE352DD42297153800D4D761 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE352DD32297153800D4D761 /* Task.storyboard */; };
+		CE352DD62297158900D4D761 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE352DD52297158900D4D761 /* TaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -112,6 +114,8 @@
 		B4EEFA5A229415DB00631A51 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		B4EEFA5C229416BF00631A51 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Catch_Up.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE352DD32297153800D4D761 /* Task.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
+		CE352DD52297158900D4D761 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +235,7 @@
 				B48C2808229547F200426E48 /* GroupingViewController.swift */,
 				B48C280C229548E500426E48 /* CreateGroupController.swift */,
 				B48C280E2295491B00426E48 /* GroupDetailController.swift */,
+				CE352DD52297158900D4D761 /* TaskViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				B4DCF161228BE172009B97CE /* Chat.storyboard */,
 				B4EEFA5A229415DB00631A51 /* Profile.storyboard */,
 				B48C280A2295489000426E48 /* GroupChat.storyboard */,
+				CE352DD32297153800D4D761 /* Task.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -350,6 +356,7 @@
 				B48205F8228A855C003A1680 /* Auth.storyboard in Resources */,
 				B48205E7228A7384003A1680 /* LaunchScreen.storyboard in Resources */,
 				B48205E4228A7384003A1680 /* Assets.xcassets in Resources */,
+				CE352DD42297153800D4D761 /* Task.storyboard in Resources */,
 				B4DCF162228BE172009B97CE /* Chat.storyboard in Resources */,
 				B4EEFA582293CA9600631A51 /* GoogleService-Info.plist in Resources */,
 				B4EEFA5B229415DB00631A51 /* Profile.storyboard in Resources */,
@@ -423,6 +430,7 @@
 				2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */,
 				B48205FA228A86E4003A1680 /* LoginWithNumberController.swift in Sources */,
 				B48205DF228A7383003A1680 /* ViewController.swift in Sources */,
+				CE352DD62297158900D4D761 /* TaskViewController.swift in Sources */,
 				B4EEFA5D229416BF00631A51 /* ProfileController.swift in Sources */,
 				B48205FC228A8704003A1680 /* VerifyOTPVController.swift in Sources */,
 				B4820600228A9507003A1680 /* GradientView.swift in Sources */,

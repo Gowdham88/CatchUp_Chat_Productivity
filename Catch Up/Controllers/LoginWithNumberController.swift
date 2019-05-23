@@ -139,22 +139,11 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
 extension LoginWithNumberController {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-//        UIView.animate(withDuration: 0.4, delay: 0.1, usingSpringWithDamping: 2.0, initialSpringVelocity: 2.0, options: .curveEaseInOut, animations: {
-//
-//            self.nextButton.frame.origin.y = self.nextButton.frame.origin.y - 280
-//
-//        })
+
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-//        UIView.animate(withDuration: 0.2, delay: 0.0, usingSpringWithDamping: 5.0, initialSpringVelocity: 5.0, options: .curveEaseIn, animations: {
-//
-//            self.nextButton.frame.origin.y = self.nextButton.frame.origin.y + 280
-//
-//        })
         
         phoneNumText.resignFirstResponder()
         

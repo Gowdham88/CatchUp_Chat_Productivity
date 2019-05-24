@@ -9,7 +9,7 @@
 import UIKit
 import BottomPopup
 
-class PopUpViewcontrollerViewController: BottomPopupViewController {
+class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var shouldDismissInteractivelty: Bool?
     
@@ -24,6 +24,9 @@ class PopUpViewcontrollerViewController: BottomPopupViewController {
     var presentDuration: Double = 0.3
     var dismissDuration: Double = 0.2
     var PageHeader = String()
+    
+    var EditProfileIcons = [UIImage(named: "camera-2"), UIImage(named: "image-1"), UIImage(named: "Delete")]
+    var EditProfileTitle = ["Camera", "Gallery", "Delete"]
     
     @IBOutlet weak var alertHeader: UILabel!
     
@@ -57,4 +60,86 @@ class PopUpViewcontrollerViewController: BottomPopupViewController {
     override func shouldPopupDismissInteractivelty() -> Bool {
         return shouldDismissInteractivelty ?? true
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch PageHeader {
+            
+        case "Chat"  :
+            return 0
+            
+        case "Invite Friends"  :
+            return 0
+            
+        case "Theme"  :
+            return 2
+            
+        case "Help"  :
+             return 0
+            
+        case "Edit Profile"  :
+             return 3
+            
+        default:
+            return 0
+            
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 65
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! popupTableViewcell
+        
+        
+        switch PageHeader {
+            
+        case "Theme"  :
+            
+            return cell
+            
+        case "Edit Profile"  :
+
+            cell.iconImage.image = EditProfileIcons[indexPath.row]
+            
+            cell.popupOption.text = EditProfileTitle[indexPath.row]
+            
+            if indexPath.row == 2 {
+                
+                cell.popupOption.textColor = .red
+                
+            }
+            
+            return cell
+            
+        default:
+            return cell
+            
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+         return 0
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+         return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PopupCollectionViewCell
+        return cell
+    }
+
 }

@@ -60,7 +60,6 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
             
             print("Success")
             
-            
         }
         
         uploadTask.observe(.failure) { snapshot in
@@ -163,7 +162,6 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
             PresentPopup(Alertheader: "Theme")
         case 3  :
             PresentPopup(Alertheader: "Help")
-            
         case 4  :
             PresentPopup(Alertheader: "Log Out")
             
@@ -171,7 +169,6 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
             break
             
         }
-        
         
     }
     

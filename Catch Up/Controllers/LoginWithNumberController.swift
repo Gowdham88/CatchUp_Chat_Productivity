@@ -39,7 +39,7 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
         }
         self.navigationController?.navigationBar.barStyle = .black
         
-//        phoneNumText.textColor = UIColor(named: "Light") //
+//        phoneNumText.textColor = UIColor(named: "Light") //.
         
         let colorr = UIColor(named: "anotherMode")
         

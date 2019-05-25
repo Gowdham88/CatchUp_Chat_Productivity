@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="khw-ZF-U3c" customClass="RoundedCornerView" customModule="Catch_Up" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="khw-ZF-U3c">
                                 <rect key="frame" x="0.0" y="82" width="375" height="585"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -140,8 +140,10 @@
                     </view>
                     <connections>
                         <outlet property="dateTargetLbl" destination="z2W-Yt-Miy" id="NPW-9d-wJ5"/>
+                        <outlet property="dayLbl" destination="feN-I3-t2a" id="UAi-vr-DSu"/>
                         <outlet property="msgText" destination="LUh-vf-oYm" id="KlK-5M-45E"/>
                         <outlet property="profileImgView" destination="4XB-X5-HCu" id="fxt-gD-kmm"/>
+                        <outlet property="taskView" destination="khw-ZF-U3c" id="gv6-yo-gQW"/>
                         <outlet property="userNameLbl" destination="rUD-q7-6aR" id="knk-cv-XVf"/>
                     </connections>
                 </viewController>

@@ -38,7 +38,6 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBAction func uploadImage(_ sender: Any) {
         
-
         let localFile = URL(string: "path/to/image")!
         
         let storage = Storage.storage()
@@ -127,7 +126,7 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+    
         
         return 100
     }

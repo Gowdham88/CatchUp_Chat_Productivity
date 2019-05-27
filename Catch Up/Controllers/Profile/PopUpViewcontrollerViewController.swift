@@ -27,8 +27,13 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
     
     var EditProfileIcons = [UIImage(named: "camera-2"), UIImage(named: "image-1"), UIImage(named: "Delete")]
     var EditProfileTitle = ["Camera", "Gallery", "Delete"]
+    var ModeTitle = ["Light mode", "Dark mode"]
+    var ModeImages = [UIImage(named: "sun"), UIImage(named: "moon")]
     
     @IBOutlet weak var alertHeader: UILabel!
+    @IBOutlet weak var myCollectionView: UICollectionView!
+    @IBOutlet weak var myTableView: UITableView!
+    
     
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
         
@@ -42,7 +47,38 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
     }
     
     override func getPopupHeight() -> CGFloat {
-        return height
+        
+        switch PageHeader {
+            
+        case "Chat"  :
+            
+            return 0
+            
+//        case "Invite Friends"  :
+//            return 0
+            
+        case "Theme"  :
+            
+            
+            
+            return 1
+            
+//        case "Help"  :
+//            return 0
+            
+        case "Edit Profile"  :
+            
+            myTableView.alpha = 1
+            myCollectionView.alpha = 0
+            
+            return 1
+            
+            
+        default:
+            return height
+
+        }
+        
     }
     
     override func getPopupTopCornerRadius() -> CGFloat {
@@ -62,7 +98,37 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        
+        switch PageHeader {
+            
+        case "Chat"  :
+            return 0
+            
+        case "Invite Friends"  :
+            return 0
+            
+        case "Theme"  :
+            
+            myTableView.alpha = 1
+            myCollectionView.alpha = 0
+            
+            return 1
+            
+        case "Help"  :
+            return 0
+            
+        case "Edit Profile"  :
+            
+            myTableView.alpha = 1
+            myCollectionView.alpha = 0
+            
+            return 1
+            
+        default:
+            return 0
+            
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,6 +162,8 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
         return 65
         
     }
+
+   
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -106,6 +174,8 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
             
         case "Theme"  :
             
+            cell.iconImage.image = ModeImages[indexPath.row]
+            cell.popupOption.text = ModeTitle[indexPath.row]
             return cell
             
         case "Edit Profile"  :
@@ -130,16 +200,80 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         return 0
+        
+        switch PageHeader {
+            
+        case "Chat"  :
+            return 5
+            
+        case "Invite Friends"  :
+            return 0
+            
+        case "Theme"  :
+            return 0
+            
+        case "Help"  :
+            return 0
+            
+        case "Edit Profile"  :
+            return 0
+            
+        default:
+            return 0
+            
+        }
+        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-         return 0
+        
+        switch PageHeader {
+            
+        case "Chat"  :
+            
+            myTableView.alpha = 0
+            myCollectionView.alpha = 1
+            
+            return 1
+            
+        case "Invite Friends"  :
+            return 0
+            
+        case "Theme"  :
+            return 0
+            
+        case "Help"  :
+            return 0
+            
+        case "Edit Profile"  :
+            return 0
+            
+        default:
+            return 0
+            
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PopupCollectionViewCell
-        return cell
+        
+        switch PageHeader {
+            
+        case "Chat"  :
+            
+//            cell.iconImage.image = EditProfileIcons[indexPath.row]
+//
+//            cell.popupOption.text = EditProfileTitle[indexPath.row]
+            
+            cell.myLabel.text = "\(indexPath.row)"
+            
+            return cell
+            
+        default:
+            return cell
+            
+        }
+        
     }
 
 }

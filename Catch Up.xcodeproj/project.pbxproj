@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */; };
 		2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */; };
+		8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */; };
+		8E28CFC12297DD0800D0D634 /* PopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28CFC02297DD0800D0D634 /* PopupCollectionViewCell.swift */; };
+		8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */; };
+		8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */; };
+		8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
 		B48205E2228A7383003A1680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48205E0228A7383003A1680 /* Main.storyboard */; };
@@ -55,6 +60,11 @@
 		2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectContactTableViewCell.swift; sourceTree = "<group>"; };
 		2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
+		8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popupTableViewcell.swift; sourceTree = "<group>"; };
+		8E28CFC02297DD0800D0D634 /* PopupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCollectionViewCell.swift; sourceTree = "<group>"; };
+		8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatpopupCollectionViewCell.swift; sourceTree = "<group>"; };
+		8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewcontrollerViewController.swift; sourceTree = "<group>"; };
+		8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.debug.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.debug.xcconfig"; sourceTree = "<group>"; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205DC228A7383003A1680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +151,7 @@
 				2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */,
 				B48C281022954E6200426E48 /* NewGroupTableCell.swift */,
 				B48C281E22955B1700426E48 /* GroupedUsersCell.swift */,
+				8E28CFBF2297DCCD00D0D634 /* Profile cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,6 +170,26 @@
 				2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8E28CFBF2297DCCD00D0D634 /* Profile cells */ = {
+			isa = PBXGroup;
+			children = (
+				8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */,
+				8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */,
+				8E28CFC02297DD0800D0D634 /* PopupCollectionViewCell.swift */,
+				8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */,
+			);
+			path = "Profile cells";
+			sourceTree = "<group>";
+		};
+		8EC319F92296B3AC008F83A9 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B4EEFA5C229416BF00631A51 /* ProfileController.swift */,
+				8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		B48205D0228A7383003A1680 = {
@@ -221,7 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				B48205DE228A7383003A1680 /* ViewController.swift */,
-				B4EEFA5C229416BF00631A51 /* ProfileController.swift */,
+				8EC319F92296B3AC008F83A9 /* Profile */,
 				B48205F9228A86E4003A1680 /* LoginWithNumberController.swift */,
 				B48205FB228A8704003A1680 /* VerifyOTPVController.swift */,
 				B4820603228AC8D5003A1680 /* CreateProfileController.swift */,
@@ -369,6 +400,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Catch Up/Pods-Catch Up-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework",
+				"${BUILT_PRODUCTS_DIR}/CameraManager/CameraManager.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -377,6 +410,8 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BottomPopup.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CameraManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -418,9 +453,11 @@
 				B48C280F2295491B00426E48 /* GroupDetailController.swift in Sources */,
 				B48C281F22955B1700426E48 /* GroupedUsersCell.swift in Sources */,
 				B4DCF168228C16B7009B97CE /* SelectContactController.swift in Sources */,
+				8E28CFC12297DD0800D0D634 /* PopupCollectionViewCell.swift in Sources */,
 				B48C2809229547F200426E48 /* GroupingViewController.swift in Sources */,
 				B48205FE228A8883003A1680 /* CurveView.swift in Sources */,
 				2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */,
+				8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */,
 				B48205FA228A86E4003A1680 /* LoginWithNumberController.swift in Sources */,
 				B48205DF228A7383003A1680 /* ViewController.swift in Sources */,
 				B4EEFA5D229416BF00631A51 /* ProfileController.swift in Sources */,
@@ -430,10 +467,13 @@
 				B48C280D229548E500426E48 /* CreateGroupController.swift in Sources */,
 				B48C281122954E6200426E48 /* NewGroupTableCell.swift in Sources */,
 				B48205F6228A83D3003A1680 /* HexColorextension.swift in Sources */,
+				8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */,
+				8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */,
 				B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */,
 				B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */,
 				2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */,
 				B4820602228AAFA5003A1680 /* DropShadow.swift in Sources */,
+				8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */,
 				B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,7 +558,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -573,7 +612,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -587,14 +625,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XSJRRDKMW9;
 				INFOPLIST_FILE = "Catch Up/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cz.Catch-Up";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -608,14 +645,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XSJRRDKMW9;
 				INFOPLIST_FILE = "Catch Up/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cz.Catch-Up";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

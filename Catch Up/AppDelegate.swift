@@ -20,6 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileController")
+        
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

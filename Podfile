@@ -10,5 +10,8 @@ target 'Catch Up' do
 	pod 'Firebase'
 	pod 'Firebase/Auth'
   pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  pod 'BottomPopup'
+
 
 end

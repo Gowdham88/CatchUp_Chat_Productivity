@@ -10,6 +10,22 @@ import UIKit
 
 class CreateGroupController: UIViewController {
 
+    @IBOutlet weak var topBarView: UIView!
+    
+    
+    @IBOutlet weak var curvedBackupView: UIView!
+    
+    @IBOutlet weak var groupImageView: UIImageView!
+    
+    @IBOutlet weak var groupNameField: UITextField!
+    
+    @IBOutlet weak var participantsLabel: UILabel!
+    
+    @IBOutlet weak var groupedUsersTableview: UITableView!
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

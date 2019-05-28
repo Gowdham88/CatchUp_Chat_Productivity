@@ -29,26 +29,32 @@ class TaskViewController: UIViewController {
         
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func viewDidLayoutSubviews() {
+        
         taskView.roundCorners(corners: [.topLeft, .topRight], radius: 3.0)
+
     }
+    
+//     func layoutSubviews() {
+//        super.layoutSubviews()
+//        taskView.roundCorners(corners: [.topLeft, .topRight], radius: 3.0)
+//    }
 }
 //extension
 extension UIImageView {
     
     func setRounded() {
-        let radius = CGRectGetWidth(self.frame) / 2
-        self.layer.cornerRadius = radius
+       
+        self.layer.cornerRadius = self.frame.height/2
         self.layer.masksToBounds = true
     }
 }
 
-extension UIView {
-    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
-    }
-}
+//extension UIView {
+//    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+//        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+//        let mask = CAShapeLayer()
+//        mask.path = path.cgPath
+//        layer.mask = mask
+//    }
+//}

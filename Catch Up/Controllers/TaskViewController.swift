@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BottomPopup
 
 class TaskViewController: UIViewController, UITextViewDelegate {
     
@@ -55,7 +56,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         _ = tapGestureRecognizer.view as! UIImageView
-        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "PopupViewController") as? PopupViewController else { return }
+        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "PopupViewController") as? PopUpViewcontrollerViewController else { return }
         present(popupVC, animated: true, completion: nil)
        
     }
@@ -70,7 +71,7 @@ extension UIImageView {
     }
 }
 
-extension ViewController: BottomPopupDelegate {
+extension TaskViewController: BottomPopupDelegate {
     
     func bottomPopupViewLoaded() {
         print("bottomPopupViewLoaded")

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskViewController: UIViewController {
+class TaskViewController: UIViewController, UITextViewDelegate {
     
     
     @IBOutlet weak var msgText: UITextView!
@@ -21,34 +21,81 @@ class TaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        msgText.delegate = self
+        
         profileImgView.setRounded()
         
         dayLbl.layer.cornerRadius = 10
         dayLbl.layer.borderWidth = 1.0
-        dayLbl.layer.borderColor = UIColor.yellow.cgColor
+        
+        taskView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector (imageTapped(tapGestureRecognizer:)))
+        profileImgView.isUserInteractionEnabled = true
+        profileImgView.addGestureRecognizer(tapGesture)
         
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        taskView.roundCorners(corners: [.topLeft, .topRight], radius: 3.0)
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print("print1")
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("print2")
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        _ = tapGestureRecognizer.view as! UIImageView
+        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "PopupViewController") as? PopupViewController else { return }
+        present(popupVC, animated: true, completion: nil)
+       
+    }
+    
 }
-//extension
 extension UIImageView {
     
     func setRounded() {
-        let radius = CGRectGetWidth(self.frame) / 2
+        let radius = self.frame.width/2.0
         self.layer.cornerRadius = radius
         self.layer.masksToBounds = true
     }
 }
 
-extension UIView {
-    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
+extension ViewController: BottomPopupDelegate {
+    
+    func bottomPopupViewLoaded() {
+        print("bottomPopupViewLoaded")
+    }
+    
+    func bottomPopupWillAppear() {
+        print("bottomPopupWillAppear")
+    }
+    
+    func bottomPopupDidAppear() {
+        print("bottomPopupDidAppear")
+    }
+    
+    func bottomPopupWillDismiss() {
+        print("bottomPopupWillDismiss")
+    }
+    
+    func bottomPopupDidDismiss() {
+        print("bottomPopupDidDismiss")
+    }
+    
+    func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
+        print("bottomPopupDismissInteractionPercentChanged fromValue: \(oldValue) to: \(newValue)")
     }
 }
+
+
+

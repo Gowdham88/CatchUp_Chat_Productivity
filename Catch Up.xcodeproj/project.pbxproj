@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */; };
 		2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */; };
+		6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */; };
 		8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */; };
 		8E28CFC12297DD0800D0D634 /* PopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28CFC02297DD0800D0D634 /* PopupCollectionViewCell.swift */; };
 		8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */; };
@@ -62,6 +63,7 @@
 		2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectContactTableViewCell.swift; sourceTree = "<group>"; };
 		2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
+		6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailTableCell.swift; sourceTree = "<group>"; };
 		8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popupTableViewcell.swift; sourceTree = "<group>"; };
 		8E28CFC02297DD0800D0D634 /* PopupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatpopupCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				B48C281022954E6200426E48 /* NewGroupTableCell.swift */,
 				B48C281E22955B1700426E48 /* GroupedUsersCell.swift */,
 				8E28CFBF2297DCCD00D0D634 /* Profile cells */,
+				6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */,
 				8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */,
 				B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */,
+				6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */,
 				B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */,
 				2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */,
 				B4820602228AAFA5003A1680 /* DropShadow.swift in Sources */,

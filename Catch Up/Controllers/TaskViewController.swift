@@ -56,7 +56,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         _ = tapGestureRecognizer.view as! UIImageView
-        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "PopupViewController") as? PopUpViewcontrollerViewController else { return }
+        guard let popupVC = storyboard?.instantiateViewController(withIdentifier: "PopUpView") as? PopUpView else { return }
         present(popupVC, animated: true, completion: nil)
        
     }

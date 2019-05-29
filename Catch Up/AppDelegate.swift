@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
         
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileController")
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginWithNumberController")
         
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()

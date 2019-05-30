@@ -21,12 +21,21 @@ class GroupDetailTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        userImageView.layer.cornerRadius = userImageView.frame.height/2
+        
+        self.selectedBackgroundView = UIView()
+        
+        self.selectionStyle = .default
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
+        self.selectedBackgroundView!.backgroundColor = selected ? .clear : nil
+
     }
 
 }

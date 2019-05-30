@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m4S-X2-IVc">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -140,11 +140,13 @@
                                     <constraint firstItem="dvq-Qw-RZw" firstAttribute="leading" secondItem="diF-4U-uaF" secondAttribute="leading" id="l9m-JB-jDR"/>
                                     <constraint firstItem="dvq-Qw-RZw" firstAttribute="top" secondItem="diF-4U-uaF" secondAttribute="top" constant="20" id="ljR-N4-7xq"/>
                                     <constraint firstAttribute="trailing" secondItem="dvq-Qw-RZw" secondAttribute="trailing" id="rNk-bP-g8z"/>
+                                    <constraint firstAttribute="height" constant="736" id="y0O-oL-sUh"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="diF-4U-uaF" firstAttribute="height" secondItem="NOf-fO-6VQ" secondAttribute="height" id="7XO-u5-zhd"/>
                             <constraint firstItem="wEi-r8-ArF" firstAttribute="trailing" secondItem="diF-4U-uaF" secondAttribute="trailing" id="A5E-hd-GZs"/>
                             <constraint firstItem="diF-4U-uaF" firstAttribute="leading" secondItem="wEi-r8-ArF" secondAttribute="leading" id="KF2-qR-eaQ"/>
                             <constraint firstItem="wEi-r8-ArF" firstAttribute="top" secondItem="diF-4U-uaF" secondAttribute="top" constant="20" id="mEJ-2L-toe"/>
@@ -153,6 +155,8 @@
                         <viewLayoutGuide key="safeArea" id="wEi-r8-ArF"/>
                     </view>
                     <navigationItem key="navigationItem" id="NJB-9N-dAJ"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="curveView" destination="dvq-Qw-RZw" id="bCd-Jj-uck"/>
                         <outlet property="nextButton" destination="ykP-5b-eko" id="T1w-Zt-tep"/>
@@ -299,6 +303,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="oGU-xJ-VW3"/>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="GradientAndCurveView" destination="TSR-hn-rvc" id="Ttd-ug-Dag"/>
                         <outlet property="enterOTPField" destination="kIy-XV-RDY" id="a0b-c6-S9E"/>

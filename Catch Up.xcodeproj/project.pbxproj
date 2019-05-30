@@ -15,6 +15,8 @@
 		8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */; };
 		8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */; };
 		8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */; };
+		B47688D7229E49A900F17BBF /* IndividualProfileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */; };
+		B47688D9229E6CD900F17BBF /* UpdateGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
 		B48205E2228A7383003A1680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48205E0228A7383003A1680 /* Main.storyboard */; };
@@ -70,6 +72,8 @@
 		8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewcontrollerViewController.swift; sourceTree = "<group>"; };
 		8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.debug.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.debug.xcconfig"; sourceTree = "<group>"; };
+		B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualProfileDetailController.swift; sourceTree = "<group>"; };
+		B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGroupController.swift; sourceTree = "<group>"; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205DC228A7383003A1680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B48205DE228A7383003A1680 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 				B48C280C229548E500426E48 /* CreateGroupController.swift */,
 				B48C280E2295491B00426E48 /* GroupDetailController.swift */,
 				CE352DD52297158900D4D761 /* TaskViewController.swift */,
+				B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */,
+				B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				B48C280D229548E500426E48 /* CreateGroupController.swift in Sources */,
 				B48C281122954E6200426E48 /* NewGroupTableCell.swift in Sources */,
 				B48205F6228A83D3003A1680 /* HexColorextension.swift in Sources */,
+				B47688D9229E6CD900F17BBF /* UpdateGroupController.swift in Sources */,
 				8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */,
 				8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */,
 				B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */,
@@ -485,6 +492,7 @@
 				B4820602228AAFA5003A1680 /* DropShadow.swift in Sources */,
 				8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */,
 				B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */,
+				B47688D7229E49A900F17BBF /* IndividualProfileDetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

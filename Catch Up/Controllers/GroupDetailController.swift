@@ -38,12 +38,15 @@ class GroupDetailController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        backupCurvedView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
     }
     
 
 }
 
 extension GroupDetailController: UITableViewDelegate,UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 10
@@ -55,6 +58,12 @@ extension GroupDetailController: UITableViewDelegate,UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+    }
+    
     
     
    

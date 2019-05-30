@@ -20,18 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//
-//        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
-//        
-//        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginWithNumberController")
-//        //
-//        //UpdateGroupController
-//        //GroupDetailController
-//        //ProfileController
-//        //IndividualProfileDetailController
-//        self.window?.rootViewController = initialViewController
-//        self.window?.makeKeyAndVisible()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+        
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "SelectContactController")
+        //
+        //UpdateGroupController
+        //GroupDetailController
+        //ProfileController
+        //IndividualProfileDetailController
+        //GroupDetailController
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
         
         return true
     }

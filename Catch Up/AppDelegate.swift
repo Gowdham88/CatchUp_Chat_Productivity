@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+        let storyboard = UIStoryboard(name: "GroupChat", bundle: nil)
         
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "SelectContactController")
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "GroupingViewController")
         //
         //UpdateGroupController
         //GroupDetailController

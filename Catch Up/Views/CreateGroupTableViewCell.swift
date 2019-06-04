@@ -1,42 +1,32 @@
 //
-//  GroupDetailTableCell.swift
+//  CreateGroupTableViewCell.swift
 //  Catch Up
 //
-//  Created by Suraj B on 29/05/2019.
+//  Created by CZ Ltd on 6/4/19.
 //  Copyright © 2019 CZ Ltd. All rights reserved.
 //
 
 import UIKit
 
-class GroupDetailTableCell: UITableViewCell {
-    
+class CreateGroupTableViewCell: UITableViewCell {
+
     @IBOutlet weak var userImageView: UIImageView!
     
     @IBOutlet weak var userNameLabel: UILabel!
     
-    @IBOutlet weak var phoneNumberLabel: UILabel!
-    
-    @IBOutlet weak var moreOptionButton: UIImageView!
-    
+    @IBOutlet weak var userContactLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         userImageView.layer.cornerRadius = userImageView.frame.height/2
-        
-        self.selectedBackgroundView = UIView()
-        
-        self.selectionStyle = .default
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-        
-        self.selectedBackgroundView!.backgroundColor = selected ? .clear : nil
-
     }
 
 }

@@ -15,6 +15,8 @@
 		8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */; };
 		8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */; };
 		8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */; };
+		B4732B2122A8EEB900153D8C /* TaskDashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */; };
+		B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */; };
 		B47688D7229E49A900F17BBF /* IndividualProfileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */; };
 		B47688D9229E6CD900F17BBF /* UpdateGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
@@ -73,6 +75,8 @@
 		8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewcontrollerViewController.swift; sourceTree = "<group>"; };
 		8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.debug.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.debug.xcconfig"; sourceTree = "<group>"; };
+		B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashboardController.swift; sourceTree = "<group>"; };
+		B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashboardTableCell.swift; sourceTree = "<group>"; };
 		B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualProfileDetailController.swift; sourceTree = "<group>"; };
 		B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGroupController.swift; sourceTree = "<group>"; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +170,7 @@
 				8E28CFBF2297DCCD00D0D634 /* Profile cells */,
 				6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */,
 				B48F09CF22A649250064CE5F /* CreateGroupTableViewCell.swift */,
+				B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				CE352DD52297158900D4D761 /* TaskViewController.swift */,
 				B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */,
 				B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */,
+				B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */,
 				B48205FA228A86E4003A1680 /* LoginWithNumberController.swift in Sources */,
 				B48F09D022A649250064CE5F /* CreateGroupTableViewCell.swift in Sources */,
+				B4732B2122A8EEB900153D8C /* TaskDashboardController.swift in Sources */,
 				B48205DF228A7383003A1680 /* ViewController.swift in Sources */,
 				CE352DD62297158900D4D761 /* TaskViewController.swift in Sources */,
 				B4EEFA5D229416BF00631A51 /* ProfileController.swift in Sources */,
@@ -492,6 +499,7 @@
 				B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */,
 				6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */,
 				B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */,
+				B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */,
 				2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */,
 				B4820602228AAFA5003A1680 /* DropShadow.swift in Sources */,
 				8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */,

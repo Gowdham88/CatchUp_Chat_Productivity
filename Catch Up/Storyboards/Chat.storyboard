@@ -81,7 +81,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="75" id="jy9-LZ-8BB" customClass="ChatTableViewCell" customModule="Catch_Up" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="75" id="jy9-LZ-8BB" customClass="ChatTableViewCell" customModule="Catch_Up" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="414" height="75"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jy9-LZ-8BB" id="6Bb-Pe-Mvc">
@@ -192,8 +192,8 @@
                                         <rect key="frame" x="0.0" y="686" width="414" height="49"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <items>
-                                            <tabBarItem systemItem="favorites" id="sFj-Bn-oxj"/>
-                                            <tabBarItem systemItem="more" id="cEQ-yT-9cO"/>
+                                            <tabBarItem image="message" id="sFj-Bn-oxj"/>
+                                            <tabBarItem image="task" id="cEQ-yT-9cO"/>
                                         </items>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
@@ -761,7 +761,9 @@
         <image name="camera" width="24" height="24"/>
         <image name="camera_bottom" width="24" height="20"/>
         <image name="image" width="360" height="558.66668701171875"/>
+        <image name="message" width="24" height="24"/>
         <image name="profile_user" width="750" height="750"/>
         <image name="smile" width="21" height="21"/>
+        <image name="task" width="26.666666030883789" height="26.666666030883789"/>
     </resources>
 </document>

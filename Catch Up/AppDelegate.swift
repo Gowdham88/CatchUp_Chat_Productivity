@@ -22,15 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        let storyboard = UIStoryboard(name: "GroupChat", bundle: nil)
+        let storyboard = UIStoryboard(name: "Task", bundle: nil)
         
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "GroupingViewController")
-        //
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TaskDashboardController")
+        //GroupingViewController
         //UpdateGroupController
         //GroupDetailController
         //ProfileController
         //IndividualProfileDetailController
         //GroupDetailController
+        //ChatDashboardController
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         

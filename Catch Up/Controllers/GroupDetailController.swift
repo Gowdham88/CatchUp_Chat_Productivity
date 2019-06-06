@@ -33,6 +33,16 @@ class GroupDetailController: UIViewController {
     @IBOutlet weak var groupDetailTableView: UITableView!
     
     
+ // popup view
+    
+    @IBOutlet weak var popUpView: UIView!
+    
+    @IBOutlet weak var groupDescInPopUp: UITextView!
+    
+    @IBOutlet weak var popUpCloseButton: UIButton!
+    
+    @IBOutlet weak var threeDotPopUp: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +50,27 @@ class GroupDetailController: UIViewController {
         // Do any additional setup after loading the view.
         
         backupCurvedView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        
+        popUpView.isHidden = true
+        
+        threeDotPopUp.isHidden = true
+        
+        popUpView.roundCorners(corners: [.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 7.0)
+        
+        threeDotPopUp.roundCorners(corners: [.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 7.0)
     }
     
-
+    
+    @IBAction func didTappedViewContact(_ sender: Any) {
+        
+        threeDotPopUp.isHidden = true
+    }
+    
+    @IBAction func didTappedRemoveUser(_ sender: Any) {
+        
+        threeDotPopUp.isHidden = true
+    }
+    
 }
 
 extension GroupDetailController: UITableViewDelegate,UITableViewDataSource {
@@ -56,15 +84,48 @@ extension GroupDetailController: UITableViewDelegate,UITableViewDataSource {
         
         let cell = groupDetailTableView.dequeueReusableCell(withIdentifier: "cell") as! GroupDetailTableCell
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(threeDotTap(gesture:)))
+        
+        tap.numberOfTapsRequired = 1
+        
+        cell.moreOptionButton.isUserInteractionEnabled = true
+        
+        cell.moreOptionButton.tag = indexPath.row
+        
+        cell.moreOptionButton.addGestureRecognizer(tap)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+
+    }
+  
+}
+
+extension GroupDetailController {
+    
+    @objc func threeDotTap(gesture: UITapGestureRecognizer) {
+    
+    let tag = gesture.view?.tag
+    
+    let point = gesture.location(in: self.view)
+    
+    print(" points are \(point.y)")
+    
+    print("tag of selected item",tag as Any)
+        
+    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+        
+        self.threeDotPopUp.isHidden = false
+        
+        self.threeDotPopUp.frame.origin.y = point.y - (self.threeDotPopUp.frame.height + 15)
+        
+        self.threeDotPopUp.frame.origin.x = point.x - (self.threeDotPopUp.frame.width - 10)
+        
+       
+    })
         
     }
-    
-    
-    
-   
 }

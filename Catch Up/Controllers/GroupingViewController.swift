@@ -19,6 +19,29 @@ class GroupingViewController: UIViewController {
     @IBOutlet weak var selectedParticipantsLabel: UILabel!
     @IBOutlet weak var groupedUserCollectionView: UICollectionView!
     @IBOutlet weak var nextButton: UIButton!
+    
+    var nameTableArray = ["User name1","User name2","User name3","User name4","User name5","User name6","User name7","User name8"]
+    
+     var numberTableArray = ["0238423084","464532422","546454342","57463522443","56789756234","36457657543","2443656234","5673423242"]
+    
+    var imageTableArray = [UIImage(named: "sampleTower"),UIImage(named: "image"),UIImage(named: "profile_user"),UIImage(named: "sample_user"),UIImage(named: "sampleTower"),UIImage(named: "image"),UIImage(named: "profile_user"),UIImage(named: "sample_user")]
+    
+    var nameCollectionArray = [String]()
+
+    var numberCollectionArray = [String]()
+
+    var imageCollectionArray = [UIImage]()
+    
+    var collectionDict = [String:Any]()
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        
+        return self.style
+    }
+    
+    
+    var style: UIStatusBarStyle = .lightContent
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +60,13 @@ class GroupingViewController: UIViewController {
         bottomBar.layer.shadowOffset = CGSize(width: 3 , height:3)
         
         bottomBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-
-        
         
         if let StatusbarView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
-            StatusbarView.backgroundColor = UIColor(red: 15/255, green: 110/255, blue: 255/255, alpha: 1)
-            
-            StatusbarView.setGradientBackground(view: StatusbarView)
+            StatusbarView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
+//            StatusbarView.setGradientBackground(view: StatusbarView)
         }
-
+        self.navigationController?.navigationBar.barStyle = .blackTranslucent
+//(red: 0/255, green: 0/255, blue: 0/255, alpha: 1.0)
 
     }
     
@@ -65,14 +86,75 @@ extension GroupingViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return nameTableArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = groupingTableView.dequeueReusableCell(withIdentifier: "cell") as! NewGroupTableCell
+        cell.userName.text = nameTableArray[indexPath.row]
+        cell.userPhoneNumber.text = numberTableArray[indexPath.row]
+        cell.userImageView.image = imageTableArray[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = groupingTableView.cellForRow(at: indexPath) as! NewGroupTableCell
+        
+        if cell.selectStatusImage.image == UIImage(named: "Check") {
+            let nameIndex = nameCollectionArray.index(of: nameTableArray[indexPath.row])
+            nameCollectionArray.remove(at: nameIndex!)
+            numberCollectionArray.remove(at: nameIndex!)
+            imageCollectionArray.remove(at: nameIndex!)
+            cell.selectStatusImage.image = UIImage(named: "Ellipse")
+            cell.alpha = 1.0
+            
+        }else {
+            nameCollectionArray.append(nameTableArray[indexPath.row])
+            numberCollectionArray.append(numberTableArray[indexPath.row])
+            imageCollectionArray.append(imageTableArray[indexPath.row]!)
+            cell.selectStatusImage.image = UIImage(named: "Check")
+//            collectionDict = ["name"   : nameCollectionArray,
+//                              "number" : numberCollectionArray,
+//                              "image"  : imageCollectionArray]
+//
+//            self.groupedUserCollectionView.reloadData()
+            cell.alpha = 0.5
+        }
+        
+        collectionDict = ["name"   : nameCollectionArray,
+                          "number" : numberCollectionArray,
+                          "image"  : imageCollectionArray]
+        
+        selectedParticipantsLabel.text = "PARTICIPANTS : " + "\(nameCollectionArray.count)"
+        
+//        if nameCollectionArray.count == 0 {
+//            
+//            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
+//                
+//                self.bottomBar.isHidden = true
+//                
+//            })
+//
+//        }else {
+//            
+//            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
+//                
+//                self.bottomBar.isHidden = false
+//                
+//                self.groupingTableView.frame.size.height = self.groupingTableView.frame.height - self.bottomBar.frame.height
+//                
+//            })
+//        }
+        
+        self.groupedUserCollectionView.reloadData()
+
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+       
     }
  
 }
@@ -81,12 +163,21 @@ extension GroupingViewController: UICollectionViewDataSource,UICollectionViewDel
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        return nameCollectionArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = groupedUserCollectionView.dequeueReusableCell(withReuseIdentifier: "groupcell", for: indexPath) as! GroupedUsersCell
+        
+        cell.groupedUserImageView.image = imageCollectionArray[indexPath.row]
+        
+//        for item in collectionDict {
+//
+//            print(" \(item.key) : \(item.value)")
+//        }
+        
+        
         
         return cell
     }

@@ -480,6 +480,8 @@
                             <constraint firstItem="hE6-kA-vu8" firstAttribute="bottom" secondItem="1VW-Ub-UBi" secondAttribute="bottom" id="QXs-gl-ieV"/>
                             <constraint firstItem="hE6-kA-vu8" firstAttribute="top" secondItem="1VW-Ub-UBi" secondAttribute="top" constant="20" id="Ukf-Ds-7Le"/>
                             <constraint firstItem="1VW-Ub-UBi" firstAttribute="leading" secondItem="hE6-kA-vu8" secondAttribute="leading" id="Urv-ub-cQ2"/>
+                            <constraint firstItem="1VW-Ub-UBi" firstAttribute="width" secondItem="Nc1-Pu-lvo" secondAttribute="width" id="Y67-TK-UqU"/>
+                            <constraint firstItem="1VW-Ub-UBi" firstAttribute="height" secondItem="Nc1-Pu-lvo" secondAttribute="height" id="dUu-K8-P2u"/>
                             <constraint firstItem="hE6-kA-vu8" firstAttribute="trailing" secondItem="1VW-Ub-UBi" secondAttribute="trailing" id="smr-vd-TRt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hE6-kA-vu8"/>

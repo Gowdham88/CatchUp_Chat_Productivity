@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let storyboard = UIStoryboard(name: "Task", bundle: nil)
         
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TaskDashboardController")
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TaskViewController")
         //GroupingViewController
         //UpdateGroupController
         //GroupDetailController
@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //IndividualProfileDetailController
         //GroupDetailController
         //ChatDashboardController
+        //TaskDashboardController
+        //ProcessViewController
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         

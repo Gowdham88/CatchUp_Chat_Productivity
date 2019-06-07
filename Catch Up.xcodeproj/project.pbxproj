@@ -19,6 +19,10 @@
 		B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */; };
 		B47688D7229E49A900F17BBF /* IndividualProfileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */; };
 		B47688D9229E6CD900F17BBF /* UpdateGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */; };
+		B47710D522AA122300F1A196 /* ProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47710D422AA122300F1A196 /* ProcessViewController.swift */; };
+		B47710D622AA351500F1A196 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B48D905F228D1E8F001B0EEC /* Muli-Regular.ttf */; };
+		B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47710D722AA51CB00F1A196 /* VACalendar.framework */; };
+		B47710D922AA7C1D00F1A196 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B48D905B228D1E8F001B0EEC /* Muli-Bold.ttf */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
 		B48205E2228A7383003A1680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48205E0228A7383003A1680 /* Main.storyboard */; };
@@ -79,6 +83,8 @@
 		B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashboardTableCell.swift; sourceTree = "<group>"; };
 		B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualProfileDetailController.swift; sourceTree = "<group>"; };
 		B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGroupController.swift; sourceTree = "<group>"; };
+		B47710D422AA122300F1A196 /* ProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewController.swift; sourceTree = "<group>"; };
+		B47710D722AA51CB00F1A196 /* VACalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VACalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205DC228A7383003A1680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B48205DE228A7383003A1680 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */,
 				B81B68888E8A9CFFD12C5434 /* Pods_Catch_Up.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +162,7 @@
 		1B6EE85014391CEC5B832B2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B47710D722AA51CB00F1A196 /* VACalendar.framework */,
 				C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */,
 			);
 			name = Frameworks;
@@ -232,11 +240,11 @@
 		B48205DB228A7383003A1680 /* Catch Up */ = {
 			isa = PBXGroup;
 			children = (
+				B48D9054228D1DC8001B0EEC /* Fonts */,
 				2A6D63872295102C00D2CE63 /* Constants */,
 				2A6D638222950FC500D2CE63 /* Views */,
 				B4EEFA592293CD8500631A51 /* Catch Up.entitlements */,
 				B4EEFA572293CA9600631A51 /* GoogleService-Info.plist */,
-				B48D9054228D1DC8001B0EEC /* Fonts */,
 				B48205F2228A76DC003A1680 /* Storyboards */,
 				B48205F1228A76D1003A1680 /* Controllers */,
 				B48205F0228A76C8003A1680 /* Helpers */,
@@ -285,6 +293,7 @@
 				B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */,
 				B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */,
 				B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */,
+				B47710D422AA122300F1A196 /* ProcessViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -401,6 +410,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B47710D922AA7C1D00F1A196 /* Muli-Bold.ttf in Resources */,
+				B47710D622AA351500F1A196 /* Muli-Regular.ttf in Resources */,
 				B48C280B2295489000426E48 /* GroupChat.storyboard in Resources */,
 				B48205F8228A855C003A1680 /* Auth.storyboard in Resources */,
 				B48205E7228A7384003A1680 /* LaunchScreen.storyboard in Resources */,
@@ -428,6 +439,7 @@
 				"${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/VACalendar/VACalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -437,6 +449,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BottomPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VACalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,6 +518,7 @@
 				8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */,
 				B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */,
 				B47688D7229E49A900F17BBF /* IndividualProfileDetailController.swift in Sources */,
+				B47710D522AA122300F1A196 /* ProcessViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

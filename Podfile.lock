@@ -68,6 +68,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - VACalendar (1.3)
 
 DEPENDENCIES:
   - BottomPopup
@@ -75,6 +76,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Storage
+  - VACalendar
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -90,6 +92,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - nanopb
+    - VACalendar
 
 SPEC CHECKSUMS:
   BottomPopup: d487f2fd398805f07e4563a29cf79233f531cbe7
@@ -104,7 +107,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  VACalendar: 3e5a001cbf437ebed2bcfc747f3187e555d65175
 
-PODFILE CHECKSUM: cb1121cbf0602c8ec5999863733d4dd08e89ca41
+PODFILE CHECKSUM: e7af05153bacec95705d40144f3d4f99f6e6bcc7
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.6.0.rc.1

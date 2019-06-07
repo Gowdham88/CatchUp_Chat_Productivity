@@ -12,6 +12,6 @@ target 'Catch Up' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'BottomPopup'
-
+  pod 'VACalendar'
 
 end

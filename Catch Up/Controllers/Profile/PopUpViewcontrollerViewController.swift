@@ -11,6 +11,8 @@ import BottomPopup
 
 class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    let ChooseBackground = Chat_Background()
+
     var shouldDismissInteractivelty: Bool?
     
     let kHeightMaxValue: CGFloat = 600
@@ -33,8 +35,7 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
     @IBOutlet weak var alertHeader: UILabel!
     @IBOutlet weak var myCollectionView: UICollectionView!
     @IBOutlet weak var myTableView: UITableView!
-    
-    
+
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
         
         dismiss(animated: true, completion: nil)
@@ -52,27 +53,21 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
             
         case "Chat"  :
             
-            return 0
+            return 300
             
-//        case "Invite Friends"  :
-//            return 0
+        case "Invite Friends"  :
+            return 200
             
         case "Theme"  :
             
+            return 250
             
-            
-            return 1
-            
-//        case "Help"  :
-//            return 0
+        case "Help"  :
+            return 200
             
         case "Edit Profile"  :
             
-            myTableView.alpha = 1
-            myCollectionView.alpha = 0
-            
-            return 1
-            
+            return 300
             
         default:
             return height
@@ -102,16 +97,14 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
         switch PageHeader {
             
         case "Chat"  :
+            
             return 0
             
         case "Invite Friends"  :
             return 0
             
         case "Theme"  :
-            
-            myTableView.alpha = 1
-            myCollectionView.alpha = 0
-            
+    
             return 1
             
         case "Help"  :
@@ -119,15 +112,99 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
             
         case "Edit Profile"  :
             
-            myTableView.alpha = 1
-            myCollectionView.alpha = 0
-            
             return 1
             
         default:
             return 0
             
         }
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        switch PageHeader {
+        
+                case "Chat"  :
+
+                    if let cell = collectionView.cellForItem(at: indexPath) {
+                        
+                        Themeused[indexPath.row] = true
+                        
+            }
+//                    if let cell = tableView.cellForRow(at: indexPath) {
+//                        cell.accessoryType = .none
+//            }
+   
+        
+    default:
+        break
+        
+        }
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        <#code#>
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        switch PageHeader {
+            
+//        case "Chat"  :
+//            return 0
+//
+//        case "Invite Friends"  :
+//            return 0
+//
+        case "Theme"  :
+            
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.accessoryType = .none
+            }
+            
+//        case "Help"  :
+//            return 0
+//
+//        case "Edit Profile"  :
+//            return 3
+            
+        default:
+            break
+            
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+            switch PageHeader {
+                
+                //        case "Chat"  :
+                //            return 0
+                //
+                //        case "Invite Friends"  :
+                //            return 0
+            //
+            case "Theme"  :
+                
+               
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    cell.accessoryType = .checkmark
+                    
+                }
+                
+                //        case "Help"  :
+                //            return 0
+                //
+                //        case "Edit Profile"  :
+                //            return 3
+                
+            default:
+                break
+                
+            }
         
     }
     
@@ -163,6 +240,7 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
         
     }
 
+    
    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -204,7 +282,7 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
         switch PageHeader {
             
         case "Chat"  :
-            return 5
+            return 6
             
         case "Invite Friends"  :
             return 0
@@ -231,8 +309,18 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
             
         case "Chat"  :
             
-            myTableView.alpha = 0
-            myCollectionView.alpha = 1
+            if myTableView == nil
+            {
+                
+                myTableView.alpha = 0
+            }
+            
+            if myCollectionView != nil
+            {
+                
+                myCollectionView.alpha = 1
+                
+            }
             
             return 1
             
@@ -253,6 +341,9 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
             
         }
     }
+    
+
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PopupCollectionViewCell
@@ -261,11 +352,21 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
             
         case "Chat"  :
             
+            if indexPath.row == 0 {
+            
+            ChooseBackground.choosecameraImage(BackView: cell.myview)
+                
+            } else {
+                
+                ChooseBackground.chooseThemes(BackView: cell.myview, Row: indexPath.row)
+                
+                
+            }
+            
 //            cell.iconImage.image = EditProfileIcons[indexPath.row]
 //
 //            cell.popupOption.text = EditProfileTitle[indexPath.row]
             
-            cell.myLabel.text = "\(indexPath.row)"
             
             return cell
             

@@ -29,7 +29,7 @@ class VAWeekView: UIView {
         self.showDaysOut = showDaysOut
         super.init(frame: .zero)
         
-        backgroundColor = .clear
+        backgroundColor = .white
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,6 +43,8 @@ class VAWeekView: UIView {
         week.days.enumerated().forEach { index, day in
             let dayView = VADayView(day: day)
             dayView.frame = CGRect(x: x, y: 0, width: dayWidth, height: frame.height)
+            
+//            print("day view's height \(frame.height)")
             x = dayView.frame.maxX
             dayView.delegate = self
             dayViews.append(dayView)

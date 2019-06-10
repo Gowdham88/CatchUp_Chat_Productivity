@@ -115,7 +115,7 @@ class VAMonthView: UIView {
         let weekViewWidth = self.frame.width - (leftInset + rightInset)
         
         var x: CGFloat = leftInset
-        var y: CGFloat = initialOffsetY
+        var y: CGFloat = initialOffsetY + 10
 
         weekViews.enumerated().forEach { index, week in
             switch viewType {

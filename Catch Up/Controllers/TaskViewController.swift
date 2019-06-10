@@ -49,7 +49,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     
     let defaultCalendar: Calendar = {
         var calendar = Calendar.current
-        calendar.firstWeekday = 1
+        calendar.firstWeekday = 2
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         return calendar
     }()
@@ -67,13 +67,25 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet var overlayView: UIView!
     
+    @IBOutlet var isDateView: UIView!
+    
+    @IBOutlet var dateView: UIView!
+    
+    @IBOutlet var timeView: UIView!
+    
+    @IBOutlet var dateIndicator: UIView!
+    
+    @IBOutlet var timeIndicator: UIView!
     
     @IBOutlet var calendarButton: UIButton!
+    
+    @IBOutlet var isTimeView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         msgText.delegate = self
-        
         profileImgView.setRounded()
         
         dayLbl.layer.cornerRadius = 10
@@ -88,16 +100,27 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         calendarMainView.isHidden = true
         self.overlayView.isHidden = true
 
-        
         let tapOverlay = UITapGestureRecognizer(target: self, action: #selector(overlayTap(gesture:)))
         
         overlayView.addGestureRecognizer(tapOverlay)
+        
+        let isCalendarTap = UITapGestureRecognizer(target: self, action: #selector(isCalendar(gesture:)))
+        isDateView.isUserInteractionEnabled = true
+        isCalendarTap.numberOfTapsRequired = 1
+        isDateView.addGestureRecognizer(isCalendarTap)
+        
+        let isTimeTap = UITapGestureRecognizer(target: self, action: #selector(isTime(gesture:)))
+        timeView.isUserInteractionEnabled = true
+        isTimeTap.numberOfTapsRequired = 1
+        timeView.addGestureRecognizer(isTimeTap)
+    
         
     }
     
     @objc func overlayTap(gesture: UITapGestureRecognizer) {
         
         self.view.sendSubviewToBack(overlayView)
+        calendarView.removeFromSuperview()
         overlayView.isHidden = true
     }
     
@@ -114,35 +137,10 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func didTappedCalendar(_ sender: Any) {
         
-        self.overlayView.isHidden = false
-        self.view.bringSubviewToFront(overlayView)
-        self.overlayView.addSubview(calendarMainView)
-        calendarMainView.isHidden = false
-        
-        let calendar = VACalendar(calendar: defaultCalendar)
-        calendarView = VACalendarView(frame: .zero, calendar: calendar)
-        calendarView.showDaysOut = true
-        calendarView.selectionStyle = .single
-        calendarView.monthDelegate = monthHeaderView
-        calendarView.dayViewAppearanceDelegate = self
-        calendarView.monthViewAppearanceDelegate = self
-        calendarView.calendarDelegate = self
-        calendarView.scrollDirection = .horizontal
-        calendarMainView.addSubview(calendarView)
-        calendarMainView.roundCorners(corners: [.topLeft,.topRight], radius: 15.0)
-        
-        if calendarView.frame == .zero {
-            calendarView.frame = CGRect(
-                x: 0,
-                y: weekDaysView.frame.maxY,
-                width: view.frame.width,
-                height: view.frame.height * 0.6
-            )
-            calendarView.setup()
-        }
+        isCalendar()
     }
     
-    
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         print("print1")
     }
@@ -297,6 +295,72 @@ extension TaskViewController: VACalendarViewDelegate {
         print(dates)
     }
     
+}
+
+extension TaskViewController {
+    
+    @objc func isCalendar(gesture: UITapGestureRecognizer) {
+        
+        isCalendar()
+        
+    }
+    
+    @objc func isTime(gesture: UITapGestureRecognizer) {
+        
+        isTimePicker()
+        
+    }
+    
+    func isCalendar() {
+        
+        self.overlayView.isHidden = false
+        self.view.bringSubviewToFront(overlayView)
+        self.overlayView.addSubview(calendarMainView)
+        calendarMainView.isHidden = false
+        isTimeView.isHidden = true
+        isDateView.isHidden = false
+        
+        timeIndicator.isHidden = true
+        dateIndicator.isHidden = false
+        
+        let calendar = VACalendar(calendar: defaultCalendar)
+        calendarView = VACalendarView(frame: .zero, calendar: calendar)
+        calendarView.showDaysOut = true
+        calendarView.selectionStyle = .single
+        calendarView.monthDelegate = monthHeaderView
+        calendarView.dayViewAppearanceDelegate = self
+        calendarView.monthViewAppearanceDelegate = self
+        calendarView.calendarDelegate = self
+        calendarView.scrollDirection = .horizontal
+        calendarMainView.addSubview(calendarView)
+        calendarMainView.roundCorners(corners: [.topLeft,.topRight], radius: 20.0)
+        
+        if calendarView.frame == .zero {
+            calendarView.frame = CGRect(
+                x: 0,
+                y: weekDaysView.frame.maxY,
+                width: view.frame.width,
+                height: view.frame.height * 0.45
+            )
+            calendarView.setup()
+        }
+    }
+    
+    func isTimePicker() {
+        
+        self.overlayView.isHidden = false
+        self.view.sendSubviewToBack(overlayView)
+        calendarView.removeFromSuperview()
+        self.view.bringSubviewToFront(overlayView)
+//        overlayView.addSubview(isDateView)
+        
+        isDateView.isHidden = true
+        isTimeView.isHidden = false
+        
+        timeIndicator.isHidden = false
+        dateIndicator.isHidden = true
+        
+    }
 }
 
 

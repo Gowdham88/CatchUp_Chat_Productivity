@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        let storyboard = UIStoryboard(name: "Task", bundle: nil)
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TaskViewController")
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "ProfileController")
         //GroupingViewController
         //UpdateGroupController
         //GroupDetailController

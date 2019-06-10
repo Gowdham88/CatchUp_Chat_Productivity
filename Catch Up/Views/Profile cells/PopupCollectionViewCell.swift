@@ -10,10 +10,15 @@ import UIKit
 
 class PopupCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var myview: UIView!
     
-    @IBOutlet weak var myLabel: UILabel!
-    
+//    let firstFrame = CGRect(x: 50, y: 70, height: 200, width: 200)
+   
+    //Now, I want to add a subview inside firstView
+   
     override func awakeFromNib() {
+        
+      
         
     }
     

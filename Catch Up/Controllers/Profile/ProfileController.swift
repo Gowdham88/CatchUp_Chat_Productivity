@@ -17,7 +17,7 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var tableView: UITableView!
     
     var profileitems = ["Chat", "Invite Friends", "Theme", "Help", "Log Out"]
-    var iconImages : [UIImage] = [UIImage(named: "message-square")!, UIImage(named: "users")!, UIImage(named: "sliders")!, UIImage(named: "help-circle")!, UIImage(named: "power")!]
+    var iconImages : [UIImage] = [UIImage(named: "message")!, UIImage(named: "users")!, UIImage(named: "sliders")!, UIImage(named: "help-circle")!, UIImage(named: "power")!]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +38,20 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBAction func uploadImage(_ sender: Any) {
         
+        PresentPopup(Alertheader: "Edit Profile")
+
+
+        
+    }
+    
+    func uploadpicture() {
+        
         let localFile = URL(string: "path/to/image")!
         
         let storage = Storage.storage()
-
+        
         let storageRef = storage.reference()
-
+        
         // Create a reference to the file you want to upload
         let riversRef = storageRef.child("images/rivers.jpg")
         
@@ -51,7 +59,7 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
         
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
-
+        
         let uploadTask = riversRef.putFile(from: localFile, metadata: metadata)
         
         
@@ -89,8 +97,8 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
             }
         }
         
+        
     }
-    
     @IBAction func backPressed(_ sender: Any) {
         
         
@@ -98,7 +106,6 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBAction func editPressed(_ sender: Any) {
         
-        PresentPopup(Alertheader: "Edit Profile")
         
     }
     

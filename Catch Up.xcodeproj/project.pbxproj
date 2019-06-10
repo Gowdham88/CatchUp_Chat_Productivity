@@ -10,6 +10,7 @@
 		2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */; };
 		2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */; };
 		6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */; };
+		8E28BDD122AB9A640070440D /* Chat_Theme_Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28BDD022AB9A640070440D /* Chat_Theme_Background.swift */; };
 		8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */; };
 		8E28CFC12297DD0800D0D634 /* PopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28CFC02297DD0800D0D634 /* PopupCollectionViewCell.swift */; };
 		8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */; };
@@ -73,6 +74,7 @@
 		2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
 		6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailTableCell.swift; sourceTree = "<group>"; };
+		8E28BDD022AB9A640070440D /* Chat_Theme_Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat_Theme_Background.swift; sourceTree = "<group>"; };
 		8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popupTableViewcell.swift; sourceTree = "<group>"; };
 		8E28CFC02297DD0800D0D634 /* PopupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatpopupCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -199,6 +201,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8E28BDCF22AB9A220070440D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8E28BDD022AB9A640070440D /* Chat_Theme_Background.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		8E28CFBF2297DCCD00D0D634 /* Profile cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +270,7 @@
 		B48205EF228A76B8003A1680 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				8E28BDCF22AB9A220070440D /* Profile */,
 				B48205FF228A9507003A1680 /* GradientView.swift */,
 				B4820601228AAFA5003A1680 /* DropShadow.swift */,
 			);
@@ -497,6 +508,7 @@
 				B48205FA228A86E4003A1680 /* LoginWithNumberController.swift in Sources */,
 				B48F09D022A649250064CE5F /* CreateGroupTableViewCell.swift in Sources */,
 				B4732B2122A8EEB900153D8C /* TaskDashboardController.swift in Sources */,
+				8E28BDD122AB9A640070440D /* Chat_Theme_Background.swift in Sources */,
 				B48205DF228A7383003A1680 /* ViewController.swift in Sources */,
 				CE352DD62297158900D4D761 /* TaskViewController.swift in Sources */,
 				B4EEFA5D229416BF00631A51 /* ProfileController.swift in Sources */,

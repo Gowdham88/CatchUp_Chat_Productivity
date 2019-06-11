@@ -145,9 +145,9 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
 
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        <#code#>
-    }
+//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        <#code#>
+//    }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         switch PageHeader {

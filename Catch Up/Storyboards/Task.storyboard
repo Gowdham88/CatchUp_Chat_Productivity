@@ -157,12 +157,12 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BEP-FD-TAJ">
-                                <rect key="frame" x="0.0" y="358" width="414" height="378"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="300" width="414" height="436"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e6O-Fp-FYp">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n2s-FA-AWL">
                                                 <rect key="frame" x="65" y="0.0" width="146" height="60"/>
@@ -213,19 +213,67 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8d8-oD-A9v" customClass="VAMonthHeaderView" customModule="VACalendar">
-                                        <rect key="frame" x="0.0" y="60" width="414" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sSZ-6U-HHv">
+                                        <rect key="frame" x="0.0" y="60" width="414" height="376"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yvt-C0-Czw" customClass="VAMonthHeaderView" customModule="VACalendar">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z6P-YO-0If" customClass="VAWeekDaysView" customModule="VACalendar">
+                                                <rect key="frame" x="0.0" y="44" width="414" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yb7-lp-zOx">
+                                                <rect key="frame" x="0.0" y="80" width="414" height="296"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IKF-dt-M9E" customClass="VAWeekDaysView" customModule="VACalendar">
-                                        <rect key="frame" x="0.0" y="105" width="414" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOv-R8-h5i">
-                                        <rect key="frame" x="0.0" y="140" width="414" height="239"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ofn-NQ-Dym">
+                                        <rect key="frame" x="0.0" y="60" width="414" height="376"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QWw-9P-Y4B">
+                                                <rect key="frame" x="68" y="75" width="113" height="195"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7e-TE-ToL">
+                                                        <rect key="frame" x="48" y="2" width="16" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="topArrow"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WP-V8-VlI">
+                                                        <rect key="frame" x="49" y="167" width="16" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="bottomArrow"/>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpv-el-bIw">
+                                                <rect key="frame" x="233" y="75" width="113" height="195"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1R-AK-RAC">
+                                                        <rect key="frame" x="48" y="2" width="16" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="topArrow"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKN-ms-eDd">
+                                                        <rect key="frame" x="49" y="167" width="16" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="bottomArrow"/>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -265,20 +313,28 @@
                         <color key="backgroundColor" red="0.20944273469999999" green="0.29964923859999998" blue="0.3973022699" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Ec1-Nx-pc2"/>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="calendarAdjustView" destination="eOv-R8-h5i" id="DQp-24-bBW"/>
+                        <outlet property="calendarAdjustView" destination="Yb7-lp-zOx" id="oHb-AD-Nil"/>
                         <outlet property="calendarButton" destination="Lca-In-Yiu" id="1G0-ah-tbw"/>
                         <outlet property="calendarMainView" destination="BEP-FD-TAJ" id="Mrg-UT-Zkj"/>
-                        <outlet property="calendarTopView" destination="e6O-Fp-FYp" id="oc5-0m-vk7"/>
+                        <outlet property="calendarTopView" destination="e6O-Fp-FYp" id="dqC-il-EeA"/>
+                        <outlet property="dateIndicator" destination="6QM-r4-Gue" id="GdY-tj-DNN"/>
                         <outlet property="dateTargetLbl" destination="z2W-Yt-Miy" id="NPW-9d-wJ5"/>
+                        <outlet property="dateView" destination="n2s-FA-AWL" id="zmu-yB-dJV"/>
                         <outlet property="dayLbl" destination="feN-I3-t2a" id="UAi-vr-DSu"/>
-                        <outlet property="monthHeaderView" destination="8d8-oD-A9v" id="ft8-fo-0K3"/>
+                        <outlet property="isDateView" destination="sSZ-6U-HHv" id="fmv-EJ-KHl"/>
+                        <outlet property="isTimeView" destination="Ofn-NQ-Dym" id="x0U-9T-Alw"/>
+                        <outlet property="monthHeaderView" destination="yvt-C0-Czw" id="Cb3-RP-uBU"/>
                         <outlet property="msgText" destination="LUh-vf-oYm" id="KlK-5M-45E"/>
                         <outlet property="overlayView" destination="SR9-v7-gVW" id="nJR-AR-XOh"/>
                         <outlet property="profileImgView" destination="4XB-X5-HCu" id="fxt-gD-kmm"/>
                         <outlet property="taskView" destination="khw-ZF-U3c" id="gv6-yo-gQW"/>
+                        <outlet property="timeIndicator" destination="ARO-el-Xsg" id="CeU-HG-dMN"/>
+                        <outlet property="timeView" destination="ivv-5F-zXj" id="nJ3-KR-dzM"/>
                         <outlet property="userNameLbl" destination="rUD-q7-6aR" id="knk-cv-XVf"/>
-                        <outlet property="weekDaysView" destination="IKF-dt-M9E" id="Ybu-ni-EAa"/>
+                        <outlet property="weekDaysView" destination="Z6P-YO-0If" id="my1-pD-c9S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UPx-Zj-OxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -675,6 +731,7 @@
         <image name="Ellipse" width="22" height="22"/>
         <image name="Search" width="24" height="24"/>
         <image name="back" width="16" height="16"/>
+        <image name="bottomArrow" width="12" height="7"/>
         <image name="btn add" width="68" height="63"/>
         <image name="btn save" width="68" height="68"/>
         <image name="calendar" width="20" height="22"/>
@@ -685,6 +742,7 @@
         <image name="message" width="24" height="24"/>
         <image name="profile_user" width="750" height="750"/>
         <image name="task" width="26.666666030883789" height="26.666666030883789"/>
+        <image name="topArrow" width="12" height="7"/>
         <image name="x" width="24" height="24"/>
     </resources>
 </document>

@@ -21,8 +21,8 @@ public struct VAMonthHeaderViewAppearance {
     }()
     
     public init(
-        monthFont: UIFont = UIFont.systemFont(ofSize: 21),
-        monthTextColor: UIColor = UIColor.black,
+        monthFont: UIFont = UIFont(name: "Muli-Regular", size: 16)!,
+        monthTextColor: UIColor = UIColor(red: 37/255, green: 62/255, blue: 91/255, alpha: 1.0),
         monthTextWidth: CGFloat = 150,
         previousButtonImage: UIImage = UIImage(),
         nextButtonImage: UIImage = UIImage(),
@@ -71,8 +71,12 @@ public class VAMonthHeaderView: UIView {
         let buttonWidth: CGFloat = 50.0
         monthLabel.frame = CGRect(x: 0, y: 0, width: appearance.monthTextWidth, height: frame.height)
         monthLabel.center.x = center.x
-        previousButton.frame = CGRect(x: monthLabel.frame.minX - buttonWidth, y: 0, width: buttonWidth, height: frame.height)
-        nextButton.frame = CGRect(x: monthLabel.frame.maxX, y: 0, width: buttonWidth, height: frame.height)
+//        previousButton.frame = CGRect(x: monthLabel.frame.minX - buttonWidth, y: 0, width: buttonWidth, height: frame.height)
+//        nextButton.frame = CGRect(x: monthLabel.frame.maxX, y: 0, width: buttonWidth, height: frame.height)
+        
+        previousButton.frame = CGRect(x: monthLabel.frame.minX - 100, y: 0, width: buttonWidth, height: frame.height)
+        nextButton.frame = CGRect(x: monthLabel.frame.maxX + 50, y: 0, width: buttonWidth, height: frame.height)
+
     }
     
     private func setupView() {

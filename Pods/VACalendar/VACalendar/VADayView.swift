@@ -72,7 +72,9 @@ class VADayView: UIView {
         let shortestSide: CGFloat = (frame.width < frame.height ? frame.width : frame.height)
         let side: CGFloat = shortestSide * (dayViewAppearanceDelegate?.selectedArea?() ?? 0.8)
         
+//        dateLabel.font = dayViewAppearanceDelegate?.font?(for: day.state) ?? dateLabel.font
         dateLabel.font = dayViewAppearanceDelegate?.font?(for: day.state) ?? dateLabel.font
+
         dateLabel.text = VAFormatters.dayFormatter.string(from: day.date)
         dateLabel.textAlignment = .center
         dateLabel.frame = CGRect(
@@ -81,6 +83,7 @@ class VADayView: UIView {
             width: side,
             height: side
         )
+        print("side val \(side)")
         dateLabel.center = CGPoint(x: frame.width / 2, y: frame.height / 2)
 
         setState(day.state)
@@ -104,7 +107,9 @@ class VADayView: UIView {
         layer.borderColor = dayViewAppearanceDelegate?.borderColor?(for: state).cgColor ?? layer.borderColor
         layer.borderWidth = dayViewAppearanceDelegate?.borderWidth?(for: state) ?? dateLabel.layer.borderWidth
         
+//        dateLabel.textColor = dayViewAppearanceDelegate?.textColor?(for: state) ?? dateLabel.textColor
         dateLabel.textColor = dayViewAppearanceDelegate?.textColor?(for: state) ?? dateLabel.textColor
+
         dateLabel.backgroundColor = dayViewAppearanceDelegate?.textBackgroundColor?(for: state) ?? dateLabel.backgroundColor
         
         updateSupplementaryViews()
@@ -123,9 +128,11 @@ class VADayView: UIView {
                     stack.addArrangedSubview(dotView)
                 }
                 let spaceOffset = CGFloat(colors.count - 1) * dotSpacing
+                
                 let stackWidth = CGFloat(colors.count) * dotSpacing + spaceOffset
                 
                 let verticalOffset = dayViewAppearanceDelegate?.dotBottomVerticalOffset?(for: day.state) ?? 2
+                print("vertical offset val\(verticalOffset)")
                 stack.frame = CGRect(x: 0, y: dateLabel.frame.maxY + verticalOffset, width: stackWidth, height: dotSize)
                 stack.center.x = dateLabel.center.x
                 addSubview(stack)

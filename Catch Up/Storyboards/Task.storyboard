@@ -244,35 +244,143 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7e-TE-ToL">
-                                                        <rect key="frame" x="48" y="2" width="16" height="22"/>
+                                                        <rect key="frame" x="24" y="0.0" width="64" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="topArrow"/>
+                                                        <connections>
+                                                            <action selector="hourTimeUpButton:" destination="0ee-vq-lis" eventType="touchUpInside" id="uM5-Vq-DGH"/>
+                                                        </connections>
                                                     </button>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="O4U-xC-RT2">
+                                                        <rect key="frame" x="0.0" y="31" width="113" height="133"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="0.30128959760273971" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ofG-rw-dle">
+                                                            <size key="itemSize" width="111" height="133"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="s52-LO-K8N" customClass="TimeHourCollectionViewCell" customModule="Catch_Up" customModuleProvider="target">
+                                                                <rect key="frame" x="1" y="0.0" width="111" height="133"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="111" height="133"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7T-Aq-yF0">
+                                                                            <rect key="frame" x="29" y="39" width="52" height="54"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </view>
+                                                                <color key="backgroundColor" red="0.14509803921568626" green="0.24313725490196078" blue="0.35686274509803922" alpha="0.029999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <size key="customSize" width="111" height="133"/>
+                                                                <connections>
+                                                                    <outlet property="hourLabel" destination="d7T-Aq-yF0" id="PD6-T4-VmX"/>
+                                                                </connections>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="0ee-vq-lis" id="hLb-jO-NEj"/>
+                                                            <outlet property="delegate" destination="0ee-vq-lis" id="EL7-Ba-rGg"/>
+                                                        </connections>
+                                                    </collectionView>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WP-V8-VlI">
-                                                        <rect key="frame" x="49" y="167" width="16" height="22"/>
+                                                        <rect key="frame" x="24" y="164" width="64" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="bottomArrow"/>
+                                                        <connections>
+                                                            <action selector="hourTimeDownButton:" destination="0ee-vq-lis" eventType="touchUpInside" id="dsm-wz-iwH"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" red="0.14509803921568626" green="0.24313725490196078" blue="0.35686274509803922" alpha="0.029999999999999999" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpv-el-bIw">
-                                                <rect key="frame" x="233" y="75" width="113" height="195"/>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7x0-o3-oNb">
+                                                <rect key="frame" x="246" y="75" width="113" height="195"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1R-AK-RAC">
-                                                        <rect key="frame" x="48" y="2" width="16" height="22"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BvN-0O-L62">
+                                                        <rect key="frame" x="24" y="0.0" width="64" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="topArrow"/>
+                                                        <connections>
+                                                            <action selector="minsTimeUpButton:" destination="0ee-vq-lis" eventType="touchUpInside" id="fJV-QW-uam"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKN-ms-eDd">
-                                                        <rect key="frame" x="49" y="167" width="16" height="22"/>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wnS-CM-UQ1">
+                                                        <rect key="frame" x="0.0" y="31" width="113" height="133"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IcB-F2-4XL">
+                                                            <size key="itemSize" width="111" height="133"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MinsCell" id="ESs-Ga-xUc" customClass="TimeMinsCollectionViewCell" customModule="Catch_Up" customModuleProvider="target">
+                                                                <rect key="frame" x="1" y="0.0" width="111" height="133"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="111" height="133"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBz-br-eJS">
+                                                                            <rect key="frame" x="29" y="39" width="52" height="54"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </view>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <size key="customSize" width="111" height="133"/>
+                                                                <connections>
+                                                                    <outlet property="minsLabel" destination="kBz-br-eJS" id="02f-sE-c3b"/>
+                                                                </connections>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="0ee-vq-lis" id="9lN-vL-L6X"/>
+                                                            <outlet property="delegate" destination="0ee-vq-lis" id="Lg8-4O-BPN"/>
+                                                        </connections>
+                                                    </collectionView>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4je-HQ-y9a">
+                                                        <rect key="frame" x="24" y="164" width="64" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" image="bottomArrow"/>
+                                                        <connections>
+                                                            <action selector="minsTimeDownButton:" destination="0ee-vq-lis" eventType="touchUpInside" id="enU-Dq-Eh2"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKS-h8-DkJ">
+                                                <rect key="frame" x="197" y="331" width="88" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
+                                                <state key="normal" title="CANCEL">
+                                                    <color key="titleColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Jp-Wc-1vb">
+                                                <rect key="frame" x="309" y="331" width="88" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
+                                                <state key="normal" title="SELECT">
+                                                    <color key="titleColor" red="0.14509803921568626" green="0.24313725490196078" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -324,14 +432,22 @@
                         <outlet property="dateTargetLbl" destination="z2W-Yt-Miy" id="NPW-9d-wJ5"/>
                         <outlet property="dateView" destination="n2s-FA-AWL" id="zmu-yB-dJV"/>
                         <outlet property="dayLbl" destination="feN-I3-t2a" id="UAi-vr-DSu"/>
+                        <outlet property="hourDecrementButton" destination="8WP-V8-VlI" id="NLy-jS-aPq"/>
+                        <outlet property="hourIncrementButton" destination="V7e-TE-ToL" id="hTp-if-a8k"/>
                         <outlet property="isDateView" destination="sSZ-6U-HHv" id="fmv-EJ-KHl"/>
                         <outlet property="isTimeView" destination="Ofn-NQ-Dym" id="x0U-9T-Alw"/>
+                        <outlet property="minsDecrementButton" destination="4je-HQ-y9a" id="TzI-g5-eBL"/>
+                        <outlet property="minsIncrementButton" destination="BvN-0O-L62" id="pQq-4v-sZp"/>
                         <outlet property="monthHeaderView" destination="yvt-C0-Czw" id="Cb3-RP-uBU"/>
                         <outlet property="msgText" destination="LUh-vf-oYm" id="KlK-5M-45E"/>
                         <outlet property="overlayView" destination="SR9-v7-gVW" id="nJR-AR-XOh"/>
                         <outlet property="profileImgView" destination="4XB-X5-HCu" id="fxt-gD-kmm"/>
                         <outlet property="taskView" destination="khw-ZF-U3c" id="gv6-yo-gQW"/>
+                        <outlet property="timeHourCollectionView" destination="O4U-xC-RT2" id="q6c-ql-pAg"/>
                         <outlet property="timeIndicator" destination="ARO-el-Xsg" id="CeU-HG-dMN"/>
+                        <outlet property="timeMinsCollectionView" destination="wnS-CM-UQ1" id="4CP-XH-FfU"/>
+                        <outlet property="timePickerHourView" destination="QWw-9P-Y4B" id="rst-WL-AIp"/>
+                        <outlet property="timePickerMinutesView" destination="7x0-o3-oNb" id="UP2-nz-ZCo"/>
                         <outlet property="timeView" destination="ivv-5F-zXj" id="nJ3-KR-dzM"/>
                         <outlet property="userNameLbl" destination="rUD-q7-6aR" id="knk-cv-XVf"/>
                         <outlet property="weekDaysView" destination="Z6P-YO-0If" id="my1-pD-c9S"/>

@@ -132,6 +132,10 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
                         
                         Themeused[indexPath.row] = true
                         
+                        ChooseBackground.chooseThemes(BackView: collectionView.check, Row: Int)
+                        
+                        print("Themeused: \(Themeused)")
+                        
             }
 //                    if let cell = tableView.cellForRow(at: indexPath) {
 //                        cell.accessoryType = .none
@@ -145,9 +149,28 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
 
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        <#code#>
-//    }
+        func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    
+    switch PageHeader {
+    
+    case "Chat"  :
+    
+    if let cell = collectionView.cellForItem(at: indexPath) {
+    
+    Themeused[indexPath.row] = false
+    
+    }
+    //                    if let cell = tableView.cellForRow(at: indexPath) {
+    //                        cell.accessoryType = .none
+    //            }
+    
+    
+    default:
+    break
+    
+    }
+    
+}
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         switch PageHeader {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-var Themeused = [false, true, false, false, false, false]
+var Themeused = [true, false, false, false, false]
 
 class Chat_Background {
     
@@ -81,7 +81,11 @@ class Chat_Background {
         let CheckImageView = UIImageView(image: checkImage)
         CheckImageView.frame = CGRect(x: 20, y: 17, width: 25, height: 25)
         
+        print("Themeused.count: \(Themeused.count), Row: \(Row)")
+        
         if Themeused[Row-1] == true {
+            
+            print("Themeused: \(Themeused)")
             
             CheckImageView.alpha = 1
             

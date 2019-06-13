@@ -31,17 +31,13 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
         profileImage.roundCorners(corners: [.topRight, .topLeft, .bottomLeft, .bottomRight], radius: profileImage.frame.height/2)
         
         supportView.roundCorners(corners: [.topRight, .topLeft], radius: 20)
-        
-        
-        // Do any additional setup after loading the view.
+
     }
     
     @IBAction func uploadImage(_ sender: Any) {
         
         PresentPopup(Alertheader: "Edit Profile")
 
-
-        
     }
     
     func uploadpicture() {

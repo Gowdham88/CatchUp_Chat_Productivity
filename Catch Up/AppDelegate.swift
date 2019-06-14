@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        let storyboard = UIStoryboard(name: "Task", bundle: nil)
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
         
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TaskViewController")
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainChatScreenController")
         //GroupingViewController
         //UpdateGroupController
         //GroupDetailController
@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //ChatDashboardController
         //TaskDashboardController
         //ProcessViewController
+        //MainChatScreenController
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         

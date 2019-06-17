@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 import AVKit
-import Pickle
 import Photos
 
 //import CameraManager
@@ -17,7 +16,7 @@ import Photos
 
 
 
-class MainChatScreenController: UIViewController,UITextFieldDelegate {
+class MainChatScreenController: UIViewController,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
   
 
     
@@ -149,6 +148,8 @@ class MainChatScreenController: UIViewController,UITextFieldDelegate {
     
     @IBAction func didTappedAttchments(_ sender: Any) {
         
+        openGallery()
+        
         // for image
         
 //        let myPickerController = UIImagePickerController()
@@ -188,12 +189,35 @@ class MainChatScreenController: UIViewController,UITextFieldDelegate {
 //            picker!.sourceType = UIImagePickerController.SourceType.camera
 //            self .present(picker!, animated: true, completion: nil)
 //        }
+        
+        let sb = UIStoryboard(name: "Chat", bundle: nil)
+        
+        let vc = sb.instantiateViewController(withIdentifier: "CutomCameraViewController")
+        
+        self.navigationController?.present(vc, animated: true, completion: nil)
 
     }
     
     @IBAction func didTappedAudioRecord(_ sender: Any) {
         
         recordView.isHidden = false
+    }
+    
+    func openGallery()
+    {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        else
+        {
+            let alert  = UIAlertController(title: "Warning", message: "You don't have permission to access gallery.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -378,19 +402,19 @@ extension MainChatScreenController {
     }
 }
 
-extension MainChatScreenController: ImagePickerControllerDelegate {
-    
-    func imagePickerController(_ picker: ImagePickerController, shouldLaunchCameraWithAuthorization status: AVAuthorizationStatus) -> Bool {
-        return true
-    }
-    
-    func imagePickerController(_ picker: ImagePickerController, didFinishPickingImageAssets assets: [PHAsset]) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: ImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-}
+//extension MainChatScreenController: ImagePickerControllerDelegate {
+//    
+//    func imagePickerController(_ picker: ImagePickerController, shouldLaunchCameraWithAuthorization status: AVAuthorizationStatus) -> Bool {
+//        return true
+//    }
+//    
+//    func imagePickerController(_ picker: ImagePickerController, didFinishPickingImageAssets assets: [PHAsset]) {
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+//    
+//    func imagePickerControllerDidCancel(_ picker: ImagePickerController) {
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+//}
 
 

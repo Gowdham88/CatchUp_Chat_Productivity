@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F54DF2DD4EF8FC6340975146B2DE01F1"
+               BlueprintIdentifier = "CEC51FE3CAD8E0D0185C646120414486"
                BlueprintName = "VACalendar"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "VACalendar.framework">

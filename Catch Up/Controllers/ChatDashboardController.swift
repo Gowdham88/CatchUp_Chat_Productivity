@@ -86,7 +86,5 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
         
         return cell
     }
-    
-    
-   
+
 }

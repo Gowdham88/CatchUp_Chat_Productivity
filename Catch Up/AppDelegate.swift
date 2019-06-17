@@ -19,12 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
-        
+    /*
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
         
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "MainChatScreenController")
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "CutomCameraViewController")
         //GroupingViewController
         //UpdateGroupController
         //GroupDetailController
@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //MainChatScreenController
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
+        
+        */
         
         return true
     }

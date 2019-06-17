@@ -1,5 +1,6 @@
 PODS:
   - BottomPopup (0.5.0)
+  - CameraManager (4.4.0)
   - Firebase (5.16.0):
     - Firebase/Core (= 5.16.0)
   - Firebase/Auth (5.16.0):
@@ -73,6 +74,7 @@ PODS:
 
 DEPENDENCIES:
   - BottomPopup
+  - CameraManager (~> 4.4)
   - Firebase
   - Firebase/Auth
   - Firebase/Core
@@ -83,6 +85,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BottomPopup
+    - CameraManager
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -99,6 +102,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BottomPopup: d487f2fd398805f07e4563a29cf79233f531cbe7
+  CameraManager: 583710502c42178d12ef046d9d4f7893feff8354
   Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
   FirebaseAnalytics: d35d47c03c50c73c14a7fd31463c5775843e78a9
   FirebaseAuth: c9b3ff063c223d2841d97240af547ce511bce19a
@@ -113,6 +117,6 @@ SPEC CHECKSUMS:
   Pickle: 28753955cbcd9cc1a7b44624e49c61e182f3bbd7
   VACalendar: 3e5a001cbf437ebed2bcfc747f3187e555d65175
 
-PODFILE CHECKSUM: dc546c0d07ee90cd1e94b9326133bcad5b823f91
+PODFILE CHECKSUM: a3ecca9d84925cfbbf04fca92fe5eb2871d132b2
 
 COCOAPODS: 1.6.0.rc.1

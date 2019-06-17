@@ -14,6 +14,7 @@ target 'Catch Up' do
   pod 'BottomPopup'
   pod 'VACalendar'
   pod 'Pickle'
+  pod 'CameraManager', '~> 4.4'
 
 
 end

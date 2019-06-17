@@ -16,6 +16,8 @@
 		8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */; };
 		8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */; };
 		8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */; };
+		B4021D0B22B3923100248EDB /* CarousellImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4021D0A22B3923100248EDB /* CarousellImagePickerController.swift */; };
+		B4021D0D22B3929F00248EDB /* ImagePickerConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4021D0C22B3929F00248EDB /* ImagePickerConfigurable.swift */; };
 		B4732B2122A8EEB900153D8C /* TaskDashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */; };
 		B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */; };
 		B47688D7229E49A900F17BBF /* IndividualProfileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */; };
@@ -25,6 +27,7 @@
 		B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47710D722AA51CB00F1A196 /* VACalendar.framework */; };
 		B47710D922AA7C1D00F1A196 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B48D905B228D1E8F001B0EEC /* Muli-Bold.ttf */; };
 		B47C3A2822AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */; };
+		B47E3F1F22B37F6F00E9EB5E /* Pickle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
 		B48205E2228A7383003A1680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48205E0228A7383003A1680 /* Main.storyboard */; };
@@ -83,6 +86,8 @@
 		8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewcontrollerViewController.swift; sourceTree = "<group>"; };
 		8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.debug.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.debug.xcconfig"; sourceTree = "<group>"; };
+		B4021D0A22B3923100248EDB /* CarousellImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarousellImagePickerController.swift; sourceTree = "<group>"; };
+		B4021D0C22B3929F00248EDB /* ImagePickerConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerConfigurable.swift; sourceTree = "<group>"; };
 		B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashboardController.swift; sourceTree = "<group>"; };
 		B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashboardTableCell.swift; sourceTree = "<group>"; };
 		B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualProfileDetailController.swift; sourceTree = "<group>"; };
@@ -90,6 +95,8 @@
 		B47710D422AA122300F1A196 /* ProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewController.swift; sourceTree = "<group>"; };
 		B47710D722AA51CB00F1A196 /* VACalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VACalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMinsCollectionViewCell.swift; sourceTree = "<group>"; };
+		B47E3F1C22B37E6400E9EB5E /* Pickle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pickle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pickle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205DC228A7383003A1680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B48205DE228A7383003A1680 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B47E3F1F22B37F6F00E9EB5E /* Pickle.framework in Frameworks */,
 				B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */,
 				B81B68888E8A9CFFD12C5434 /* Pods_Catch_Up.framework in Frameworks */,
 			);
@@ -168,6 +176,8 @@
 		1B6EE85014391CEC5B832B2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */,
+				B47E3F1C22B37E6400E9EB5E /* Pickle.framework */,
 				B47710D722AA51CB00F1A196 /* VACalendar.framework */,
 				C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */,
 			);
@@ -276,9 +286,11 @@
 		B48205EF228A76B8003A1680 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				B4021D0A22B3923100248EDB /* CarousellImagePickerController.swift */,
 				8E28BDCF22AB9A220070440D /* Profile */,
 				B48205FF228A9507003A1680 /* GradientView.swift */,
 				B4820601228AAFA5003A1680 /* DropShadow.swift */,
+				B4021D0C22B3929F00248EDB /* ImagePickerConfigurable.swift */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -456,6 +468,7 @@
 				"${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Pickle/Pickle.framework",
 				"${BUILT_PRODUCTS_DIR}/VACalendar/VACalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -466,6 +479,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BottomPopup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pickle.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VACalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -524,12 +538,14 @@
 				B48D9064228D29CB001B0EEC /* MainChatScreenController.swift in Sources */,
 				B48C280D229548E500426E48 /* CreateGroupController.swift in Sources */,
 				B48C281122954E6200426E48 /* NewGroupTableCell.swift in Sources */,
+				B4021D0B22B3923100248EDB /* CarousellImagePickerController.swift in Sources */,
 				B48205F6228A83D3003A1680 /* HexColorextension.swift in Sources */,
 				B47688D9229E6CD900F17BBF /* UpdateGroupController.swift in Sources */,
 				8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */,
 				8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */,
 				B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */,
 				6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */,
+				B4021D0D22B3929F00248EDB /* ImagePickerConfigurable.swift in Sources */,
 				B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */,
 				B47C3A2822AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift in Sources */,
 				B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */,

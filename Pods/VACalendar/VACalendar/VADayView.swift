@@ -83,7 +83,7 @@ class VADayView: UIView {
             width: side,
             height: side
         )
-        print("side val \(side)")
+//        print("side val \(side)")
         dateLabel.center = CGPoint(x: frame.width / 2, y: frame.height / 2)
 
         setState(day.state)

@@ -9,11 +9,17 @@
 import UIKit
 import AVFoundation
 import AVKit
+import Pickle
+import Photos
+
 //import CameraManager
 
 
 
-class MainChatScreenController: UIViewController {
+
+class MainChatScreenController: UIViewController,UITextFieldDelegate {
+  
+
     
    // navigation outlets
     
@@ -45,18 +51,43 @@ class MainChatScreenController: UIViewController {
 //    var cameraManager : CameraManager!
     
     
-    var picker:UIImagePickerController?=UIImagePickerController()
+    @IBOutlet var recordView: UIView!
     
+    @IBOutlet var openKeyboard: UIButton!
+    
+    @IBOutlet var timerLabel: UILabel!
+    
+    @IBOutlet var recordDeleteButton: UIButton!
+    
+    @IBOutlet var recordAudioButton: UIButton!
+    
+    @IBOutlet var sendRecordButton: UIButton!
+    
+    var audioRecorder:AVAudioRecorder!
+    
+    var meterTimer:Timer!
+    
+    var isRecording = false
+    
+    var isAudioRecordingGranted: Bool!
+    
+//    var picker:UIImagePickerController?=UIImagePickerController()
+    
+    @IBOutlet var cameraOVerlayView: UIView!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
+        typeMessageTextField.delegate = self
+        
         threadBackupView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         
         threadMainImageView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         
-        bottomBarView.roundCorners(corners: [.topLeft, .topRight], radius: 17.0)
+        bottomBarView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         
         navProfileImage.layer.cornerRadius = navProfileImage.frame.height/2
         
@@ -66,13 +97,44 @@ class MainChatScreenController: UIViewController {
             StatusbarView.setGradientBackground(view: StatusbarView)
         }
         bottomBarView.layer.masksToBounds = false
+        recordView.layer.masksToBounds = false
         
-        picker?.delegate = self
+//        picker?.delegate = self
+        
+        
+        // button targetss
+        
+        openKeyboard.addTarget(self, action: #selector(openKeyboard(sender:)), for: .touchUpInside)
+        
+        recordDeleteButton.addTarget(self, action: #selector(deleteRecord(sender:)), for: .touchUpInside)
+        
+        recordAudioButton.addTarget(self, action: #selector(audioRecord(sender:)), for: .touchUpInside)
+        
+        sendRecordButton.addTarget(self, action: #selector(sendRecord(sender:)), for: .touchUpInside)
         
 //        cameraManager = CameraManager()
         
 //        cameraManager.shouldFlipFrontCameraImage = true
+        
+        checkPermission()
+        
+        recordView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        
+        recordView.isHidden = true
+        
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+       
+    }
+    
+
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        recordView.isHidden = true
+        
+        typeMessageTextField.resignFirstResponder()
     }
     
     @IBAction func didTappedBack(_ sender: Any) {
@@ -89,51 +151,246 @@ class MainChatScreenController: UIViewController {
         
         // for image
         
-        let myPickerController = UIImagePickerController()
-        myPickerController.delegate = self;
-        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
-        addChild(myPickerController)
-        threadMainImageView.addSubview(myPickerController.view)
+//        let myPickerController = UIImagePickerController()
         
-        myPickerController.view.frame = threadMainImageView.bounds
+//        myPickerController.delegate = self;
+//        myPickerController.sourceType = UIImagePickerController.SourceType.photoLibrary
+//        addChild(myPickerController)
+//        threadMainImageView.addSubview(myPickerController.view)
         
-        myPickerController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        myPickerController.view.frame = threadMainImageView.bounds
+//
+//        myPickerController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        //        self.present(myPickerController, animated: true, completion: nil)
         
-        myPickerController.didMove(toParent: self)
+//        let pickerr = ImagePickerController()
+//        pickerr.delegate = self
+//        present(pickerr, animated: true, completion: nil)
+        
+        
+        
+//            self.present(pickerr, animated: true, completion: nil)
+//
+//        myPickerController.didMove(toParent: self)
     }
     
     @IBAction func didTappedCamera(_ sender: Any) {
         
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
+//        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)) {
+//
+//            picker?.cameraOverlayView = cameraOVerlayView
+//
+//            picker?.showsCameraControls = false
+        
             
 //            cameraManager.addPreviewLayerToView(self.view)
 //            cameraManager.shouldFlipFrontCameraImage = true
 //            picker!.sourceType = UIImagePickerController.SourceType.camera
 //            self .present(picker!, animated: true, completion: nil)
-        }
+//        }
 
-   
     }
     
     @IBAction func didTappedAudioRecord(_ sender: Any) {
         
+        recordView.isHidden = false
+    }
+}
+
+//extension MainChatScreenController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+//
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//
+//
+//
+//
+//    }
+//
+//}
+
+extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegate {
+    
+    func checkPermission() {
         
+        switch AVAudioSession.sharedInstance().recordPermission {
+        case AVAudioSessionRecordPermission.granted:
+            isAudioRecordingGranted = true
+            break
+        case AVAudioSessionRecordPermission.denied:
+            isAudioRecordingGranted = false
+            break
+        case AVAudioSessionRecordPermission.undetermined:
+            AVAudioSession.sharedInstance().requestRecordPermission({ (allowed) in
+                if allowed {
+                    self.isAudioRecordingGranted = true
+                } else {
+                    self.isAudioRecordingGranted = false
+                }
+            })
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    @objc func deleteRecord(sender: UIButton) {
+        
+        if audioRecorder != nil {
+            
+            audioRecorder.stop()
+            audioRecorder = nil
+            meterTimer.invalidate()
+            
+        }
+        
+        isRecording = false
+        timerLabel.text = "00:00"
+        
+    }
+    
+    @objc func audioRecord(sender: UIButton) {
+        
+        if(isRecording)
+        {
+            finishAudioRecording(success: true)
+            recordAudioButton.setImage(UIImage(named: "Record"), for: .normal)
+//            play_btn_ref.isEnabled = true
+            isRecording = false
+        }
+        else
+        {
+            setup_recorder()
+            isRecording = true
+            audioRecorder.record()
+            meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
+            recordAudioButton.setImage(UIImage(named: "stop_Record"), for: .normal)
+//            play_btn_ref.isEnabled = false
+            
+        }
+        
+    }
+    
+    @objc func sendRecord(sender: UIButton) {
+        
+      
+        
+    }
+    
+    @objc func openKeyboard(sender: UIButton) {
+        
+        recordView.isHidden = true
+        
+        typeMessageTextField.becomeFirstResponder()
+        
+    }
+    
+    
+    @objc func updateAudioMeter(timer: Timer)
+    {
+        if audioRecorder.isRecording
+        {
+//            let hr = Int((audioRecorder.currentTime / 60) / 60)
+            let min = Int(audioRecorder.currentTime / 60)
+            let sec = Int(audioRecorder.currentTime.truncatingRemainder(dividingBy: 60))
+            let totalTimeString = String(format: "%02d:%02d",min,sec)
+            print("audio timer",totalTimeString)
+            timerLabel.text = totalTimeString
+            audioRecorder.updateMeters()
+        }
+    }
+    
+    func finishAudioRecording(success: Bool)
+    {
+        if success
+        {
+            audioRecorder.stop()
+            audioRecorder = nil
+            meterTimer.invalidate()
+            print("recorded successfully.")
+        }
+        else
+        {
+//            display_alert(msg_title: "Error", msg_desc: "Recording failed.", action_title: "OK")
+        }
+    }
+    
+    func setup_recorder()
+    {
+        if isAudioRecordingGranted
+        {
+            let session = AVAudioSession.sharedInstance()
+            do
+            {
+//                try session.setCategory(AVAudioSession.Category.playAndRecord, with: .mixWithOthers)
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.mixWithOthers)
+                try session.setActive(true)
+                let settings = [
+                    AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                    AVSampleRateKey: 44100,
+                    AVNumberOfChannelsKey: 2,
+                    AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
+                ]
+                audioRecorder = try AVAudioRecorder(url: getFileUrl(), settings: settings)
+                audioRecorder.delegate = self
+                audioRecorder.isMeteringEnabled = true
+                audioRecorder.prepareToRecord()
+            }
+            catch let error {
+//                display_alert(msg_title: "Error", msg_desc: error.localizedDescription, action_title: "OK")
+            }
+        }
+        else
+        {
+//            display_alert(msg_title: "Error", msg_desc: "Don't have access to use your microphone.", action_title: "OK")
+        }
+    }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool)
+    {
+        if !flag
+        {
+            finishAudioRecording(success: false)
+        }
+        
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool)
+    {
         
     }
 }
 
-extension MainChatScreenController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+extension MainChatScreenController {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        
-     
-        
+    func getDocumentsDirectory() -> URL
+    {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
     
-    
-    
-    
+    func getFileUrl() -> URL
+    {
+        let filename = "myRecording.m4a"
+        let filePath = getDocumentsDirectory().appendingPathComponent(filename)
+        return filePath
+    }
 }
+
+extension MainChatScreenController: ImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: ImagePickerController, shouldLaunchCameraWithAuthorization status: AVAuthorizationStatus) -> Bool {
+        return true
+    }
+    
+    func imagePickerController(_ picker: ImagePickerController, didFinishPickingImageAssets assets: [PHAsset]) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: ImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+

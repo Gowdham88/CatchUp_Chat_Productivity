@@ -11,10 +11,17 @@ target 'Catch Up' do
 	pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Database'
   pod 'BottomPopup'
   pod 'VACalendar'
   pod 'Pickle'
   pod 'CameraManager', '~> 4.4'
+  pod 'IQAudioRecorderController'
+  
+  pod 'JSQMessagesViewController', ‘7.3.3’
+  pod 'IDMPhotoBrowser'
+ 
 
 
 end

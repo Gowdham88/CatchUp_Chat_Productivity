@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZCt-oD-for">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4GX-qu-atm">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -403,7 +403,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKf-gg-kF9">
-                                                                    <rect key="frame" x="374" y="21" width="16" height="22"/>
+                                                                    <rect key="frame" x="368" y="21" width="22" height="22"/>
                                                                     <state key="normal" image="Ellipse"/>
                                                                     <connections>
                                                                         <action selector="didTappedSelectContact:" destination="lpa-gH-Ke0" eventType="touchUpInside" id="jYc-O7-OXt"/>
@@ -703,7 +703,7 @@
                                         <rect key="frame" x="0.0" y="436" width="414" height="300"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NE-G1-wRc">
-                                                <rect key="frame" x="20" y="15" width="16" height="22"/>
+                                                <rect key="frame" x="20" y="15" width="30" height="30"/>
                                                 <state key="normal" image="keyboard"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVh-Yr-4VH">
@@ -720,15 +720,15 @@
                                                 <rect key="frame" x="50" y="185" width="314" height="82"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76b-Cm-O8k">
-                                                        <rect key="frame" x="0.0" y="30" width="16" height="22"/>
+                                                        <rect key="frame" x="0.0" y="15" width="52" height="52"/>
                                                         <state key="normal" image="Delete-voice"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXg-6c-aJY">
-                                                        <rect key="frame" x="80" y="30" width="16" height="22"/>
+                                                        <rect key="frame" x="116" y="0.0" width="82" height="82"/>
                                                         <state key="normal" image="Record"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6u-dM-ZaV">
-                                                        <rect key="frame" x="160" y="30" width="16" height="22"/>
+                                                        <rect key="frame" x="262" y="15" width="52" height="52"/>
                                                         <state key="normal" image="Send-voice"/>
                                                     </button>
                                                 </subviews>
@@ -937,10 +937,145 @@
             </objects>
             <point key="canvasLocation" x="6292.753623188406" y="-136.14130434782609"/>
         </scene>
+        <!--Custom Image Picker View Controller-->
+        <scene sceneID="AiQ-r7-PPC">
+            <objects>
+                <viewController storyboardIdentifier="CustomImagePickerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4GX-qu-atm" customClass="CustomImagePickerViewController" customModule="Catch_Up" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vAf-xP-Udq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TCe-Nh-UZw" customClass="GradientView" customModule="Catch_Up" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Cz-RR-cCr" customClass="GradientView" customModule="Catch_Up" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="20" width="414" height="64"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ept-fV-HD3">
+                                                <rect key="frame" x="14" y="23" width="32" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="Cross_close"/>
+                                                <connections>
+                                                    <action selector="didTappedBack:" destination="UPE-xn-DaR" eventType="touchUpInside" id="iZ1-72-WoZ"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gallery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36y-9u-mzd">
+                                                <rect key="frame" x="66" y="22" width="158" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuO-vi-glD">
+                                                <rect key="frame" x="373" y="20" width="25" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="camera"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                                <color key="value" red="0.37254901959999998" green="0.6705882353" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Dd-Uf-TXG">
+                                        <rect key="frame" x="0.0" y="84" width="414" height="652"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SaF-iU-Xjn">
+                                                <rect key="frame" x="114" y="8" width="185" height="27"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Camera album" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BC3-nn-vXg">
+                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="27"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="13"/>
+                                                        <color key="textColor" red="0.14509803921568626" green="0.24313725490196078" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btC-Sb-wJm">
+                                                        <rect key="frame" x="129" y="2" width="40" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="drop_down"/>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MF3-dK-kqQ">
+                                                <rect key="frame" x="0.0" y="43" width="414" height="609"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="9lv-lb-Zty">
+                                                    <size key="itemSize" width="110" height="110"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="scb-ip-r0g" customClass="ImagePickerCollectionViewCell" customModule="Catch_Up" customModuleProvider="target">
+                                                        <rect key="frame" x="10" y="10" width="110" height="110"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sampleTower" translatesAutoresizingMaskIntoConstraints="NO" id="rHe-Ma-lbZ">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                        </view>
+                                                        <connections>
+                                                            <outlet property="imagesView" destination="rHe-Ma-lbZ" id="os2-Av-6Fz"/>
+                                                        </connections>
+                                                    </collectionViewCell>
+                                                </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="4GX-qu-atm" id="1Jv-kS-hbp"/>
+                                                    <outlet property="delegate" destination="4GX-qu-atm" id="0tn-qU-ocv"/>
+                                                </connections>
+                                            </collectionView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                        <color key="value" red="0.0" green="0.47843137254901957" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                        <color key="value" red="0.37254901960784315" green="0.6705882352941176" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="iby-Dw-2tD"/>
+                    </view>
+                    <connections>
+                        <outlet property="albumNameLabel" destination="BC3-nn-vXg" id="gyb-Kx-f61"/>
+                        <outlet property="cameraButton" destination="WuO-vi-glD" id="gr3-AL-HqQ"/>
+                        <outlet property="curveView" destination="8Dd-Uf-TXG" id="dUw-pw-rUJ"/>
+                        <outlet property="dismissButton" destination="Ept-fV-HD3" id="NpT-5y-vUW"/>
+                        <outlet property="dropDownButton" destination="btC-Sb-wJm" id="8xS-5x-Ztr"/>
+                        <outlet property="imagePickerCollectionView" destination="MF3-dK-kqQ" id="hA1-u1-k9P"/>
+                        <outlet property="topBar" destination="7Cz-RR-cCr" id="5mZ-kh-zG2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sGb-QT-VI4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7127.5362318840589" y="-148.36956521739131"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="jhY-JF-2RX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kz8-qC-7XG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="y6m-Nc-Ctw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dSQ-xG-mbC">
@@ -951,6 +1086,7 @@
                         <segue destination="8uB-yc-mVI" kind="relationship" relationship="rootViewController" id="xxq-8i-eYV"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kz8-qC-7XG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="373.91304347826087" y="14.673913043478262"/>
         </scene>
@@ -991,12 +1127,14 @@
         <image name="btn_send2" width="72" height="72"/>
         <image name="camera" width="24" height="24"/>
         <image name="camera_bottom" width="24" height="20"/>
+        <image name="drop_down" width="11" height="7"/>
         <image name="flash" width="24" height="24"/>
         <image name="front white" width="24.333333969116211" height="24.333333969116211"/>
         <image name="image" width="360" height="558.66668701171875"/>
         <image name="keyboard" width="30" height="30"/>
         <image name="message" width="24" height="24"/>
         <image name="profile_user" width="750" height="750"/>
+        <image name="sampleTower" width="360" height="360"/>
         <image name="save_copy" width="23.333333969116211" height="23.333333969116211"/>
         <image name="smile" width="21" height="21"/>
         <image name="task" width="26.666666030883789" height="26.666666030883789"/>

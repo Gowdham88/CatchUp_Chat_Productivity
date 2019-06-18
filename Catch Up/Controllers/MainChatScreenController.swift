@@ -10,71 +10,94 @@ import UIKit
 import AVFoundation
 import AVKit
 import Photos
+import JSQMessagesViewController
+import IQAudioRecorderController
+import IDMPhotoBrowser
+import Firebase
+import FirebaseMessaging
+import FirebaseDatabase
+
 
 //import CameraManager
 
 
 
 
-class MainChatScreenController: UIViewController,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
-  
+class MainChatScreenController: JSQMessagesViewController,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate {
 
+    func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String) {
+        
+    }
+    
+  
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
    // navigation outlets
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var navProfileImage: UIImageView!
     @IBOutlet weak var groupButton: UIButton!
-    
     @IBOutlet weak var navigationView: GradientView!
-    
     @IBOutlet weak var threadBackupView: UIView!
-    
     @IBOutlet weak var threadMainImageView: UIImageView!
-    
     @IBOutlet weak var bottomBarView: UIView!
     
     
     // bottom bar outlets
     
     @IBOutlet weak var emojiButton: UIButton!
-    
     @IBOutlet weak var typeMessageTextField: UITextField!
-    
     @IBOutlet weak var attachmentButton: UIButton!
-    
     @IBOutlet weak var cameraButton: UIButton!
-    
     @IBOutlet weak var recordButton: UIButton!
     
 //    var cameraManager : CameraManager!
     
     
     @IBOutlet var recordView: UIView!
-    
     @IBOutlet var openKeyboard: UIButton!
-    
     @IBOutlet var timerLabel: UILabel!
-    
     @IBOutlet var recordDeleteButton: UIButton!
-    
     @IBOutlet var recordAudioButton: UIButton!
-    
     @IBOutlet var sendRecordButton: UIButton!
-    
+  
     var audioRecorder:AVAudioRecorder!
-    
     var meterTimer:Timer!
-    
     var isRecording = false
-    
     var isAudioRecordingGranted: Bool!
     
 //    var picker:UIImagePickerController?=UIImagePickerController()
     
     @IBOutlet var cameraOVerlayView: UIView!
     
-
+    // listeners
+    
+//    var typingListener: ListenerRegistration?
+//    var updatedChatListener: ListenerRegistration?
+//    var newChatListener: ListenerRegistration?
+    
+    // initializers for chat
+    
+    let legitTypes = [kAUDIO, kVIDEO, kTEXT, kLOCATION, kPICTURE]
+    var maxMessageNumber = 0
+    var minMessageNumber = 0
+    var loadOld = false
+    var loadedMessagesCount = 0
+    var typingCounter = 0
+    var messages: [JSQMessage] = []
+    var objectMessages: [NSDictionary] = []
+    var loadedMessages: [NSDictionary] = []
+    var allPictureMessages: [String] = []
+    var initialLoadComplete = false
+    var jsqAvatarDictionary: NSMutableDictionary?
+    var avatarImageDictionary: NSMutableDictionary?
+    var showAvatars = true
+    var firstLoad: Bool?
+    
+    var outgoingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+    
+    var incomingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -97,6 +120,8 @@ class MainChatScreenController: UIViewController,UITextFieldDelegate,UINavigatio
         }
         bottomBarView.layer.masksToBounds = false
         recordView.layer.masksToBounds = false
+        
+        
         
 //        picker?.delegate = self
         

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class CreateProfileController: UIViewController {
 
@@ -19,6 +21,10 @@ class CreateProfileController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     
     var imagePicker = UIImagePickerController()
+    
+    var ref: DatabaseReference!
+    
+    var userPhoneNumber: String!
 
     
     override func viewDidLoad() {
@@ -29,6 +35,8 @@ class CreateProfileController: UIViewController {
         nameField.delegate = self
         imagePicker.delegate = self
         roundedTop(targetView: gradientCurveView, desiredCurve: 1)
+        
+         ref = Database.database().reference()
         
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         
@@ -62,6 +70,25 @@ class CreateProfileController: UIViewController {
         let userName = nameField.text
         
         UserDefaults.standard.set(userName, forKey: "name")
+        
+        //updating the user details to firebase
+        
+//        var imgData: NSData = NSData(data: UIImageJPEGRepresentation(profileImageView.image!, 0.8)!)
+        
+        guard let imageData = profileImageView.image!.jpegData(compressionQuality: 0.75) else { return }
+        
+        let userID = Auth.auth().currentUser?.uid
+        
+        print("printing user id \(userID)")
+
+        let imageStr = self.uploadProfileImageToFirebase(data: imageData as NSData, uid: userID!)
+        
+        let username = nameField.text
+        
+        print("user name \(username)")
+        
+       
+        
 
     }
     
@@ -124,4 +151,79 @@ extension CreateProfileController: UIImagePickerControllerDelegate,UINavigationC
         }
         
     }
+}
+
+extension CreateProfileController {
+    
+    
+    func uploadProfileImageToFirebase(data:NSData,uid: String) -> String {
+        var urlStr: String?
+        let storageRef = Storage.storage().reference().child(userPhoneNumber).child("\(uid).jpg")
+//        if data != nil {
+            storageRef.putData(data as Data, metadata: nil, completion: { (metadata, error) in
+                if(error != nil){
+                    print("error occured in upload profile image to firebase function",error as Any)
+                    return
+                }
+                guard let userID = Auth.auth().currentUser?.uid else {
+                    return
+                }
+                // Fetch the download URL
+                storageRef.downloadURL { url, error in
+                    if let error = error {
+                        // Handle any errors
+                            print("error while downloading url",error)
+                            return
+                       
+                    } else {
+                        // Get the download URL for 'images/stars.jpg'
+                        
+                         urlStr = (url?.absoluteString) ?? ""
+                        print("printing url",urlStr)
+                        let values = ["downloadURL": urlStr]
+                        self.addImageURLToDatabase(uid: userID, values: values as [String : AnyObject])
+                        
+                        let username = self.nameField.text
+                        
+//                        self.ref.child("user").childByAutoId().setValue(["userName": username,
+//                                                                         "userPhotoThumbnail" : urlStr,
+//                                                                         "userContactNumber" : self.userPhoneNumber,
+//                                                                         "uid" : uid])
+                        
+//                        self.ref.child(self.userPhoneNumber).setValue(["userName": username,
+//                                                                "userPhotoThumbnail" : urlStr,
+//                                                                "userContactNumber" : self.userPhoneNumber,
+//                                                                "uid" : uid])
+                        
+                        
+                        self.ref.setValue(["userName": username,
+                                           "userPhotoThumbnail" : urlStr,
+                                           "userContactNumber" : self.userPhoneNumber,
+                                           "uid" : uid])
+                    }
+                }
+            })
+        
+//        }
+        
+        return urlStr ?? ""
+        
+    }
+    
+    func addImageURLToDatabase(uid:String, values:[String:AnyObject]){
+        let ref = Database.database().reference(fromURL: "https://schnellfirebase-dev.firebaseio.com")
+        let usersReference = ref.child(userPhoneNumber).child((Auth.auth().currentUser?.uid)!)
+        
+        usersReference.updateChildValues(values) { (error, ref) in
+            if(error != nil){
+                print("error occured in add image url to database function",error as Any)
+                return
+            }
+     
+            
+            self.parent?.dismiss(animated: true, completion: nil)
+        }
+        
+    }
+
 }

@@ -50,6 +50,8 @@ class VerifyOTPVController: UIViewController {
         
         savedPhoneNumber = UserDefaults.standard.object(forKey: "phone") as! String
         
+        print("saved phone number",savedPhoneNumber)
+        
         if let number = savedPhoneNumber {
             
             enteredNumberField.text = number
@@ -120,7 +122,8 @@ class VerifyOTPVController: UIViewController {
             // User is signed in
             
             let sb = UIStoryboard(name: "Auth", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "CreateProfileController")
+            let vc = sb.instantiateViewController(withIdentifier: "CreateProfileController") as! CreateProfileController
+            vc.userPhoneNumber = self.savedPhoneNumber
             self.navigationController?.pushViewController(vc, animated: true)
             
         }

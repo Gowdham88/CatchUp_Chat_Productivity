@@ -30,6 +30,8 @@
 		B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47710D722AA51CB00F1A196 /* VACalendar.framework */; };
 		B47710D922AA7C1D00F1A196 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B48D905B228D1E8F001B0EEC /* Muli-Bold.ttf */; };
 		B47C3A2822AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */; };
+		B47C53C522BB4D98007A7583 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47C53C422BB4D97007A7583 /* GoogleService-Info.plist */; };
+		B47C53C722BB81D6007A7583 /* FUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47C53C622BB81D5007A7583 /* FUser.swift */; };
 		B47E3F1F22B37F6F00E9EB5E /* Pickle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
@@ -56,7 +58,6 @@
 		B48D9064228D29CB001B0EEC /* MainChatScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48D9063228D29CB001B0EEC /* MainChatScreenController.swift */; };
 		B48EF3B122B8A61900C3A3C4 /* CustomImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EF3B022B8A61900C3A3C4 /* CustomImagePickerViewController.swift */; };
 		B48EF3B322B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EF3B222B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift */; };
-		B48EF3B522B8B4C100C3A3C4 /* GoogleService-Info_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = B48EF3B422B8B4C000C3A3C4 /* GoogleService-Info_1.plist */; };
 		B48F09D022A649250064CE5F /* CreateGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48F09CF22A649250064CE5F /* CreateGroupTableViewCell.swift */; };
 		B4DC352B22AF962A0074A963 /* TimeHourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC352A22AF962A0074A963 /* TimeHourCollectionViewCell.swift */; };
 		B4DCF162228BE172009B97CE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4DCF161228BE172009B97CE /* Chat.storyboard */; };
@@ -107,6 +108,8 @@
 		B47710D422AA122300F1A196 /* ProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewController.swift; sourceTree = "<group>"; };
 		B47710D722AA51CB00F1A196 /* VACalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VACalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMinsCollectionViewCell.swift; sourceTree = "<group>"; };
+		B47C53C422BB4D97007A7583 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Chrome Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B47C53C622BB81D5007A7583 /* FUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUser.swift; sourceTree = "<group>"; };
 		B47E3F1C22B37E6400E9EB5E /* Pickle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pickle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pickle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,7 +165,6 @@
 		B48D9063228D29CB001B0EEC /* MainChatScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChatScreenController.swift; sourceTree = "<group>"; };
 		B48EF3B022B8A61900C3A3C4 /* CustomImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePickerViewController.swift; sourceTree = "<group>"; };
 		B48EF3B222B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCollectionViewCell.swift; sourceTree = "<group>"; };
-		B48EF3B422B8B4C000C3A3C4 /* GoogleService-Info_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info_1.plist"; sourceTree = "<group>"; };
 		B48F09CF22A649250064CE5F /* CreateGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupTableViewCell.swift; sourceTree = "<group>"; };
 		B4DC352A22AF962A0074A963 /* TimeHourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHourCollectionViewCell.swift; sourceTree = "<group>"; };
 		B4DCF161228BE172009B97CE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
@@ -298,8 +300,8 @@
 				B48205F0228A76C8003A1680 /* Helpers */,
 				B48205EF228A76B8003A1680 /* Supporting files */,
 				B48205DC228A7383003A1680 /* AppDelegate.swift */,
+				B47C53C422BB4D97007A7583 /* GoogleService-Info.plist */,
 				B48205E3228A7384003A1680 /* Assets.xcassets */,
-				B48EF3B422B8B4C000C3A3C4 /* GoogleService-Info_1.plist */,
 				B48205E5228A7384003A1680 /* LaunchScreen.storyboard */,
 				B48205E8228A7384003A1680 /* Info.plist */,
 			);
@@ -309,6 +311,7 @@
 		B48205EF228A76B8003A1680 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				B47C53C622BB81D5007A7583 /* FUser.swift */,
 				B40A888E22B8E5580087DDFB /* MapViewController.swift */,
 				B4021D0A22B3923100248EDB /* CarousellImagePickerController.swift */,
 				8E28BDCF22AB9A220070440D /* Profile */,
@@ -472,9 +475,9 @@
 				B48C280B2295489000426E48 /* GroupChat.storyboard in Resources */,
 				B48205F8228A855C003A1680 /* Auth.storyboard in Resources */,
 				B48205E7228A7384003A1680 /* LaunchScreen.storyboard in Resources */,
+				B47C53C522BB4D98007A7583 /* GoogleService-Info.plist in Resources */,
 				B48205E4228A7384003A1680 /* Assets.xcassets in Resources */,
 				CE352DD42297153800D4D761 /* Task.storyboard in Resources */,
-				B48EF3B522B8B4C100C3A3C4 /* GoogleService-Info_1.plist in Resources */,
 				B4DCF162228BE172009B97CE /* Chat.storyboard in Resources */,
 				B4EEFA582293CA9600631A51 /* GoogleService-Info.plist in Resources */,
 				B4EEFA5B229415DB00631A51 /* Profile.storyboard in Resources */,
@@ -573,6 +576,7 @@
 				B4DCF168228C16B7009B97CE /* SelectContactController.swift in Sources */,
 				8E28CFC12297DD0800D0D634 /* PopupCollectionViewCell.swift in Sources */,
 				B4DC352B22AF962A0074A963 /* TimeHourCollectionViewCell.swift in Sources */,
+				B47C53C722BB81D6007A7583 /* FUser.swift in Sources */,
 				B48EF3B122B8A61900C3A3C4 /* CustomImagePickerViewController.swift in Sources */,
 				B48C2809229547F200426E48 /* GroupingViewController.swift in Sources */,
 				B48205FE228A8883003A1680 /* CurveView.swift in Sources */,

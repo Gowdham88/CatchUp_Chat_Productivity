@@ -29,6 +29,7 @@
 		B47710D622AA351500F1A196 /* Muli-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B48D905F228D1E8F001B0EEC /* Muli-Regular.ttf */; };
 		B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47710D722AA51CB00F1A196 /* VACalendar.framework */; };
 		B47710D922AA7C1D00F1A196 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B48D905B228D1E8F001B0EEC /* Muli-Bold.ttf */; };
+		B477A4F222BC9AC200AC76D4 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B477A4F122BC9AC200AC76D4 /* Recent.swift */; };
 		B47C3A2822AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */; };
 		B47C53C522BB4D98007A7583 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47C53C422BB4D97007A7583 /* GoogleService-Info.plist */; };
 		B47C53C722BB81D6007A7583 /* FUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47C53C622BB81D5007A7583 /* FUser.swift */; };
@@ -107,6 +108,7 @@
 		B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGroupController.swift; sourceTree = "<group>"; };
 		B47710D422AA122300F1A196 /* ProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewController.swift; sourceTree = "<group>"; };
 		B47710D722AA51CB00F1A196 /* VACalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VACalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B477A4F122BC9AC200AC76D4 /* Recent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMinsCollectionViewCell.swift; sourceTree = "<group>"; };
 		B47C53C422BB4D97007A7583 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Chrome Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B47C53C622BB81D5007A7583 /* FUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FUser.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				B47C53C622BB81D5007A7583 /* FUser.swift */,
+				B477A4F122BC9AC200AC76D4 /* Recent.swift */,
 				B40A888E22B8E5580087DDFB /* MapViewController.swift */,
 				B4021D0A22B3923100248EDB /* CarousellImagePickerController.swift */,
 				8E28BDCF22AB9A220070440D /* Profile */,
@@ -608,6 +611,7 @@
 				B4021D0D22B3929F00248EDB /* ImagePickerConfigurable.swift in Sources */,
 				B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */,
 				B40A889322B902650087DDFB /* Constants.swift in Sources */,
+				B477A4F222BC9AC200AC76D4 /* Recent.swift in Sources */,
 				B47C3A2822AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift in Sources */,
 				B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */,
 				2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */,

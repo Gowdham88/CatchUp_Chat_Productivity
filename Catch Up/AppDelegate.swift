@@ -43,9 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         Messaging.messaging().isAutoInitEnabled = true
     /*
         self.window = UIWindow(frame: UIScreen.main.bounds)
-
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-        
         let initialViewController = storyboard.instantiateViewController(withIdentifier: "CutomCameraViewController")
         //GroupingViewController
         //UpdateGroupController
@@ -61,8 +59,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         self.window?.makeKeyAndVisible()
         
         */
+       
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let userDefaults = UserDefaults.standard
+       
+        if userDefaults.value(forKey: "appFirstTimeOpend") == nil {
+
+            userDefaults.setValue(true, forKey: "appFirstTimeOpend")
+
+            do {
+                try Auth.auth().signOut()
+            }catch {
+                
+            }
+           
+            moveToSignIn()
+            
+        } else {
+            
+            moveToDashboard()
+        }
+        
+//        if Auth.auth().currentUser != nil {
+//
+        // let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+//        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginWithNumberController")
+//        self.window?.rootViewController = initialViewController
+//        self.window?.makeKeyAndVisible()
+//        }else {
+//
+//        //    let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+//        let initialViewController = storyboard.instantiateViewController(withIdentifier: "ChatDashboardController")
+//        self.window?.rootViewController = initialViewController
+//        self.window?.makeKeyAndVisible()
+//        }
+        
+        
         
         return true
+    }
+    
+    func moveToSignIn() {
+        
+        let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+        
+        let destinationController = storyboard.instantiateViewController(withIdentifier: "LoginWithNumberController") as? LoginWithNumberController
+        
+        let frontNavigationController = UINavigationController(rootViewController: destinationController!)
+        
+        self.window!.rootViewController = frontNavigationController
+        
+        frontNavigationController.navigationBar.isHidden = true
+        
+        self.window?.makeKeyAndVisible()
+    }
+    
+    func moveToDashboard() {
+        
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+        
+        let destinationController = storyboard.instantiateViewController(withIdentifier: "ChatDashboardController") as? ChatDashboardController
+        
+        let frontNavigationController = UINavigationController(rootViewController: destinationController!)
+        
+        self.window!.rootViewController = frontNavigationController
+        
+        frontNavigationController.navigationBar.isHidden = true
+        
+        self.window?.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

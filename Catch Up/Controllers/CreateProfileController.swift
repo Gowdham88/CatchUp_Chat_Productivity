@@ -87,7 +87,7 @@ class CreateProfileController: UIViewController {
         
         print("user name \(username)")
         
-       
+    
         
 
     }
@@ -184,22 +184,25 @@ extension CreateProfileController {
                         self.addImageURLToDatabase(uid: userID, values: values as [String : AnyObject])
                         
                         let username = self.nameField.text
+                        let deviceID = UIDevice.current.identifierForVendor!.uuidString
                         
-//                        self.ref.child("user").childByAutoId().setValue(["userName": username,
-//                                                                         "userPhotoThumbnail" : urlStr,
-//                                                                         "userContactNumber" : self.userPhoneNumber,
-//                                                                         "uid" : uid])
+                        self.ref.child("user").childByAutoId().setValue(["userName": username,
+                                                                         "userPhotoThumbnail" : urlStr,
+                                                                         "userContactNumber" : self.userPhoneNumber,
+                                                                         "deviceId" : deviceID,
+                                                                         "user_id" : uid])
                         
 //                        self.ref.child(self.userPhoneNumber).setValue(["userName": username,
 //                                                                "userPhotoThumbnail" : urlStr,
 //                                                                "userContactNumber" : self.userPhoneNumber,
 //                                                                "uid" : uid])
                         
-                        
-                        self.ref.setValue(["userName": username,
-                                           "userPhotoThumbnail" : urlStr,
-                                           "userContactNumber" : self.userPhoneNumber,
-                                           "uid" : uid])
+
+//                        self.ref.setValue(["userName": username,
+//                                           "userPhotoThumbnail" : urlStr,
+//                                           "userContactNumber" : self.userPhoneNumber,
+//                                           "deviceId" : deviceID,
+//                                           "user_id" : uid])
                     }
                 }
             })

@@ -16,6 +16,11 @@
 		8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E51DAA5229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift */; };
 		8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */; };
 		8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */; };
+		B4021D0B22B3923100248EDB /* CarousellImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4021D0A22B3923100248EDB /* CarousellImagePickerController.swift */; };
+		B4021D0D22B3929F00248EDB /* ImagePickerConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4021D0C22B3929F00248EDB /* ImagePickerConfigurable.swift */; };
+		B40A888F22B8E5580087DDFB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A888E22B8E5580087DDFB /* MapViewController.swift */; };
+		B40A889122B8F9BA0087DDFB /* CollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A889022B8F9BA0087DDFB /* CollectionReference.swift */; };
+		B40A889322B902650087DDFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40A889222B902650087DDFB /* Constants.swift */; };
 		B4732B2122A8EEB900153D8C /* TaskDashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */; };
 		B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */; };
 		B47688D7229E49A900F17BBF /* IndividualProfileDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */; };
@@ -25,6 +30,7 @@
 		B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47710D722AA51CB00F1A196 /* VACalendar.framework */; };
 		B47710D922AA7C1D00F1A196 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B48D905B228D1E8F001B0EEC /* Muli-Bold.ttf */; };
 		B47C3A2822AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */; };
+		B47E3F1F22B37F6F00E9EB5E /* Pickle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */; };
 		B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DC228A7383003A1680 /* AppDelegate.swift */; };
 		B48205DF228A7383003A1680 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205DE228A7383003A1680 /* ViewController.swift */; };
 		B48205E2228A7383003A1680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48205E0228A7383003A1680 /* Main.storyboard */; };
@@ -38,6 +44,9 @@
 		B4820600228A9507003A1680 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48205FF228A9507003A1680 /* GradientView.swift */; };
 		B4820602228AAFA5003A1680 /* DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4820601228AAFA5003A1680 /* DropShadow.swift */; };
 		B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4820603228AC8D5003A1680 /* CreateProfileController.swift */; };
+		B48A3E4022B75622002DA50F /* CutomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A3E3F22B75622002DA50F /* CutomCameraViewController.swift */; };
+		B48A3E4222B75EE6002DA50F /* CameraManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B48A3E4122B75EE6002DA50F /* CameraManager.framework */; };
+		B48A3E4422B76793002DA50F /* CameraPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48A3E4322B76793002DA50F /* CameraPreviewController.swift */; };
 		B48C2809229547F200426E48 /* GroupingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48C2808229547F200426E48 /* GroupingViewController.swift */; };
 		B48C280B2295489000426E48 /* GroupChat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48C280A2295489000426E48 /* GroupChat.storyboard */; };
 		B48C280D229548E500426E48 /* CreateGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48C280C229548E500426E48 /* CreateGroupController.swift */; };
@@ -45,6 +54,9 @@
 		B48C281122954E6200426E48 /* NewGroupTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48C281022954E6200426E48 /* NewGroupTableCell.swift */; };
 		B48C281F22955B1700426E48 /* GroupedUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48C281E22955B1700426E48 /* GroupedUsersCell.swift */; };
 		B48D9064228D29CB001B0EEC /* MainChatScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48D9063228D29CB001B0EEC /* MainChatScreenController.swift */; };
+		B48EF3B122B8A61900C3A3C4 /* CustomImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EF3B022B8A61900C3A3C4 /* CustomImagePickerViewController.swift */; };
+		B48EF3B322B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EF3B222B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift */; };
+		B48EF3B522B8B4C100C3A3C4 /* GoogleService-Info_1.plist in Resources */ = {isa = PBXBuildFile; fileRef = B48EF3B422B8B4C000C3A3C4 /* GoogleService-Info_1.plist */; };
 		B48F09D022A649250064CE5F /* CreateGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48F09CF22A649250064CE5F /* CreateGroupTableViewCell.swift */; };
 		B4DC352B22AF962A0074A963 /* TimeHourCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC352A22AF962A0074A963 /* TimeHourCollectionViewCell.swift */; };
 		B4DCF162228BE172009B97CE /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4DCF161228BE172009B97CE /* Chat.storyboard */; };
@@ -83,6 +95,11 @@
 		8EC319F722969D6B008F83A9 /* PopUpViewcontrollerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewcontrollerViewController.swift; sourceTree = "<group>"; };
 		8EF1F59422956549003A4C5D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A610C4AB823CFC97E74A1A02 /* Pods-Catch Up.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.debug.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.debug.xcconfig"; sourceTree = "<group>"; };
+		B4021D0A22B3923100248EDB /* CarousellImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarousellImagePickerController.swift; sourceTree = "<group>"; };
+		B4021D0C22B3929F00248EDB /* ImagePickerConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerConfigurable.swift; sourceTree = "<group>"; };
+		B40A888E22B8E5580087DDFB /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B40A889022B8F9BA0087DDFB /* CollectionReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReference.swift; sourceTree = "<group>"; };
+		B40A889222B902650087DDFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = "Catch Up/Supporting files/Constants.swift"; sourceTree = SOURCE_ROOT; };
 		B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashboardController.swift; sourceTree = "<group>"; };
 		B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDashboardTableCell.swift; sourceTree = "<group>"; };
 		B47688D6229E49A900F17BBF /* IndividualProfileDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualProfileDetailController.swift; sourceTree = "<group>"; };
@@ -90,6 +107,8 @@
 		B47710D422AA122300F1A196 /* ProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewController.swift; sourceTree = "<group>"; };
 		B47710D722AA51CB00F1A196 /* VACalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VACalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeMinsCollectionViewCell.swift; sourceTree = "<group>"; };
+		B47E3F1C22B37E6400E9EB5E /* Pickle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pickle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pickle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205D9228A7383003A1680 /* Catch Up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Catch Up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48205DC228A7383003A1680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B48205DE228A7383003A1680 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +124,9 @@
 		B48205FF228A9507003A1680 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		B4820601228AAFA5003A1680 /* DropShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadow.swift; sourceTree = "<group>"; };
 		B4820603228AC8D5003A1680 /* CreateProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileController.swift; sourceTree = "<group>"; };
+		B48A3E3F22B75622002DA50F /* CutomCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutomCameraViewController.swift; sourceTree = "<group>"; };
+		B48A3E4122B75EE6002DA50F /* CameraManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CameraManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B48A3E4322B76793002DA50F /* CameraPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewController.swift; sourceTree = "<group>"; };
 		B48C2808229547F200426E48 /* GroupingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingViewController.swift; sourceTree = "<group>"; };
 		B48C280A2295489000426E48 /* GroupChat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupChat.storyboard; sourceTree = "<group>"; };
 		B48C280C229548E500426E48 /* CreateGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupController.swift; sourceTree = "<group>"; };
@@ -138,6 +160,9 @@
 		B48D9061228D1E8F001B0EEC /* Muli-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraBold.ttf"; sourceTree = "<group>"; };
 		B48D9062228D1E96001B0EEC /* Muli-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		B48D9063228D29CB001B0EEC /* MainChatScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainChatScreenController.swift; sourceTree = "<group>"; };
+		B48EF3B022B8A61900C3A3C4 /* CustomImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePickerViewController.swift; sourceTree = "<group>"; };
+		B48EF3B222B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCollectionViewCell.swift; sourceTree = "<group>"; };
+		B48EF3B422B8B4C000C3A3C4 /* GoogleService-Info_1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info_1.plist"; sourceTree = "<group>"; };
 		B48F09CF22A649250064CE5F /* CreateGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupTableViewCell.swift; sourceTree = "<group>"; };
 		B4DC352A22AF962A0074A963 /* TimeHourCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHourCollectionViewCell.swift; sourceTree = "<group>"; };
 		B4DCF161228BE172009B97CE /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
@@ -157,6 +182,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B48A3E4222B75EE6002DA50F /* CameraManager.framework in Frameworks */,
+				B47E3F1F22B37F6F00E9EB5E /* Pickle.framework in Frameworks */,
 				B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */,
 				B81B68888E8A9CFFD12C5434 /* Pods_Catch_Up.framework in Frameworks */,
 			);
@@ -168,13 +195,16 @@
 		1B6EE85014391CEC5B832B2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B48A3E4122B75EE6002DA50F /* CameraManager.framework */,
+				B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */,
+				B47E3F1C22B37E6400E9EB5E /* Pickle.framework */,
 				B47710D722AA51CB00F1A196 /* VACalendar.framework */,
 				C6316A94A105273DF1DD2915 /* Pods_Catch_Up.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2A6D638222950FC500D2CE63 /* Views */ = {
+		2A6D638222950FC500D2CE63 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
 				2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */,
@@ -187,13 +217,15 @@
 				B4732B2222A8F7BC00153D8C /* TaskDashboardTableCell.swift */,
 				B4DC352A22AF962A0074A963 /* TimeHourCollectionViewCell.swift */,
 				B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */,
+				B48EF3B222B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift */,
 			);
-			path = Views;
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 		2A6D63872295102C00D2CE63 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				B40A889222B902650087DDFB /* Constants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -258,7 +290,7 @@
 			children = (
 				B48D9054228D1DC8001B0EEC /* Fonts */,
 				2A6D63872295102C00D2CE63 /* Constants */,
-				2A6D638222950FC500D2CE63 /* Views */,
+				2A6D638222950FC500D2CE63 /* CustomCells */,
 				B4EEFA592293CD8500631A51 /* Catch Up.entitlements */,
 				B4EEFA572293CA9600631A51 /* GoogleService-Info.plist */,
 				B48205F2228A76DC003A1680 /* Storyboards */,
@@ -267,6 +299,7 @@
 				B48205EF228A76B8003A1680 /* Supporting files */,
 				B48205DC228A7383003A1680 /* AppDelegate.swift */,
 				B48205E3228A7384003A1680 /* Assets.xcassets */,
+				B48EF3B422B8B4C000C3A3C4 /* GoogleService-Info_1.plist */,
 				B48205E5228A7384003A1680 /* LaunchScreen.storyboard */,
 				B48205E8228A7384003A1680 /* Info.plist */,
 			);
@@ -276,9 +309,13 @@
 		B48205EF228A76B8003A1680 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				B40A888E22B8E5580087DDFB /* MapViewController.swift */,
+				B4021D0A22B3923100248EDB /* CarousellImagePickerController.swift */,
 				8E28BDCF22AB9A220070440D /* Profile */,
 				B48205FF228A9507003A1680 /* GradientView.swift */,
 				B4820601228AAFA5003A1680 /* DropShadow.swift */,
+				B4021D0C22B3929F00248EDB /* ImagePickerConfigurable.swift */,
+				B40A889022B8F9BA0087DDFB /* CollectionReference.swift */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -311,6 +348,9 @@
 				B47688D8229E6CD900F17BBF /* UpdateGroupController.swift */,
 				B4732B2022A8EEB900153D8C /* TaskDashboardController.swift */,
 				B47710D422AA122300F1A196 /* ProcessViewController.swift */,
+				B48A3E3F22B75622002DA50F /* CutomCameraViewController.swift */,
+				B48A3E4322B76793002DA50F /* CameraPreviewController.swift */,
+				B48EF3B022B8A61900C3A3C4 /* CustomImagePickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -434,6 +474,7 @@
 				B48205E7228A7384003A1680 /* LaunchScreen.storyboard in Resources */,
 				B48205E4228A7384003A1680 /* Assets.xcassets in Resources */,
 				CE352DD42297153800D4D761 /* Task.storyboard in Resources */,
+				B48EF3B522B8B4C100C3A3C4 /* GoogleService-Info_1.plist in Resources */,
 				B4DCF162228BE172009B97CE /* Chat.storyboard in Resources */,
 				B4EEFA582293CA9600631A51 /* GoogleService-Info.plist in Resources */,
 				B4EEFA5B229415DB00631A51 /* Profile.storyboard in Resources */,
@@ -454,20 +495,44 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Catch Up/Pods-Catch Up-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BottomPopup/BottomPopup.framework",
+				"${BUILT_PRODUCTS_DIR}/CameraManager/CameraManager.framework",
+				"${BUILT_PRODUCTS_DIR}/DACircularProgress/DACircularProgress.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IDMPhotoBrowser/IDMPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/IQAudioRecorderController/IQAudioRecorderController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/Pickle/Pickle.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SCSiriWaveformView/SCSiriWaveformView.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/VACalendar/VACalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BottomPopup.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CameraManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DACircularProgress.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IDMPhotoBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQAudioRecorderController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pickle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCSiriWaveformView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VACalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -508,11 +573,13 @@
 				B4DCF168228C16B7009B97CE /* SelectContactController.swift in Sources */,
 				8E28CFC12297DD0800D0D634 /* PopupCollectionViewCell.swift in Sources */,
 				B4DC352B22AF962A0074A963 /* TimeHourCollectionViewCell.swift in Sources */,
+				B48EF3B122B8A61900C3A3C4 /* CustomImagePickerViewController.swift in Sources */,
 				B48C2809229547F200426E48 /* GroupingViewController.swift in Sources */,
 				B48205FE228A8883003A1680 /* CurveView.swift in Sources */,
 				2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */,
 				8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */,
 				B48205FA228A86E4003A1680 /* LoginWithNumberController.swift in Sources */,
+				B40A888F22B8E5580087DDFB /* MapViewController.swift in Sources */,
 				B48F09D022A649250064CE5F /* CreateGroupTableViewCell.swift in Sources */,
 				B4732B2122A8EEB900153D8C /* TaskDashboardController.swift in Sources */,
 				8E28BDD122AB9A640070440D /* Chat_Theme_Background.swift in Sources */,
@@ -520,17 +587,23 @@
 				CE352DD62297158900D4D761 /* TaskViewController.swift in Sources */,
 				B4EEFA5D229416BF00631A51 /* ProfileController.swift in Sources */,
 				B48205FC228A8704003A1680 /* VerifyOTPVController.swift in Sources */,
+				B40A889122B8F9BA0087DDFB /* CollectionReference.swift in Sources */,
 				B4820600228A9507003A1680 /* GradientView.swift in Sources */,
 				B48D9064228D29CB001B0EEC /* MainChatScreenController.swift in Sources */,
 				B48C280D229548E500426E48 /* CreateGroupController.swift in Sources */,
 				B48C281122954E6200426E48 /* NewGroupTableCell.swift in Sources */,
+				B4021D0B22B3923100248EDB /* CarousellImagePickerController.swift in Sources */,
 				B48205F6228A83D3003A1680 /* HexColorextension.swift in Sources */,
 				B47688D9229E6CD900F17BBF /* UpdateGroupController.swift in Sources */,
 				8EF1F5952295654A003A4C5D /* ProfileTableViewCell.swift in Sources */,
 				8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */,
 				B4DCF164228BE193009B97CE /* ChatDashboardController.swift in Sources */,
 				6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */,
+				B48A3E4022B75622002DA50F /* CutomCameraViewController.swift in Sources */,
+				B48EF3B322B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift in Sources */,
+				B4021D0D22B3929F00248EDB /* ImagePickerConfigurable.swift in Sources */,
 				B4820604228AC8D5003A1680 /* CreateProfileController.swift in Sources */,
+				B40A889322B902650087DDFB /* Constants.swift in Sources */,
 				B47C3A2822AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift in Sources */,
 				B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */,
 				2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */,
@@ -539,6 +612,7 @@
 				B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */,
 				B47688D7229E49A900F17BBF /* IndividualProfileDetailController.swift in Sources */,
 				B47710D522AA122300F1A196 /* ProcessViewController.swift in Sources */,
+				B48A3E4422B76793002DA50F /* CameraPreviewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

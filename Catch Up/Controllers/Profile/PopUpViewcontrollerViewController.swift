@@ -121,6 +121,7 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
         
     }
     
+    let ThemeBackground = [UIImage(named: "Theme1"), UIImage(named: "Theme2"), UIImage(named: "Theme3"), UIImage(named: "Theme4"), UIImage(named: "Theme5")]
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -128,13 +129,58 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
         
                 case "Chat"  :
 
-                    if let cell = collectionView.cellForItem(at: indexPath) {
+                    if indexPath.row == 0 {
                         
-                        Themeused[indexPath.row] = true
+                        print("Chat Camera Clicked")
                         
-                        ChooseBackground.chooseThemes(BackView: collectionView.check, Row: Int)
+                    } else {
                         
-                        print("Themeused: \(Themeused)")
+                        if let cell = collectionView.cellForItem(at: indexPath) {
+                            
+                            
+                            let firstFrame = CGRect(x: 0, y: 0, width: 60, height: 60)
+                            
+                          
+                            let firstView = UIView(frame: firstFrame)
+                            
+                            view.addSubview(firstView)
+                            
+                            let cameraimage = ThemeBackground[indexPath.row - 1]
+                            
+                            let ImageView = UIImageView(image: cameraimage)
+                            ImageView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+                            
+                            let checkImage = UIImage(named: "ChatThemeCheck")
+                            let CheckImageView = UIImageView(image: checkImage)
+                            CheckImageView.frame = CGRect(x: 20, y: 17, width: 25, height: 25)
+                            
+
+                            
+                            if Themeused[indexPath.row-1] == true {
+                                
+                                print("Themeused: \(Themeused)")
+                                
+                                CheckImageView.alpha = 1
+                                
+                            } else {
+                                
+                                CheckImageView.alpha = 0
+                            }
+                            
+                            //        firstView.addSubview(secondView)
+                            firstView.addSubview(ImageView)
+                            firstView.addSubview(CheckImageView)
+                            
+                            firstView.roundCorners(corners: [.topRight, .topLeft, .bottomLeft, .bottomRight], radius: 5)
+                            
+//                            Themeused[indexPath.row] = true
+                            
+                            //                        ChooseBackground.chooseThemes(BackView: collectionView.check, Row: Int)
+                            
+                            print("Themeused: \(Themeused)")
+                        
+                    }
+
                         
             }
 //                    if let cell = tableView.cellForRow(at: indexPath) {
@@ -381,7 +427,7 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
                 
             } else {
                 
-                ChooseBackground.chooseThemes(BackView: cell.myview, Row: indexPath.row)
+//                ChooseBackground.chooseThemes(BackView: cell.myview, Row: indexPath.row)
                 
                 
             }

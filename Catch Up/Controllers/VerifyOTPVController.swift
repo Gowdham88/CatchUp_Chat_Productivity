@@ -53,7 +53,7 @@ class VerifyOTPVController: UIViewController {
         print("saved phone number",savedPhoneNumber)
         
         if let number = savedPhoneNumber {
-            
+
             enteredNumberField.text = number
         }
         
@@ -139,12 +139,6 @@ class VerifyOTPVController: UIViewController {
 
         }
         
-//        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-//
-//          
-//            
-//        }
- 
     }
     
     func roundedTop(targetView:UIView?, desiredCurve:CGFloat?){

@@ -180,11 +180,16 @@ extension CreateProfileController {
                         
                          urlStr = (url?.absoluteString) ?? ""
                         print("printing url",urlStr)
-                        let values = ["downloadURL": urlStr]
-                        self.addImageURLToDatabase(uid: userID, values: values as [String : AnyObject])
                         
                         let username = self.nameField.text
                         let deviceID = UIDevice.current.identifierForVendor!.uuidString
+                        
+//                        let values = ["downloadURL": urlStr]
+                        let values = ["profileImage": urlStr,
+                                      "profileName" : username]
+                        self.addImageURLToDatabase(uid: userID, values: values as [String : AnyObject])
+                        
+                       
                         
                         self.ref.child("user").childByAutoId().setValue(["userName": username,
                                                                          "userPhotoThumbnail" : urlStr,
@@ -203,6 +208,13 @@ extension CreateProfileController {
 //                                           "userContactNumber" : self.userPhoneNumber,
 //                                           "deviceId" : deviceID,
 //                                           "user_id" : uid])
+                        
+                        
+                        let sb = UIStoryboard(name: "Chat", bundle: nil)
+                        
+                        let vc = sb.instantiateViewController(withIdentifier: "ChatDashboardController") as! ChatDashboardController
+                        
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }
                 }
             })
@@ -215,6 +227,7 @@ extension CreateProfileController {
     
     func addImageURLToDatabase(uid:String, values:[String:AnyObject]){
         let ref = Database.database().reference(fromURL: "https://schnellfirebase-dev.firebaseio.com")
+        
         let usersReference = ref.child(userPhoneNumber).child((Auth.auth().currentUser?.uid)!)
         
         usersReference.updateChildValues(values) { (error, ref) in

@@ -56,7 +56,8 @@ class ChatDashboardController: UIViewController {
     @IBAction func didTappedAddContact(_ sender: Any) {
         
         let sb = UIStoryboard(name: "Chat", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "SelectContactController")
+        let vc = sb.instantiateViewController(withIdentifier: "SelectContactController") as! SelectContactController
+        vc.isForward = false
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

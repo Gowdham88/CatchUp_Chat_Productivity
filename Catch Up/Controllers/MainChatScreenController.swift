@@ -134,16 +134,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         navProfileImage.layer.cornerRadius = navProfileImage.frame.height/2
         
         if let StatusbarView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
+           
             StatusbarView.backgroundColor = UIColor(red: 15/255, green: 110/255, blue: 255/255, alpha: 1)
           
             StatusbarView.setGradientBackground(view: StatusbarView)
         }
+        
         bottomBarView.layer.masksToBounds = false
+      
         recordView.layer.masksToBounds = false
-        
-       
-        
-        
         
 //        picker?.delegate = self
         
@@ -175,9 +174,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewWillAppear(_ animated: Bool) {
        
     }
-    
-
-    
+ 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         recordView.isHidden = true

@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.283199006319-9n4u5ti9b33qvfbpup0atigfpbo48tge</string>
+				<string>com.googleusercontent.apps.413525242718-c5jj60rn3sgbp8b0qkor9h2bk49ssspt</string>
 			</array>
 		</dict>
 	</array>
@@ -50,7 +50,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Chat</string>
+	<string>Auth</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

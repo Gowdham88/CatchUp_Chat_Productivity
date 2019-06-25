@@ -8,8 +8,9 @@
 
 import Foundation
 import FirebaseDatabase
+import Firebase
 
-enum CollectionReference: String {
+enum FDatabaseReference: String {
     case User
     case Typing
     case Recent
@@ -19,8 +20,9 @@ enum CollectionReference: String {
 }
 
 
-//func reference(_ collectionReference: CollectionReference) -> CollectionReference {
-//    var ref = Database.database().reference()
-//   
-//    return ref.
-//}
+func reference(_ collectionReference: FDatabaseReference) -> DatabaseReference {
+    
+    let ref = Database.database().reference()
+   
+    return ref.child(collectionReference.rawValue)
+}

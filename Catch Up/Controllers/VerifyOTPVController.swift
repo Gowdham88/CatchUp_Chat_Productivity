@@ -50,6 +50,8 @@ class VerifyOTPVController: UIViewController {
         
         savedPhoneNumber = UserDefaults.standard.object(forKey: "phone") as! String
         
+        print("saved phone number",savedPhoneNumber)
+        
         if let number = savedPhoneNumber {
             
             enteredNumberField.text = number
@@ -108,6 +110,8 @@ class VerifyOTPVController: UIViewController {
             withVerificationID: verificationID!,
             verificationCode: enterOTPField.text!)
         
+        
+        
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
             
             if let error = error {
@@ -117,11 +121,26 @@ class VerifyOTPVController: UIViewController {
                 return
             }
             
-            // User is signed in
+            print("printing auth result here",authResult?.additionalUserInfo?.isNewUser,authResult?.additionalUserInfo?.username,authResult?.additionalUserInfo?.profile,authResult?.additionalUserInfo?.providerID)
             
-            let sb = UIStoryboard(name: "Auth", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "CreateProfileController")
-            self.navigationController?.pushViewController(vc, animated: true)
+            if (authResult?.additionalUserInfo!.isNewUser)! {
+              
+                // User is signed in and is new user
+                
+                let sb = UIStoryboard(name: "Auth", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "CreateProfileController") as! CreateProfileController
+                vc.userPhoneNumber = self.savedPhoneNumber
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }else {
+                
+                let sb = UIStoryboard(name: "Chat", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "ChatDashboardController") as! ChatDashboardController
+//                vc.userPhoneNumber = self.savedPhoneNumber
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+          
             
         }
  

@@ -10,6 +10,8 @@ import UIKit
 
 class ChatDashboardController: UIViewController {
     
+    var getDeviceToken: String?
+    
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var chatTableView: UITableView!
     @IBOutlet weak var navigationSubView: GradientView!
@@ -30,6 +32,8 @@ class ChatDashboardController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        print("device token is",getDeviceToken)
         
         if self.style == .default {
             

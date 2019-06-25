@@ -10,12 +10,14 @@ import UIKit
 import Firebase
 import FirebaseMessaging
 import UserNotifications
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
 
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
+    var deviceTokenString: String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -65,13 +67,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         
         let userDefaults = UserDefaults.standard
        
-        if userDefaults.value(forKey: "appFirstTimeOpend") == nil {
+        if userDefaults.value(forKey: "appFirstTimeOpend") == nil   {
 
             userDefaults.setValue(true, forKey: "appFirstTimeOpend")
-
+            
+           if Auth.auth().currentUser?.uid != nil {
+            
             do {
+                
                 try Auth.auth().signOut()
+                
             }catch {
+                
+            }
                 
             }
            
@@ -79,7 +87,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
             
         } else {
             
-            moveToDashboard()
+            if Auth.auth().currentUser?.uid != nil {
+                
+                moveToDashboard()
+                
+            }else {
+                
+                moveToSignIn()
+            }
+            
+           
         }
         
 //        if Auth.auth().currentUser != nil {
@@ -109,6 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         
         let frontNavigationController = UINavigationController(rootViewController: destinationController!)
         
+        destinationController?.getDeviceToken = deviceTokenString
+        
         self.window!.rootViewController = frontNavigationController
         
         frontNavigationController.navigationBar.isHidden = true
@@ -123,6 +142,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         let destinationController = storyboard.instantiateViewController(withIdentifier: "ChatDashboardController") as? ChatDashboardController
         
         let frontNavigationController = UINavigationController(rootViewController: destinationController!)
+        
+        destinationController?.getDeviceToken = deviceTokenString
         
         self.window!.rootViewController = frontNavigationController
         
@@ -161,8 +182,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
 //        Messaging.messaging().apnsToken = deviceToken
+         deviceTokenString = deviceToken.hexString
         
-
+        print("printing device token",deviceTokenString!)
     }
 }
 
@@ -266,3 +288,9 @@ extension AppDelegate  {
 }
 
 
+extension Data {
+    var hexString: String {
+        let hexString = map { String(format: "%02.2hhx", $0) }.joined()
+        return hexString
+    }
+}

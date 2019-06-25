@@ -110,21 +110,18 @@ class VerifyOTPVController: UIViewController {
             withVerificationID: verificationID!,
             verificationCode: enterOTPField.text!)
         
-        
-        
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { (authResult, error) in
             
             if let error = error {
-               
+                
                 print("error occured while verifying OTP",error)
                 
                 return
             }
             
-            print("printing auth result here",authResult?.additionalUserInfo?.isNewUser,authResult?.additionalUserInfo?.username,authResult?.additionalUserInfo?.profile,authResult?.additionalUserInfo?.providerID)
             
             if (authResult?.additionalUserInfo!.isNewUser)! {
-              
+                
                 // User is signed in and is new user
                 
                 let sb = UIStoryboard(name: "Auth", bundle: nil)
@@ -136,13 +133,17 @@ class VerifyOTPVController: UIViewController {
                 
                 let sb = UIStoryboard(name: "Chat", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "ChatDashboardController") as! ChatDashboardController
-//                vc.userPhoneNumber = self.savedPhoneNumber
+                //                vc.userPhoneNumber = self.savedPhoneNumber
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-            
-          
-            
+
         }
+        
+//        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+//
+//          
+//            
+//        }
  
     }
     
@@ -208,6 +209,7 @@ extension VerifyOTPVController {
         }
         
         resendOTPButton.isUserInteractionEnabled = false
+      
         resendOTPButton.alpha = 0.3
     }
     
@@ -219,6 +221,7 @@ extension VerifyOTPVController {
         }
         
         resendOTPButton.isUserInteractionEnabled = true
+       
         resendOTPButton.alpha = 1.0
     }
     

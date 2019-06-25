@@ -16,6 +16,7 @@ import IDMPhotoBrowser
 import Firebase
 import FirebaseMessaging
 import FirebaseDatabase
+import JSQMessagesViewController
 
 
 //import CameraManager
@@ -23,7 +24,24 @@ import FirebaseDatabase
 
 
 
-class MainChatScreenController: JSQMessagesViewController,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate {
+class MainChatScreenController: JSQMessagesViewController,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate,JSQMessagesCollectionViewCellDelegate {
+  
+    func messagesCollectionViewCellDidTapAvatar(_ cell: JSQMessagesCollectionViewCell!) {
+        
+    }
+    
+    func messagesCollectionViewCellDidTapMessageBubble(_ cell: JSQMessagesCollectionViewCell!) {
+        
+    }
+    
+    func messagesCollectionViewCellDidTap(_ cell: JSQMessagesCollectionViewCell!, atPosition position: CGPoint) {
+        
+    }
+    
+    func messagesCollectionViewCell(_ cell: JSQMessagesCollectionViewCell!, didPerformAction action: Selector!, withSender sender: Any!) {
+        
+    }
+    
 
     func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String) {
         
@@ -98,6 +116,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var incomingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
     
+     let composeVC = JSQMessagesViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -120,6 +140,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }
         bottomBarView.layer.masksToBounds = false
         recordView.layer.masksToBounds = false
+        
+       
         
         
         
@@ -146,6 +168,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         recordView.isHidden = true
         
+        displayMessageInterface()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,6 +193,27 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBAction func didTappedEmoji(_ sender: Any) {
         
         
+    }
+    
+    func displayMessageInterface() {
+       
+//        composeVC.automaticallyScrollsToMostRecentMessage = true
+//        composeVC.collectionView.delegate = self
+//        composeVC.send
+        
+        
+//        composeVC.messageComposeDelegate = self
+//
+//        // Configure the fields of the interface.
+//        composeVC.recipients = ["3142026521"]
+//        composeVC.body = "I love Swift!"
+        
+        // Present the view controller modally.
+//        if MFMessageComposeViewController.canSendText() {
+//            self.present(composeVC, animated: true, completion: nil)
+//        } else {
+//            print("Can't send messages.")
+//        }
     }
     
     @IBAction func didTappedAttchments(_ sender: Any) {
@@ -358,9 +403,8 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
             meterTimer.invalidate()
             print("recorded successfully.")
         }
-        else
-        {
-//            display_alert(msg_title: "Error", msg_desc: "Recording failed.", action_title: "OK")
+        else{
+            print("error while finishing audio record")
         }
     }
     
@@ -386,12 +430,10 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
                 audioRecorder.prepareToRecord()
             }
             catch let error {
-//                display_alert(msg_title: "Error", msg_desc: error.localizedDescription, action_title: "OK")
+                print("catched some error during recording")
             }
-        }
-        else
-        {
-//            display_alert(msg_title: "Error", msg_desc: "Don't have access to use your microphone.", action_title: "OK")
+        }else {
+            print("please enable audio access for catch app")
         }
     }
     
@@ -441,5 +483,12 @@ extension MainChatScreenController {
 //        picker.dismiss(animated: true, completion: nil)
 //    }
 //}
+
+//extension MainChatScreenController : UITableViewDataSource,UITableViewDelegate {
+//
+//
+//
+//}
+
 
 

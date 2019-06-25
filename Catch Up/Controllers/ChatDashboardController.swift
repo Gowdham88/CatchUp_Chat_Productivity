@@ -86,5 +86,14 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let sb = UIStoryboard(name: "Chat", bundle: nil)
+        
+        let vc = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 
 }

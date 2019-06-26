@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         
         application.registerForRemoteNotifications()
         
-        Messaging.messaging().isAutoInitEnabled = true
+//        Messaging.messaging().isAutoInitEnabled = true
     /*
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)

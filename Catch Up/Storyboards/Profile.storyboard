@@ -36,7 +36,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="91" id="9BL-O6-Oja" customClass="ProfileTableViewCell" customModule="Catch_Up" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="91" id="9BL-O6-Oja" customClass="ProfileTableViewCell" customModule="Catch_Up" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9BL-O6-Oja" id="jtG-4L-Nqn">
@@ -213,7 +213,6 @@
                                             </subviews>
                                         </view>
                                         <connections>
-                                            <outlet property="chatBackgroundImageView" destination="GFU-0p-VqD" id="oBI-Uo-35O"/>
                                             <outlet property="myview" destination="LH6-WZ-rje" id="1iR-kG-1Ze"/>
                                         </connections>
                                     </collectionViewCell>

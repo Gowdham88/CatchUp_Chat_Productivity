@@ -213,6 +213,7 @@
                                             </subviews>
                                         </view>
                                         <connections>
+                                            <outlet property="chatBackgroundImageView" destination="GFU-0p-VqD" id="oBI-Uo-35O"/>
                                             <outlet property="myview" destination="LH6-WZ-rje" id="1iR-kG-1Ze"/>
                                         </connections>
                                     </collectionViewCell>

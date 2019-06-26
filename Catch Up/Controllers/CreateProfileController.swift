@@ -26,11 +26,21 @@ class CreateProfileController: UIViewController {
     
     var userPhoneNumber: String!
 
+    var grantedContactsForProfileImage = [String:String]()
+    
+    var grantedContactsForProfileName = [String:String]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        grantedContactsForProfileImage = ["435345345" : "5352525245",
+                               "242342343" : "234234234",
+                               "342342423" : "242424324"]
+        
+        grantedContactsForProfileName = ["isAllPermitted": "Y"]
         
         nameField.delegate = self
         imagePicker.delegate = self
@@ -178,15 +188,21 @@ extension CreateProfileController {
                     } else {
                         // Get the download URL for 'images/stars.jpg'
                         
-                         urlStr = (url?.absoluteString) ?? ""
+                         urlStr = (url?.absoluteString)
                         print("printing url",urlStr)
                         
                         let username = self.nameField.text
                         let deviceID = UIDevice.current.identifierForVendor!.uuidString
                         
 //                        let values = ["downloadURL": urlStr]
-                        let values = ["profileImage": urlStr,
-                                      "profileName" : username]
+                       
+                        let profileImageDict = ["premissionGrantedContacts": self.grantedContactsForProfileImage,
+                                                "url"                      : urlStr ] as [String : Any]
+                        
+                        let profileNameDict = ["premissionGrantedContacts" : self.grantedContactsForProfileName,
+                                               "userName"                  : username] as [String : Any]
+                        let values = ["profileImage": profileImageDict,
+                                      "profileName" : profileNameDict] as [String : Any]
                         self.addImageURLToDatabase(uid: userID, values: values as [String : AnyObject])
                         
                        
@@ -228,7 +244,7 @@ extension CreateProfileController {
     func addImageURLToDatabase(uid:String, values:[String:AnyObject]){
         let ref = Database.database().reference(fromURL: "https://schnellfirebase-dev.firebaseio.com")
         
-        let usersReference = ref.child(userPhoneNumber).child((Auth.auth().currentUser?.uid)!)
+        let usersReference = ref.child(userPhoneNumber)
         
         usersReference.updateChildValues(values) { (error, ref) in
             if(error != nil){

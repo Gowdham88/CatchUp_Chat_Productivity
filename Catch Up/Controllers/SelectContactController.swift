@@ -10,6 +10,7 @@ import UIKit
 import ContactsUI
 import Contacts
 
+
 class SelectContactController: UIViewController {
     
     @IBOutlet weak var selectContactTableView: UITableView!
@@ -22,12 +23,19 @@ class SelectContactController: UIViewController {
     
     @IBOutlet weak var addPeopleButton: UIButton!
     
+    var isForward: Bool = false
+    
+    
 var contacts = [CNContact]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //temp - static dict
+        
+      
         
         roundedView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         addNewGroup.layer.cornerRadius = 20
@@ -40,16 +48,58 @@ var contacts = [CNContact]()
         }
         self.navigationController?.navigationBar.barStyle = .black
         
-      
+//      requestAccess()
+        
+        requestAccess { (status) in
+            
+            if status {
+                
+                print("access given")
+                
+                self.getContacts()
+            }
+        }
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
-            getContacts()
-            
+//        if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
+//            getContacts()
+//
+//        }
+    }
+    
+    func requestAccess(completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
+        let store = CNContactStore()
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .authorized:
+            completionHandler(true)
+        case .denied:
+            showSettingsAlert(completionHandler)
+        case .restricted, .notDetermined:
+            store.requestAccess(for: .contacts) { granted, error in
+                if granted {
+                    completionHandler(true)
+                } else {
+                    DispatchQueue.main.async {
+                        self.showSettingsAlert(completionHandler)
+                    }
+                }
+            }
         }
+    }
+    
+    private func showSettingsAlert(_ completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
+        let alert = UIAlertController(title: nil, message: "This app requires access to Contacts to proceed. Would you like to open settings and grant permission to contacts?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { action in
+            completionHandler(false)
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
+            completionHandler(false)
+        })
+        present(alert, animated: true)
     }
     
 
@@ -123,16 +173,25 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
         
         cell.userName.text = contacts[indexPath.row].givenName + " " + contacts[indexPath.row].familyName
         
-        
-       
          let phone = contacts[indexPath.row].phoneNumbers
         
         for item in phone {
             
             print(item.value.stringValue)
-            
             cell.userContactNumber.text = item.value.stringValue
+        }
+        
+        if isForward == false {
             
+            cell.selectContactButton.isHidden = true
+            cell.selectContactButton.isUserInteractionEnabled = false
+            selectContactTableView.allowsMultipleSelection = false
+            
+        }else {
+            
+            cell.selectContactButton.isHidden = false
+            cell.selectContactButton.isUserInteractionEnabled = true
+            selectContactTableView.allowsMultipleSelection = true
         }
         
 //            print("number val \(phone[indexPath.row].value)")
@@ -148,9 +207,20 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
         return cell
     }
     
-    
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if isForward == false {
+            
+            let sb = UIStoryboard(name: "Chat", bundle: nil)
+            
+            let vc = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }
+        
+    }
+   
 }
 
 extension SelectContactController {
@@ -191,6 +261,8 @@ extension SelectContactController {
                 (contact, stop) in
                 self.contacts.append(contact)
             }
+            
+            self.selectContactTableView.reloadData()
         }
         catch {
             print("unable to fetch contacts")

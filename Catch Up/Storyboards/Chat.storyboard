@@ -28,7 +28,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YL2-hx-5bX" customClass="GradientView" customModule="Catch_Up" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20" width="414" height="69.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="20" width="414" height="60"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_user" translatesAutoresizingMaskIntoConstraints="NO" id="iiy-3r-jJf">
                                                 <rect key="frame" x="20" y="14" width="38" height="38"/>
@@ -59,7 +59,7 @@
                                         <constraints>
                                             <constraint firstItem="iiy-3r-jJf" firstAttribute="top" secondItem="YL2-hx-5bX" secondAttribute="top" constant="14" id="4sg-Vl-Sf9"/>
                                             <constraint firstItem="iiy-3r-jJf" firstAttribute="leading" secondItem="YL2-hx-5bX" secondAttribute="leading" constant="20" id="Glz-lZ-8pM"/>
-                                            <constraint firstAttribute="bottom" secondItem="lxC-Qf-Tu0" secondAttribute="bottom" constant="30" id="KB7-sh-ahJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="lxC-Qf-Tu0" secondAttribute="bottom" constant="20.666666666666671" id="KB7-sh-ahJ"/>
                                             <constraint firstItem="qdH-z2-qRb" firstAttribute="top" secondItem="YL2-hx-5bX" secondAttribute="top" constant="22" id="T5H-3c-fcM"/>
                                             <constraint firstAttribute="trailing" secondItem="qdH-z2-qRb" secondAttribute="trailing" constant="17" id="hGo-cA-ncz"/>
                                             <constraint firstItem="lxC-Qf-Tu0" firstAttribute="top" secondItem="YL2-hx-5bX" secondAttribute="top" constant="19" id="tce-yp-DUS"/>
@@ -75,7 +75,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMb-Eq-fSA">
-                                        <rect key="frame" x="0.0" y="80.333333333333314" width="414" height="605.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="80" width="414" height="605.66666666666663"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wh9-9I-fnZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="605.66666666666663"/>
@@ -237,7 +237,7 @@
                                     <constraint firstItem="YL2-hx-5bX" firstAttribute="top" secondItem="vJv-eH-ff5" secondAttribute="top" constant="20" id="hAg-SA-MMV"/>
                                     <constraint firstItem="EMb-Eq-fSA" firstAttribute="leading" secondItem="vJv-eH-ff5" secondAttribute="leading" id="lF7-B1-Fai"/>
                                     <constraint firstAttribute="bottom" secondItem="7g1-Q0-rXF" secondAttribute="bottom" constant="-9" id="lPW-p4-fga"/>
-                                    <constraint firstItem="EMb-Eq-fSA" firstAttribute="top" secondItem="YL2-hx-5bX" secondAttribute="bottom" constant="-9" id="teW-tv-fah"/>
+                                    <constraint firstItem="EMb-Eq-fSA" firstAttribute="top" secondItem="YL2-hx-5bX" secondAttribute="bottom" constant="0.33333333333331439" id="teW-tv-fah"/>
                                     <constraint firstItem="7g1-Q0-rXF" firstAttribute="centerX" secondItem="vJv-eH-ff5" secondAttribute="centerX" id="xtX-aJ-KnZ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>

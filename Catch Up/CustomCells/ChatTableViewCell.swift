@@ -7,15 +7,23 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorage
+import FirebaseDatabase
 
 class ChatTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var recipientImg: UIImageView!
+    @IBOutlet weak var recipientName: UILabel!
+    @IBOutlet weak var chatPreview: UILabel!
+    
+    var messageDetail: MessageDetail!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        profileImg.layer.cornerRadius = profileImg.frame.height/2
+        recipientImg.layer.cornerRadius = recipientImg.frame.height/2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

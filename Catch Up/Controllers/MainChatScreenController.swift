@@ -307,13 +307,13 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
     func checkPermission() {
         
         switch AVAudioSession.sharedInstance().recordPermission {
-        case AVAudioSessionRecordPermission.granted:
+        case AVAudioSession.RecordPermission.granted:
             isAudioRecordingGranted = true
             break
-        case AVAudioSessionRecordPermission.denied:
+        case AVAudioSession.RecordPermission.denied:
             isAudioRecordingGranted = false
             break
-        case AVAudioSessionRecordPermission.undetermined:
+        case AVAudioSession.RecordPermission.undetermined:
             AVAudioSession.sharedInstance().requestRecordPermission({ (allowed) in
                 if allowed {
                     self.isAudioRecordingGranted = true
@@ -416,7 +416,7 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
             do
             {
 //                try session.setCategory(AVAudioSession.Category.playAndRecord, with: .mixWithOthers)
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.mixWithOthers)
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
                 try session.setActive(true)
                 let settings = [
                     AVFormatIDKey: Int(kAudioFormatMPEG4AAC),

@@ -10,34 +10,43 @@ import Foundation
 import Firebase
 import FirebaseStorage
 import FirebaseDatabase
+import SwiftKeychainWrapper
 
 class MessageDetail {
     
     
     private var _recipient: String!
     private var _messageKey: String!
-//    private var _messageRef: FIRDatabaseRefernce!
-//
-//    var recipient: String {
-//        return _recipient
-//    }
-//
-//    var messageKey: String {
-//        return _messageKey
-//    }
-//
-//    var messageRef: FIRDatabaseRefernce {
-//        return _messageRef
-//    }
-//
-//    init (messageKey: String, messageData: Dictionary<string, AnyObject>) {
-//
-//        _messageKey = messageKey
-//        if let recipient = postData["recipient"] as? String {
-//            _recipient = recipient
-//        }
-////        _messageRef = FIRDatabase
-//    }
-//
+    private var _messageRef: DatabaseReference!
+
+    var currentUser = KeychainWrapper.standard.string(forKey: "uid")
+    
+    var recipient: String {
+        return _recipient
+    }
+
+    var messageKey: String {
+        return _messageKey
+    }
+
+    var messageRef: DatabaseReference {
+        return _messageRef
+    }
+    
+    init(recipient: String) {
+        _recipient = recipient
+    }
+
+    init (messageKey: String, messageData: Dictionary<String, AnyObject>) {
+
+        _messageKey = messageKey
+        if let recipient = messageData["recipient"] as? String {
+            
+            _recipient = recipient
+            
+        }
+        _messageRef = Database.database().reference().child("recipient").child(_messageKey)
+    }
+
     
 }

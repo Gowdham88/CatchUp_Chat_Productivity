@@ -62,7 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         
         */
        
+     
         
+        /*
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         let userDefaults = UserDefaults.standard
@@ -98,6 +100,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
             
            
         }
+        
+        */
         
 //        if Auth.auth().currentUser != nil {
 //

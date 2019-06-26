@@ -124,24 +124,42 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        switch PageHeader {
+      
         
-                case "Chat"  :
-
-                    if let cell = collectionView.cellForItem(at: indexPath) {
-                        
-                        Themeused[indexPath.row] = true
-                        
+        if indexPath.row != 0 {
+            
+            switch PageHeader {
+                
+            case "Chat"  :
+                
+                if let cell = collectionView.cellForItem(at: indexPath) as? PopupCollectionViewCell {
+                    
+                    collectionView.allowsMultipleSelection = true
+                    
+                    collectionView.isUserInteractionEnabled = true
+                    
+                    ChooseBackground.chooseThemes(BackView: cell.myview, Row: indexPath.row, selectTheme: true)
+                    
+                   
+                    
+                }
+                                
+                
+                //            ChooseBackground.chooseThemes(BackView: <#T##UIView#>, Row: <#T##Int#>, selectTheme: <#T##Bool#>)
+                
+                //
+                //                    if let cell = tableView.cellForRow(at: indexPath) {
+                //                        cell.accessoryType = .none
+                //            }
+                
+                
+            default:
+                break
+                
             }
-//                    if let cell = tableView.cellForRow(at: indexPath) {
-//                        cell.accessoryType = .none
-//            }
-   
-        
-    default:
-        break
-        
         }
+        
+
 
     }
     
@@ -358,7 +376,7 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
                 
             } else {
                 
-                ChooseBackground.chooseThemes(BackView: cell.myview, Row: indexPath.row)
+                ChooseBackground.chooseThemes(BackView: cell.myview, Row: indexPath.row, selectTheme: false)
                 
                 
             }

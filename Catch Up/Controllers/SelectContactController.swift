@@ -25,12 +25,17 @@ class SelectContactController: UIViewController {
     
     var isForward: Bool = false
     
+    
 var contacts = [CNContact]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //temp - static dict
+        
+      
         
         roundedView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         addNewGroup.layer.cornerRadius = 20

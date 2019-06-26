@@ -12,7 +12,9 @@ class PopupCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var myview: UIView!
     
-//    let firstFrame = CGRect(x: 50, y: 70, height: 200, width: 200)
+    @IBOutlet var chatBackgroundImageView: UIImageView!
+    
+    //    let firstFrame = CGRect(x: 50, y: 70, height: 200, width: 200)
    
     //Now, I want to add a subview inside firstView
    
@@ -21,5 +23,6 @@ class PopupCollectionViewCell: UICollectionViewCell {
       
         
     }
+    
     
 }

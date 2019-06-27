@@ -9,7 +9,15 @@
 import UIKit
 import BottomPopup
 
+//protocol sendImageDelegate {
+//
+//    func sendImage(image: UIImage)
+//
+//}
+
 class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    var chosenImage: UIImage?
     
     let ChooseBackground = Chat_Background()
 
@@ -35,6 +43,8 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
     @IBOutlet weak var alertHeader: UILabel!
     @IBOutlet weak var myCollectionView: UICollectionView!
     @IBOutlet weak var myTableView: UITableView!
+    
+//    var delegate: sendImageDelegate?
 
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
         
@@ -201,6 +211,7 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
             //
             case "Theme"  :
                 
+               myTableView.alpha = 1
                
                 if let cell = tableView.cellForRow(at: indexPath) {
                     cell.accessoryType = .checkmark
@@ -212,6 +223,25 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
                 //
                 //        case "Edit Profile"  :
                 //            return 3
+                
+            case "Edit Profile" :
+                
+                myTableView.alpha = 1
+                
+                if indexPath.row == 0 {
+                    
+                    showCamera()
+                    
+                    self.dismiss(animated: true, completion: nil)
+                    
+                }else if indexPath.row == 1 {
+                    
+                    showGallery()
+                    
+                }else {
+                    
+                    self.dismiss(animated: true, completion: nil)
+                }
                 
             default:
                 break
@@ -257,22 +287,30 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! popupTableViewcell
+        let cell = myTableView.dequeueReusableCell(withIdentifier: "Cell") as! popupTableViewcell
         
         
         switch PageHeader {
             
         case "Theme"  :
             
+            myTableView.alpha = 1
+            
             cell.iconImage.image = ModeImages[indexPath.row]
+            
             cell.popupOption.text = ModeTitle[indexPath.row]
+            
             return cell
             
         case "Edit Profile"  :
+            
+            myTableView.alpha = 1
 
             cell.iconImage.image = EditProfileIcons[indexPath.row]
             
             cell.popupOption.text = EditProfileTitle[indexPath.row]
+            
+            print("edit profile title",EditProfileTitle[indexPath.row])
             
             if indexPath.row == 2 {
                 
@@ -372,21 +410,70 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
                 
                 ChooseBackground.chooseThemes(BackView: cell.myview, Row: indexPath.row, selectTheme: false)
                 
-                
             }
-            
-//            cell.iconImage.image = EditProfileIcons[indexPath.row]
-//
-//            cell.popupOption.text = EditProfileTitle[indexPath.row]
-            
-            
+
             return cell
             
         default:
+            
             return cell
             
         }
         
     }
 
+}
+
+extension PopUpViewcontrollerViewController: UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+    
+    func showCamera() {
+        
+        let sb = UIStoryboard(name: "Chat", bundle: nil)
+        
+        let vc = sb.instantiateViewController(withIdentifier: "CutomCameraViewController")
+        
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func showGallery() {
+        
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = false
+                imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            else
+            {
+                let alert  = UIAlertController(title: "Warning", message: "You don't have permission to access gallery.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        
+        
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        chosenImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//        profile.contentMode = .scaleAspectFit
+//        userImageView.image = chosenImage
+//        dismiss(animated:true, completion: nil)
+        
+//        if let delegatee = delegate {
+//
+//            delegatee.sendImage(image: chosenImage!)
+//        }
+        
+        if let presenter = presentingViewController as? ProfileController {
+            
+            presenter.updatedImage = chosenImage
+            
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
 }

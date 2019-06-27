@@ -19,8 +19,13 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     var profileitems = ["Chat", "Invite Friends", "Theme", "Help", "Log Out"]
     var iconImages : [UIImage] = [UIImage(named: "message")!, UIImage(named: "users")!, UIImage(named: "sliders")!, UIImage(named: "help-circle")!, UIImage(named: "power")!]
     
+    var updatedImage: UIImage?
+    
+    @IBOutlet var userNameField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userNameField.delegate = self
 
 //        profileImage.layer.borderWidth = 1
 //        profileImage.layer.masksToBounds = false
@@ -39,8 +44,6 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBAction func uploadImage(_ sender: Any) {
         
         PresentPopup(Alertheader: "Edit Profile")
-
-
         
     }
     
@@ -106,7 +109,7 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBAction func editPressed(_ sender: Any) {
         
-        
+        userNameField.becomeFirstResponder()
     }
     
     
@@ -156,6 +159,11 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        print("view did appear")
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.row {
@@ -181,7 +189,7 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
 }
 
 
-extension ViewController: BottomPopupDelegate {
+extension ProfileController: BottomPopupDelegate {
     
     func bottomPopupViewLoaded() {
         print("bottomPopupViewLoaded")
@@ -201,9 +209,51 @@ extension ViewController: BottomPopupDelegate {
     
     func bottomPopupDidDismiss() {
         print("bottomPopupDidDismiss")
+        
+        if updatedImage != nil {
+            
+            profileImage.image = updatedImage
+            
+            profileImage.contentMode = .scaleAspectFill
+            
+        }
+        
+        
     }
     
     func bottomPopupDismissInteractionPercentChanged(from oldValue: CGFloat, to newValue: CGFloat) {
         print("bottomPopupDismissInteractionPercentChanged fromValue: \(oldValue) to: \(newValue)")
+    }
+}
+
+//extension ProfileController: sendImageDelegate {
+//    
+////    func sendImage(image: UIImage) {
+////        
+////        profileImage.image = image
+////        
+////    }
+////    
+//    
+//    
+//}
+
+extension ProfileController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        userNameField.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        userNameField.resignFirstResponder()
+        
+        return true
     }
 }

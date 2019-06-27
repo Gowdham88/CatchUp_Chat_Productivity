@@ -17,6 +17,9 @@ import Firebase
 import FirebaseMessaging
 import FirebaseDatabase
 import JSQMessagesViewController
+import FirebaseStorage
+import SwiftKeychainWrapper
+
 
 
 //import CameraManager
@@ -24,24 +27,25 @@ import JSQMessagesViewController
 
 
 
-class MainChatScreenController: JSQMessagesViewController,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate,JSQMessagesCollectionViewCellDelegate {
+class MainChatScreenController: UIViewController,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
   
-    func messagesCollectionViewCellDidTapAvatar(_ cell: JSQMessagesCollectionViewCell!) {
-        
-    }
-    
-    func messagesCollectionViewCellDidTapMessageBubble(_ cell: JSQMessagesCollectionViewCell!) {
-        
-    }
-    
-    func messagesCollectionViewCellDidTap(_ cell: JSQMessagesCollectionViewCell!, atPosition position: CGPoint) {
-        
-    }
-    
-    func messagesCollectionViewCell(_ cell: JSQMessagesCollectionViewCell!, didPerformAction action: Selector!, withSender sender: Any!) {
-        
-    }
-    
+  
+//    func messagesCollectionViewCellDidTapAvatar(_ cell: JSQMessagesCollectionViewCell!) {
+//
+//    }
+//
+//    func messagesCollectionViewCellDidTapMessageBubble(_ cell: JSQMessagesCollectionViewCell!) {
+//
+//    }
+//
+//    func messagesCollectionViewCellDidTap(_ cell: JSQMessagesCollectionViewCell!, atPosition position: CGPoint) {
+//
+//    }
+//
+//    func messagesCollectionViewCell(_ cell: JSQMessagesCollectionViewCell!, didPerformAction action: Selector!, withSender sender: Any!) {
+//
+//    }
+//
 
     func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String) {
         
@@ -49,6 +53,20 @@ class MainChatScreenController: JSQMessagesViewController,UITextFieldDelegate,UI
     
   
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    var recipient: String!
+    var messageId: String!
+    
+    
+    var messages = [Message]()
+    
+    var message: Message!
+
+    var currentUser = KeychainWrapper.standard.string(forKey: "uid")
+    
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     
    // navigation outlets
     
@@ -84,6 +102,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var isRecording = false
     var isAudioRecordingGranted: Bool!
     
+   
+    
 //    var picker:UIImagePickerController?=UIImagePickerController()
     
     @IBOutlet var cameraOVerlayView: UIView!
@@ -102,7 +122,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var loadOld = false
     var loadedMessagesCount = 0
     var typingCounter = 0
-    var messages: [JSQMessage] = []
+//    var messages: [JSQMessage] = []
     var objectMessages: [NSDictionary] = []
     var loadedMessages: [NSDictionary] = []
     var allPictureMessages: [String] = []
@@ -112,16 +132,50 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var showAvatars = true
     var firstLoad: Bool?
     
-    var outgoingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
-    
-    var incomingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
-    
-     let composeVC = JSQMessagesViewController()
+//    var outgoingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+//
+//    var incomingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
+//
+//     let composeVC = JSQMessagesViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = 300.0
+        tableView.rowHeight = UITableView.automaticDimension
+
+        if messageId != "" && messageId != nil {
+            
+            loadData()
+            
+        }
+        
+      
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))            
+        
+        view.addGestureRecognizer(tap)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+            
+            self.moveToBottom()
+        }
         
         typeMessageTextField.delegate = self
         
@@ -169,6 +223,34 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         displayMessageInterface()
         
+    } //viewdidload
+    
+    
+    @objc func keyboardWillShow(notify: NSNotification) {
+        
+        if let keyboardSize = (notify.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if self.view.frame.origin.y == 0 {
+                
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notify: NSNotification) {
+        
+        if let keyboardSize = (notify.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if self.view.frame.origin.y != 0 {
+                
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -286,7 +368,160 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             self.present(alert, animated: true, completion: nil)
         }
     }
-}
+    
+    
+    //chat table view
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
+            return messages.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let message = messages[indexPath.row]
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
+            
+            cell.configCell(message: message)
+            
+            return cell
+            
+        } else {
+            
+            return mainChatScreenTableViewCell()
+        }
+        
+    }
+    
+    func loadData() {
+        
+        Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
+            
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                
+                self.messages.removeAll()
+                
+                for data in snapshot {
+                    
+                    if let postDict = data.value as? Dictionary<String, AnyObject> {
+                        
+                        let key = data.key
+                        
+                        let post = Message(messageKey: key, postData: postDict)
+                        
+                        self.messages.append(post)
+                    }
+                }
+            }
+            
+            self.tableView.reloadData()
+        })
+        
+    }//loadData
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        typeMessageTextField.resignFirstResponder()//
+        
+        
+        return true
+    }
+    
+    
+    func messageSend(){
+        
+        if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
+            
+            if messageId == nil {
+                
+                let post: Dictionary<String, AnyObject> = [
+                    "message": typeMessageTextField.text as AnyObject,
+                    "sender": recipient as AnyObject
+                ]
+                
+                let message: Dictionary<String, AnyObject> = [
+                    "lastmessage": typeMessageTextField.text as AnyObject,
+                    "recipient": recipient as AnyObject
+                ]
+                
+                let recipientMessage: Dictionary<String, AnyObject> = [
+                    "lastmessage": typeMessageTextField.text as AnyObject,
+                    "recipient": currentUser as AnyObject
+                ]
+                
+                messageId = Database.database().reference().child("messages").childByAutoId().key
+                
+                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                
+                firebaseMessage.setValue(post)
+                
+                let recipentMessage = Database.database().reference().child("users").child(recipient).child("messages").child(messageId)
+                
+                recipentMessage.setValue(recipientMessage)
+                
+                let userMessage = Database.database().reference().child("users").child(currentUser!).child("messages").child(messageId)
+                
+                userMessage.setValue(message)
+                
+                loadData()
+            } else if messageId != "" {
+                
+                let post: Dictionary<String, AnyObject> = [
+                    "message": typeMessageTextField.text as AnyObject,
+                    "sender": recipient as AnyObject
+                ]
+                
+                let message: Dictionary<String, AnyObject> = [
+                    "lastmessage": typeMessageTextField.text as AnyObject,
+                    "recipient": recipient as AnyObject
+                ]
+                
+                let recipientMessage: Dictionary<String, AnyObject> = [
+                    "lastmessage": typeMessageTextField.text as AnyObject,
+                    "recipient": currentUser as AnyObject
+                ]
+                
+                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                
+                firebaseMessage.setValue(post)
+                
+                let recipentMessage = Database.database().reference().child("users").child(recipient).child("messages").child(messageId)
+                
+                recipentMessage.setValue(recipientMessage)
+                
+                let userMessage = Database.database().reference().child("users").child(currentUser!).child("messages").child(messageId)
+                
+                userMessage.setValue(message)
+                
+                loadData()
+            }
+            
+            typeMessageTextField.text = ""
+        }
+        
+//        moveToBottom()
+
+    }
+    
+    func moveToBottom() {
+        
+        if messages.count > 0  {
+            
+            let indexPath = IndexPath(row: messages.count - 1, section: 0)
+            
+            tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+        }
+    }
+    
+    
+}//class
 
 //extension MainChatScreenController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 //

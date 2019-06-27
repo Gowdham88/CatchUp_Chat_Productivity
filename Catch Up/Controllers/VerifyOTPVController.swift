@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import SwiftKeychainWrapper
 
 class VerifyOTPVController: UIViewController {
 
@@ -27,6 +28,7 @@ class VerifyOTPVController: UIViewController {
     
     var timer : Timer?
     
+    
     // sum up the timer
     
     var totalCount = 40
@@ -40,6 +42,7 @@ class VerifyOTPVController: UIViewController {
     //get keyboard's height
     
     var keyboardHeight: CGFloat?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,7 +121,15 @@ class VerifyOTPVController: UIViewController {
                 
                 return
             }
+           
             
+            if let uid = Auth.auth().currentUser?.uid {
+            
+            KeychainWrapper.standard.set(uid, forKey: "uid")
+            
+                print("current user uid:::", uid)
+            
+            }
             
             if (authResult?.additionalUserInfo!.isNewUser)! {
                 

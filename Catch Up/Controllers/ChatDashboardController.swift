@@ -87,9 +87,9 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = chatTableView.dequeueReusableCell(withIdentifier: "cell") as! ChatTableViewCell
+//        let cell = chatTableView.dequeueReusableCell(withIdentifier: "cell") as! ChatTableViewCell
         
-        return cell
+        return ChatTableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

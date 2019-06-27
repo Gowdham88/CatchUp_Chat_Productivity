@@ -10,6 +10,7 @@
 		2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */; };
 		2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */; };
 		4760B3B622C3710900A627C3 /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4760B3B522C3710900A627C3 /* MessageDetail.swift */; };
+		4760B3B822C3799000A627C3 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4760B3B722C3799000A627C3 /* SwiftKeychainWrapper.framework */; };
 		6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */; };
 		8E28BDD122AB9A640070440D /* Chat_Theme_Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28BDD022AB9A640070440D /* Chat_Theme_Background.swift */; };
 		8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */; };
@@ -90,6 +91,7 @@
 		2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
 		4760B3B522C3710900A627C3 /* MessageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
+		4760B3B722C3799000A627C3 /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftKeychainWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailTableCell.swift; sourceTree = "<group>"; };
 		8E28BDD022AB9A640070440D /* Chat_Theme_Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat_Theme_Background.swift; sourceTree = "<group>"; };
 		8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popupTableViewcell.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4760B3B822C3799000A627C3 /* SwiftKeychainWrapper.framework in Frameworks */,
 				B48A3E4222B75EE6002DA50F /* CameraManager.framework in Frameworks */,
 				B47E3F1F22B37F6F00E9EB5E /* Pickle.framework in Frameworks */,
 				B47710D822AA51CB00F1A196 /* VACalendar.framework in Frameworks */,
@@ -199,6 +202,7 @@
 		1B6EE85014391CEC5B832B2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4760B3B722C3799000A627C3 /* SwiftKeychainWrapper.framework */,
 				B48A3E4122B75EE6002DA50F /* CameraManager.framework */,
 				B47E3F1E22B37F6F00E9EB5E /* Pickle.framework */,
 				B47E3F1C22B37E6400E9EB5E /* Pickle.framework */,

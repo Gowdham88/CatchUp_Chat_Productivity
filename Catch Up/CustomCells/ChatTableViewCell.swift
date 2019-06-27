@@ -44,6 +44,7 @@ class ChatTableViewCell: UITableViewCell {
             let data = snapshot.value as! Dictionary<String, AnyObject>
             let username = data["useraName"]
             let userImg = data["url"]
+            
             self.recipientName.text = username as? String
             
             let ref = Storage.storage().reference(forURL: userImg as! String)

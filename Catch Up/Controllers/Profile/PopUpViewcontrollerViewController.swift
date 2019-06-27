@@ -140,10 +140,7 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
                     
                     ChooseBackground.chooseThemes(BackView: cell.myview, Row: indexPath.row, selectTheme: true)
                     
-                   
-                    
                 }
-                                
                 
                 //            ChooseBackground.chooseThemes(BackView: <#T##UIView#>, Row: <#T##Int#>, selectTheme: <#T##Bool#>)
                 
@@ -158,9 +155,6 @@ class PopUpViewcontrollerViewController: BottomPopupViewController, UITableViewD
                 
             }
         }
-        
-
-
     }
     
 //    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

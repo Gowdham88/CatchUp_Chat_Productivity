@@ -97,15 +97,13 @@ class Chat_Background {
                 
                 CheckImageView.isHidden = true
             
-            CheckImageView.isUserInteractionEnabled = true
-            
-    
-            
+                CheckImageView.isUserInteractionEnabled = true
+                        
         } else {
             
 
            print("images in array",checkImageArray,checkImageArray.count)
-//
+
             if let indexx = previousIndex {
 
                   print("printing previous index",indexx.row)
@@ -122,11 +120,8 @@ class Chat_Background {
             checkImageArray[Row - 1].isHidden = false
             
             checkImageArray[Row - 1].isUserInteractionEnabled = true
-//
+
             previousIndex = NSIndexPath(row: Row - 1, section: 0)
-            
-            
-            
             
         }
         
@@ -157,9 +152,7 @@ class Chat_Background {
 //        }
         
 //
-        
-
-      
+ 
         
 //        firstView.addSubview(CheckImageView)
         

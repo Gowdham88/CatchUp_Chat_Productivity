@@ -38,10 +38,12 @@ class ChatTableViewCell: UITableViewCell {
     func configureCell(messageDetail: MessageDetail){
         
         self.messageDetail = messageDetail
+        print("messageDetail.recipient", messageDetail.recipient)
         let recipientData = Database.database().reference().child("user").child(messageDetail.recipient)
         recipientData.observeSingleEvent(of: .value) { (snapshot) in
             
             let data = snapshot.value as! Dictionary<String, AnyObject>
+            
             let username = data["useraName"]
             let userImg = data["userPhotoThumbnail"]
             

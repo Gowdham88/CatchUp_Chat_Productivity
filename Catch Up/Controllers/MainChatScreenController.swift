@@ -410,15 +410,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-//            return messages.count
+            return messages.count
         
-        return dummyMessageArray.count
+//        return dummyMessageArray.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        let message = messages[indexPath.row]
+        let message = messages[indexPath.row]
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
             
@@ -429,24 +429,24 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             cell.recievedMessageLbl.sizeToFit()
 
             
-//            cell.configCell(message: message)
+            cell.configCell(message: message)
             
-            if dummyBoolArray[indexPath.row] == true {
-                
-                cell.recievedMessageView.isHidden = false
-                cell.sentMessageView.isHidden = true
-                
-                cell.recievedMessageLbl.text = dummyMessageArray[indexPath.row]
-                cell.receivedTimeLabel.text = "10:26 AM"
-                
-            }else {
-                
-                cell.recievedMessageView.isHidden = true
-                cell.sentMessageView.isHidden = false
-                
-                cell.sentMessageLbl.text = dummyMessageArray[indexPath.row]
-                cell.sentTimeLabel.text = "10:26 AM"
-            }
+//            if dummyBoolArray[indexPath.row] == true {
+//
+//                cell.recievedMessageView.isHidden = false
+//                cell.sentMessageView.isHidden = true
+//
+//                cell.recievedMessageLbl.text = dummyMessageArray[indexPath.row]
+//                cell.receivedTimeLabel.text = "10:26 AM"
+//
+//            }else {
+//
+//                cell.recievedMessageView.isHidden = true
+//                cell.sentMessageView.isHidden = false
+//
+//                cell.sentMessageLbl.text = dummyMessageArray[indexPath.row]
+//                cell.sentTimeLabel.text = "10:26 AM"
+//            }
             
             return cell
             

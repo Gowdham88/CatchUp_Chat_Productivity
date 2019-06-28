@@ -489,7 +489,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         recordView.isHidden = true
         
-//        messageSend()
+        messageSend()
+        
         return true
     }
     

@@ -86,6 +86,32 @@ class ChatDashboardController: UIViewController {
         
     }//viewdidload
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        print("current user uid in dashboard screen:::", currentUser!)
+        Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value) { (snapshot) in
+            
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                
+                self.messageDetail.removeAll()
+                
+                for data in snapshot {
+                    
+                    if let messageDict = data.value as? Dictionary<String, AnyObject> {
+                        
+                        let key = data.key
+                        
+                        let info = MessageDetail(messageKey: key, messageData: messageDict)
+                        
+                        self.messageDetail.append(info)
+                    }
+                }
+                
+            }
+            
+        }
+    }
+    
 
     @IBAction func didTappedAddContact(_ sender: Any) {
         

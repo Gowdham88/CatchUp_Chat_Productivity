@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
+import SwiftKeychainWrapper
 
 class SelectContactTableViewCell: UITableViewCell {
 
@@ -18,6 +23,8 @@ class SelectContactTableViewCell: UITableViewCell {
     
     @IBOutlet weak var selectContactButton: UIButton!
     
+    var searchDetail: Contacts!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,5 +45,33 @@ class SelectContactTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func configCell(searchDetail: Contacts) {
+        
+        self.searchDetail = searchDetail
+        
+        userName.text = searchDetail.userName
+        
+        let ref = Storage.storage().reference(forURL: searchDetail.userPhotoThumbnail)
+        
+            ref.getData(maxSize: 100000, completion: { (data, error) in
+            
+                if error != nil {
+                
+                print(" we couldnt upload the img")
+                
+            } else {
+                
+                if let imgData = data {
+                    
+                    if let img = UIImage(data: imgData) {
+                        
+                        self.userImage.image = img
+                    }
+                }
+            }
+            
+        })
+    }
 
-}
+}//class

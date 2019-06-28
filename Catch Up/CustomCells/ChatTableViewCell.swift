@@ -43,7 +43,7 @@ class ChatTableViewCell: UITableViewCell {
             
             let data = snapshot.value as! Dictionary<String, AnyObject>
             let username = data["useraName"]
-            let userImg = data["url"]
+            let userImg = data["userPhotoThumbnail"]
             
             self.recipientName.text = username as? String
             

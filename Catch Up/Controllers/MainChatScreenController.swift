@@ -430,7 +430,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         typeMessageTextField.resignFirstResponder()//
         
-        
+        messageSend()
         return true
     }
     
@@ -462,11 +462,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 firebaseMessage.setValue(post)
                 
-                let recipentMessage = Database.database().reference().child("users").child(recipient).child("messages").child(messageId)
+                let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
                 
                 recipentMessage.setValue(recipientMessage)
                 
-                let userMessage = Database.database().reference().child("users").child(currentUser!).child("messages").child(messageId)
+                let userMessage = Database.database().reference().child("user").child(currentUser!).child("messages").child(messageId)
                 
                 userMessage.setValue(message)
                 
@@ -492,11 +492,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 firebaseMessage.setValue(post)
                 
-                let recipentMessage = Database.database().reference().child("users").child(recipient).child("messages").child(messageId)
+                let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
                 
                 recipentMessage.setValue(recipientMessage)
                 
-                let userMessage = Database.database().reference().child("users").child(currentUser!).child("messages").child(messageId)
+                let userMessage = Database.database().reference().child("user").child(currentUser!).child("messages").child(messageId)
                 
                 userMessage.setValue(message)
                 

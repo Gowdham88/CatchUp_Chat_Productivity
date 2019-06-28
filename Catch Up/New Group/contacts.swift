@@ -1,5 +1,5 @@
 //
-//  contacts.swift
+//  Contacts.swift
 //  Catch Up
 //
 //  Created by Siva on 28/06/19.
@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 import Firebase
 import FirebaseDatabase
 import SwiftKeychainWrapper
@@ -29,7 +30,7 @@ class Contacts {
     }
     
     var userPhotoThumbnail: String {
-        
+
         return _userPhotoThumbnail
     }
     
@@ -40,25 +41,26 @@ class Contacts {
     
     init(userName: String, userPhotoThumbnail: String) {
         
-        _userName = userName
-        
-        _userPhotoThumbnail = userPhotoThumbnail
+            _userName = userName
+
+            _userPhotoThumbnail = userPhotoThumbnail
     }
     
     init(userKey: String, postData: Dictionary<String, AnyObject>) {
         
         _userKey = userKey
+
+         if let userName = postData["userName"] as? String {
         
-        if let userName = postData["userName"] as? String {
-            
             _userName = userName
         }
         
         if let userPhotoThumbnail = postData["userPhotoThumbnail"] as? String {
             
             _userPhotoThumbnail = userPhotoThumbnail
-        }
         
-        _userRef = Database.database().reference().child("messages").child(_userKey)
+        }
+
+            _userRef = Database.database().reference().child("messages").child(_userKey)
+        }
     }
-}

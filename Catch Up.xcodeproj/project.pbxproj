@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */; };
 		2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */; };
+		4728295122C495AB00E473A5 /* mainChatScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728295022C495AB00E473A5 /* mainChatScreenTableViewCell.swift */; };
+		4728295322C4963F00E473A5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728295222C4963F00E473A5 /* Message.swift */; };
 		4760B3B622C3710900A627C3 /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4760B3B522C3710900A627C3 /* MessageDetail.swift */; };
 		4760B3B822C3799000A627C3 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4760B3B722C3799000A627C3 /* SwiftKeychainWrapper.framework */; };
 		6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */; };
@@ -90,6 +92,8 @@
 		2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectContactTableViewCell.swift; sourceTree = "<group>"; };
 		2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
+		4728295022C495AB00E473A5 /* mainChatScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainChatScreenTableViewCell.swift; sourceTree = "<group>"; };
+		4728295222C4963F00E473A5 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4760B3B522C3710900A627C3 /* MessageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
 		4760B3B722C3799000A627C3 /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftKeychainWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailTableCell.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 				B4DC352A22AF962A0074A963 /* TimeHourCollectionViewCell.swift */,
 				B47C3A2722AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift */,
 				B48EF3B222B8A92000C3A3C4 /* ImagePickerCollectionViewCell.swift */,
+				4728295022C495AB00E473A5 /* mainChatScreenTableViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				4760B3B522C3710900A627C3 /* MessageDetail.swift */,
+				4728295222C4963F00E473A5 /* Message.swift */,
 			);
 			name = Model;
 			path = "New Group";
@@ -596,7 +602,9 @@
 				B4DCF168228C16B7009B97CE /* SelectContactController.swift in Sources */,
 				8E28CFC12297DD0800D0D634 /* PopupCollectionViewCell.swift in Sources */,
 				B4DC352B22AF962A0074A963 /* TimeHourCollectionViewCell.swift in Sources */,
+				4728295122C495AB00E473A5 /* mainChatScreenTableViewCell.swift in Sources */,
 				B47C53C722BB81D6007A7583 /* FUser.swift in Sources */,
+				4728295322C4963F00E473A5 /* Message.swift in Sources */,
 				B48EF3B122B8A61900C3A3C4 /* CustomImagePickerViewController.swift in Sources */,
 				B48C2809229547F200426E48 /* GroupingViewController.swift in Sources */,
 				B48205FE228A8883003A1680 /* CurveView.swift in Sources */,

@@ -23,6 +23,14 @@ class mainChatScreenTableViewCell: UITableViewCell {
     
     @IBOutlet weak var sentMessageView: UIView!
     
+    @IBOutlet var receivedTimeLabel: UILabel!
+    
+    @IBOutlet var sentTimeLabel: UILabel!
+    
+    @IBOutlet var likeOrUnlikeImageView: UIImageView!
+    
+    @IBOutlet var errorImageView: UIImageView!
+    
     var message: Message!
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
 

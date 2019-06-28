@@ -27,7 +27,7 @@ import SwiftKeychainWrapper
 
 
 
-class MainChatScreenController: UIViewController,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class MainChatScreenController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
   
   
 //    func messagesCollectionViewCellDidTapAvatar(_ cell: JSQMessagesCollectionViewCell!) {
@@ -65,7 +65,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var chatTableView: UITableView!
     
     
    // navigation outlets
@@ -131,6 +131,16 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var avatarImageDictionary: NSMutableDictionary?
     var showAvatars = true
     var firstLoad: Bool?
+    var keyboardSize: CGRect?
+    var openKeyboardForFirstTime: Bool = true
+    
+    var dummyBoolArray = [true,false,false,true,true,false,true,false]
+    
+    var dummyMessageArray = ["heysdhfishfisdhfisdhfosdhfpsdhfojdshfjpsdhfkjsdhfjdskhfjsdhfsdjhfskdjhfdskjhfdsjfhsdjhfdsjkhfdskjhfdskjfhdsjkhfdsjhfdskjhfdskjfhdskjhfdskjfhdkjsfhdskjhfdksj hey hey hey hey hey hey hey hey","hey hey hey hey hey hey hey hey","how are you","im fine","how is going","good","ok","take care"]
+    
+    
+    @IBOutlet var btnRecordOrSend: UIButton!
+    
     
 //    var outgoingBubble = JSQMessagesBubbleImageFactory()?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
 //
@@ -143,10 +153,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
         // Do any additional setup after loading the view.
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.estimatedRowHeight = 300.0
-        tableView.rowHeight = UITableView.automaticDimension
+        chatTableView.delegate = self
+        chatTableView.dataSource = self
+//        chatTableView.estimatedRowHeight = 300.0
+//        chatTableView.rowHeight = UITableView.automaticDimension
 
         if messageId != "" && messageId != nil {
             
@@ -154,22 +164,20 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
         }
         
-      
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        
+
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(self.keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification, object: nil)
     
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))            
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+
         view.addGestureRecognizer(tap)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
@@ -179,12 +187,13 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         typeMessageTextField.delegate = self
         
+        // set corner radius for view's rounded corner
+        
         threadBackupView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
-        
         threadMainImageView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
-        
+        chatTableView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        recordView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         bottomBarView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
-        
         navProfileImage.layer.cornerRadius = navProfileImage.frame.height/2
         
         if let StatusbarView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
@@ -217,8 +226,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         checkPermission()
         
-        recordView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
-        
         recordView.isHidden = true
         
         displayMessageInterface()
@@ -228,23 +235,38 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @objc func keyboardWillShow(notify: NSNotification) {
         
-        if let keyboardSize = (notify.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if openKeyboardForFirstTime == true {
             
+            keyboardSize = (notify.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+
+            openKeyboardForFirstTime = false
+        }
+        
             if self.view.frame.origin.y == 0 {
                 
-                self.view.frame.origin.y -= keyboardSize.height
+                if let Keyboard = keyboardSize {
+                    
+                     self.view.frame.origin.y -= Keyboard.height
+                }
+               
             }
-        }
     }
+    
+
     
     @objc func keyboardWillHide(notify: NSNotification) {
         
-        if let keyboardSize = (notify.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//        if let keyboardSize = (notify.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        
+//        }
+        
+        if self.view.frame.origin.y != 0 {
             
-            if self.view.frame.origin.y != 0 {
+            if let Keyboard = keyboardSize {
                 
-                self.view.frame.origin.y += keyboardSize.height
+                self.view.frame.origin.y += Keyboard.height
             }
+            
         }
     }
     
@@ -347,9 +369,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     }
     
-    @IBAction func didTappedAudioRecord(_ sender: Any) {
+    @IBAction func recordOrSendButton(_ sender: Any) {
         
-        recordView.isHidden = false
+         recordView.isHidden = false
     }
     
     func openGallery()
@@ -361,8 +383,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         }
-        else
-        {
+        else {
             let alert  = UIAlertController(title: "Warning", message: "You don't have permission to access gallery.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -373,23 +394,50 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     //chat table view
     
     func numberOfSections(in tableView: UITableView) -> Int {
+       
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-            return messages.count
+//            return messages.count
+        
+        return dummyMessageArray.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let message = messages[indexPath.row]
+//        let message = messages[indexPath.row]
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
             
-            cell.configCell(message: message)
+            cell.sentMessageLbl.roundCorners(corners: [.topLeft,.bottomLeft,.bottomRight], radius: 5.0)
+            
+            cell.recievedMessageLbl.roundCorners(corners: [.topRight,.bottomLeft,.bottomRight], radius: 5.0)
+            
+            cell.recievedMessageLbl.sizeToFit()
+
+            
+//            cell.configCell(message: message)
+            
+            if dummyBoolArray[indexPath.row] == true {
+                
+                cell.recievedMessageView.isHidden = false
+                cell.sentMessageView.isHidden = true
+                
+                cell.recievedMessageLbl.text = dummyMessageArray[indexPath.row]
+                cell.receivedTimeLabel.text = "10:26 AM"
+                
+            }else {
+                
+                cell.recievedMessageView.isHidden = true
+                cell.sentMessageView.isHidden = false
+                
+                cell.sentMessageLbl.text = dummyMessageArray[indexPath.row]
+                cell.sentTimeLabel.text = "10:26 AM"
+            }
             
             return cell
             
@@ -421,7 +469,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 }
             }
             
-            self.tableView.reloadData()
+            self.chatTableView.reloadData()
         })
         
     }//loadData
@@ -516,7 +564,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             let indexPath = IndexPath(row: messages.count - 1, section: 0)
             
-            tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+            chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
         }
     }
     
@@ -721,6 +769,34 @@ extension MainChatScreenController {
 //
 //
 //}
+
+extension MainChatScreenController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        typeMessageTextField.becomeFirstResponder()
+            
+        btnRecordOrSend.setImage(UIImage(named: "btn_send2"), for: .normal)
+            
+    
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+         typeMessageTextField.resignFirstResponder()
+        
+        if typeMessageTextField.text!.count > 0 {
+            
+            btnRecordOrSend.setImage(UIImage(named: "btn_send2"), for: .normal)
+            
+        }else {
+            
+            btnRecordOrSend.setImage(UIImage(named: "btn voice"), for: .normal)
+        }
+        
+    }
+    
+}
 
 
 

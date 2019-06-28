@@ -13,6 +13,7 @@
 		4728295322C4963F00E473A5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728295222C4963F00E473A5 /* Message.swift */; };
 		4760B3B622C3710900A627C3 /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4760B3B522C3710900A627C3 /* MessageDetail.swift */; };
 		4760B3B822C3799000A627C3 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4760B3B722C3799000A627C3 /* SwiftKeychainWrapper.framework */; };
+		4798D9B522C61E9900C0D82B /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4798D9B422C61E9900C0D82B /* Contacts.swift */; };
 		6F9D4E76229E2C5400CE1C77 /* GroupDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */; };
 		8E28BDD122AB9A640070440D /* Chat_Theme_Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28BDD022AB9A640070440D /* Chat_Theme_Background.swift */; };
 		8E28CFBE2297DCB700D0D634 /* popupTableViewcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */; };
@@ -96,6 +97,7 @@
 		4728295222C4963F00E473A5 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4760B3B522C3710900A627C3 /* MessageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
 		4760B3B722C3799000A627C3 /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftKeychainWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4798D9B422C61E9900C0D82B /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		6F9D4E75229E2C5300CE1C77 /* GroupDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailTableCell.swift; sourceTree = "<group>"; };
 		8E28BDD022AB9A640070440D /* Chat_Theme_Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat_Theme_Background.swift; sourceTree = "<group>"; };
 		8E28CFBD2297DCB700D0D634 /* popupTableViewcell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popupTableViewcell.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				4760B3B522C3710900A627C3 /* MessageDetail.swift */,
 				4728295222C4963F00E473A5 /* Message.swift */,
+				4798D9B422C61E9900C0D82B /* Contacts.swift */,
 			);
 			name = Model;
 			path = "New Group";
@@ -641,6 +644,7 @@
 				B47C3A2822AFB44E00FD3CCD /* TimeMinsCollectionViewCell.swift in Sources */,
 				B4732B2322A8F7BC00153D8C /* TaskDashboardTableCell.swift in Sources */,
 				2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */,
+				4798D9B522C61E9900C0D82B /* Contacts.swift in Sources */,
 				B4820602228AAFA5003A1680 /* DropShadow.swift in Sources */,
 				8EC319F822969D6B008F83A9 /* PopUpViewcontrollerViewController.swift in Sources */,
 				B48205DD228A7383003A1680 /* AppDelegate.swift in Sources */,

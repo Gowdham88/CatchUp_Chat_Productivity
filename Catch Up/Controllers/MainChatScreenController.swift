@@ -371,7 +371,16 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func recordOrSendButton(_ sender: Any) {
         
-         recordView.isHidden = false
+        if btnRecordOrSend.imageView?.image == UIImage(named: "btn_send2") {
+            
+             recordView.isHidden = true
+            
+        }else {
+            
+             recordView.isHidden = false
+        }
+        
+        
     }
     
     func openGallery()
@@ -478,7 +487,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         typeMessageTextField.resignFirstResponder()//
         
+        recordView.isHidden = true
+        
         messageSend()
+        
         return true
     }
     
@@ -787,9 +799,14 @@ extension MainChatScreenController: UITextFieldDelegate {
         
         if typeMessageTextField.text!.count > 0 {
             
+            recordView.isHidden = true
+            
             btnRecordOrSend.setImage(UIImage(named: "btn_send2"), for: .normal)
             
+            
         }else {
+            
+            recordView.isHidden = false
             
             btnRecordOrSend.setImage(UIImage(named: "btn voice"), for: .normal)
         }

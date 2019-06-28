@@ -207,7 +207,7 @@ extension CreateProfileController {
                         
                        
                         
-                        self.ref.child("user").childByAutoId().setValue(["userName": username,
+                        self.ref.child("user").child(uid).setValue(["userName": username,
                                                                          "userPhotoThumbnail" : urlStr,
                                                                          "userContactNumber" : self.userPhoneNumber,
                                                                          "deviceId" : deviceID,

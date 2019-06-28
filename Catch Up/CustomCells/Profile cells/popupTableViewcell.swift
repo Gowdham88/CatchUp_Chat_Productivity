@@ -24,11 +24,11 @@ class popupTableViewcell: UITableViewCell {
             let textLabelFrame = self.popupOption?.frame
             let imageViewFrame = self.iconImage?.frame
             
-            self.iconImage?.contentMode = .scaleAspectFit
+            self.iconImage?.contentMode   = .scaleAspectFit
             self.iconImage?.clipsToBounds = true
-            self.iconImage?.frame = CGRect(x: (imageViewFrame?.origin.x)!, y: (imageViewFrame?.origin.y)! + 1, width: 25, height: 25)
+            self.iconImage?.frame         = CGRect(x: (imageViewFrame?.origin.x)!, y: (imageViewFrame?.origin.y)! + 1, width: 25, height: 25)
             
-            self.popupOption!.frame = CGRect(x: 60 + (imageViewFrame?.origin.x)! , y: (textLabelFrame?.origin.y)!-7, width: cellFrame.width-(70 + (imageViewFrame?.origin.x)!), height: textLabelFrame!.height)
+            self.popupOption!.frame       = CGRect(x: 60 + (imageViewFrame?.origin.x)! , y: (textLabelFrame?.origin.y)!-7, width: cellFrame.width-(70 + (imageViewFrame?.origin.x)!), height: textLabelFrame!.height)
         }
         
     }

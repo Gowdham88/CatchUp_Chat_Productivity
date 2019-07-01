@@ -22,6 +22,7 @@ target 'Catch Up' do
   pod 'JSQMessagesViewController', ‘7.3.3’
   pod 'IDMPhotoBrowser'
   pod 'SwiftKeychainWrapper'
+  pod 'SDWebImage'
  
 
 

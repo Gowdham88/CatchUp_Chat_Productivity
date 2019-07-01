@@ -125,6 +125,7 @@ DEPENDENCIES:
   - IQAudioRecorderController
   - JSQMessagesViewController (= 7.3.3)
   - Pickle
+  - SDWebImage
   - SwiftKeychainWrapper
   - VACalendar
 
@@ -191,6 +192,6 @@ SPEC CHECKSUMS:
   SwiftKeychainWrapper: ef5ad793bc0e08e24a5913f28345b8f7bc8e4123
   VACalendar: 3e5a001cbf437ebed2bcfc747f3187e555d65175
 
-PODFILE CHECKSUM: 32bcac546e7a79557581bcafcad3817fcf67ca94
+PODFILE CHECKSUM: be187a9f9938f23892f3dcf45678bff31963ac64
 
 COCOAPODS: 1.6.0.rc.1

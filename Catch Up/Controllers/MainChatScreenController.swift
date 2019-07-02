@@ -500,8 +500,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             cell.checkImage.image = UIImage(named: "un-check")
         }
-        
     }
+    
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

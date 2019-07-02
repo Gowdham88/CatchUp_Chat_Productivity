@@ -539,7 +539,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func loadData() {
         
-        Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
+        Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).observe(.value, with: { (snapshot) in
+//        Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
             
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
@@ -579,6 +580,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
             
+            print("recipient id::::\(String(describing: recipient))")
+
+            
             if messageId == nil {
                 
                 let post: Dictionary<String, AnyObject> = [
@@ -599,9 +603,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
-                messageId = Database.database().reference().child("messages").childByAutoId().key
+//                messageId = Database.database().reference().child("messages").childByAutoId().key
+                messageId = Database.database().reference().child("user").child(currentUser!).child("outbox").childByAutoId().key
                 
-                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                print("message id::::\(String(describing: messageId))")
+                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 
@@ -634,7 +641,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
-                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                   let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 

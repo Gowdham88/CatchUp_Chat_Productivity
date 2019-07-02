@@ -262,7 +262,8 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         recipient = searchDetail[indexPath.row].userKey
-
+        
+        print("recipient contact id::\(String(describing: recipient))")
         
         if isForward == false {
             

@@ -90,6 +90,9 @@ class ChatDashboardController: UIViewController {
 //            }
 //        }
         
+        let idss = UUID().uuidString
+        
+        print("idss:::\(String(describing: idss))")
         Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value) { (snapshot) in
 
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
@@ -103,6 +106,7 @@ class ChatDashboardController: UIViewController {
                         let key = data.key
 
                         let info = MessageDetail(messageKey: key, messageData: messageDict)
+                        print("info::\(info)")
                         
 //                         let info = MessageDetail(messageKey: key, messageData: messageDict, timeStamp: )
 //

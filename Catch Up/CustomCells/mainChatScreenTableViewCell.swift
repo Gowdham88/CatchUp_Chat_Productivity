@@ -31,12 +31,19 @@ class mainChatScreenTableViewCell: UITableViewCell {
     
     @IBOutlet var errorImageView: UIImageView!
     
+    
+    @IBOutlet var checkImage: UIImageView!
+    
     var message: Message!
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        sentMessageView.layer.masksToBounds  = true
+        recievedMessageView.layer.masksToBounds = true
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -51,23 +58,28 @@ class mainChatScreenTableViewCell: UITableViewCell {
         
         if message.sender == currentUser {
             
-            sentMessageView.isHidden = false
+            sentMessageView.isHidden = true
             
-            sentMessageLbl.text = message.message
+            recievedMessageView.isHidden = true
             
-            recievedMessageLbl.text = ""
+            sentMessageLbl.text = "   " + message.message
             
             recievedMessageLbl.isHidden = true
             
+            sentMessageLbl.isHidden = true
+            
         } else {
             
-            sentMessageView.isHidden = true
+            sentMessageView.isHidden = false
             
-            sentMessageLbl.text = ""
+            recievedMessageView.isHidden = true
             
-            recievedMessageLbl.text = message.message
+            recievedMessageLbl.text = "   " + message.message
             
-            recievedMessageLbl.isHidden = false
+            recievedMessageLbl.isHidden = true
+            
+            sentMessageLbl.isHidden = false
+                    
         }
     }
 

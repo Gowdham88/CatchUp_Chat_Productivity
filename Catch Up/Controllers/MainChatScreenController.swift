@@ -148,6 +148,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //     let composeVC = JSQMessagesViewController()
     
+    var isLongPressed: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -229,6 +231,14 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         recordView.isHidden = true
         
         displayMessageInterface()
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressCell(gesture:)))
+        
+        chatTableView.isUserInteractionEnabled = true
+        
+        longPress.delegate = self
+        
+        chatTableView.addGestureRecognizer(longPress)
         
     } //viewdidload
     
@@ -422,11 +432,17 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
             
+            cell.tag = indexPath.row
+            
             cell.sentMessageLbl.roundCorners(corners: [.topLeft,.bottomLeft,.bottomRight], radius: 5.0)
             
             cell.recievedMessageLbl.roundCorners(corners: [.topRight,.bottomLeft,.bottomRight], radius: 5.0)
             
-            cell.recievedMessageLbl.sizeToFit()
+            cell.checkImage.image = UIImage(named: "un-check")
+            
+            cell.checkImage.isHidden = true
+            
+//            cell.recievedMessageLbl.sizeToFit()
 
             
             cell.configCell(message: message)
@@ -448,6 +464,13 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                cell.sentTimeLabel.text = "10:26 AM"
 //            }
             
+            let tapAtCell = UITapGestureRecognizer(target: self, action: #selector(tapOverTheCell(gesture:)))
+            
+            tapAtCell.numberOfTapsRequired = 1
+            
+            cell.addGestureRecognizer(tapAtCell)
+          
+            
             return cell
             
         } else {
@@ -455,6 +478,50 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             return mainChatScreenTableViewCell()
         }
         
+    }
+    
+   @objc func tapOverTheCell(gesture: UITapGestureRecognizer) {
+        
+    if isLongPressed {
+        
+        let touchPoint = gesture.location(in: self.view)
+        
+        let indexPath = chatTableView.indexPathForRow(at: touchPoint)
+        
+        let cell = chatTableView.cellForRow(at: indexPath!) as! mainChatScreenTableViewCell
+        
+        if cell.checkImage.image == UIImage(named: "un-check") {
+            
+            cell.checkImage.image = UIImage(named: "check_blue")
+            
+            // open pop up view
+            
+        }else {
+            
+            cell.checkImage.image = UIImage(named: "un-check")
+        }
+    }
+    
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if isLongPressed {
+            
+            let cell = chatTableView.cellForRow(at: indexPath) as! mainChatScreenTableViewCell
+            
+            if cell.checkImage.image == UIImage(named: "un-check") {
+                
+                cell.checkImage.image = UIImage(named: "check_blue")
+                
+                // open pop up view
+                
+            }else {
+                
+                cell.checkImage.image = UIImage(named: "un-check")
+            }
+
+        }
     }
     
     func loadData() {
@@ -503,17 +570,20 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 let post: Dictionary<String, AnyObject> = [
                     "message": typeMessageTextField.text as AnyObject,
-                    "sender": recipient as AnyObject
+                    "sender": recipient as AnyObject,
+                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
-                    "recipient": recipient as AnyObject
+                    "recipient": recipient as AnyObject,
+                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
-                    "recipient": currentUser as AnyObject
+                    "recipient": currentUser as AnyObject,
+                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
                 messageId = Database.database().reference().child("messages").childByAutoId().key
@@ -535,17 +605,20 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 let post: Dictionary<String, AnyObject> = [
                     "message": typeMessageTextField.text as AnyObject,
-                    "sender": recipient as AnyObject
+                    "sender": recipient as AnyObject,
+                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
-                    "recipient": recipient as AnyObject
+                    "recipient": recipient as AnyObject,
+                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
-                    "recipient": currentUser as AnyObject
+                    "recipient": currentUser as AnyObject,
+                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
                 let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
@@ -789,7 +862,6 @@ extension MainChatScreenController: UITextFieldDelegate {
         typeMessageTextField.becomeFirstResponder()
             
         btnRecordOrSend.setImage(UIImage(named: "btn_send2"), for: .normal)
-            
     
     }
     
@@ -815,5 +887,64 @@ extension MainChatScreenController: UITextFieldDelegate {
     
 }
 
+// tableview cell long press gesture
+
+extension MainChatScreenController: UIGestureRecognizerDelegate {
+    
+    @objc func longPressCell(gesture: UILongPressGestureRecognizer) {
+        
+         isLongPressed = true
+        
+        let touchPoint = gesture.location(in: chatTableView)
+        
+        let indexpath = chatTableView.indexPathForRow(at: touchPoint)
+        
+        let cell = chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
+        
+        if gesture.state == .began {
+            
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+                
+                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + 15
+                
+                cell.checkImage.isHidden = false
+                
+                self.groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
+                
+            })
+        }
+        
+        if gesture.state == .ended {
+            
+            cell.isUserInteractionEnabled = true
+            
+            cell.checkImage.isHidden = false
+        }
+        
+    }
+}
+
+
+// group button action
+
+extension MainChatScreenController {
+    
+    func groupButtonOrClose(sender: UIButton) {
+        
+        isLongPressed = true
+        
+        if groupButton.imageView?.image == UIImage(named: "Cross_close") {
+            
+            dismiss(animated: true, completion: nil)
+            
+            groupButton.imageView?.image = UIImage(named: "Group")
+            
+        }else {
+            
+            groupButton.imageView?.image = UIImage(named: "Cross_close")
+        }
+    
+    }
+}
 
 

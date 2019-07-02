@@ -11,6 +11,8 @@ import FirebaseDatabase
 import FirebaseStorage
 import Firebase
 import SwiftKeychainWrapper
+import SDWebImage
+
 
 class ChatDashboardController: UIViewController {
     
@@ -27,7 +29,7 @@ class ChatDashboardController: UIViewController {
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     var recipient : String!
     var messageId: String!
-    
+        
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         
@@ -41,30 +43,6 @@ class ChatDashboardController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("current user uid in dashboard screen:::", currentUser!)
-        Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value) { (snapshot) in
-            
-            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-         
-                self.messageDetail.removeAll()
-                
-                for data in snapshot {
-                    
-                    if let messageDict = data.value as? Dictionary<String, AnyObject> {
-                        
-                        let key = data.key
-                        
-                        let info = MessageDetail(messageKey: key, messageData: messageDict)
-                        
-                        self.messageDetail.append(info)
-                    }
-                }
-                
-            }
-            
-        }
-        
-        print("device token is",getDeviceToken)
         
         if self.style == .default {
             
@@ -89,26 +67,53 @@ class ChatDashboardController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         print("current user uid in dashboard screen:::", currentUser!)
+        
+//        Database.database().reference().child("user").child(currentUser!).observe(.value) { (snapshot) in
+//
+//            if let snap = snapshot.children.allObjects as? [DataSnapshot] {
+//
+//                self.messageDetail.removeAll()
+//
+//                for dataa in snap {
+//
+//                    print("printing user data",dataa)
+//
+////                    if let userData = data.value as? [String:AnyObject] {
+////
+////                        let key = data.key
+////
+////
+////
+////
+////                    }
+//                }
+//            }
+//        }
+        
         Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value) { (snapshot) in
-            
+
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                
+
                 self.messageDetail.removeAll()
-                
+
                 for data in snapshot {
-                    
+
                     if let messageDict = data.value as? Dictionary<String, AnyObject> {
-                        
+
                         let key = data.key
-                        
+
                         let info = MessageDetail(messageKey: key, messageData: messageDict)
                         
+//                         let info = MessageDetail(messageKey: key, messageData: messageDict, timeStamp: )
+//
                         self.messageDetail.append(info)
                     }
                 }
-                
+
             }
-            
+
+            self.chatTableView.reloadData()
+
         }
     }
     
@@ -154,11 +159,16 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
             cell.configureCell(messageDetail: messageDet)
             
             return cell
+            
         } else {
             
             return ChatTableViewCell()
 
         }
+        
+        
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -178,3 +188,4 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
 
     
 }
+

@@ -106,7 +106,7 @@ class ChatDashboardController: UIViewController {
                         let key = data.key
 
                         let info = MessageDetail(messageKey: key, messageData: messageDict)
-                        print("info::\(info)")
+                        print("info::\(info.messageKey)")
                         
 //                         let info = MessageDetail(messageKey: key, messageData: messageDict, timeStamp: )
 //

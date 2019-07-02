@@ -438,7 +438,16 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             cell.recievedMessageLbl.roundCorners(corners: [.topRight,.bottomLeft,.bottomRight], radius: 5.0)
             
-            cell.checkImage.image = UIImage(named: "un-check")
+            if cell.checkImage.image == UIImage(named: "un-check") {
+                
+                cell.checkImage.image = UIImage(named: "check_blue")
+                
+            }else {
+                
+                cell.checkImage.image = UIImage(named: "un-check")
+            }
+            
+//            cell.checkImage.image = UIImage(named: "un-check")
             
             cell.checkImage.isHidden = true
             
@@ -499,7 +508,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }else {
             
             cell.checkImage.image = UIImage(named: "un-check")
+            
+            
         }
+        
+        self.chatTableView.reloadData()
     }
     
     }
@@ -640,6 +653,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }
         
 //        moveToBottom()
+        
+        self.chatTableView.reloadData()
 
     }
     

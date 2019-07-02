@@ -56,29 +56,31 @@ class mainChatScreenTableViewCell: UITableViewCell {
         
         self.message = message
         
+        print("sender id : \(message.sender) receiver id: \(currentUser)")
+        
         if message.sender == currentUser {
             
             sentMessageView.isHidden = true
             
-            recievedMessageView.isHidden = true
+            recievedMessageView.isHidden = false
             
             sentMessageLbl.text = "   " + message.message
             
-            recievedMessageLbl.isHidden = true
+            recievedMessageLbl.isHidden = false
             
             sentMessageLbl.isHidden = true
             
         } else {
             
-            sentMessageView.isHidden = false
+            sentMessageView.isHidden = true
             
-            recievedMessageView.isHidden = true
+            recievedMessageView.isHidden = false
             
             recievedMessageLbl.text = "   " + message.message
             
-            recievedMessageLbl.isHidden = true
+            recievedMessageLbl.isHidden = false
             
-            sentMessageLbl.isHidden = false
+            sentMessageLbl.isHidden = true
                     
         }
     }

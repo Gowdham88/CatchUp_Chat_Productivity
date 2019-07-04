@@ -185,6 +185,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
             
             self.moveToBottom()
+    
         }
         
         typeMessageTextField.delegate = self
@@ -539,8 +540,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func loadData() {
         
-        Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).observe(.value, with: { (snapshot) in
-//        Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
+//        Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).observe(.value, with: { (snapshot) in
+        Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
             
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
@@ -603,12 +604,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
-//                messageId = Database.database().reference().child("messages").childByAutoId().key
-                messageId = Database.database().reference().child("user").child(currentUser!).child("outbox").childByAutoId().key
+                messageId = Database.database().reference().child("messages").childByAutoId().key
+//                messageId = Database.database().reference().child("user").child(currentUser!).child("outbox").childByAutoId().key
                 
-//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
                 print("message id::::\(String(describing: messageId))")
-                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
+//                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 
@@ -641,8 +642,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
-//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
-                   let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
+                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+//                   let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 
@@ -660,19 +661,27 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             typeMessageTextField.text = ""
         }
         
-//        moveToBottom()
         
         self.chatTableView.reloadData()
+      
+        moveToBottom()
+
 
     }
     
     func moveToBottom() {
         
-        if messages.count > 0  {
+        DispatchQueue.main.async {
+        
+            if self.messages.count > 0  {
+
+                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+
+                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+
+            }
+        
             
-            let indexPath = IndexPath(row: messages.count - 1, section: 0)
-            
-            chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
         }
     }
     

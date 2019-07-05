@@ -264,6 +264,8 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
         recipient = searchDetail[indexPath.row].userKey
         
         print("recipient contact id::\(String(describing: recipient))")
+        print("message id::\(String(describing: messageId))")
+
         
         if isForward == false {
             

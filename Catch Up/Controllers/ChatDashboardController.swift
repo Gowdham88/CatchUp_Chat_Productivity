@@ -96,15 +96,15 @@ class ChatDashboardController: UIViewController {
         
 
         
-        let ref = Database.database().reference().child("user").child(currentUser!).child("messages")
-        
+        let ref = Database.database().reference().child("user").child(currentUser!).child("messages").queryOrdered(byChild: "timestamp")
+    
         ref.observe(.value) { (snapshot) in
             
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
                 self.messageDetail.removeAll()
 
-                for data in snapshot {
+                for data in snapshot.reversed() {
                     
                     if let messageDict = data.value as? Dictionary<String, AnyObject> {
                         
@@ -113,18 +113,17 @@ class ChatDashboardController: UIViewController {
                         let info = MessageDetail(messageKey: key, messageData: messageDict)
                         print("info::\(info.messageKey)")
                         
-                        //                         let info = MessageDetail(messageKey: key, messageData: messageDict, timeStamp: )
-                        //
-                        
-                        
+            
                         self.messageDetail.append(info)
+                        
+                        
                     }
                 }
                 
             }
-            
+
             self.chatTableView.reloadData()
-        
+
         }
         
 //        Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value) { (snapshot) in
@@ -155,6 +154,8 @@ class ChatDashboardController: UIViewController {
 //            self.chatTableView.reloadData()
 //
 //        }
+        
+        
     }
     
 

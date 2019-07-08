@@ -58,7 +58,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var messageId: String!
     
     
+//    var messages = [Message]()
+    
     var messages = [Message]()
+      
     
     var message: Message!
 
@@ -138,7 +141,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var dummyMessageArray = ["heysdhfishfisdhfisdhfosdhfpsdhfojdshfjpsdhfkjsdhfjdskhfjsdhfsdjhfskdjhfdskjhfdsjfhsdjhfdsjkhfdskjhfdskjfhdsjkhfdsjhfdskjhfdskjfhdskjhfdskjfhdkjsfhdskjhfdksj hey hey hey hey hey hey hey hey","hey hey hey hey hey hey hey hey","how are you","im fine","how is going","good","ok","take care"]
     
-    
+    var messageKeyName = [String]()
+    var userMessageKeyName = [String]()
+
     @IBOutlet var btnRecordOrSend: UIButton!
     
     
@@ -152,13 +157,37 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.chatTableView.frame = CGRect(x: self.chatTableView.frame.origin.x, y: self.chatTableView.frame.origin.y, width: self.chatTableView.frame.size.width, height: self.view.frame.size.height - self.chatTableView.frame.origin.y)
+
 
         // Do any additional setup after loading the view.
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
+        
+      //table view background changed here..
+        
+        let backgroundImage = #imageLiteral(resourceName: "image")
+        let imageView = UIImageView(image: backgroundImage)
+     
+        let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.chatTableView.frame.size.width, height: self.chatTableView.frame.size.height))
+        
+        overlay.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        
+        imageView.addSubview(overlay)
+        
+       self.chatTableView.backgroundView = imageView
+        
+          //table view background changed here..
+        
 //        chatTableView.estimatedRowHeight = 300.0
 //        chatTableView.rowHeight = UITableView.automaticDimension
+        
+        print("messageId id::::\(String(describing: messageId))")
+        
+        
+
 
         if messageId != "" && messageId != nil {
             
@@ -182,10 +211,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
         view.addGestureRecognizer(tap)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
-            
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+        
             self.moveToBottom()
-        }
+    
+//        }
         
         typeMessageTextField.delegate = self
         
@@ -241,6 +271,17 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         chatTableView.addGestureRecognizer(longPress)
         
     } //viewdidload
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if messageId != "" && messageId != nil {
+            
+            loadData()
+            
+        }
+        
+    }//viewdidappear
     
     
     @objc func keyboardWillShow(notify: NSNotification) {
@@ -428,9 +469,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        print("message count::\(messages.count)")
+        
+        
+        
         let message = messages[indexPath.row]
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
+        print("message timestamp::\(messages[indexPath.row].receivedTimeStamp)")
+        
+        if let cell = chatTableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
             
             cell.tag = indexPath.row
             
@@ -478,6 +525,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             tapAtCell.numberOfTapsRequired = 1
             
             cell.addGestureRecognizer(tapAtCell)
+            cell.backgroundColor = .clear
           
             
             return cell
@@ -487,6 +535,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             return mainChatScreenTableViewCell()
         }
         
+    }
+    
+    private func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        cell.backgroundColor = .clear
+
     }
     
    @objc func tapOverTheCell(gesture: UITapGestureRecognizer) {
@@ -517,6 +571,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     }
     
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if isLongPressed {
@@ -539,8 +597,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func loadData() {
         
-        Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).observe(.value, with: { (snapshot) in
-//        Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
+//        Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).observe(.value, with: { (snapshot) in
+        Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
             
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
@@ -578,10 +636,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func messageSend(){
         
+        
+        
         if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
             
             print("recipient id::::\(String(describing: recipient))")
-
+            
             
             if messageId == nil {
                 
@@ -603,12 +663,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
-//                messageId = Database.database().reference().child("messages").childByAutoId().key
-                messageId = Database.database().reference().child("user").child(currentUser!).child("outbox").childByAutoId().key
+                messageId = Database.database().reference().child("messages").childByAutoId().key
+//                messageId = Database.database().reference().child("user").child(currentUser!).child("outbox").childByAutoId().key
                 
-//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
                 print("message id::::\(String(describing: messageId))")
-                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
+//                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 
@@ -621,6 +681,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 userMessage.setValue(message)
                 
                 loadData()
+                
             } else if messageId != "" {
                 
                 let post: Dictionary<String, AnyObject> = [
@@ -641,8 +702,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
-//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
-                   let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
+                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+//                   let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 
@@ -660,19 +721,27 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             typeMessageTextField.text = ""
         }
         
-//        moveToBottom()
         
         self.chatTableView.reloadData()
+      
+        moveToBottom()
+
 
     }
     
     func moveToBottom() {
         
-        if messages.count > 0  {
+        DispatchQueue.main.async {
+        
+            if self.messages.count > 0  {
+
+                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+
+                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+
+            }
+        
             
-            let indexPath = IndexPath(row: messages.count - 1, section: 0)
-            
-            chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
         }
     }
     

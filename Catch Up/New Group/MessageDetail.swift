@@ -62,7 +62,9 @@ class MessageDetail {
    
     
     init(recipient: String) {
+        
         _recipient = recipient
+        
     }
 
     init (messageKey: String, messageData: Dictionary<String, AnyObject>) {

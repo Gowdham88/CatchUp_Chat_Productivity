@@ -93,32 +93,69 @@ class ChatDashboardController: UIViewController {
         let idss = UUID().uuidString
         
         print("idss:::\(String(describing: idss))")
-        Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value) { (snapshot) in
+        
 
+        
+        let ref = Database.database().reference().child("user").child(currentUser!).child("messages").queryOrdered(byChild: "timestamp")
+    
+        ref.observe(.value) { (snapshot) in
+            
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-
+                
                 self.messageDetail.removeAll()
 
-                for data in snapshot {
-
+                for data in snapshot.reversed() {
+                    
                     if let messageDict = data.value as? Dictionary<String, AnyObject> {
-
+                        
                         let key = data.key
-
+                        
                         let info = MessageDetail(messageKey: key, messageData: messageDict)
                         print("info::\(info.messageKey)")
                         
-//                         let info = MessageDetail(messageKey: key, messageData: messageDict, timeStamp: )
-//
+            
                         self.messageDetail.append(info)
+                        
+                        
                     }
                 }
-
+                
             }
 
             self.chatTableView.reloadData()
 
         }
+        
+//        Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value) { (snapshot) in
+//
+//            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+//
+//                self.messageDetail.removeAll()
+////(names.count - 1).stride(to: -1, by: -1)
+//                for data in snapshot.reversed() {
+//
+//                    if let messageDict = data.value as? Dictionary<String, AnyObject> {
+//
+//                        let key = data.key
+//
+//                        let info = MessageDetail(messageKey: key, messageData: messageDict)
+//                        print("info::\(info.messageKey)")
+//
+////                         let info = MessageDetail(messageKey: key, messageData: messageDict, timeStamp: )
+////
+//
+//
+//                        self.messageDetail.append(info)
+//                    }
+//                }
+//
+//            }
+//
+//            self.chatTableView.reloadData()
+//
+//        }
+        
+        
     }
     
 

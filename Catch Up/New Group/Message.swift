@@ -23,6 +23,9 @@ class Message {
     
     private var _messageRef: DatabaseReference!
     
+    private var _receivedTimeStamp: TimeInterval!
+
+    
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     
     var message: String {
@@ -38,6 +41,11 @@ class Message {
     var messageKey: String{
         
         return _messageKey
+    }
+    
+    var receivedTimeStamp: TimeInterval {
+        
+        return _receivedTimeStamp
     }
     
     init(message: String, sender: String) {
@@ -61,8 +69,13 @@ class Message {
             _sender = sender
         }
         
-//        _messageRef = Database.database().reference().child("messages").child(_messageKey)
-        Database.database().reference().child("user").child(currentUser!).child("messages").child(_messageKey)
+        if let time = postData["timestamp"] as? TimeInterval {
+            
+            _receivedTimeStamp = time
+        }
+        
+        _messageRef = Database.database().reference().child("messages").child(_messageKey)
+//        Database.database().reference().child("user").child(currentUser!).child("messages").child(_messageKey)
     }
     
     

@@ -56,33 +56,118 @@ class mainChatScreenTableViewCell: UITableViewCell {
         
         self.message = message
         
+        print("message label::\(message.message.count)")
+        
         print("sender id : \(message.sender) receiver id: \(currentUser)")
+//
+//        if message.sender == currentUser {
+//
+//            sentMessageView.isHidden = true
+//
+//            recievedMessageView.isHidden = false
+//
+//            sentMessageLbl.text = "   " + message.message
+//
+//            recievedMessageLbl.isHidden = false
+//
+//            sentMessageLbl.isHidden = true
+//
+//        } else {
+//
+//            sentMessageView.isHidden = true
+//
+//            recievedMessageView.isHidden = false
+//
+//            recievedMessageLbl.text = "   " + message.message
+//
+//            recievedMessageLbl.isHidden = false
+//
+//            sentMessageLbl.isHidden = true
+//
+//        }
         
         if message.sender == currentUser {
             
-            sentMessageView.isHidden = true
+            let time = message.receivedTimeStamp
+            let timeinterval : TimeInterval = time
+            let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
+            let formatter = DateFormatter()
+            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601) as Calendar?
+            formatter.locale = NSLocale(localeIdentifier: "en_IN") as Locale
+            //            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
+            formatter.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
             
-            recievedMessageView.isHidden = false
+            formatter.dateFormat = "h:mm a"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            //            let dateString = formatter.stringFromDate(modfl.courseDate)
+            let dateString: String = formatter.string(from: dateFromServer as Date)
             
-            sentMessageLbl.text = "   " + message.message
+            print("dateString:::\(dateString)")
             
-            recievedMessageLbl.isHidden = false
+            sentMessageView.isHidden = false
             
-            sentMessageLbl.isHidden = true
+            sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
+            
+            sentMessageLbl.text = " " + message.message
+            sentTimeLabel.text = " " + dateString
+            
+            recievedMessageLbl.text = ""
+            
+            recievedMessageLbl.isHidden = true
+            
+            recievedMessageView.isHidden = true
             
         } else {
             
+        
+            
+            let time = message.receivedTimeStamp
+            let timeinterval : TimeInterval = time
+            let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
+            let formatter = DateFormatter()
+            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601) as Calendar?
+            formatter.locale = NSLocale(localeIdentifier: "en_IN") as Locale
+//            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
+            formatter.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
+
+            formatter.dateFormat = "h:mm a"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+//            let dateString = formatter.stringFromDate(modfl.courseDate)
+            let dateString: String = formatter.string(from: dateFromServer as Date)
+
+            print("dateString:::\(dateString)")
+            
             sentMessageView.isHidden = true
+            sentMessageLbl.isHidden = true
+            sentMessageLbl.text = ""
             
-            recievedMessageView.isHidden = false
+            recievedMessageLbl.text = " " + message.message
             
-            recievedMessageLbl.text = "   " + message.message
+          
+            
+//            if time != "" {
+//
+//
+//
+//            }
+ 
+            receivedTimeLabel.text = " " + dateString
             
             recievedMessageLbl.isHidden = false
             
-            sentMessageLbl.isHidden = true
-                    
+            recievedMessageView.layer.backgroundColor = UIColor.clear.cgColor
+
         }
     }
+    
+    func getCurrentTimeZone() -> String{
+        
+        return TimeZone.current.identifier
+        
+    }
+    
+   
 
 }

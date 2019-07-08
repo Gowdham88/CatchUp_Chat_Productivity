@@ -599,14 +599,14 @@
                                         <rect key="frame" x="0.0" y="84" width="414" height="652"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="bpv-gd-EJV">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="652"/>
+                                                <rect key="frame" x="400" y="0.0" width="414" height="652"/>
                                                 <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="0.57919520547945202" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rLk-5J-d5x">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="652"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="710"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="652" id="8zp-fD-opp"/>
+                                                    <constraint firstAttribute="height" constant="710" id="8zp-fD-opp"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Message" rowHeight="80" id="KdA-Ej-8H1" customClass="mainChatScreenTableViewCell" customModule="Catch_Up" customModuleProvider="target">
@@ -625,6 +625,20 @@
                                                                             <fontDescription key="fontDescription" name="Muli-Regular" family="Muli" pointSize="14"/>
                                                                             <color key="textColor" red="0.14509803921568626" green="0.24313725490196078" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                                    <size key="value" width="0.0" height="3"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                                    <real key="value" value="0.5"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                                    <real key="value" value="2"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ewwr" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VzL-cu-wpU">
                                                                             <rect key="frame" x="225" y="42.333333333333336" width="65" height="15"/>
@@ -644,7 +658,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="v0y-5A-bhi" firstAttribute="leading" secondItem="lTh-SK-sg1" secondAttribute="leading" constant="6" id="0fR-c4-BL3"/>
                                                                         <constraint firstItem="IV1-ny-huc" firstAttribute="leading" secondItem="v0y-5A-bhi" secondAttribute="trailing" constant="7" id="7ig-gT-8Gp"/>
@@ -660,16 +674,16 @@
                                                                     <viewLayoutGuide key="safeArea" id="lTh-SK-sg1" userLabel="afe Area"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="value" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                                            <size key="value" width="0.0" height="3"/>
+                                                                            <size key="value" width="-1" height="-1"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                                                             <real key="value" value="0.29999999999999999"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                                            <real key="value" value="1"/>
+                                                                            <real key="value" value="8"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
@@ -699,9 +713,23 @@
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                                    <size key="value" width="0.0" height="1"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                                    <real key="value" value="0.5"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                                    <real key="value" value="2"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" name="light"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="zeU-0v-yl7" firstAttribute="top" secondItem="93k-Zc-Bjn" secondAttribute="top" id="1UV-qS-09Z"/>
                                                                         <constraint firstItem="CIs-YU-HZr" firstAttribute="top" secondItem="zeU-0v-yl7" secondAttribute="bottom" constant="2" id="6Na-ZA-bHS"/>
@@ -714,6 +742,20 @@
                                                                         <constraint firstAttribute="height" constant="55" id="uHa-GW-WLU"/>
                                                                         <constraint firstItem="CIs-YU-HZr" firstAttribute="leading" secondItem="93k-Zc-Bjn" secondAttribute="leading" constant="3" id="vU8-2b-urz"/>
                                                                     </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                            <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                            <size key="value" width="2" height="-1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                            <real key="value" value="8"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="un-check" translatesAutoresizingMaskIntoConstraints="NO" id="rTO-jd-2AZ">
                                                                     <rect key="frame" x="10" y="25" width="30" height="30"/>
@@ -751,11 +793,11 @@
                                             <constraint firstItem="bpv-gd-EJV" firstAttribute="top" secondItem="BW2-lO-1lp" secondAttribute="top" id="Dvb-OC-agj"/>
                                             <constraint firstAttribute="trailing" secondItem="rLk-5J-d5x" secondAttribute="trailing" id="Kqb-C9-Txi"/>
                                             <constraint firstItem="bpv-gd-EJV" firstAttribute="height" secondItem="BW2-lO-1lp" secondAttribute="height" id="NpE-YZ-Bf8"/>
-                                            <constraint firstItem="bpv-gd-EJV" firstAttribute="leading" secondItem="BW2-lO-1lp" secondAttribute="leading" id="P40-iK-27E"/>
+                                            <constraint firstItem="bpv-gd-EJV" firstAttribute="leading" secondItem="BW2-lO-1lp" secondAttribute="leading" constant="400" id="P40-iK-27E"/>
                                             <constraint firstAttribute="height" constant="652" id="STx-IG-Q1V"/>
                                             <constraint firstItem="bpv-gd-EJV" firstAttribute="width" secondItem="BW2-lO-1lp" secondAttribute="width" id="Yy8-kD-ya2"/>
                                             <constraint firstAttribute="bottom" secondItem="bpv-gd-EJV" secondAttribute="bottom" id="flL-yK-v8P"/>
-                                            <constraint firstAttribute="trailing" secondItem="bpv-gd-EJV" secondAttribute="trailing" id="hEm-bx-UtJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="bpv-gd-EJV" secondAttribute="trailing" constant="-400" id="hEm-bx-UtJ"/>
                                             <constraint firstItem="rLk-5J-d5x" firstAttribute="top" secondItem="BW2-lO-1lp" secondAttribute="top" id="iJa-Xf-bkp"/>
                                             <constraint firstItem="rLk-5J-d5x" firstAttribute="leading" secondItem="BW2-lO-1lp" secondAttribute="leading" id="yyb-Xz-Wx5"/>
                                         </constraints>

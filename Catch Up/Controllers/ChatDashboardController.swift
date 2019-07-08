@@ -94,8 +94,6 @@ class ChatDashboardController: UIViewController {
         
         print("idss:::\(String(describing: idss))")
         
-
-        
         let ref = Database.database().reference().child("user").child(currentUser!).child("messages").queryOrdered(byChild: "timestamp")
     
         ref.observe(.value) { (snapshot) in

@@ -78,7 +78,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var groupButton: UIButton!
     @IBOutlet weak var navigationView: GradientView!
     @IBOutlet weak var threadBackupView: UIView!
-    @IBOutlet weak var threadMainImageView: UIImageView!
+//    @IBOutlet weak var threadMainImageView: UIImageView!
     @IBOutlet weak var bottomBarView: UIView!
     
     
@@ -222,7 +222,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         // set corner radius for view's rounded corner
         
         threadBackupView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
-        threadMainImageView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+//        threadMainImageView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         chatTableView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         recordView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         bottomBarView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)

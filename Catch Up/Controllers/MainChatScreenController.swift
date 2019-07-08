@@ -182,7 +182,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
           //table view background changed here..
         
 //        chatTableView.estimatedRowHeight = 300.0
-//        chatTableView.rowHeight = UITableView.automaticDimension
+        chatTableView.rowHeight = UITableView.automaticDimension
         
         print("messageId id::::\(String(describing: messageId))")
         
@@ -190,6 +190,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
 
         if messageId != "" && messageId != nil {
+            
             
             loadData()
             

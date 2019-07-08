@@ -29,7 +29,7 @@ class mainChatScreenTableViewCell: UITableViewCell {
     
     @IBOutlet var likeOrUnlikeImageView: UIImageView!
     
-    @IBOutlet var errorImageView: UIImageView!
+//    @IBOutlet var errorImageView: UIImageView!
     
     
     @IBOutlet var checkImage: UIImageView!

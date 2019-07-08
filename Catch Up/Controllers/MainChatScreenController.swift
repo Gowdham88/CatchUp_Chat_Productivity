@@ -426,6 +426,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
              recordView.isHidden = true
             
+             messageSend()
+            
         }else {
             
              recordView.isHidden = false
@@ -721,6 +723,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             typeMessageTextField.text = ""
         }
         
+        self.typeMessageTextField.resignFirstResponder()
         
         self.chatTableView.reloadData()
       

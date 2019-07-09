@@ -93,8 +93,10 @@ class ChatDashboardController: UIViewController {
         let idss = UUID().uuidString
         
         print("idss:::\(String(describing: idss))")
+//        let ref = Database.database().reference().child("user").child(currentUser!).child("inbox_new").queryOrdered(byChild: "timestamp")
+
         
-        let ref = Database.database().reference().child("user").child(currentUser!).child("messages").queryOrdered(byChild: "timestamp")
+        let ref = Database.database().reference().child("user").child(currentUser!).child("messages").queryOrdered(byChild: "timestamp") //original
     
         ref.observe(.value) { (snapshot) in
             

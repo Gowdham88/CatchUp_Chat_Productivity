@@ -74,7 +74,7 @@ class Message {
             _receivedTimeStamp = time
         }
         
-        _messageRef = Database.database().reference().child("messages").child(_messageKey)
+        _messageRef = Database.database().reference().child("user").child("messages").child(_messageKey)
 //        Database.database().reference().child("user").child(currentUser!).child("messages").child(_messageKey)
     }
     

@@ -607,8 +607,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     func loadData() {
         
         print("message id load data::\(String(describing: messageId))")
+        
+//        Database.database().reference().child("user").child(currentUser!).child("outbox_new").queryEqual(toValue: messageId).observe(.value, with: { (snapshot) in
+    
+        
         Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
-            
+        
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
                 self.messages.removeAll()
@@ -663,7 +667,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "chatId" : userContactNumber as AnyObject,
                     "from": userContactNumber as AnyObject,
                     "chatMessageType": "TEXT" as AnyObject,
-                    "chatMessageId": "" as AnyObject,
+                    "chatMessageId": messageId as AnyObject,
                     
                 ]
                 
@@ -697,7 +701,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
                     firebase_currentUser_Message.setValue(post)
                 }
-                
+            
               
                 
                 let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
@@ -713,9 +717,14 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             } else if messageId != "" {
                 
                 let post: Dictionary<String, AnyObject> = [
-                    "message": typeMessageTextField.text as AnyObject,
+                    
+                    "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": ServerValue.timestamp() as AnyObject,
+                    "chatId" : userContactNumber as AnyObject,
+                    "from": userContactNumber as AnyObject,
+                    "chatMessageType": "TEXT" as AnyObject,
+                    "chatMessageId": messageId as AnyObject,
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
@@ -1152,9 +1161,9 @@ extension MainChatScreenController: UITextFieldDelegate {
         
         recordView.isHidden = true
         
-//        messageSend()
+        messageSend()
         
-        messageSendnew()
+//        messageSendnew()
 
         return true
     }

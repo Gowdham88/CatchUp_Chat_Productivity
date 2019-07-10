@@ -15,7 +15,7 @@ import SwiftKeychainWrapper
 class Message {
     
     
-    private var _messageText: String!
+    private var _message: String!
     
     private var _sender: String!
     
@@ -34,9 +34,9 @@ class Message {
     
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     
-    var messageText: String {
+    var message: String {
         
-        return _messageText
+        return _message
     }
     
     var sender: String {
@@ -54,9 +54,9 @@ class Message {
         return _receivedTimeStamp
     }
     
-    init(messageText: String, sender: String) {
+    init(message: String, sender: String) {
         
-        _messageText = messageText
+        _message = message
         
         _sender = sender
     }
@@ -65,9 +65,9 @@ class Message {
         
         _messageKey = messageKey
         
-        if let messageText = postData["messageText"] as? String {
+        if let message = postData["message"] as? String {
             
-            _messageText = messageText
+            _message = message
         }
         
         if let sender = postData["sender"] as? String {

@@ -56,7 +56,7 @@ class mainChatScreenTableViewCell: UITableViewCell {
         
         self.message = message
         
-        print("message label::\(message.messageText.count)")
+        print("message label::\(message.message.count)")
         
         print("sender id : \(message.sender) receiver id: \(String(describing: currentUser))")
 
@@ -88,14 +88,14 @@ class mainChatScreenTableViewCell: UITableViewCell {
             sentMessageLbl.isHidden = true
             sentMessageLbl.text = ""
             
-            print("receive message",message.messageText)
+            print("receive message",message.message)
             
 //            recievedMessageLbl.frame.size.width = recievedMessageLbl.intrinsicContentSize.width + 10
 //            recievedMessageLbl.frame.size.height = recievedMessageLbl.intrinsicContentSize.height + 10
             
 //            recievedMessageLbl.text = message.message
             
-            let strValue = message.messageText
+            let strValue = message.message
             recievedMessageLbl?.text = " \(strValue)"
             
             receivedTimeLabel.text =  dateString
@@ -129,12 +129,12 @@ class mainChatScreenTableViewCell: UITableViewCell {
             sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
 //           sentMessageLbl.frame.size.width = sentMessageLbl.intrinsicContentSize.width + 10
 //           sentMessageLbl.frame.size.height = sentMessageLbl.intrinsicContentSize.height + 10
-            print("sent messages",message.messageText)
+            print("sent messages",message.message)
 //            sentMessageLbl.text =  message.message
             sentTimeLabel.text =  dateString
             
             recievedMessageLbl.text = ""
-            let strValue = message.messageText
+            let strValue = message.message
             sentMessageLbl?.text = " \(strValue)"
             
             recievedMessageLbl.isHidden = true

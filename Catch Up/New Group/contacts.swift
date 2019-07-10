@@ -22,6 +22,8 @@ class Contacts {
     
     private var _userRef: DatabaseReference!
     
+    private var _userContactNumber : String!
+    
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     
     var userName: String {
@@ -39,11 +41,18 @@ class Contacts {
         return _userKey
     }
     
-    init(userName: String, userPhotoThumbnail: String) {
+    var userContactNumber: String{
+        
+        return _userContactNumber
+    }
+    
+    init(userName: String, userPhotoThumbnail: String, userContactNumber: String) {
         
             _userName = userName
 
             _userPhotoThumbnail = userPhotoThumbnail
+        
+            _userContactNumber = userContactNumber
     }
     
     init(userKey: String, postData: Dictionary<String, AnyObject>) {
@@ -61,11 +70,18 @@ class Contacts {
         
         }
         
-//        _userRef = FIRDatabase.database().reference().child("messages").child(_userKey)
-
+        if let userContactNumber = postData["userContactNumber"] as? String {
+            
+            _userContactNumber = userContactNumber
+            
+        }
+        
+        
+//          _userRef = FIRDatabase.database().reference().child("messages").child(_userKey)
 
             _userRef = Database.database().reference().child("messages").child(_userKey)
-//            _userRef = Database.database().reference().child("user").child(currentUser!).child("messages").child(_userKey)
+//          _userRef = Database.database().reference().child("user").child(currentUser!).child("messages").child(_userKey)
+        
         
         }
     }

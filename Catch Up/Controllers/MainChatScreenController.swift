@@ -56,7 +56,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var recipient: String!
     var messageId: String!
-    
+    var userContactNumber: String!
     
 //    var messages = [Message]()
     
@@ -185,6 +185,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         chatTableView.rowHeight = UITableView.automaticDimension
         
         print("messageId id::::\(String(describing: messageId))")
+        print("contact number::::\(String(describing: userContactNumber))")
+
         
         
 
@@ -651,9 +653,14 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if messageId == nil {
                 
                 let post: Dictionary<String, AnyObject> = [
-                    "message": typeMessageTextField.text as AnyObject,
+                    "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": ServerValue.timestamp() as AnyObject,
+                    "chatId" : userContactNumber as AnyObject,
+                    "from": userContactNumber as AnyObject,
+                    "chatMessageType": "TEXT" as AnyObject,
+                    "chatMessageId": "" as AnyObject,
+                    
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [

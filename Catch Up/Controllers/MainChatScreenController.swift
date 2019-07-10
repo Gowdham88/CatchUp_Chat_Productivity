@@ -155,8 +155,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var isLongPressed: Bool = false
     
+    var checkImageArray = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         self.chatTableView.frame = CGRect(x: self.chatTableView.frame.origin.x, y: self.chatTableView.frame.origin.y, width: self.chatTableView.frame.size.width, height: self.view.frame.size.height - self.chatTableView.frame.origin.y)
 
@@ -430,9 +433,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if btnRecordOrSend.imageView?.image == UIImage(named: "btn_send2") {
             
-             recordView.isHidden = true
-            
              messageSend()
+            
+            recordView.isHidden = true
             
         }else {
             
@@ -479,8 +482,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         print("message count::\(messages.count)")
         
-        
-        
         let message = messages[indexPath.row]
         
         print("message timestamp::\(messages[indexPath.row].receivedTimeStamp)")
@@ -493,16 +494,16 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             cell.recievedMessageLbl.roundCorners(corners: [.topRight,.bottomLeft,.bottomRight], radius: 5.0)
             
-            if cell.checkImage.image == UIImage(named: "un-check") {
-                
-                cell.checkImage.image = UIImage(named: "check_blue")
-                
-            }else {
-                
-                cell.checkImage.image = UIImage(named: "un-check")
-            }
+//            if cell.checkImage.image == UIImage(named: "un-check") {
+//
+//                cell.checkImage.image = UIImage(named: "check_blue")
+//
+//            }else {
+//
+//                cell.checkImage.image = UIImage(named: "un-check")
+//            }
             
-//            cell.checkImage.image = UIImage(named: "un-check")
+            cell.checkImage.image = checkImageArray[indexPath.row]
             
             cell.checkImage.isHidden = true
             
@@ -621,6 +622,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         let post = Message(messageKey: key, postData: postDict)
                         
                         self.messages.append(post)
+                        
+                        self.checkImageArray.append(UIImage(named: "un-check")!)
                     }
                 }
             }
@@ -630,6 +633,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }//loadData
     
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         typeMessageTextField.resignFirstResponder()//
@@ -777,8 +781,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         
     }
-    
-    
+        
     func messageSend(){
         
         
@@ -866,6 +869,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             typeMessageTextField.text = ""
         }
         
+        recordView.isHidden = true
+        
         self.typeMessageTextField.resignFirstResponder()
         
         self.chatTableView.reloadData()
@@ -891,6 +896,24 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }
     }
     
+    
+    
+    @IBAction func didEditingChanged(_ sender: Any) {
+        
+        print("typign count \(typeMessageTextField.text?.count)")
+        
+        
+        if typeMessageTextField.text!.count >= 1 {
+            
+            btnRecordOrSend.setImage(UIImage(named: "btn_send2"), for: .normal)
+            
+        }else {
+            
+            btnRecordOrSend.setImage(UIImage(named: "btn voice"), for: .normal)
+        }
+        
+    }
+
     
 }//class
 
@@ -1123,6 +1146,28 @@ extension MainChatScreenController: UITextFieldDelegate {
         
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        typeMessageTextField.resignFirstResponder()//
+        
+        recordView.isHidden = true
+        
+        messageSend()
+        
+        return true
+    }
+//
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//
+//        print("text field count \(textField.text?.count)")
+//
+//
+//
+//        return true
+//    }
+  
+    
+    
 }
 
 // tableview cell long press gesture
@@ -1141,22 +1186,26 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
         
         if gesture.state == .began {
             
+             cell.checkImage.isHidden = false
+            
             UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
                 
-                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + 15
+                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + cell.checkImage.frame.width + 35
                 
-                cell.checkImage.isHidden = false
-                
+//                cell.checkImage.isHidden = false
+//
                 self.groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
                 
             })
         }
         
+        
+        
         if gesture.state == .ended {
             
             cell.isUserInteractionEnabled = true
             
-            cell.checkImage.isHidden = false
+           
         }
         
     }

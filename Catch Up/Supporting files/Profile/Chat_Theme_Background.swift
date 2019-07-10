@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-var Themeused = [false, true, false, false, false, false]
+//var Themeused = [false, true, false, false, false, false]
 
 class Chat_Background {
     
-
+    var previousIndex: NSIndexPath!
+    
     func choosecameraImage(BackView: UIView) {
         
         let firstFrame = CGRect(x: 0, y: 0, width: 60, height: 60)
@@ -61,46 +62,108 @@ class Chat_Background {
         
     }
     
-     let ThemeBackground = [UIImage(named: "Theme1"), UIImage(named: "Theme2"), UIImage(named: "Theme3"), UIImage(named: "Theme4"), UIImage(named: "Theme5")]
+     let ThemeBackground = [UIImage(named: "Theme1"), UIImage(named: "Theme2"), UIImage(named: "Theme3"), UIImage(named: "Theme4"), UIImage(named: "Theme4")]
     let firstFrame = CGRect(x: 0, y: 0, width: 60, height: 60)
 
-
+ var checkImageArray = [UIImageView]()
     
-    func chooseThemes(BackView: UIView, Row: Int) {
+    func chooseThemes(BackView: UIView, Row: Int,selectTheme: Bool) {
         
-        let firstView = UIView(frame: firstFrame)
-
-        BackView.addSubview(firstView)
-        
-        let cameraimage = ThemeBackground[Row - 1]
-
-        let ImageView = UIImageView(image: cameraimage)
-        ImageView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-        
-        let checkImage = UIImage(named: "ChatThemeCheck")
-        let CheckImageView = UIImageView(image: checkImage)
-        CheckImageView.frame = CGRect(x: 20, y: 17, width: 25, height: 25)
-        
-        if Themeused[Row-1] == true {
+        if selectTheme == false {
             
-            CheckImageView.alpha = 1
+                let firstView = UIView(frame: firstFrame)
+                
+                BackView.addSubview(firstView)
+                
+                let cameraimage = ThemeBackground[Row - 1]
+                
+                let ImageView = UIImageView(image: cameraimage)
+                
+                ImageView.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+                
+                firstView.addSubview(ImageView)
+                
+                firstView.roundCorners(corners: [.topRight, .topLeft, .bottomLeft, .bottomRight], radius: 5)
+                
+                let checkImage = UIImage(named: "ChatThemeCheck")
+                
+                let CheckImageView = UIImageView(image: checkImage)
+                
+                CheckImageView.frame = CGRect(x: 20, y: 17, width: 25, height: 25)
+                
+                ImageView.addSubview(CheckImageView)
+                
+                checkImageArray.append(CheckImageView)
+                
+                CheckImageView.isHidden = true
             
+                CheckImageView.isUserInteractionEnabled = true
+                        
         } else {
             
-            CheckImageView.alpha = 0
+
+           print("images in array",checkImageArray,checkImageArray.count)
+
+            if let indexx = previousIndex {
+
+                  print("printing previous index",indexx.row)
+
+                 checkImageArray[indexx.row].isHidden = true
+                
+                checkImageArray[indexx.row].isUserInteractionEnabled = true
+
+            }else {
+                
+                checkImageArray[Row - 1].isHidden = false
+            }
+            
+            checkImageArray[Row - 1].isHidden = false
+            
+            checkImageArray[Row - 1].isUserInteractionEnabled = true
+
+            previousIndex = NSIndexPath(row: Row - 1, section: 0)
+            
         }
         
         
-//        firstView.addSubview(secondView)
-        firstView.addSubview(ImageView)
-        firstView.addSubview(CheckImageView)
+//        let checkImage = UIImage(named: "ChatThemeCheck")
+//
+//        let CheckImageView = UIImageView(image: checkImage)
+//
+//        CheckImageView.frame = CGRect(x: 20, y: 17, width: 25, height: 25)
         
-        firstView.roundCorners(corners: [.topRight, .topLeft, .bottomLeft, .bottomRight], radius: 5)
+//        BackView.backgroundColor = .red
+//
+//        firstView.backgroundColor = .green
+//
+//        ImageView.backgroundColor = .blue
+        
+        
+//        if Themeused[Row-1] == true {
+//
+////            CheckImageView.alpha = 1
+//
+//
+//        } else {
+//
+////            CheckImageView.alpha = 0
+//
+//            CheckImageView.removeFromSuperview()
+//        }
+        
+//
+ 
+        
+//        firstView.addSubview(CheckImageView)
+        
+        
+//        firstView.addSubview(secondView)
+       
+        
+       
         
     }
-    
-    
-    
+
     
     
 }

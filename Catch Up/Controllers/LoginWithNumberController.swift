@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import SwiftKeychainWrapper
 
 class LoginWithNumberController: UIViewController,UITextFieldDelegate {
 
+    var getDeviceToken: String?
     
     @IBOutlet weak var curveView: GradientView!
     
@@ -27,6 +29,8 @@ class LoginWithNumberController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        print("device token in login",getDeviceToken)
         
         phoneNumText.delegate = self
         

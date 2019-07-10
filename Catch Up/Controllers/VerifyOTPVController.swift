@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import SwiftKeychainWrapper
 
 class VerifyOTPVController: UIViewController {
 
@@ -27,6 +28,7 @@ class VerifyOTPVController: UIViewController {
     
     var timer : Timer?
     
+    
     // sum up the timer
     
     var totalCount = 40
@@ -40,6 +42,7 @@ class VerifyOTPVController: UIViewController {
     //get keyboard's height
     
     var keyboardHeight: CGFloat?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +53,10 @@ class VerifyOTPVController: UIViewController {
         
         savedPhoneNumber = UserDefaults.standard.object(forKey: "phone") as! String
         
+        print("saved phone number",savedPhoneNumber)
+        
         if let number = savedPhoneNumber {
-            
+
             enteredNumberField.text = number
         }
         
@@ -108,23 +113,43 @@ class VerifyOTPVController: UIViewController {
             withVerificationID: verificationID!,
             verificationCode: enterOTPField.text!)
         
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { (authResult, error) in
             
             if let error = error {
-               
+                
                 print("error occured while verifying OTP",error)
                 
                 return
             }
+           
             
-            // User is signed in
+            if let uid = Auth.auth().currentUser?.uid {
             
-            let sb = UIStoryboard(name: "Auth", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "CreateProfileController")
-            self.navigationController?.pushViewController(vc, animated: true)
+            KeychainWrapper.standard.set(uid, forKey: "uid")
             
+                print("current user uid:::", uid)
+            
+            }
+            
+            if (authResult?.additionalUserInfo!.isNewUser)! {
+                
+                // User is signed in and is new user
+                
+                let sb = UIStoryboard(name: "Auth", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "CreateProfileController") as! CreateProfileController
+                vc.userPhoneNumber = self.savedPhoneNumber
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }else {
+                
+                let sb = UIStoryboard(name: "Chat", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "ChatDashboardController") as! ChatDashboardController
+                //                vc.userPhoneNumber = self.savedPhoneNumber
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+
         }
- 
+        
     }
     
     func roundedTop(targetView:UIView?, desiredCurve:CGFloat?){
@@ -189,6 +214,7 @@ extension VerifyOTPVController {
         }
         
         resendOTPButton.isUserInteractionEnabled = false
+      
         resendOTPButton.alpha = 0.3
     }
     
@@ -200,6 +226,7 @@ extension VerifyOTPVController {
         }
         
         resendOTPButton.isUserInteractionEnabled = true
+       
         resendOTPButton.alpha = 1.0
     }
     

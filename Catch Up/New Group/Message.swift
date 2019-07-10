@@ -15,7 +15,7 @@ import SwiftKeychainWrapper
 class Message {
     
     
-    private var _message: String!
+    private var _messageText: String!
     
     private var _sender: String!
     
@@ -24,13 +24,19 @@ class Message {
     private var _messageRef: DatabaseReference!
     
     private var _receivedTimeStamp: TimeInterval!
+    
+    private var _chatId: String!
+    
+    private var _chatMessageType: String!
+    
+    private var _from: String!
 
     
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     
-    var message: String {
+    var messageText: String {
         
-        return _message
+        return _messageText
     }
     
     var sender: String {
@@ -48,9 +54,9 @@ class Message {
         return _receivedTimeStamp
     }
     
-    init(message: String, sender: String) {
+    init(messageText: String, sender: String) {
         
-        _message = message
+        _messageText = messageText
         
         _sender = sender
     }
@@ -59,9 +65,9 @@ class Message {
         
         _messageKey = messageKey
         
-        if let message = postData["message"] as? String {
+        if let messageText = postData["messageText"] as? String {
             
-            _message = message
+            _messageText = messageText
         }
         
         if let sender = postData["sender"] as? String {
@@ -74,7 +80,7 @@ class Message {
             _receivedTimeStamp = time
         }
         
-        _messageRef = Database.database().reference().child("messages").child(_messageKey)
+        _messageRef = Database.database().reference().child("user").child("messages").child(_messageKey)
 //        Database.database().reference().child("user").child(currentUser!).child("messages").child(_messageKey)
     }
     

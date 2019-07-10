@@ -56,72 +56,16 @@ class mainChatScreenTableViewCell: UITableViewCell {
         
         self.message = message
         
-        print("message label::\(message.message.count)")
+        print("message label::\(message.messageText.count)")
         
-        print("sender id : \(message.sender) receiver id: \(currentUser)")
-//
-//        if message.sender == currentUser {
-//
-//            sentMessageView.isHidden = true
-//
-//            recievedMessageView.isHidden = false
-//
-//            sentMessageLbl.text = "   " + message.message
-//
-//            recievedMessageLbl.isHidden = false
-//
-//            sentMessageLbl.isHidden = true
-//
-//        } else {
-//
-//            sentMessageView.isHidden = true
-//
-//            recievedMessageView.isHidden = false
-//
-//            recievedMessageLbl.text = "   " + message.message
-//
-//            recievedMessageLbl.isHidden = false
-//
-//            sentMessageLbl.isHidden = true
-//
-//        }
+        print("sender id : \(message.sender) receiver id: \(String(describing: currentUser))")
+
         
-        print("sender id \(message.sender) and current user \(currentUser)")
+        print("sender id \(message.sender) and current user \(String(describing: currentUser))")
         
         if message.sender == currentUser {
             
-//            let time = message.receivedTimeStamp
-//            let timeinterval : TimeInterval = time
-//            let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
-//            let formatter = DateFormatter()
-//            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601) as Calendar?
-//            formatter.locale = NSLocale(localeIdentifier: "en_IN") as Locale
-//            //            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
-//            formatter.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
-//
-//            formatter.dateFormat = "h:mm a"
-//            formatter.amSymbol = "AM"
-//            formatter.pmSymbol = "PM"
-//            //            let dateString = formatter.stringFromDate(modfl.courseDate)
-//            let dateString: String = formatter.string(from: dateFromServer as Date)
-//
-//            print("dateString:::\(dateString)")
-//
-//            sentMessageView.isHidden = false
-//
-//            sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
-//
-//            print("sent messages",message.message)
-//
-//            sentMessageLbl.text = " " + message.message
-//            sentTimeLabel.text = " " + dateString
-//
-//            recievedMessageLbl.text = ""
-//
-//            recievedMessageLbl.isHidden = true
-//
-//            recievedMessageView.isHidden = true
-            
+
             
             let time = message.receivedTimeStamp
             let timeinterval : TimeInterval = time
@@ -144,19 +88,17 @@ class mainChatScreenTableViewCell: UITableViewCell {
             sentMessageLbl.isHidden = true
             sentMessageLbl.text = ""
             
-            print("receive message",message.message)
+            print("receive message",message.messageText)
             
-            recievedMessageLbl.text = " " + message.message
+//            recievedMessageLbl.frame.size.width = recievedMessageLbl.intrinsicContentSize.width + 10
+//            recievedMessageLbl.frame.size.height = recievedMessageLbl.intrinsicContentSize.height + 10
             
+//            recievedMessageLbl.text = message.message
             
+            let strValue = message.messageText
+            recievedMessageLbl?.text = " \(strValue)"
             
-            //            if time != "" {
-            //
-            //
-            //
-            //            }
-            
-            receivedTimeLabel.text = " " + dateString
+            receivedTimeLabel.text =  dateString
             
             recievedMessageLbl.isHidden = false
             
@@ -185,13 +127,15 @@ class mainChatScreenTableViewCell: UITableViewCell {
             sentMessageView.isHidden = false
             
             sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
-            
-            print("sent messages",message.message)
-            
-            sentMessageLbl.text = " " + message.message
-            sentTimeLabel.text = " " + dateString
+//           sentMessageLbl.frame.size.width = sentMessageLbl.intrinsicContentSize.width + 10
+//           sentMessageLbl.frame.size.height = sentMessageLbl.intrinsicContentSize.height + 10
+            print("sent messages",message.messageText)
+//            sentMessageLbl.text =  message.message
+            sentTimeLabel.text =  dateString
             
             recievedMessageLbl.text = ""
+            let strValue = message.messageText
+            sentMessageLbl?.text = " \(strValue)"
             
             recievedMessageLbl.isHidden = true
             
@@ -199,51 +143,7 @@ class mainChatScreenTableViewCell: UITableViewCell {
 
             
             
-            
-            
-            
-            
-            
-        
-            
-//            let time = message.receivedTimeStamp
-//            let timeinterval : TimeInterval = time
-//            let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
-//            let formatter = DateFormatter()
-//            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601) as Calendar?
-//            formatter.locale = NSLocale(localeIdentifier: "en_IN") as Locale
-////            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
-//            formatter.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
-//
-//            formatter.dateFormat = "h:mm a"
-//            formatter.amSymbol = "AM"
-//            formatter.pmSymbol = "PM"
-////            let dateString = formatter.stringFromDate(modfl.courseDate)
-//            let dateString: String = formatter.string(from: dateFromServer as Date)
-//
-//            print("dateString:::\(dateString)")
-//
-//            sentMessageView.isHidden = true
-//            sentMessageLbl.isHidden = true
-//            sentMessageLbl.text = ""
-//
-//            print("receive message",message.message)
-//
-//            recievedMessageLbl.text = " " + message.message
-//
-//
-//
-////            if time != "" {
-////
-////
-////
-////            }
-//
-//            receivedTimeLabel.text = " " + dateString
-//
-//            recievedMessageLbl.isHidden = false
-//
-//            recievedMessageView.layer.backgroundColor = UIColor.clear.cgColor
+   
 
         }
     }
@@ -254,6 +154,14 @@ class mainChatScreenTableViewCell: UITableViewCell {
         
     }
     
-   
+  
 
+}
+
+class PaddingLabel: UILabel {
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 20)//CGRect.inset(by:)
+        super.drawText(in: rect.inset(by: insets))
+    }
 }

@@ -220,7 +220,6 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
         if let cell = selectContactTableView.dequeueReusableCell(withIdentifier: "cell") as? SelectContactTableViewCell {
         
             searchData = searchDetail[indexPath.row]
-
             cell.configCell(searchDetail: searchData)
             
             return cell
@@ -262,9 +261,11 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         recipient = searchDetail[indexPath.row].userKey
-        
+        userContactNumber = searchDetail[indexPath.row].userContactNumber
         print("recipient contact id::\(String(describing: recipient))")
         print("message id::\(String(describing: messageId))")
+        print("contact id::\(String(describing: userContactNumber))")
+
 
         
         if isForward == false {

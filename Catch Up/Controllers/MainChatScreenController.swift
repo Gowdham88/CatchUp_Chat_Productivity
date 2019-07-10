@@ -634,17 +634,17 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     }//loadData
     
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        typeMessageTextField.resignFirstResponder()//
-        
-        recordView.isHidden = true
-        
-//        messageSend()
-        messageSendnew()
-        
-        return true
-    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//
+//        typeMessageTextField.resignFirstResponder()//
+//
+//        recordView.isHidden = true
+//
+////        messageSend()
+//        messageSendnew()
+//
+//        return true
+//    }
     func messageSendnew(){
         
         
@@ -1152,8 +1152,10 @@ extension MainChatScreenController: UITextFieldDelegate {
         
         recordView.isHidden = true
         
-        messageSend()
+//        messageSend()
         
+        messageSendnew()
+
         return true
     }
 //

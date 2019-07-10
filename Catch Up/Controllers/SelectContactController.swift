@@ -40,7 +40,7 @@ class SelectContactController: UIViewController {
     var recipient: String!
     
     var messageId: String!
-    
+    var userContactNumber: String!
     
 var contacts = [CNContact]()
     
@@ -275,8 +275,8 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
          
 
             vc.recipient = recipient
-            
             vc.messageId = messageId
+            vc.userContactNumber = userContactNumber
 
             
             self.navigationController?.pushViewController(vc, animated: true)

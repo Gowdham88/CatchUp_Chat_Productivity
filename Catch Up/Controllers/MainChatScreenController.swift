@@ -302,6 +302,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }//viewdidappear
     
+
+    
     
     @objc func keyboardWillShow(notify: NSNotification) {
         
@@ -718,7 +720,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let post: Dictionary<String, AnyObject> = [
                     "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject,
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
                     "from": userContactNumber as AnyObject,
                     "chatMessageType": "TEXT" as AnyObject,
@@ -729,13 +731,13 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp":NSDate().timeIntervalSince1970 as AnyObject
                 ]
                 
 //                messageId = Database.database().reference().child("messages").childByAutoId().key
@@ -775,7 +777,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
                     "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject,
+//                    "timestamp": ServerValue.timestamp() as AnyObject,
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
                     "from": userContactNumber as AnyObject,
                     "chatMessageType": "TEXT" as AnyObject,
@@ -785,13 +788,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
                 ]
                 
                 
@@ -860,19 +865,22 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let post: Dictionary<String, AnyObject> = [
                     "message": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
                 
                 messageId = Database.database().reference().child("messages").childByAutoId().key
@@ -899,19 +907,20 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let post: Dictionary<String, AnyObject> = [
                     "message": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
                 
                 let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
@@ -978,6 +987,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }
 
+    
+   
     
 }//class
 
@@ -1300,4 +1311,9 @@ extension MainChatScreenController {
     }
 }
 
+//extension Date {
+//    var ticks: UInt64 {
+//        return UInt64((self.timeIntervalSince1970 + 62_135_596_800) * 10_000_000)
+//    }
+//}
 

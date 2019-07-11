@@ -15,11 +15,11 @@ import FirebaseDatabase
 class mainChatScreenTableViewCell: UITableViewCell {
     
 //    PaddingLabel
-    @IBOutlet weak var recievedMessageLbl: UILabel!
+    @IBOutlet weak var recievedMessageLbl: BorderedLabel!
     
     @IBOutlet weak var recievedMessageView: UIView!
     
-    @IBOutlet weak var sentMessageLbl: UILabel!
+    @IBOutlet weak var sentMessageLbl: BorderedLabel!
     
     @IBOutlet weak var sentMessageView: UIView!
     
@@ -44,21 +44,18 @@ class mainChatScreenTableViewCell: UITableViewCell {
         sentMessageView.layer.masksToBounds  = true
         recievedMessageView.layer.masksToBounds = true
         
-//        label.textAlignment = .center
-//        label.sizeToFit()
-//        label.frame = CGRect( x: label.frame.x, y: label.frame.y,width:  label.frame.width + 20,height: label.frame.height + 8)
-        
-//        label.frame = CGRect( x: label.frame.origin.x - 10, y: label.frame.origin.y - 4, width: label.frame.width + 20,height: label.frame.height + 8)
-        
-        recievedMessageLbl.textAlignment = .left
-        recievedMessageLbl.sizeToFit()
-        recievedMessageLbl.frame = CGRect(x: recievedMessageLbl.frame.origin.x , y: recievedMessageLbl.frame.origin.y , width: recievedMessageLbl.frame.width + 20, height: recievedMessageLbl.frame.width + 8)
 
-        sentMessageLbl.textAlignment = .right
-        sentMessageLbl.sizeToFit()
-        sentMessageLbl.frame = CGRect(x: sentMessageLbl.frame.origin.x , y: sentMessageLbl.frame.origin.y , width: sentMessageLbl.frame.width + 20, height: sentMessageLbl.frame.width + 8)
-//        sentMessageLbl.contentEdgeInsets =
         
+//        recievedMessageLbl.textAlignment = .left
+        recievedMessageLbl.sizeToFit()
+
+
+//        sentMessageLbl.textAlignment = .right
+        sentMessageLbl.sizeToFit()
+
+
+        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -94,11 +91,11 @@ class mainChatScreenTableViewCell: UITableViewCell {
 //            recievedMessageLbl.text = message.message
             
             let strValue = message.message
-            recievedMessageLbl?.text = " \(" " + strValue + " " )"
+            recievedMessageLbl?.text = " \(strValue)"
             
             let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
             print("new time1:::\(String(describing: timeNew1))")
-            sentTimeLabel.text =  timeNew1
+            receivedTimeLabel.text =  timeNew1
             recievedMessageLbl.isHidden = false
             
             recievedMessageView.layer.backgroundColor = UIColor.clear.cgColor
@@ -119,7 +116,7 @@ class mainChatScreenTableViewCell: UITableViewCell {
             
             recievedMessageLbl.text = ""
             let strValue = message.message
-            sentMessageLbl?.text = "\(" " + strValue + " " )"
+            sentMessageLbl?.text = "\(strValue)"
             
             print("timestamp:::\(message.receivedTimeStamp)")
             let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)

@@ -80,6 +80,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var threadBackupView: UIView!
 //    @IBOutlet weak var threadMainImageView: UIImageView!
     @IBOutlet weak var bottomBarView: UIView!
+    @IBOutlet weak var navProfileName: UILabel!
     
     
     // bottom bar outlets
@@ -201,6 +202,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         chatTableView.rowHeight = UITableView.automaticDimension
         
         print("messageId id::::\(String(describing: messageId))")
+        print("recipient id::::\(String(describing: recipient))")
         print("contact number::::\(String(describing: userContactNumber))")
 
         

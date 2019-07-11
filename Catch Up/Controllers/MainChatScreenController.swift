@@ -288,8 +288,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //        bottomBarView.layer.shadowOffset = CGSize(width: 3 , height:3)
         bottomBarView.layer.masksToBounds = false
      
-        loadData()
-
+        if messageId != "" && messageId != nil {
+            
+            loadData()
+            
+        }
         
         bottomBarView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         

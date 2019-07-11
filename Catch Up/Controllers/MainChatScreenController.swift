@@ -245,7 +245,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             StatusbarView.setGradientBackground(view: StatusbarView)
         }
         
-        bottomBarView.layer.masksToBounds = false
         recordView.layer.masksToBounds = false
         
 //        picker?.delegate = self
@@ -270,14 +269,28 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         // shadow for bottom view
         
-        self.bottomBarView.layer.shadowPath =
-            UIBezierPath(roundedRect: self.bottomBarView.bounds,
-                         cornerRadius: self.bottomBarView.layer.cornerRadius).cgPath
-        self.bottomBarView.layer.shadowColor = UIColor.black.cgColor
-        self.bottomBarView.layer.shadowOpacity = 0.5
-        self.bottomBarView.layer.shadowOffset = CGSize(width: 10, height: 10)
-        self.bottomBarView.layer.shadowRadius = 1
-        self.bottomBarView.layer.masksToBounds = false
+//        self.bottomBarView.layer.shadowPath =
+//            UIBezierPath(roundedRect: self.bottomBarView.bounds,
+//                         cornerRadius: self.bottomBarView.layer.cornerRadius).cgPath
+//        self.bottomBarView.layer.shadowColor = UIColor.black.cgColor
+//        self.bottomBarView.layer.shadowOpacity = 0.5
+//        self.bottomBarView.layer.shadowOffset = CGSize(width: 10, height: 10)
+//        self.bottomBarView.layer.shadowRadius = 1
+//        self.bottomBarView.layer.masksToBounds = false
+//        self.bottomBarView.clipsToBounds = true
+        
+//        bottomBarView.layer.cornerRadius = 20.0
+//        bottomBarView.clipsToBounds = false
+//        bottomBarView.layer.shadowRadius = 10.0
+//        bottomBarView.layer.shadowOpacity = 0.2
+//        bottomBarView.layer.shadowColor = UIColor.gray.cgColor
+//        bottomBarView.layer.shadowOffset = CGSize(width: 3 , height:3)
+        bottomBarView.layer.masksToBounds = false
+     
+        loadData()
+
+        
+        bottomBarView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
     } //viewdidload
     

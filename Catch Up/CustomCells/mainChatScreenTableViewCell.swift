@@ -14,12 +14,12 @@ import FirebaseDatabase
 
 class mainChatScreenTableViewCell: UITableViewCell {
     
-    
-    @IBOutlet weak var recievedMessageLbl: UILabel!
+//    PaddingLabel
+    @IBOutlet weak var recievedMessageLbl: BorderedLabel!
     
     @IBOutlet weak var recievedMessageView: UIView!
     
-    @IBOutlet weak var sentMessageLbl: UILabel!
+    @IBOutlet weak var sentMessageLbl: BorderedLabel!
     
     @IBOutlet weak var sentMessageView: UIView!
     
@@ -43,7 +43,19 @@ class mainChatScreenTableViewCell: UITableViewCell {
         
         sentMessageView.layer.masksToBounds  = true
         recievedMessageView.layer.masksToBounds = true
-       
+        
+
+        
+//        recievedMessageLbl.textAlignment = .left
+        recievedMessageLbl.sizeToFit()
+
+
+//        sentMessageLbl.textAlignment = .right
+        sentMessageLbl.sizeToFit()
+
+
+        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -83,7 +95,7 @@ class mainChatScreenTableViewCell: UITableViewCell {
             
             let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
             print("new time1:::\(String(describing: timeNew1))")
-            sentTimeLabel.text =  timeNew1
+            receivedTimeLabel.text =  timeNew1
             recievedMessageLbl.isHidden = false
             
             recievedMessageView.layer.backgroundColor = UIColor.clear.cgColor
@@ -104,7 +116,7 @@ class mainChatScreenTableViewCell: UITableViewCell {
             
             recievedMessageLbl.text = ""
             let strValue = message.message
-            sentMessageLbl?.text = " \(strValue)"
+            sentMessageLbl?.text = "\(strValue)"
             
             print("timestamp:::\(message.receivedTimeStamp)")
             let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
@@ -159,10 +171,3 @@ class mainChatScreenTableViewCell: UITableViewCell {
 
 }
 
-class PaddingLabel: UILabel {
-    
-    override func drawText(in rect: CGRect) {
-        let insets = UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 20)//CGRect.inset(by:)
-        super.drawText(in: rect.inset(by: insets))
-    }
-}

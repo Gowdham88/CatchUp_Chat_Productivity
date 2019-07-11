@@ -67,29 +67,11 @@ class ChatDashboardController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        print("current user uid in dashboard screen:::", currentUser!)
+        NavProfileData()
         
-//        Database.database().reference().child("user").child(currentUser!).observe(.value) { (snapshot) in
-//
-//            if let snap = snapshot.children.allObjects as? [DataSnapshot] {
-//
-//                self.messageDetail.removeAll()
-//
-//                for dataa in snap {
-//
-//                    print("printing user data",dataa)
-//
-////                    if let userData = data.value as? [String:AnyObject] {
-////
-////                        let key = data.key
-////
-////
-////
-////
-////                    }
-//                }
-//            }
-//        }
+        
+        print("current user uid in dashboard screen:::", currentUser!)
+
         
         let idss = UUID().uuidString
         
@@ -127,35 +109,41 @@ class ChatDashboardController: UIViewController {
 
         }
         
-//        Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value) { (snapshot) in
-//
-//            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-//
-//                self.messageDetail.removeAll()
-////(names.count - 1).stride(to: -1, by: -1)
-//                for data in snapshot.reversed() {
-//
-//                    if let messageDict = data.value as? Dictionary<String, AnyObject> {
-//
-//                        let key = data.key
-//
-//                        let info = MessageDetail(messageKey: key, messageData: messageDict)
-//                        print("info::\(info.messageKey)")
-//
-////                         let info = MessageDetail(messageKey: key, messageData: messageDict, timeStamp: )
-////
-//
-//
-//                        self.messageDetail.append(info)
-//                    }
-//                }
-//
-//            }
-//
-//            self.chatTableView.reloadData()
-//
-//        }
+
         
+    }//viewdidappear
+    
+    
+    func NavProfileData(){
+        
+        
+        let recipientData = Database.database().reference().child("user").child(currentUser!)
+        
+        recipientData.observeSingleEvent(of: .value) { (snapshot) in
+            
+            let data = snapshot.value as! Dictionary<String, AnyObject>
+            
+            print("printing whole user data",data)
+            
+            for item in data {
+                
+             
+                if item.key == "userPhotoThumbnail" {
+                    
+                    
+                    if let photoUrl = URL(string: item.value as! String) {
+                        
+                        self.userProfileImage.sd_setImage(with: photoUrl)
+                        
+                    }
+                    
+                    
+                }
+                
+                
+            }
+            
+        }
         
     }
     

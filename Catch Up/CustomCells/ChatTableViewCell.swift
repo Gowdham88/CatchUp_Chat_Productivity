@@ -63,14 +63,6 @@ class ChatTableViewCell: UITableViewCell {
                 
                 if item.key == "userPhotoThumbnail" {
                     
-//                    let urll = NSURL(string: item.value as! String)
-//
-//                    do {
-//
-//                        let dataa = try Data(contentsOf: urll as! URL)
-//
-//                        self.recipientImg.image = UIImage(data: dataa)
-//                    }
                     
                     if let photoUrl = URL(string: item.value as! String) {
                         
@@ -111,36 +103,7 @@ class ChatTableViewCell: UITableViewCell {
                                     
                                       self.timeStampLabel.text = newTime
                                     
-                                    
-//                                    let addedTime = itemm.value
-//                                    let timeinterval : TimeInterval = addedTime as! TimeInterval
-//                                    let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
-//                                    let dateFormater : DateFormatter = DateFormatter()
-////                                    dateFormater.locale = Locale(identifier: "en_IN")
-////                                    dateFormater.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
-//
-//                                    if Calendar.current.isDateInToday(dateFromServer as Date) {
-//
-//                                        dateFormater.dateFormat = "'Today' hh:mm a"
-//                                    }
-//                                    else if Calendar.current.isDateInYesterday(dateFromServer as Date) {
-//
-//                                        dateFormater.dateFormat = "'Yesterday' hh:mm a"
-//                                    }
-//                                    else {
-//
-//                                        dateFormater.dateFormat = "dd-MM-yyyy"
-//                                    }
-//
-//
-//                                   let dateValue = self.relativeDate(for: dateFromServer as Date)
-//                                    print("date value::\(dateValue)")
-////
-//                                    let timenewValue = self.getPastTime(for:  dateFromServer as Date)
-//                                    print("time new value:::\(timenewValue)")
-                                    
-//                                    self.timeStampLabel.text = dateFormater.string(from: dateFromServer as Date)
-                                  
+ 
 
                                 }
                             }
@@ -152,34 +115,6 @@ class ChatTableViewCell: UITableViewCell {
                     //                    self.chatPreview.text = chatMessages.
                 }
             }
-            
-//            let username = data["useraName"]
-//
-//            let userImg = data["userPhotoThumbnail"]
-//
-//            self.recipientName.text = username as? String
-//
-//            self.chatPreview.text = self.messageDetail.recipient
-
-//            let ref = Storage.storage().reference(forURL: userImg as! String)
-
-//            ref.getData(maxSize: 100000, completion: { (data, error) in
-//
-//                if error != nil {
-//
-//                    print("could not load image")
-//                } else {
-//
-//                    if let imgData = data {
-//                        if let img = UIImage(data: imgData) {
-//
-//                            self.recipientImg.image = img
-//                        }
-//                    }
-//                }
-//
-//            })
-            
 
         }
         

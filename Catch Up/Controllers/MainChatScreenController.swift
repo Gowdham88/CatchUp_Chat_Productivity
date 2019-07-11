@@ -162,6 +162,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var checkImageArray = [UIImage]()
     
+    var isSelected: Bool = false
+    
+    @IBOutlet var bottomBarHeightConstant: NSLayoutConstraint!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -218,11 +224,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             self,
             selector: #selector(self.keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        // target for group button
+        
+        groupButton.addTarget(self, action: #selector(groupButtonOrClose(sender:)), for: .touchUpInside)
     
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-
-        view.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//
+//        view.addGestureRecognizer(tap)
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
         
@@ -504,18 +514,38 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             cell.recievedMessageLbl.roundCorners(corners: [.topRight,.bottomLeft,.bottomRight], radius: 5.0)
             
-//            if cell.checkImage.image == UIImage(named: "un-check") {
+            if isLongPressed  {
+                
+                cell.checkImage.alpha = 1
+                
+                if isSelected {
+                    
+                    cell.checkImage.image = checkImageArray[indexPath.row]
+
+                    
+//                    if cell.checkImage.image == UIImage(named: "un-check") {
 //
-//                cell.checkImage.image = UIImage(named: "check_blue")
+////                        cell.checkImage.image = UIImage(named: "check_blue")
 //
-//            }else {
+//                        cell.checkImage.image = checkImageArray[indexPath.row]
 //
-//                cell.checkImage.image = UIImage(named: "un-check")
-//            }
+//                    }else {
+//
+////                        cell.checkImage.image = UIImage(named: "un-check")
+//                    }
+ 
+                }
+                
+
+            }else {
+                
+                cell.checkImage.alpha = 0
+            }
             
-            cell.checkImage.image = checkImageArray[indexPath.row]
             
-            cell.checkImage.isHidden = true
+//            cell.checkImage.image = checkImageArray[indexPath.row]
+//
+//            cell.checkImage.isHidden = true
             
 //            cell.recievedMessageLbl.sizeToFit()
 
@@ -539,12 +569,23 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                cell.sentTimeLabel.text = "10:26 AM"
 //            }
             
-            let tapAtCell = UITapGestureRecognizer(target: self, action: #selector(tapOverTheCell(gesture:)))
+//            let tapAtCell = UITapGestureRecognizer(target: self, action: #selector(tapOverTheCell(gesture:)))
+//
+//            tapAtCell.numberOfTapsRequired = 1
+//
+//            cell.addGestureRecognizer(tapAtCell)
             
-            tapAtCell.numberOfTapsRequired = 1
-            
-            cell.addGestureRecognizer(tapAtCell)
             cell.backgroundColor = .clear
+
+            
+            //swipe to reply
+            let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeToReply(gesture:)))
+            
+            swipeGesture.direction = .left
+            
+            cell.isUserInteractionEnabled = true
+            
+            cell.addGestureRecognizer(swipeGesture)
           
             
             return cell
@@ -603,21 +644,31 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if isLongPressed {
-            
+//
             let cell = chatTableView.cellForRow(at: indexPath) as! mainChatScreenTableViewCell
-            
+//
             if cell.checkImage.image == UIImage(named: "un-check") {
+
+//                cell.checkImage.image = UIImage(named: "check_blue")
                 
-                cell.checkImage.image = UIImage(named: "check_blue")
-                
+                checkImageArray[indexPath.row] = UIImage(named: "check_blue")!
+
                 // open pop up view
-                
+
             }else {
+
+//                cell.checkImage.image = UIImage(named: "un-check")
                 
-                cell.checkImage.image = UIImage(named: "un-check")
+                checkImageArray[indexPath.row] = UIImage(named: "un-check")!
             }
 
-        }
+    }
+    
+    
+        
+        isSelected = true
+        
+        chatTableView.reloadData()
     }
     
     
@@ -1244,36 +1295,52 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
         
          isLongPressed = true
         
-        let touchPoint = gesture.location(in: chatTableView)
-        
-        let indexpath = chatTableView.indexPathForRow(at: touchPoint)
-        
-        let cell = chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
-        
-        if gesture.state == .began {
-            
-             cell.checkImage.isHidden = false
-            
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
-                
-                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + cell.checkImage.frame.width + 35
-                
-//                cell.checkImage.isHidden = false
+//        let touchPoint = gesture.location(in: chatTableView)
 //
-                self.groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
-                
-            })
-        }
+//        let indexpath = chatTableView.indexPathForRow(at: touchPoint)
+//
+//        let cell = chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
+//
+//        if gesture.state == .began {
+//
+////             cell.checkImage.isHidden = false
+//
+//            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+//
+//                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + cell.checkImage.frame.width + 35
+//
+////                cell.checkImage.isHidden = false
+////
+//
+//
+//            })
+//        }
+//
+//
+//
+//        if gesture.state == .ended {
+//
+//            cell.isUserInteractionEnabled = true
+//
+//
+//        }
+//
         
+        self.groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
         
+        chatTableView.reloadData()
         
-        if gesture.state == .ended {
+    }
+    
+    @objc func swipeToReply(gesture: UISwipeGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+    
+            self.bottomBarView.frame.origin.y = self.bottomBarView.frame.origin.y - (120 - self.bottomBarHeightConstant.constant)
             
-            cell.isUserInteractionEnabled = true
+            self.bottomBarHeightConstant.constant = 120
             
-           
-        }
-        
+        })
     }
 }
 
@@ -1282,19 +1349,22 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
 
 extension MainChatScreenController {
     
-    func groupButtonOrClose(sender: UIButton) {
+    @objc func groupButtonOrClose(sender: UIButton) {
         
-        isLongPressed = true
+        isLongPressed = false
+        
+        isSelected = false
         
         if groupButton.imageView?.image == UIImage(named: "Cross_close") {
             
-            dismiss(animated: true, completion: nil)
+            groupButton.setImage(UIImage(named: "Group"), for: .normal)
             
-            groupButton.imageView?.image = UIImage(named: "Group")
+            chatTableView.reloadData()
             
         }else {
             
-            groupButton.imageView?.image = UIImage(named: "Cross_close")
+            groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
+            
         }
     
     }

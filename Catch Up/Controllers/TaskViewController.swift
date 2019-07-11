@@ -203,19 +203,6 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func hourTimeUpButton(_ sender: Any) {
         
-        
-//        let visibleIndexPaths = timeHourCollectionView.indexPathsForVisibleItems
-//
-//        print("visible ones \(visibleIndexPaths)")
-//
-//        let visibleIndex = visibleIndexPaths.first
-//
-//        print("visible on button click",visibleIndex)
-//
-//        let nextHour = hourTimeArray[(visibleIndex!.row) + 1]
-//
-//        print("the real next",nextHour)
-        
         scrollToNextCell()
         
     }
@@ -223,39 +210,6 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     func scrollToNextCell(){
         
         indexNumber += 1
-        
-//        //get cell size
-//
-//                let visibleIndexPaths = timeHourCollectionView.indexPathsForVisibleItems
-//
-//                print("visible ones \(visibleIndexPaths)")
-//
-//                let visibleIndex = visibleIndexPaths.first
-//
-////                print("visible on button click",visibleIndex)
-//
-//        let cell = timeHourCollectionView.cellForItem(at: visibleIndex!) as! TimeHourCollectionViewCell
-//
-//        print("print cell sizes",cell.frame.width,cell.frame.height)
-//
-//        let cellSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-//
-//        //get current content Offset of the Collection view
-//        let contentOffset = timeHourCollectionView.contentOffset
-//
-////        if timeHourCollectionView.contentSize.width <= timeHourCollectionView.contentOffset.x + cellSize.width
-////        {
-//
-//            timeHourCollectionView.scrollRectToVisible(CGRect(x: 0, y: contentOffset.y, width: cellSize.width, height: cellSize.height), animated: true)
-//
-//
-////        } else {
-////
-////            timeHourCollectionView.scrollRectToVisible(CGRect(x: contentOffset.x, y: contentOffset.y, width: cellSize.width, height: cellSize.height), animated: true)
-////
-////        }
-//
-//        self.timeHourCollectionView.reloadData()
         
         if indexNumber < hourTimeArray.count {
             
@@ -291,10 +245,6 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     @IBAction func minsTimeUpButton(_ sender: Any) {
        
         minsIndexNumber += 1
-        
-        print("min index",minsIndexNumber)
-
-        print("min array",minTimeArray)
         isDateView.isHidden = true
         isTimeView.isHidden = false
         calendarMainView.isHidden = false
@@ -302,16 +252,12 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         if minsIndexNumber < minTimeArray.count  {
             
             minsIncrementButton.isUserInteractionEnabled = true
-            
             self.timeMinsCollectionView.scrollToItem(at:IndexPath(item: minsIndexNumber, section: 0), at: .bottom, animated: true)
             
         }else {
             
             minsIncrementButton.isUserInteractionEnabled = false
         }
-        
-       
-        
     }
     
     @IBAction func minsTimeDownButton(_ sender: Any) {
@@ -537,74 +483,6 @@ extension TaskViewController {
     }
 }
 
-//extension TaskViewController: UIPickerViewDelegate,UIPickerViewDataSource {
-//
-////    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-////
-////        pickerView.subviews.forEach({
-////            $0.isHidden = $0.frame.height < 1.0
-////        })
-////        return 1
-////    }
-////
-////    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-////
-////       return 13
-////    }
-////
-////    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-////
-////       return "\(row)"
-////
-////    }
-////
-////    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-////
-////        var pickerLabel = view as? UILabel
-////
-////        if (pickerLabel == nil)
-////        {
-////            pickerLabel = UILabel()
-////
-////            pickerLabel?.font = UIFont(name: "Muli-Regular", size: 16)
-////            pickerLabel?.textAlignment = .center
-////            pickerLabel?.textColor = .blue
-////        }
-////
-////        pickerLabel?.text = "\(row)"
-////
-////        return pickerLabel!
-////
-////    }
-////
-////    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-////
-//////        timerHourTextFiled.text = "\(row)"
-////    }
-//
-//
-//    func openTimePicker()  {
-//
-//
-//        timeHourPickerView = UIPickerView()
-//        timeHourPickerView.frame = CGRect(x: 0, y: 20, width: timePickerHourView.frame.width, height: timePickerHourView.frame.height - 40)
-//        timeHourPickerView.dataSource = self
-//        timeHourPickerView.delegate = self
-//
-//
-//        timePickerHourView.addSubview(timeHourPickerView)
-////        gradeTextField.text = gradePickerValues[0]
-//
-//    }
-//
-////    @objc func startTimeDiveChanged(sender: UIDatePicker) {
-////        let formatter = DateFormatter()
-////        formatter.timeStyle = .short
-////        timerHourTextFiled.text = formatter.string(from: sender.date)
-//////        timePicker.removeFromSuperview() // if you want to remove time picker
-////    }
-//}
-
 extension TaskViewController: UICollectionViewDataSource,UICollectionViewDelegate {
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -640,39 +518,7 @@ extension TaskViewController: UICollectionViewDataSource,UICollectionViewDelegat
         }
   
     }
-    
-//    fileprivate var pageSize: CGSize {
-//
-//        let layout = self.timeHourCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//        var pageSize = layout.itemSize
-//        if layout.scrollDirection == .horizontal {
-//            pageSize.width += layout.minimumLineSpacing
-//        } else {
-//            pageSize.height += layout.minimumLineSpacing
-//        }
-//        return pageSize
-//    }
-    
-    
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//
-//        let layout = timeHourCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-////        let pageSize = layout.itemSize
-//        let pageSide = (layout.scrollDirection == .vertical) ? pageSize.width : pageSize.height
-//        let offset = (layout.scrollDirection == .vertical) ? scrollView.contentOffset.x : scrollView.contentOffset.y
-//       let currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
-//        print("currentpage::::\(currentPage)")
-//    }
-//
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//
-//        let visibleIndex = Int(targetContentOffset.pointee.x / timeHourCollectionView.frame.width)
-//
-//        print("the visible index is \(visibleIndex)")
-//    }
-//
-    
-    
+   
 }
 
 

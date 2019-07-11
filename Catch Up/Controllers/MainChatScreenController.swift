@@ -181,6 +181,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
         // Do any additional setup after loading the view.
         
+        print("selected recipient id ::\(recipient)")
+        
         chatTableView.delegate = self
         chatTableView.dataSource = self
         
@@ -197,7 +199,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //        self.chatTableView.backgroundView = imageView
         
-//        chatTableView.rowHeight = UITableView.automaticDimension
         
         NotificationCenter.default.addObserver(
             self,
@@ -292,6 +293,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         NavProfileData()
         navProfileFromContact()
+        
     }//viewdidappear
     
     
@@ -316,23 +318,39 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     }
 
     func NavProfileData(){
+  
         
-        print("chatUserImg::\(String(describing: chatUserImg))")
-        print("chatUserName::\(String(describing: chatUserName))")
+        let recipientData = Database.database().reference().child("user").child(recipient)
+        
+        recipientData.observeSingleEvent(of: .value) { (snapshot) in
+            
+            let data = snapshot.value as! Dictionary<String, AnyObject>
+            
+            print("printing whole user data",data)
+            
+            for item in data {
+                
+                if item.key == "userName" {
+                    
+                    self.navProfileName.text = item.value as? String
+                    
+                }
+                
+                if item.key == "userPhotoThumbnail" {
 
-        
-        
-        
-        if let userImg = chatUserImg {
-            
+                    
+                    if let photoUrl = URL(string: item.value as! String) {
+                                                
+                        
+                        self.navProfileImage.sd_setImage(with: photoUrl)
+                    }
+                    
+                    
+                }
+                
 
-            self.navProfileImage.sd_setImage(with: URL(string: userImg))
+            }
             
-        }
-        
-        if let userName = chatUserName {
-            
-            self.navProfileName.text = userName
         }
         
     }
@@ -549,17 +567,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
                     cell.recievedMessageView.alpha = 0.5
 
-                    
-//                    if cell.checkImage.image == UIImage(named: "un-check") {
-//
-////                        cell.checkImage.image = UIImage(named: "check_blue")
-//
-//                        cell.checkImage.image = checkImageArray[indexPath.row]
-//
-//                    }else {
-//
-////                        cell.checkImage.image = UIImage(named: "un-check")
-//                    }
+
  
                 }else {
                     
@@ -572,39 +580,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 cell.checkImage.alpha = 0
             }
             
-            
-//            cell.checkImage.image = checkImageArray[indexPath.row]
-//
-//            cell.checkImage.isHidden = true
-            
-//            cell.recievedMessageLbl.sizeToFit()
 
             
             cell.configCell(message: message)
-            
-//            if dummyBoolArray[indexPath.row] == true {
-//
-//                cell.recievedMessageView.isHidden = false
-//                cell.sentMessageView.isHidden = true
-//
-//                cell.recievedMessageLbl.text = dummyMessageArray[indexPath.row]
-//                cell.receivedTimeLabel.text = "10:26 AM"
-//
-//            }else {
-//
-//                cell.recievedMessageView.isHidden = true
-//                cell.sentMessageView.isHidden = false
-//
-//                cell.sentMessageLbl.text = dummyMessageArray[indexPath.row]
-//                cell.sentTimeLabel.text = "10:26 AM"
-//            }
-            
-//            let tapAtCell = UITapGestureRecognizer(target: self, action: #selector(tapOverTheCell(gesture:)))
-//
-//            tapAtCell.numberOfTapsRequired = 1
-//
-//            cell.addGestureRecognizer(tapAtCell)
-            
+
             cell.backgroundColor = .clear
 
             
@@ -632,39 +611,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     }
     
-   @objc func tapOverTheCell(gesture: UITapGestureRecognizer) {
-        
-    if isLongPressed {
-        
-        self.longPressView.isHidden = false
-        
-        let touchPoint = gesture.location(in: self.view)
-        
-        let indexPath = chatTableView.indexPathForRow(at: touchPoint)
-        
-        let cell = chatTableView.cellForRow(at: indexPath!) as! mainChatScreenTableViewCell
-        
-        if cell.checkImage.image == UIImage(named: "un-check") {
-            
-            cell.checkImage.image = UIImage(named: "check_blue")
-            
-            // open pop up view
-            
-        }else {
-            
-            cell.checkImage.image = UIImage(named: "un-check")
-            
-            
-        }
-        
-        self.chatTableView.reloadData()
-    } else {
-        
-        self.longPressView.isHidden = true
-        
-    }
-    
-    }
     
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return UITableView.automaticDimension

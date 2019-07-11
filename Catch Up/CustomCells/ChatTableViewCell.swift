@@ -12,6 +12,8 @@ import FirebaseStorage
 import FirebaseDatabase
 import SwiftKeychainWrapper
 
+var chatUserName: String?
+
 class ChatTableViewCell: UITableViewCell {
 
     @IBOutlet weak var recipientImg: UIImageView!
@@ -40,16 +42,7 @@ class ChatTableViewCell: UITableViewCell {
     func configureCell(messageDetail: MessageDetail){
         
         self.messageDetail = messageDetail
-        
-        print("printing message detail",messageDetail)
-        
-//        for item in messageDetail {
-//
-//            print("valessssssss",ite)
-//        }
-       
-        print("messageDetail.recipient", messageDetail.recentMessage)
-       
+    
         let recipientData = Database.database().reference().child("user").child(messageDetail.recipient)
        
         recipientData.observeSingleEvent(of: .value) { (snapshot) in
@@ -63,6 +56,8 @@ class ChatTableViewCell: UITableViewCell {
                 if item.key == "userName" {
                     
                     self.recipientName.text = item.value as? String
+                    
+                    chatUserName = item.value as? String
                 }
                 
                 if item.key == "userPhotoThumbnail" {

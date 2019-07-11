@@ -100,6 +100,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet var recordAudioButton: UIButton!
     @IBOutlet var sendRecordButton: UIButton!
   
+    @IBOutlet weak var longPressView: UIView!
+    
+    
+    
+    
     var audioRecorder:AVAudioRecorder!
     var meterTimer:Timer!
     var isRecording = false
@@ -160,6 +165,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        self.longPressView.isHidden = true
+
         
         self.chatTableView.frame = CGRect(x: self.chatTableView.frame.origin.x, y: self.chatTableView.frame.origin.y, width: self.chatTableView.frame.size.width, height: self.view.frame.size.height - self.chatTableView.frame.origin.y)
 
@@ -232,6 +239,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         chatTableView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         recordView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         bottomBarView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        
+        longPressView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        
         navProfileImage.layer.cornerRadius = navProfileImage.frame.height/2
         
         if let StatusbarView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
@@ -556,6 +566,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     if isLongPressed {
         
+        self.longPressView.isHidden = false
+        
         let touchPoint = gesture.location(in: self.view)
         
         let indexPath = chatTableView.indexPathForRow(at: touchPoint)
@@ -576,6 +588,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }
         
         self.chatTableView.reloadData()
+    } else {
+        
+        self.longPressView.isHidden = true
+        
     }
     
     }
@@ -603,6 +619,45 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
         }
     }
+    
+    
+    // long press action
+    
+    
+    @IBAction func addTaskAction(_ sender: Any) {
+   
+        print("add task btn pressed")
+        self.longPressView.isHidden = true
+    
+    }
+    
+    @IBAction func replyAction(_ sender: Any) {
+        
+        print("reply btn pressed")
+        self.longPressView.isHidden = true
+        
+    }
+    
+    @IBAction func forwardAction(_ sender: Any) {
+        
+        print("forward btn pressed")
+        self.longPressView.isHidden = true
+        
+    }
+    @IBAction func copAction(_ sender: Any) {
+        
+        print("copy btn pressed")
+        self.longPressView.isHidden = true
+    }
+    
+    @IBAction func deleteAction(_ sender: Any) {
+        
+        print("delete btn pressed")
+        self.longPressView.isHidden = true
+        
+        
+    }
+    
     
     func loadData() {
         

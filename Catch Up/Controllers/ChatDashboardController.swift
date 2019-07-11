@@ -218,12 +218,9 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
         messageId = messageDetail[indexPath.row].messageRef.key
         
         let sb = UIStoryboard(name: "Chat", bundle: nil)
-        
         let vc = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController
-        
         vc.recipient = recipient
         vc.messageId = messageId
-        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

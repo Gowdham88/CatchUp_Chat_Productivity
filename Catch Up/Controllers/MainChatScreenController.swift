@@ -166,8 +166,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var isSelected: Bool = false
     
     @IBOutlet var bottomBarHeightConstant: NSLayoutConstraint!
-    
-    
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -205,16 +204,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         print("recipient id::::\(String(describing: recipient))")
         print("contact number::::\(String(describing: userContactNumber))")
 
-        
-        
-
-
-        if messageId != "" && messageId != nil {
-            
-            
-            loadData()
-            
-        }
+//        if messageId != "" && messageId != nil {
+//
+//
+//            loadData()
+//
+//        }
         
         NotificationCenter.default.addObserver(
             self,
@@ -304,10 +299,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidAppear(_ animated: Bool) {
         
         if messageId != "" && messageId != nil {
-            
-            print("message id in viewdidappear::\(messageId)")
         
-            
             loadData()
             
         }
@@ -328,7 +320,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
             if self.view.frame.origin.y == 0 {
                 
-                if let Keyboard = keyboardSize {
+                if let Keyboard = keyboardSize  {
                     
                      self.view.frame.origin.y -= Keyboard.height
                 }
@@ -522,9 +514,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 cell.checkImage.alpha = 1
                 
+                cell.checkImage.image = checkImageArray[indexPath.row]
+                
                 if isSelected {
                     
-                    cell.checkImage.image = checkImageArray[indexPath.row]
+                    cell.recievedMessageView.alpha = 0.5
 
                     
 //                    if cell.checkImage.image == UIImage(named: "un-check") {
@@ -538,6 +532,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 ////                        cell.checkImage.image = UIImage(named: "un-check")
 //                    }
  
+                }else {
+                    
+                    cell.recievedMessageView.alpha = 1.0
                 }
                 
 
@@ -585,12 +582,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             //swipe to reply
             let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeToReply(gesture:)))
             
-            swipeGesture.direction = .left
+            swipeGesture.direction = .right
             
             cell.isUserInteractionEnabled = true
             
             cell.addGestureRecognizer(swipeGesture)
-          
             
             return cell
             
@@ -656,6 +652,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                cell.checkImage.image = UIImage(named: "check_blue")
                 
                 checkImageArray[indexPath.row] = UIImage(named: "check_blue")!
+                
+                isSelected = true
 
                 // open pop up view
 
@@ -664,13 +662,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                cell.checkImage.image = UIImage(named: "un-check")
                 
                 checkImageArray[indexPath.row] = UIImage(named: "un-check")!
+                
+                isSelected = false
             }
 
     }
     
-    
-        
-        isSelected = true
         
         chatTableView.reloadData()
     }
@@ -1349,9 +1346,67 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
         
         UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
     
-            self.bottomBarView.frame.origin.y = self.bottomBarView.frame.origin.y - (120 - self.bottomBarHeightConstant.constant)
+//            self.bottomBarView.frame.origin.y = self.bottomBarView.frame.origin.y - (120 - self.bottomBarHeightConstant.constant)
+//
+//            self.bottomBarHeightConstant.constant = 120
+//
+//            self.bottomBarView.frame.size.height = 120
             
-            self.bottomBarHeightConstant.constant = 120
+            // alternate method
+            
+//            self.bottomBarView.layer.cornerRadius = 1
+            
+            let touchPoint = gesture.location(in: self.chatTableView)
+            
+            let indexpath = self.chatTableView.indexPathForRow(at: touchPoint)
+            
+            let cell = self.chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
+            
+            print("cell text",self.messages[(indexpath?.row)!].message)
+            
+            self.bottomBarView.roundCorners(corners: [], radius: 1.0)
+          
+            self.bottomBarView.clipsToBounds = true
+            
+            let viewHeight = 80
+            
+            let replyView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: Int(self.bottomBarView.frame.minY) - Int(self.bottomBarView.frame.size.height - 10)), size: CGSize(width: Int(self.bottomBarView.frame.width), height: viewHeight)))
+            
+            let replySubView = UIView(frame: CGRect(x: 10, y: 10, width: replyView.frame.width - (20), height: 60))
+            
+            replyView.backgroundColor = .white
+            
+            replySubView.backgroundColor = UIColor(hex: "EAF4FF")
+            
+            self.view.addSubview(replyView)
+            
+            replyView.addSubview(replySubView)
+            
+            // rounded corners
+            
+            replyView.roundCorners(corners: [.topLeft,.topRight], radius: 15.0)
+            
+            replySubView.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: 5.0)
+            
+            let nameLabel = UILabel(frame: CGRect(x: 7, y: 7, width: 225, height: 22))
+            
+            nameLabel.textColor = UIColor(hex: "1183FF")
+            
+            nameLabel.text = chatUserName
+            
+            nameLabel.font = UIFont(name: "Muli-Bold", size: 15.0)
+            
+            replySubView.addSubview(nameLabel)
+            
+            let messageLabel = UILabel(frame: CGRect(x: nameLabel.frame.origin.x, y: nameLabel.frame.maxY + 5, width: 225, height: 22))
+            
+            messageLabel.textColor = UIColor(hex: "5B799C")
+            
+            messageLabel.text = self.messages[(indexpath?.row)!].message
+            
+            messageLabel.font = UIFont(name: "Muli-Regular", size: 14.0)
+            
+            replySubView.addSubview(messageLabel)
             
         })
     }

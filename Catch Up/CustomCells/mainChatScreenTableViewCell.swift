@@ -67,23 +67,6 @@ class mainChatScreenTableViewCell: UITableViewCell {
             
 
             
-            let time = message.receivedTimeStamp
-            let timeinterval : TimeInterval = time
-            let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
-            let formatter = DateFormatter()
-            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601) as Calendar?
-            formatter.locale = NSLocale(localeIdentifier: "en_IN") as Locale
-            //            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
-            formatter.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
-            
-            formatter.dateFormat = "h:mm a"
-            formatter.amSymbol = "AM"
-            formatter.pmSymbol = "PM"
-            //            let dateString = formatter.stringFromDate(modfl.courseDate)
-            let dateString: String = formatter.string(from: dateFromServer as Date)
-            
-            print("dateString:::\(dateString)")
-            
             sentMessageView.isHidden = true
             sentMessageLbl.isHidden = true
             sentMessageLbl.text = ""
@@ -98,31 +81,16 @@ class mainChatScreenTableViewCell: UITableViewCell {
             let strValue = message.message
             recievedMessageLbl?.text = " \(strValue)"
             
-            receivedTimeLabel.text =  dateString
-            
+            let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
+            print("new time1:::\(String(describing: timeNew1))")
+            sentTimeLabel.text =  timeNew1
             recievedMessageLbl.isHidden = false
             
             recievedMessageView.layer.backgroundColor = UIColor.clear.cgColor
             
         } else {
             
-            
-            let time = message.receivedTimeStamp
-            let timeinterval : TimeInterval = time
-            let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
-            let formatter = DateFormatter()
-            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601) as Calendar?
-            formatter.locale = NSLocale(localeIdentifier: "en_IN") as Locale
-            //            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
-            formatter.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
-            
-            formatter.dateFormat = "h:mm a"
-            formatter.amSymbol = "AM"
-            formatter.pmSymbol = "PM"
-            //            let dateString = formatter.stringFromDate(modfl.courseDate)
-            let dateString: String = formatter.string(from: dateFromServer as Date)
-            
-            print("dateString:::\(dateString)")
+ 
             
             sentMessageView.isHidden = false
             
@@ -131,12 +99,19 @@ class mainChatScreenTableViewCell: UITableViewCell {
 //           sentMessageLbl.frame.size.height = sentMessageLbl.intrinsicContentSize.height + 10
             print("sent messages",message.message)
 //            sentMessageLbl.text =  message.message
-            sentTimeLabel.text =  dateString
+            
+            
             
             recievedMessageLbl.text = ""
             let strValue = message.message
             sentMessageLbl?.text = " \(strValue)"
             
+            print("timestamp:::\(message.receivedTimeStamp)")
+            let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
+            print("new time1:::\(String(describing: timeNew1))")
+ 
+            sentTimeLabel.text =  timeNew1
+
             recievedMessageLbl.isHidden = true
             
             recievedMessageView.isHidden = true
@@ -148,13 +123,39 @@ class mainChatScreenTableViewCell: UITableViewCell {
         }
     }
     
-    func getCurrentTimeZone() -> String{
-        
-        return TimeZone.current.identifier
-        
+  
+    func getReadableDate(timeStamp: TimeInterval) -> String? {
+        let date = Date(timeIntervalSince1970: timeStamp)
+        let dateFormatter = DateFormatter()
+        let timezone = TimeZone.current.abbreviation()   // get current TimeZone abbreviation or set to GMT+5:30
+        print("current time zone data:::\(String(describing: timezone))")
+        dateFormatter.timeZone = TimeZone(abbreviation: timezone!) //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        if Calendar.current.isDateInTomorrow(date) {
+            return "Tomorrow"
+        } else if Calendar.current.isDateInYesterday(date) {
+            return "Yesterday"
+        } else if dateFallsInCurrentWeek(date: date) {
+            if Calendar.current.isDateInToday(date) {
+                dateFormatter.dateFormat = "h:mm a"
+                return dateFormatter.string(from: date)
+            } else {
+                dateFormatter.dateFormat = "EEEE"
+                return dateFormatter.string(from: date)
+            }
+        } else {
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            return dateFormatter.string(from: date)
+        }
     }
     
-  
+    func dateFallsInCurrentWeek(date: Date) -> Bool {
+        let currentWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: Date())
+        let datesWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: date)
+        return (currentWeek == datesWeek)
+    }
+    
+
 
 }
 

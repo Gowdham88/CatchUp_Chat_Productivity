@@ -107,37 +107,41 @@ class ChatTableViewCell: UITableViewCell {
                                 
                                 if itemm.key == "timestamp" {
                                     
-                                   
+                                    let newTime = self.getReadableDate(timeStamp: itemm.value as! TimeInterval)
+                                    print("new time :::\(String(describing: newTime))")
                                     
-                                    let addedTime = itemm.value
-                                    let timeinterval : TimeInterval = addedTime as! TimeInterval
-                                    let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
-                                    let dateFormater : DateFormatter = DateFormatter()
-//                                    dateFormater.locale = Locale(identifier: "en_IN")
-//                                    dateFormater.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
-
-                                    if Calendar.current.isDateInToday(dateFromServer as Date) {
-
-                                        dateFormater.dateFormat = "'Today' hh:mm a"
-                                    }
-                                    else if Calendar.current.isDateInYesterday(dateFromServer as Date) {
-
-                                        dateFormater.dateFormat = "'Yesterday' hh:mm a"
-                                    }
-                                    else {
-
-                                        dateFormater.dateFormat = "dd-MM-yyyy"
-                                    }
-                                  
+                                      self.timeStampLabel.text = newTime
                                     
-                                   let dateValue = self.relativeDate(for: dateFromServer as Date)
-                                    print("date value::\(dateValue)")
+                                    
+//                                    let addedTime = itemm.value
+//                                    let timeinterval : TimeInterval = addedTime as! TimeInterval
+//                                    let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
+//                                    let dateFormater : DateFormatter = DateFormatter()
+////                                    dateFormater.locale = Locale(identifier: "en_IN")
+////                                    dateFormater.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
 //
-                                    let timenewValue = self.getPastTime(for:  dateFromServer as Date)
-                                    print("time new value:::\(timenewValue)")
+//                                    if Calendar.current.isDateInToday(dateFromServer as Date) {
+//
+//                                        dateFormater.dateFormat = "'Today' hh:mm a"
+//                                    }
+//                                    else if Calendar.current.isDateInYesterday(dateFromServer as Date) {
+//
+//                                        dateFormater.dateFormat = "'Yesterday' hh:mm a"
+//                                    }
+//                                    else {
+//
+//                                        dateFormater.dateFormat = "dd-MM-yyyy"
+//                                    }
+//
+//
+//                                   let dateValue = self.relativeDate(for: dateFromServer as Date)
+//                                    print("date value::\(dateValue)")
+////
+//                                    let timenewValue = self.getPastTime(for:  dateFromServer as Date)
+//                                    print("time new value:::\(timenewValue)")
                                     
 //                                    self.timeStampLabel.text = dateFormater.string(from: dateFromServer as Date)
-                                    self.timeStampLabel.text = dateValue
+                                  
 
                                 }
                             }
@@ -182,6 +186,38 @@ class ChatTableViewCell: UITableViewCell {
         
     }//configureCell
     
+    
+    func getReadableDate(timeStamp: TimeInterval) -> String? {
+        let date = Date(timeIntervalSince1970: timeStamp)
+        let dateFormatter = DateFormatter()
+        let timezone = TimeZone.current.abbreviation()   // get current TimeZone abbreviation or set to GMT+5:30
+        print("current time zone data:::\(String(describing: timezone))")
+        dateFormatter.timeZone = TimeZone(abbreviation: timezone!) //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        if Calendar.current.isDateInTomorrow(date) {
+            return "Tomorrow"
+        } else if Calendar.current.isDateInYesterday(date) {
+            return "Yesterday"
+        } else if dateFallsInCurrentWeek(date: date) {
+            if Calendar.current.isDateInToday(date) {
+                dateFormatter.dateFormat = "h:mm a"
+//                dateFormatter.dateFormat = "dd/MM/yyyy"
+                return dateFormatter.string(from: date)
+            } else {
+                dateFormatter.dateFormat = "EEEE"
+                return dateFormatter.string(from: date)
+            }
+        } else {
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            return dateFormatter.string(from: date)
+        }
+    }
+    
+    func dateFallsInCurrentWeek(date: Date) -> Bool {
+        let currentWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: Date())
+        let datesWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: date)
+        return (currentWeek == datesWeek)
+    }
     
     func relativeDate(for date:Date) -> String {
 

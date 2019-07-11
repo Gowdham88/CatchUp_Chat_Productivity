@@ -29,7 +29,8 @@ class ChatDashboardController: UIViewController {
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     var recipient : String!
     var messageId: String!
-        
+//    var userContactName: String!
+//    var userContactImage: String!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         
@@ -217,6 +218,11 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
         recipient = messageDetail[indexPath.row].recipient
         messageId = messageDetail[indexPath.row].messageRef.key
         
+//        userContactName = messageDetail[indexPath.row].receipientName
+//        userContactImage = messageDetail[indexPath.row].receipientImage
+//
+//        print("user Contact Name:: recent \(String(describing: userContactName))")
+//        print("user Contact Image:: recent \(String(describing: userContactImage))")
         let sb = UIStoryboard(name: "Chat", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController
         vc.recipient = recipient

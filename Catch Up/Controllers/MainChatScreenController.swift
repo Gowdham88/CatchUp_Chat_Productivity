@@ -57,6 +57,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipient: String!
     var messageId: String!
     var userContactNumber: String!
+    var userContactName: String!
+    var userContactImage: String!
     
 //    var messages = [Message]()
     
@@ -304,9 +306,52 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
         }
         
+        NavProfileData()
+        navProfileFromContact()
     }//viewdidappear
     
+    
+    func navProfileFromContact(){
+        
+        print("userContactName::\(String(describing: userContactName))")
+        print("userContactImage::\(String(describing: userContactImage))")
+        
 
+        if let userImg = userContactImage {
+            
+            
+            self.navProfileImage.sd_setImage(with: URL(string: userImg))
+            
+        }
+        
+        if let userName = userContactName {
+            
+            self.navProfileName.text = userName
+        }
+        
+    }
+
+    func NavProfileData(){
+        
+        print("chatUserImg::\(String(describing: chatUserImg))")
+        print("chatUserName::\(String(describing: chatUserName))")
+
+        
+        
+        
+        if let userImg = chatUserImg {
+            
+
+            self.navProfileImage.sd_setImage(with: URL(string: userImg))
+            
+        }
+        
+        if let userName = chatUserName {
+            
+            self.navProfileName.text = userName
+        }
+        
+    }
     
     
     @objc func keyboardWillShow(notify: NSNotification) {

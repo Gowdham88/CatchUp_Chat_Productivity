@@ -82,6 +82,16 @@ class MessageDetail {
             _recentMessage = recent
         }
         
+        if let Name = messageData["userName"] as? String {
+            
+            _receipientName = Name
+        }
+        
+        if let photo = messageData["userPhotoThumbnail"] as? String {
+            
+            _receipientImage = photo
+        }
+        
 //        _receipientName = userName
 //
 //        _receipientImage = userPhoto

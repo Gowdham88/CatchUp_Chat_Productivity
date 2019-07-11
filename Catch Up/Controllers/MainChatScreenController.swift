@@ -312,10 +312,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func navProfileFromContact(){
         
-        print("userContactName::\(String(describing: userContactName))")
-        print("userContactImage::\(String(describing: userContactImage))")
-        
-
         if let userImg = userContactImage {
             
             
@@ -338,8 +334,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         recipientData.observeSingleEvent(of: .value) { (snapshot) in
             
             let data = snapshot.value as! Dictionary<String, AnyObject>
-            
-            print("printing whole user data",data)
             
             for item in data {
                 
@@ -854,9 +848,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 messageId = Database.database().reference().child(recipient).child("inbox_new").childByAutoId().key
                 
-                print("new message id:::\(messageId)")
-                
-                
                 let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox_new").child(messageId)
                 
                 firebase_recipient_Message.setValue(post)
@@ -886,17 +877,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         moveToBottom()
         
-        
     }
         
     func messageSend(){
         
-        
-        
         if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
-            
-            print("recipient id::::\(String(describing: recipient))")
-            
             
             if messageId == nil {
                 
@@ -925,7 +910,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                messageId = Database.database().reference().child("user").child(currentUser!).child("outbox").childByAutoId().key
                 
                 let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
-                print("message id::::\(String(describing: messageId))")
 //                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
@@ -1010,9 +994,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     
     @IBAction func didEditingChanged(_ sender: Any) {
-        
-        print("typign count \(typeMessageTextField.text?.count)")
-        
         
         if typeMessageTextField.text!.count >= 1 {
             

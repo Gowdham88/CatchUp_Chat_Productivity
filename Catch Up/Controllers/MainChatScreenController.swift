@@ -172,9 +172,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         super.viewDidLoad()
     
         self.longPressView.isHidden = true
+        recordView.isHidden = true
 
-        
-        self.chatTableView.frame = CGRect(x: self.chatTableView.frame.origin.x, y: self.chatTableView.frame.origin.y, width: self.chatTableView.frame.size.width, height: self.view.frame.size.height - self.chatTableView.frame.origin.y)
+//        self.chatTableView.frame = CGRect(x: self.chatTableView.frame.origin.x, y: self.chatTableView.frame.origin.y, width: self.chatTableView.frame.size.width, height: self.view.frame.size.height - self.chatTableView.frame.origin.y)
 
 
         // Do any additional setup after loading the view.
@@ -184,32 +184,18 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
       //table view background changed here..
         
-        let backgroundImage = #imageLiteral(resourceName: "image")
-        let imageView = UIImageView(image: backgroundImage)
-     
-        let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.chatTableView.frame.size.width, height: self.chatTableView.frame.size.height))
-        
-        overlay.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        
-        imageView.addSubview(overlay)
-        
-       self.chatTableView.backgroundView = imageView
-        
-          //table view background changed here..
-        
-//        chatTableView.estimatedRowHeight = 300.0
-        chatTableView.rowHeight = UITableView.automaticDimension
-        
-        print("messageId id::::\(String(describing: messageId))")
-        print("recipient id::::\(String(describing: recipient))")
-        print("contact number::::\(String(describing: userContactNumber))")
-
-//        if messageId != "" && messageId != nil {
+//        let backgroundImage = #imageLiteral(resourceName: "image")
+//        let imageView = UIImageView(image: backgroundImage)
 //
+//        let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.chatTableView.frame.size.width, height: self.chatTableView.frame.size.height))
 //
-//            loadData()
+//        overlay.backgroundColor = UIColor.white.withAlphaComponent(0.5)
 //
-//        }
+//        imageView.addSubview(overlay)
+//
+//        self.chatTableView.backgroundView = imageView
+        
+//        chatTableView.rowHeight = UITableView.automaticDimension
         
         NotificationCenter.default.addObserver(
             self,
@@ -246,7 +232,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         chatTableView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         recordView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         bottomBarView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
-        
         longPressView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         
         navProfileImage.layer.cornerRadius = navProfileImage.frame.height/2
@@ -259,7 +244,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         }
         
         bottomBarView.layer.masksToBounds = false
-      
         recordView.layer.masksToBounds = false
         
 //        picker?.delegate = self
@@ -268,30 +252,30 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         // button targetss
         
         openKeyboard.addTarget(self, action: #selector(openKeyboard(sender:)), for: .touchUpInside)
-        
         recordDeleteButton.addTarget(self, action: #selector(deleteRecord(sender:)), for: .touchUpInside)
-        
         recordAudioButton.addTarget(self, action: #selector(audioRecord(sender:)), for: .touchUpInside)
-        
         sendRecordButton.addTarget(self, action: #selector(sendRecord(sender:)), for: .touchUpInside)
-        
-//        cameraManager = CameraManager()
-        
-//        cameraManager.shouldFlipFrontCameraImage = true
-        
+
         checkPermission()
-        
-        recordView.isHidden = true
-        
         displayMessageInterface()
         
+        // long press and select messages
+        
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressCell(gesture:)))
-        
         chatTableView.isUserInteractionEnabled = true
-        
         longPress.delegate = self
-        
         chatTableView.addGestureRecognizer(longPress)
+        
+        // shadow for bottom view
+        
+        self.bottomBarView.layer.shadowPath =
+            UIBezierPath(roundedRect: self.bottomBarView.bounds,
+                         cornerRadius: self.bottomBarView.layer.cornerRadius).cgPath
+        self.bottomBarView.layer.shadowColor = UIColor.black.cgColor
+        self.bottomBarView.layer.shadowOpacity = 0.5
+        self.bottomBarView.layer.shadowOffset = CGSize(width: 10, height: 10)
+        self.bottomBarView.layer.shadowRadius = 1
+        self.bottomBarView.layer.masksToBounds = false
         
     } //viewdidload
     
@@ -1392,8 +1376,16 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             nameLabel.textColor = UIColor(hex: "1183FF")
             
-            nameLabel.text = chatUserName
-            
+            if self.messages[(indexpath?.row)!].sender == self.messages[(indexpath?.row)!].currentUser {
+                
+               nameLabel.text = chatUserName
+                
+            }else {
+                
+                 nameLabel.text = "You"
+                
+            }
+       
             nameLabel.font = UIFont(name: "Muli-Bold", size: 15.0)
             
             replySubView.addSubview(nameLabel)

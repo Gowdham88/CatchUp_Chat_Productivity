@@ -548,7 +548,7 @@
                                                     <action selector="didTappedBack:" destination="PEs-1i-fPb" eventType="touchUpInside" id="OYA-E3-4mF"/>
                                                 </connections>
                                             </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_user" translatesAutoresizingMaskIntoConstraints="NO" id="Kqf-0c-z8D">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_user" translatesAutoresizingMaskIntoConstraints="NO" id="Kqf-0c-z8D">
                                                 <rect key="frame" x="60" y="15" width="38" height="38"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="38" id="Bpa-bk-CIy"/>

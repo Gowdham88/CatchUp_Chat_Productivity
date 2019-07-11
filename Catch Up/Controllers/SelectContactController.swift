@@ -41,6 +41,8 @@ class SelectContactController: UIViewController {
     
     var messageId: String!
     var userContactNumber: String!
+    var userContactName: String!
+    var userContactImage: String!
     
 var contacts = [CNContact]()
     
@@ -262,11 +264,18 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
         
         recipient = searchDetail[indexPath.row].userKey
         userContactNumber = searchDetail[indexPath.row].userContactNumber
+        
+        userContactName = searchDetail[indexPath.row].userName
+        userContactImage = searchDetail[indexPath.row].userPhotoThumbnail
+
+        
         print("recipient contact id::\(String(describing: recipient))")
         print("message id::\(String(describing: messageId))")
         print("contact id::\(String(describing: userContactNumber))")
+        print("user Contact Name::\(String(describing: userContactName))")
+        print("user Contact Image::\(String(describing: userContactImage))")
 
-
+        
         
         if isForward == false {
             
@@ -278,7 +287,9 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
             vc.recipient = recipient
             vc.messageId = messageId
             vc.userContactNumber = userContactNumber
-
+            vc.userContactName = userContactName
+            vc.userContactImage = userContactImage
+            
             
             self.navigationController?.pushViewController(vc, animated: true)
             

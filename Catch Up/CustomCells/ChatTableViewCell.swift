@@ -13,6 +13,7 @@ import FirebaseDatabase
 import SwiftKeychainWrapper
 
 var chatUserName: String?
+var chatUserImg: String?
 
 class ChatTableViewCell: UITableViewCell {
 
@@ -72,6 +73,9 @@ class ChatTableViewCell: UITableViewCell {
 //                    }
                     
                     if let photoUrl = URL(string: item.value as! String) {
+                        
+                        chatUserImg = photoUrl.absoluteString
+
                         
                         self.recipientImg.sd_setImage(with: photoUrl)
                     }

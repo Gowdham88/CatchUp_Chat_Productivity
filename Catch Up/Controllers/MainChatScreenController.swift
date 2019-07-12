@@ -10,8 +10,8 @@ import UIKit
 import AVFoundation
 import AVKit
 import Photos
-import JSQMessagesViewController
-import IQAudioRecorderController
+//import JSQMessagesViewController
+//import IQAudioRecorderController
 import IDMPhotoBrowser
 import Firebase
 import FirebaseMessaging
@@ -19,6 +19,7 @@ import FirebaseDatabase
 import JSQMessagesViewController
 import FirebaseStorage
 import SwiftKeychainWrapper
+import CoreFoundation
 
 
 
@@ -27,7 +28,7 @@ import SwiftKeychainWrapper
 
 
 
-class MainChatScreenController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class MainChatScreenController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource {
   
   
 //    func messagesCollectionViewCellDidTapAvatar(_ cell: JSQMessagesCollectionViewCell!) {
@@ -47,9 +48,9 @@ class MainChatScreenController: UIViewController,UINavigationControllerDelegate,
 //    }
 //
 
-    func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String) {
-        
-    }
+//    func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String) {
+//
+//    }
     
   
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -109,6 +110,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     
     var audioRecorder:AVAudioRecorder!
+    var audioPlayer : AVAudioPlayer?
     var meterTimer:Timer!
     var isRecording = false
     var isAudioRecordingGranted: Bool!
@@ -165,16 +167,20 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var checkImageArray = [UIImage]()
     
-    var isSelected: Bool = false
-    
     @IBOutlet var bottomBarHeightConstant: NSLayoutConstraint!
-        
+    
+    var messageType: String?
+    
+    var messageTypeArray: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         self.longPressView.isHidden = true
         recordView.isHidden = true
+        
+        chatTableView.rowHeight = UITableView.automaticDimension
+        chatTableView.estimatedRowHeight = 650
 
 //        self.chatTableView.frame = CGRect(x: self.chatTableView.frame.origin.x, y: self.chatTableView.frame.origin.y, width: self.chatTableView.frame.size.width, height: self.view.frame.size.height - self.chatTableView.frame.origin.y)
 
@@ -286,7 +292,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //        bottomBarView.layer.shadowOpacity = 0.2
 //        bottomBarView.layer.shadowColor = UIColor.gray.cgColor
 //        bottomBarView.layer.shadowOffset = CGSize(width: 3 , height:3)
-        bottomBarView.layer.masksToBounds = false
+//        bottomBarView.layer.masksToBounds = false
      
         if messageId != "" && messageId != nil {
             
@@ -294,7 +300,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
         }
         
-        bottomBarView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+//        bottomBarView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
     } //viewdidload
     
@@ -506,7 +512,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if btnRecordOrSend.imageView?.image == UIImage(named: "btn_send2") {
             
-             messageSend()
+            messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
             
             recordView.isHidden = true
             
@@ -518,8 +524,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }
     
-    func openGallery()
-    {
+    func openGallery() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -544,7 +549,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        
             return messages.count
         
 //        return dummyMessageArray.count
@@ -553,11 +557,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("message count::\(messages.count)")
-        
         let message = messages[indexPath.row]
-        
-        print("message timestamp::\(messages[indexPath.row].receivedTimeStamp)")
         
         if let cell = chatTableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
             
@@ -572,27 +572,16 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 cell.checkImage.alpha = 1
                 
                 cell.checkImage.image = checkImageArray[indexPath.row]
-                
-                if isSelected {
-                    
-                    cell.recievedMessageView.alpha = 0.5
-
-
- 
-                }else {
-                    
-                    cell.recievedMessageView.alpha = 1.0
-                }
-                
 
             }else {
                 
                 cell.checkImage.alpha = 0
+                
+                cell.contentView.alpha = 1.0
             }
             
-
             
-            cell.configCell(message: message)
+            cell.configCell(message: message, isReplyMessage: false)
 
             cell.backgroundColor = .clear
 
@@ -622,9 +611,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     }
     
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -636,9 +625,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
 //                cell.checkImage.image = UIImage(named: "check_blue")
                 
-                checkImageArray[indexPath.row] = UIImage(named: "check_blue")!
+//                cell.checkImage.frame = CGRect(x: 12, y: 26, width: 20, height: 20)
                 
-                isSelected = true
+                checkImageArray[indexPath.row] = UIImage(named: "Check")!
+                
+                cell.contentView.alpha = 0.5
 
                 // open pop up view
 
@@ -646,9 +637,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
 //                cell.checkImage.image = UIImage(named: "un-check")
                 
+//                cell.checkImage.frame = CGRect(x: 12, y: 26, width: 20, height: 20)
+                
                 checkImageArray[indexPath.row] = UIImage(named: "un-check")!
                 
-                isSelected = false
+                cell.contentView.alpha = 1.0
             }
 
     }
@@ -741,7 +734,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //        return true
 //    }
-    func messageSendnew(){
+    func messageSendnew(messageType: String){
         
         
         
@@ -758,8 +751,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": NSDate().timeIntervalSince1970 as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
                     "from": userContactNumber as AnyObject,
-                    "chatMessageType": "TEXT" as AnyObject,
                     "chatMessageId": messageId as AnyObject,
+                    "chatAttachment": "" as AnyObject,
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject
+                    
                     
                 ]
                 
@@ -793,8 +789,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
                     firebase_currentUser_Message.setValue(post)
                 }
-            
-              
                 
                 let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
 
@@ -882,7 +876,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }
         
-    func messageSend(){
+    func messageSend(messageType:String,chatAttachment: String){
         
         if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
             
@@ -891,7 +885,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let post: Dictionary<String, AnyObject> = [
                     "message": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+                    "chatMessageId": messageId as AnyObject,
+                    "chatAttachment": chatAttachment as AnyObject,
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject
 //                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
@@ -899,7 +897,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
 //                    "timestamp": ServerValue.timestamp() as AnyObject
-                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+                    "chatMessageId": messageId as AnyObject,
+                    "chatAttachment": "" as AnyObject,
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
@@ -1068,36 +1070,86 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
     
     @objc func audioRecord(sender: UIButton) {
         
-        if(isRecording)
-        {
-            finishAudioRecording(success: true)
-            recordAudioButton.setImage(UIImage(named: "Record"), for: .normal)
-//            play_btn_ref.isEnabled = true
-            isRecording = false
-        }
-        else
-        {
-            setup_recorder()
-            isRecording = true
-            audioRecorder.record()
-            meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
-            recordAudioButton.setImage(UIImage(named: "stop_Record"), for: .normal)
-//            play_btn_ref.isEnabled = false
+        if recordAudioButton.imageView?.image == UIImage(named: "Record") {
             
+            
+//            if(isRecording) {
+//
+//                finishAudioRecording(success: true)
+//                recordAudioButton.setImage(UIImage(named: "Record"), for: .normal)
+//                //            play_btn_ref.isEnabled = true
+//                isRecording = false
+//
+//            }else {
+//                setup_recorder()
+//                isRecording = true
+//                audioRecorder.record()
+//                meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
+//                recordAudioButton.setImage(UIImage(named: "stop_Record"), for: .normal)
+//                //            play_btn_ref.isEnabled = false
+//
+//            }
+            
+            
+            
+          
+                setup_recorder()
+                isRecording = true
+                audioRecorder.record()
+                meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
+                recordAudioButton.setImage(UIImage(named: "stop_Record"), for: .normal)
+                //            play_btn_ref.isEnabled = false
+                
+          
+
+        }else if recordAudioButton.imageView?.image == UIImage(named: "stop_Record") {
+            
+            if(isRecording) {
+                
+                finishAudioRecording(success: true)
+                recordAudioButton.setImage(UIImage(named: "send_recorded"), for: .normal)
+                //            play_btn_ref.isEnabled = true
+                isRecording = false
+                
+            }
+            
+        }else {
+            
+            var error : NSError?
+            do {
+                
+                let recordedUrl = audioRecorder.url
+               
+                audioPlayer = try AVAudioPlayer(contentsOf: recordedUrl)
+//                audioPlayer = player
+                
+            } catch {
+                
+                print("player setup error",error)
+            }
+            
+            audioPlayer?.delegate = self
+
+            if let err = error {
+                
+                print("audioPlayer error: \(err.localizedDescription)")
+                
+            }else{
+                audioPlayer?.play()
+            }
         }
         
     }
     
     @objc func sendRecord(sender: UIButton) {
         
-      
+        messageSend(messageType: "AUDIO", chatAttachment: "")
         
     }
     
     @objc func openKeyboard(sender: UIButton) {
         
         recordView.isHidden = true
-        
         typeMessageTextField.becomeFirstResponder()
         
     }
@@ -1105,8 +1157,7 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
     
     @objc func updateAudioMeter(timer: Timer)
     {
-        if audioRecorder.isRecording
-        {
+        if audioRecorder.isRecording {
 //            let hr = Int((audioRecorder.currentTime / 60) / 60)
             let min = Int(audioRecorder.currentTime / 60)
             let sec = Int(audioRecorder.currentTime.truncatingRemainder(dividingBy: 60))
@@ -1119,8 +1170,7 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
     
     func finishAudioRecording(success: Bool)
     {
-        if success
-        {
+        if success {
             audioRecorder.stop()
             audioRecorder = nil
             meterTimer.invalidate()
@@ -1131,46 +1181,81 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
         }
     }
     
-    func setup_recorder()
-    {
-        if isAudioRecordingGranted
-        {
-            let session = AVAudioSession.sharedInstance()
-            do
-            {
-//                try session.setCategory(AVAudioSession.Category.playAndRecord, with: .mixWithOthers)
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
-                try session.setActive(true)
-                let settings = [
-                    AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                    AVSampleRateKey: 44100,
-                    AVNumberOfChannelsKey: 2,
-                    AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
-                ]
-                audioRecorder = try AVAudioRecorder(url: getFileUrl(), settings: settings)
+    func setup_recorder() {
+        if isAudioRecordingGranted {
+          
+            
+//            let session = AVAudioSession.sharedInstance()
+//            do {
+////                try session.setCategory(AVAudioSession.Category.playAndRecord, with: .mixWithOthers)
+//                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
+//                try session.setActive(true)
+//                let settings = [
+//                    AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+//                    AVSampleRateKey: 44100,
+//                    AVNumberOfChannelsKey: 2,
+//                    AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
+//                ]
+//                audioRecorder = try AVAudioRecorder(url: getFileUrl(), settings: settings)
+//                audioRecorder.delegate = self
+//                audioRecorder.isMeteringEnabled = true
+//                audioRecorder.prepareToRecord()
+//            }
+//            catch let error {
+//                print("catched some error during recording",error)
+//            }
+            
+            
+            //Setting for recorder
+            
+            let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            let docDir = dirPath[0]
+            let soundFilePath = docDir.appending("sound.caf")
+            let soundFileURL = NSURL(fileURLWithPath: soundFilePath)
+            print(soundFileURL)
+            
+            
+            let recordSettings = [AVEncoderAudioQualityKey: AVAudioQuality.min.rawValue,
+                                  AVEncoderBitRateKey: 16,
+                                  AVNumberOfChannelsKey : 2,
+                                  AVSampleRateKey: 44100.0] as [String : Any]
+            var error : NSError?
+            let audioSession = AVAudioSession.sharedInstance()
+            
+            do {
+               try audioSession.setCategory(.playAndRecord)
+                //            audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, error: &error)
+                if let err = error{
+                    print("audioSession error: \(err.localizedDescription)")
+                }
+                audioRecorder = try AVAudioRecorder(url: soundFileURL as URL, settings: recordSettings )
                 audioRecorder.delegate = self
                 audioRecorder.isMeteringEnabled = true
-                audioRecorder.prepareToRecord()
+                if let err = error{
+                    print("audioSession error: \(err.localizedDescription)")
+                }else{
+                    audioRecorder?.prepareToRecord()
+                }
+            }catch{
+                
+                print("catched some error during recording",error)
             }
-            catch let error {
-                print("catched some error during recording")
-            }
+           
+            
+            
         }else {
             print("please enable audio access for catch app")
         }
     }
     
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool)
-    {
-        if !flag
-        {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
             finishAudioRecording(success: false)
         }
         
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool)
-    {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
     }
 }
@@ -1182,11 +1267,18 @@ extension MainChatScreenController {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         return documentsDirectory
+        
+//        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+//        let docDir = dirPath[0]
+//        let soundFilePath = (docDir as NSString).appendingPathComponent("sound.caf")
+//        let soundFileURL = URL(fileURLWithPath: soundFilePath)
+//        print("document url",soundFilePath)
+//        return soundFileURL
     }
     
-    func getFileUrl() -> URL
-    {
-        let filename = "myRecording.m4a"
+    func getFileUrl() -> URL {
+        let randomID = UUID().uuidString
+        let filename = randomID + ".m4a"
         let filePath = getDocumentsDirectory().appendingPathComponent(filename)
         return filePath
     }
@@ -1249,7 +1341,7 @@ extension MainChatScreenController: UITextFieldDelegate {
         
         recordView.isHidden = true
         
-        messageSend()
+//        messageSend()
         
 //        messageSendnew()
 
@@ -1285,28 +1377,23 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
 //
 //        if gesture.state == .began {
 //
-////             cell.checkImage.isHidden = false
+//
+//        }
+
+//        if gesture.state == .ended {
+//
 //
 //            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
 //
-//                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + cell.checkImage.frame.width + 35
-//
-////                cell.checkImage.isHidden = false
-////
-//
+//                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + cell.checkImage.frame.width + 25
 //
 //            })
-//        }
-//
-//
-//
-//        if gesture.state == .ended {
 //
 //            cell.isUserInteractionEnabled = true
 //
 //
 //        }
-//
+
         
         self.groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
         
@@ -1401,8 +1488,6 @@ extension MainChatScreenController {
         
         isLongPressed = false
         
-        isSelected = false
-        
         if groupButton.imageView?.image == UIImage(named: "Cross_close") {
             
             groupButton.setImage(UIImage(named: "Group"), for: .normal)
@@ -1423,4 +1508,5 @@ extension MainChatScreenController {
 //        return UInt64((self.timeIntervalSince1970 + 62_135_596_800) * 10_000_000)
 //    }
 //}
+
 

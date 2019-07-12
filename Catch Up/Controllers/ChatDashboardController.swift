@@ -212,9 +212,16 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
 //        print("user Contact Name:: recent \(String(describing: userContactName))")
 //        print("user Contact Image:: recent \(String(describing: userContactImage))")
         let sb = UIStoryboard(name: "Chat", bundle: nil)
+        
         let vc = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController
-        vc.recipient = recipient
+        
+        if let receip = recipient {
+            
+            vc.recipient = receip
+        }
+        
         vc.messageId = messageId
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

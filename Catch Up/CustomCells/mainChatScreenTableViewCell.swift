@@ -36,15 +36,23 @@ class mainChatScreenTableViewCell: UITableViewCell {
     var message: Message!
     
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
-
+    
+    // reply view properties
+    @IBOutlet var replyView: UIView!
+    @IBOutlet var replyTop: UIView!
+    @IBOutlet var messageToBeRepliedLabel: UILabel!
+    @IBOutlet var replyLabel: UILabel!
+    @IBOutlet var replyTimeLabel: UILabel!
+    @IBOutlet var replyMessageStatusImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
+        replyView.isHidden = true
+        
         sentMessageView.layer.masksToBounds  = true
         recievedMessageView.layer.masksToBounds = true
-        
-
         
 //        recievedMessageLbl.textAlignment = .left
         recievedMessageLbl.sizeToFit()
@@ -64,20 +72,18 @@ class mainChatScreenTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configCell(message: Message) {
+    func configCell(message: Message,isReplyMessage: Bool) {
         
         self.message = message
         
-        print("message label::\(message.message.count)")
-        
-        print("sender id : \(message.sender) receiver id: \(String(describing: currentUser))")
-
-        
-        print("sender id \(message.sender) and current user \(String(describing: currentUser))")
+//        print("message label::\(message.message.count)")
+//
+//        print("sender id : \(message.sender) receiver id: \(String(describing: currentUser))")
+//
+//
+//        print("sender id \(message.sender) and current user \(String(describing: currentUser))")
         
         if message.sender == currentUser {
-            
-
             
             sentMessageView.isHidden = true
             sentMessageLbl.isHidden = true
@@ -102,32 +108,30 @@ class mainChatScreenTableViewCell: UITableViewCell {
             
         } else {
             
- 
-            
             sentMessageView.isHidden = false
+            recievedMessageLbl.isHidden = true
+            recievedMessageView.isHidden = true
             
             sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
-//           sentMessageLbl.frame.size.width = sentMessageLbl.intrinsicContentSize.width + 10
-//           sentMessageLbl.frame.size.height = sentMessageLbl.intrinsicContentSize.height + 10
-            print("sent messages",message.message)
-//            sentMessageLbl.text =  message.message
-            
-            
-            
             recievedMessageLbl.text = ""
-            let strValue = message.message
-            sentMessageLbl?.text = "\(strValue)"
-            
-            print("timestamp:::\(message.receivedTimeStamp)")
-            let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
-            print("new time1:::\(String(describing: timeNew1))")
- 
-            sentTimeLabel.text =  timeNew1
+  
+            if isReplyMessage {
+                
+                sentMessageView.isHidden = true
+                recievedMessageLbl.isHidden = true
+                recievedMessageView.isHidden = true
+                
+                
+                
+            }else {
+                
+                let strValue = message.message
+                sentMessageLbl?.text = "\(strValue)"
+                let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
+                sentTimeLabel.text =  timeNew1
 
-            recievedMessageLbl.isHidden = true
+            }
             
-            recievedMessageView.isHidden = true
-
             
             
    

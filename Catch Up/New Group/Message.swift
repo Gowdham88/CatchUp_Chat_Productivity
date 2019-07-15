@@ -17,6 +17,8 @@ class Message {
     
     private var _message: String!
     
+    private var _photoMessage: String!
+    
     private var _sender: String!
     
     private var _messageKey: String!
@@ -31,6 +33,7 @@ class Message {
     
     private var _from: String!
 
+
     
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     
@@ -38,6 +41,12 @@ class Message {
         
         return _message
     }
+    
+    var photoMessage: String {
+        
+        return _photoMessage
+    }
+
     
     var sender: String {
         
@@ -70,6 +79,11 @@ class Message {
             _message = message
         }
         
+        if let photo = postData["chatAttachment"] as? String {
+            
+            _photoMessage = photo
+        }
+        
         if let sender = postData["sender"] as? String {
             
             _sender = sender
@@ -79,6 +93,8 @@ class Message {
             
             _receivedTimeStamp = time
         }
+        
+        
         
         _messageRef = Database.database().reference().child("messages").child(_messageKey)
         

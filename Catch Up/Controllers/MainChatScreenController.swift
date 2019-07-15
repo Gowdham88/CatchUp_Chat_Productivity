@@ -10,8 +10,8 @@ import UIKit
 import AVFoundation
 import AVKit
 import Photos
-import JSQMessagesViewController
-import IQAudioRecorderController
+//import JSQMessagesViewController
+//import IQAudioRecorderController
 import IDMPhotoBrowser
 import Firebase
 import FirebaseMessaging
@@ -19,6 +19,7 @@ import FirebaseDatabase
 import JSQMessagesViewController
 import FirebaseStorage
 import SwiftKeychainWrapper
+import CoreFoundation
 
 
 
@@ -27,7 +28,7 @@ import SwiftKeychainWrapper
 
 
 
-class MainChatScreenController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,IQAudioRecorderViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class MainChatScreenController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource {
   
   
 //    func messagesCollectionViewCellDidTapAvatar(_ cell: JSQMessagesCollectionViewCell!) {
@@ -47,9 +48,9 @@ class MainChatScreenController: UIViewController,UINavigationControllerDelegate,
 //    }
 //
 
-    func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String) {
-        
-    }
+//    func audioRecorderController(_ controller: IQAudioRecorderViewController, didFinishWithAudioAtPath filePath: String) {
+//
+//    }
     
   
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -57,6 +58,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipient: String!
     var messageId: String!
     var userContactNumber: String!
+    var userContactName: String!
+    var userContactImage: String!
     
 //    var messages = [Message]()
     
@@ -80,6 +83,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var threadBackupView: UIView!
 //    @IBOutlet weak var threadMainImageView: UIImageView!
     @IBOutlet weak var bottomBarView: UIView!
+    @IBOutlet weak var navProfileName: UILabel!
     
     
     // bottom bar outlets
@@ -100,7 +104,13 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet var recordAudioButton: UIButton!
     @IBOutlet var sendRecordButton: UIButton!
   
+    @IBOutlet weak var longPressView: UIView!
+    
+    
+    
+    
     var audioRecorder:AVAudioRecorder!
+    var audioPlayer : AVAudioPlayer?
     var meterTimer:Timer!
     var isRecording = false
     var isAudioRecordingGranted: Bool!
@@ -157,49 +167,44 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var checkImageArray = [UIImage]()
     
+    @IBOutlet var bottomBarHeightConstant: NSLayoutConstraint!
+    
+    var messageType: String?
+    
+    var messageTypeArray: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        self.longPressView.isHidden = true
+        recordView.isHidden = true
         
-        self.chatTableView.frame = CGRect(x: self.chatTableView.frame.origin.x, y: self.chatTableView.frame.origin.y, width: self.chatTableView.frame.size.width, height: self.view.frame.size.height - self.chatTableView.frame.origin.y)
+        chatTableView.rowHeight = UITableView.automaticDimension
+        chatTableView.estimatedRowHeight = 650
+
+//        self.chatTableView.frame = CGRect(x: self.chatTableView.frame.origin.x, y: self.chatTableView.frame.origin.y, width: self.chatTableView.frame.size.width, height: self.view.frame.size.height - self.chatTableView.frame.origin.y)
 
 
         // Do any additional setup after loading the view.
+        
+        print("selected recipient id ::\(recipient)")
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
         
       //table view background changed here..
         
-        let backgroundImage = #imageLiteral(resourceName: "image")
-        let imageView = UIImageView(image: backgroundImage)
-     
-        let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.chatTableView.frame.size.width, height: self.chatTableView.frame.size.height))
+//        let backgroundImage = #imageLiteral(resourceName: "image")
+//        let imageView = UIImageView(image: backgroundImage)
+//
+//        let overlay: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.chatTableView.frame.size.width, height: self.chatTableView.frame.size.height))
+//
+//        overlay.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+//
+//        imageView.addSubview(overlay)
+//
+//        self.chatTableView.backgroundView = imageView
         
-        overlay.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        
-        imageView.addSubview(overlay)
-        
-       self.chatTableView.backgroundView = imageView
-        
-          //table view background changed here..
-        
-//        chatTableView.estimatedRowHeight = 300.0
-        chatTableView.rowHeight = UITableView.automaticDimension
-        
-        print("messageId id::::\(String(describing: messageId))")
-        print("contact number::::\(String(describing: userContactNumber))")
-
-        
-        
-
-
-        if messageId != "" && messageId != nil {
-            
-            
-            loadData()
-            
-        }
         
         NotificationCenter.default.addObserver(
             self,
@@ -211,11 +216,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             self,
             selector: #selector(self.keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        // target for group button
+        
+        groupButton.addTarget(self, action: #selector(groupButtonOrClose(sender:)), for: .touchUpInside)
     
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-
-        view.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//
+//        view.addGestureRecognizer(tap)
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
         
@@ -232,6 +241,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         chatTableView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         recordView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
         bottomBarView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        longPressView.roundCorners(corners: [.topLeft, .topRight], radius: 20.0)
+        
         navProfileImage.layer.cornerRadius = navProfileImage.frame.height/2
         
         if let StatusbarView = UIApplication.shared.value(forKey: "statusBar") as? UIView {
@@ -241,8 +252,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             StatusbarView.setGradientBackground(view: StatusbarView)
         }
         
-        bottomBarView.layer.masksToBounds = false
-      
         recordView.layer.masksToBounds = false
         
 //        picker?.delegate = self
@@ -251,30 +260,47 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         // button targetss
         
         openKeyboard.addTarget(self, action: #selector(openKeyboard(sender:)), for: .touchUpInside)
-        
         recordDeleteButton.addTarget(self, action: #selector(deleteRecord(sender:)), for: .touchUpInside)
-        
         recordAudioButton.addTarget(self, action: #selector(audioRecord(sender:)), for: .touchUpInside)
-        
         sendRecordButton.addTarget(self, action: #selector(sendRecord(sender:)), for: .touchUpInside)
-        
-//        cameraManager = CameraManager()
-        
-//        cameraManager.shouldFlipFrontCameraImage = true
-        
+
         checkPermission()
-        
-        recordView.isHidden = true
-        
         displayMessageInterface()
         
+        // long press and select messages
+        
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressCell(gesture:)))
-        
         chatTableView.isUserInteractionEnabled = true
-        
         longPress.delegate = self
-        
         chatTableView.addGestureRecognizer(longPress)
+        
+        // shadow for bottom view
+        
+//        self.bottomBarView.layer.shadowPath =
+//            UIBezierPath(roundedRect: self.bottomBarView.bounds,
+//                         cornerRadius: self.bottomBarView.layer.cornerRadius).cgPath
+//        self.bottomBarView.layer.shadowColor = UIColor.black.cgColor
+//        self.bottomBarView.layer.shadowOpacity = 0.5
+//        self.bottomBarView.layer.shadowOffset = CGSize(width: 10, height: 10)
+//        self.bottomBarView.layer.shadowRadius = 1
+//        self.bottomBarView.layer.masksToBounds = false
+//        self.bottomBarView.clipsToBounds = true
+        
+//        bottomBarView.layer.cornerRadius = 20.0
+//        bottomBarView.clipsToBounds = false
+//        bottomBarView.layer.shadowRadius = 10.0
+//        bottomBarView.layer.shadowOpacity = 0.2
+//        bottomBarView.layer.shadowColor = UIColor.gray.cgColor
+//        bottomBarView.layer.shadowOffset = CGSize(width: 3 , height:3)
+//        bottomBarView.layer.masksToBounds = false
+     
+        if messageId != "" && messageId != nil {
+            
+            loadData()
+            
+        }
+        
+//        bottomBarView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
     } //viewdidload
     
@@ -282,15 +308,68 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidAppear(_ animated: Bool) {
         
         if messageId != "" && messageId != nil {
-            
-            print("message id in viewdidappear::\(messageId)")
         
-            
             loadData()
             
         }
         
+        NavProfileData()
+        navProfileFromContact()
+        
     }//viewdidappear
+    
+    
+    func navProfileFromContact(){
+        
+        if let userImg = userContactImage {
+            
+            
+            self.navProfileImage.sd_setImage(with: URL(string: userImg))
+            
+        }
+        
+        if let userName = userContactName {
+            
+            self.navProfileName.text = userName
+        }
+        
+    }
+
+    func NavProfileData(){
+  
+        
+        let recipientData = Database.database().reference().child("user").child(recipient)
+        
+        recipientData.observeSingleEvent(of: .value) { (snapshot) in
+            
+            let data = snapshot.value as! Dictionary<String, AnyObject>
+            
+            for item in data {
+                
+                if item.key == "userName" {
+                    
+                    self.navProfileName.text = item.value as? String
+                    
+                }
+                
+                if item.key == "userPhotoThumbnail" {
+
+                    
+                    if let photoUrl = URL(string: item.value as! String) {
+                                                
+                        
+                        self.navProfileImage.sd_setImage(with: photoUrl)
+                    }
+                    
+                    
+                }
+                
+
+            }
+            
+        }
+        
+    }
     
     
     @objc func keyboardWillShow(notify: NSNotification) {
@@ -304,7 +383,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
             if self.view.frame.origin.y == 0 {
                 
-                if let Keyboard = keyboardSize {
+                if let Keyboard = keyboardSize  {
                     
                      self.view.frame.origin.y -= Keyboard.height
                 }
@@ -433,7 +512,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if btnRecordOrSend.imageView?.image == UIImage(named: "btn_send2") {
             
-             messageSend()
+            messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
             
             recordView.isHidden = true
             
@@ -445,8 +524,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }
     
-    func openGallery()
-    {
+    func openGallery() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -471,7 +549,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        
             return messages.count
         
 //        return dummyMessageArray.count
@@ -480,11 +557,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("message count::\(messages.count)")
-        
         let message = messages[indexPath.row]
-        
-        print("message timestamp::\(messages[indexPath.row].receivedTimeStamp)")
         
         if let cell = chatTableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
             
@@ -494,48 +567,33 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             cell.recievedMessageLbl.roundCorners(corners: [.topRight,.bottomLeft,.bottomRight], radius: 5.0)
             
-//            if cell.checkImage.image == UIImage(named: "un-check") {
-//
-//                cell.checkImage.image = UIImage(named: "check_blue")
-//
-//            }else {
-//
-//                cell.checkImage.image = UIImage(named: "un-check")
-//            }
+            if isLongPressed  {
+                
+                cell.checkImage.alpha = 1
+                
+                cell.checkImage.image = checkImageArray[indexPath.row]
+
+            }else {
+                
+                cell.checkImage.alpha = 0
+                
+                cell.contentView.alpha = 1.0
+            }
             
-            cell.checkImage.image = checkImageArray[indexPath.row]
             
-            cell.checkImage.isHidden = true
-            
-//            cell.recievedMessageLbl.sizeToFit()
+            cell.configCell(message: message, isReplyMessage: false)
+
+            cell.backgroundColor = .clear
 
             
-            cell.configCell(message: message)
+            //swipe to reply
+            let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeToReply(gesture:)))
             
-//            if dummyBoolArray[indexPath.row] == true {
-//
-//                cell.recievedMessageView.isHidden = false
-//                cell.sentMessageView.isHidden = true
-//
-//                cell.recievedMessageLbl.text = dummyMessageArray[indexPath.row]
-//                cell.receivedTimeLabel.text = "10:26 AM"
-//
-//            }else {
-//
-//                cell.recievedMessageView.isHidden = true
-//                cell.sentMessageView.isHidden = false
-//
-//                cell.sentMessageLbl.text = dummyMessageArray[indexPath.row]
-//                cell.sentTimeLabel.text = "10:26 AM"
-//            }
+            swipeGesture.direction = .right
             
-            let tapAtCell = UITapGestureRecognizer(target: self, action: #selector(tapOverTheCell(gesture:)))
+            cell.isUserInteractionEnabled = true
             
-            tapAtCell.numberOfTapsRequired = 1
-            
-            cell.addGestureRecognizer(tapAtCell)
-            cell.backgroundColor = .clear
-          
+            cell.addGestureRecognizer(swipeGesture)
             
             return cell
             
@@ -552,57 +610,84 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     }
     
-   @objc func tapOverTheCell(gesture: UITapGestureRecognizer) {
-        
-    if isLongPressed {
-        
-        let touchPoint = gesture.location(in: self.view)
-        
-        let indexPath = chatTableView.indexPathForRow(at: touchPoint)
-        
-        let cell = chatTableView.cellForRow(at: indexPath!) as! mainChatScreenTableViewCell
-        
-        if cell.checkImage.image == UIImage(named: "un-check") {
-            
-            cell.checkImage.image = UIImage(named: "check_blue")
-            
-            // open pop up view
-            
-        }else {
-            
-            cell.checkImage.image = UIImage(named: "un-check")
-            
-            
-        }
-        
-        self.chatTableView.reloadData()
-    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if isLongPressed {
-            
+//
             let cell = chatTableView.cellForRow(at: indexPath) as! mainChatScreenTableViewCell
-            
+//
             if cell.checkImage.image == UIImage(named: "un-check") {
+
+//                cell.checkImage.image = UIImage(named: "check_blue")
                 
-                cell.checkImage.image = UIImage(named: "check_blue")
+//                cell.checkImage.frame = CGRect(x: 12, y: 26, width: 20, height: 20)
                 
+                checkImageArray[indexPath.row] = UIImage(named: "Check")!
+                
+                cell.contentView.alpha = 0.5
+
                 // open pop up view
-                
+
             }else {
+
+//                cell.checkImage.image = UIImage(named: "un-check")
                 
-                cell.checkImage.image = UIImage(named: "un-check")
+//                cell.checkImage.frame = CGRect(x: 12, y: 26, width: 20, height: 20)
+                
+                checkImageArray[indexPath.row] = UIImage(named: "un-check")!
+                
+                cell.contentView.alpha = 1.0
             }
 
-        }
     }
+    
+        
+        chatTableView.reloadData()
+    }
+    
+    
+    // long press action
+    
+    
+    @IBAction func addTaskAction(_ sender: Any) {
+   
+        print("add task btn pressed")
+        self.longPressView.isHidden = true
+    
+    }
+    
+    @IBAction func replyAction(_ sender: Any) {
+        
+        print("reply btn pressed")
+        self.longPressView.isHidden = true
+        
+    }
+    
+    @IBAction func forwardAction(_ sender: Any) {
+        
+        print("forward btn pressed")
+        self.longPressView.isHidden = true
+        
+    }
+    @IBAction func copAction(_ sender: Any) {
+        
+        print("copy btn pressed")
+        self.longPressView.isHidden = true
+    }
+    
+    @IBAction func deleteAction(_ sender: Any) {
+        
+        print("delete btn pressed")
+        self.longPressView.isHidden = true
+        
+        
+    }
+    
     
     func loadData() {
         
@@ -649,7 +734,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //        return true
 //    }
-    func messageSendnew(){
+    func messageSendnew(messageType: String){
         
         
         
@@ -663,24 +748,27 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let post: Dictionary<String, AnyObject> = [
                     "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject,
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
                     "from": userContactNumber as AnyObject,
-                    "chatMessageType": "TEXT" as AnyObject,
                     "chatMessageId": messageId as AnyObject,
+                    "chatAttachment": "" as AnyObject,
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject
+                    
                     
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp":NSDate().timeIntervalSince1970 as AnyObject
                 ]
                 
 //                messageId = Database.database().reference().child("messages").childByAutoId().key
@@ -701,8 +789,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
                     firebase_currentUser_Message.setValue(post)
                 }
-            
-              
                 
                 let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
 
@@ -720,7 +806,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
                     "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject,
+//                    "timestamp": ServerValue.timestamp() as AnyObject,
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
                     "from": userContactNumber as AnyObject,
                     "chatMessageType": "TEXT" as AnyObject,
@@ -730,13 +817,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
                 ]
                 
                 
@@ -755,9 +844,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                userMessage.setValue(message)
                 
                 messageId = Database.database().reference().child(recipient).child("inbox_new").childByAutoId().key
-                
-                print("new message id:::\(messageId)")
-                
                 
                 let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox_new").child(messageId)
                 
@@ -788,43 +874,47 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         moveToBottom()
         
-        
     }
         
-    func messageSend(){
-        
-        
+    func messageSend(messageType:String,chatAttachment: String){
         
         if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
-            
-            print("recipient id::::\(String(describing: recipient))")
-            
             
             if messageId == nil {
                 
                 let post: Dictionary<String, AnyObject> = [
                     "message": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+                    "chatMessageId": messageId as AnyObject,
+                    "chatAttachment": chatAttachment as AnyObject,
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+                    "chatMessageId": messageId as AnyObject,
+                    "chatAttachment": "" as AnyObject,
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+//                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
                 
                 messageId = Database.database().reference().child("messages").childByAutoId().key
 //                messageId = Database.database().reference().child("user").child(currentUser!).child("outbox").childByAutoId().key
                 
                 let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
-                print("message id::::\(String(describing: messageId))")
 //                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
@@ -844,19 +934,20 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let post: Dictionary<String, AnyObject> = [
                     "message": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp": ServerValue.timestamp() as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
                 
                 let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
@@ -909,9 +1000,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func didEditingChanged(_ sender: Any) {
         
-        print("typign count \(typeMessageTextField.text?.count)")
-        
-        
         if typeMessageTextField.text!.count >= 1 {
             
             btnRecordOrSend.setImage(UIImage(named: "btn_send2"), for: .normal)
@@ -923,6 +1011,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }
 
+    
+   
     
 }//class
 
@@ -980,36 +1070,86 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
     
     @objc func audioRecord(sender: UIButton) {
         
-        if(isRecording)
-        {
-            finishAudioRecording(success: true)
-            recordAudioButton.setImage(UIImage(named: "Record"), for: .normal)
-//            play_btn_ref.isEnabled = true
-            isRecording = false
-        }
-        else
-        {
-            setup_recorder()
-            isRecording = true
-            audioRecorder.record()
-            meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
-            recordAudioButton.setImage(UIImage(named: "stop_Record"), for: .normal)
-//            play_btn_ref.isEnabled = false
+        if recordAudioButton.imageView?.image == UIImage(named: "Record") {
             
+            
+//            if(isRecording) {
+//
+//                finishAudioRecording(success: true)
+//                recordAudioButton.setImage(UIImage(named: "Record"), for: .normal)
+//                //            play_btn_ref.isEnabled = true
+//                isRecording = false
+//
+//            }else {
+//                setup_recorder()
+//                isRecording = true
+//                audioRecorder.record()
+//                meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
+//                recordAudioButton.setImage(UIImage(named: "stop_Record"), for: .normal)
+//                //            play_btn_ref.isEnabled = false
+//
+//            }
+            
+            
+            
+          
+                setup_recorder()
+                isRecording = true
+                audioRecorder.record()
+                meterTimer = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
+                recordAudioButton.setImage(UIImage(named: "stop_Record"), for: .normal)
+                //            play_btn_ref.isEnabled = false
+                
+          
+
+        }else if recordAudioButton.imageView?.image == UIImage(named: "stop_Record") {
+            
+            if(isRecording) {
+                
+                finishAudioRecording(success: true)
+                recordAudioButton.setImage(UIImage(named: "send_recorded"), for: .normal)
+                //            play_btn_ref.isEnabled = true
+                isRecording = false
+                
+            }
+            
+        }else {
+            
+            var error : NSError?
+            do {
+                
+                let recordedUrl = audioRecorder.url
+               
+                audioPlayer = try AVAudioPlayer(contentsOf: recordedUrl)
+//                audioPlayer = player
+                
+            } catch {
+                
+                print("player setup error",error)
+            }
+            
+            audioPlayer?.delegate = self
+
+            if let err = error {
+                
+                print("audioPlayer error: \(err.localizedDescription)")
+                
+            }else{
+                audioPlayer?.play()
+            }
         }
         
     }
     
     @objc func sendRecord(sender: UIButton) {
         
-      
+        messageSend(messageType: "AUDIO", chatAttachment: "")
         
     }
     
     @objc func openKeyboard(sender: UIButton) {
         
         recordView.isHidden = true
-        
         typeMessageTextField.becomeFirstResponder()
         
     }
@@ -1017,8 +1157,7 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
     
     @objc func updateAudioMeter(timer: Timer)
     {
-        if audioRecorder.isRecording
-        {
+        if audioRecorder.isRecording {
 //            let hr = Int((audioRecorder.currentTime / 60) / 60)
             let min = Int(audioRecorder.currentTime / 60)
             let sec = Int(audioRecorder.currentTime.truncatingRemainder(dividingBy: 60))
@@ -1031,8 +1170,7 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
     
     func finishAudioRecording(success: Bool)
     {
-        if success
-        {
+        if success {
             audioRecorder.stop()
             audioRecorder = nil
             meterTimer.invalidate()
@@ -1043,46 +1181,81 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
         }
     }
     
-    func setup_recorder()
-    {
-        if isAudioRecordingGranted
-        {
-            let session = AVAudioSession.sharedInstance()
-            do
-            {
-//                try session.setCategory(AVAudioSession.Category.playAndRecord, with: .mixWithOthers)
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
-                try session.setActive(true)
-                let settings = [
-                    AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                    AVSampleRateKey: 44100,
-                    AVNumberOfChannelsKey: 2,
-                    AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
-                ]
-                audioRecorder = try AVAudioRecorder(url: getFileUrl(), settings: settings)
+    func setup_recorder() {
+        if isAudioRecordingGranted {
+          
+            
+//            let session = AVAudioSession.sharedInstance()
+//            do {
+////                try session.setCategory(AVAudioSession.Category.playAndRecord, with: .mixWithOthers)
+//                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
+//                try session.setActive(true)
+//                let settings = [
+//                    AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+//                    AVSampleRateKey: 44100,
+//                    AVNumberOfChannelsKey: 2,
+//                    AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
+//                ]
+//                audioRecorder = try AVAudioRecorder(url: getFileUrl(), settings: settings)
+//                audioRecorder.delegate = self
+//                audioRecorder.isMeteringEnabled = true
+//                audioRecorder.prepareToRecord()
+//            }
+//            catch let error {
+//                print("catched some error during recording",error)
+//            }
+            
+            
+            //Setting for recorder
+            
+            let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            let docDir = dirPath[0]
+            let soundFilePath = docDir.appending("sound.caf")
+            let soundFileURL = NSURL(fileURLWithPath: soundFilePath)
+            print(soundFileURL)
+            
+            
+            let recordSettings = [AVEncoderAudioQualityKey: AVAudioQuality.min.rawValue,
+                                  AVEncoderBitRateKey: 16,
+                                  AVNumberOfChannelsKey : 2,
+                                  AVSampleRateKey: 44100.0] as [String : Any]
+            var error : NSError?
+            let audioSession = AVAudioSession.sharedInstance()
+            
+            do {
+               try audioSession.setCategory(.playAndRecord)
+                //            audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, error: &error)
+                if let err = error{
+                    print("audioSession error: \(err.localizedDescription)")
+                }
+                audioRecorder = try AVAudioRecorder(url: soundFileURL as URL, settings: recordSettings )
                 audioRecorder.delegate = self
                 audioRecorder.isMeteringEnabled = true
-                audioRecorder.prepareToRecord()
+                if let err = error{
+                    print("audioSession error: \(err.localizedDescription)")
+                }else{
+                    audioRecorder?.prepareToRecord()
+                }
+            }catch{
+                
+                print("catched some error during recording",error)
             }
-            catch let error {
-                print("catched some error during recording")
-            }
+           
+            
+            
         }else {
             print("please enable audio access for catch app")
         }
     }
     
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool)
-    {
-        if !flag
-        {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
             finishAudioRecording(success: false)
         }
         
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool)
-    {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
     }
 }
@@ -1094,11 +1267,18 @@ extension MainChatScreenController {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         return documentsDirectory
+        
+//        let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+//        let docDir = dirPath[0]
+//        let soundFilePath = (docDir as NSString).appendingPathComponent("sound.caf")
+//        let soundFileURL = URL(fileURLWithPath: soundFilePath)
+//        print("document url",soundFilePath)
+//        return soundFileURL
     }
     
-    func getFileUrl() -> URL
-    {
-        let filename = "myRecording.m4a"
+    func getFileUrl() -> URL {
+        let randomID = UUID().uuidString
+        let filename = randomID + ".m4a"
         let filePath = getDocumentsDirectory().appendingPathComponent(filename)
         return filePath
     }
@@ -1161,7 +1341,7 @@ extension MainChatScreenController: UITextFieldDelegate {
         
         recordView.isHidden = true
         
-        messageSend()
+//        messageSend()
         
 //        messageSendnew()
 
@@ -1189,36 +1369,113 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
         
          isLongPressed = true
         
-        let touchPoint = gesture.location(in: chatTableView)
-        
-        let indexpath = chatTableView.indexPathForRow(at: touchPoint)
-        
-        let cell = chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
-        
-        if gesture.state == .began {
-            
-             cell.checkImage.isHidden = false
-            
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
-                
-                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + cell.checkImage.frame.width + 35
-                
-//                cell.checkImage.isHidden = false
+//        let touchPoint = gesture.location(in: chatTableView)
 //
-                self.groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
+//        let indexpath = chatTableView.indexPathForRow(at: touchPoint)
+//
+//        let cell = chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
+//
+//        if gesture.state == .began {
+//
+//
+//        }
+
+//        if gesture.state == .ended {
+//
+//
+//            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+//
+//                cell.recievedMessageView.frame.origin.x = cell.checkImage.frame.origin.x + cell.checkImage.frame.width + 25
+//
+//            })
+//
+//            cell.isUserInteractionEnabled = true
+//
+//
+//        }
+
+        
+        self.groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
+        
+        chatTableView.reloadData()
+        
+    }
+    
+    @objc func swipeToReply(gesture: UISwipeGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+    
+//            self.bottomBarView.frame.origin.y = self.bottomBarView.frame.origin.y - (120 - self.bottomBarHeightConstant.constant)
+//
+//            self.bottomBarHeightConstant.constant = 120
+//
+//            self.bottomBarView.frame.size.height = 120
+            
+            // alternate method
+            
+//            self.bottomBarView.layer.cornerRadius = 1
+            
+            let touchPoint = gesture.location(in: self.chatTableView)
+            
+            let indexpath = self.chatTableView.indexPathForRow(at: touchPoint)
+            
+            let cell = self.chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
+            
+            print("cell text",self.messages[(indexpath?.row)!].message)
+            
+            self.bottomBarView.roundCorners(corners: [], radius: 1.0)
+          
+            self.bottomBarView.clipsToBounds = true
+            
+            let viewHeight = 80
+            
+            let replyView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: Int(self.bottomBarView.frame.minY) - Int(self.bottomBarView.frame.size.height - 10)), size: CGSize(width: Int(self.bottomBarView.frame.width), height: viewHeight)))
+            
+            let replySubView = UIView(frame: CGRect(x: 10, y: 10, width: replyView.frame.width - (20), height: 60))
+            
+            replyView.backgroundColor = .white
+            
+            replySubView.backgroundColor = UIColor(hex: "EAF4FF")
+            
+            self.view.addSubview(replyView)
+            
+            replyView.addSubview(replySubView)
+            
+            // rounded corners
+            
+            replyView.roundCorners(corners: [.topLeft,.topRight], radius: 15.0)
+            
+            replySubView.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: 5.0)
+            
+            let nameLabel = UILabel(frame: CGRect(x: 7, y: 7, width: 225, height: 22))
+            
+            nameLabel.textColor = UIColor(hex: "1183FF")
+            
+            if self.messages[(indexpath?.row)!].sender == self.messages[(indexpath?.row)!].currentUser {
                 
-            })
-        }
-        
-        
-        
-        if gesture.state == .ended {
+               nameLabel.text = chatUserName
+                
+            }else {
+                
+                 nameLabel.text = "You"
+                
+            }
+       
+            nameLabel.font = UIFont(name: "Muli-Bold", size: 15.0)
             
-            cell.isUserInteractionEnabled = true
+            replySubView.addSubview(nameLabel)
             
-           
-        }
-        
+            let messageLabel = UILabel(frame: CGRect(x: nameLabel.frame.origin.x, y: nameLabel.frame.maxY + 5, width: 225, height: 22))
+            
+            messageLabel.textColor = UIColor(hex: "5B799C")
+            
+            messageLabel.text = self.messages[(indexpath?.row)!].message
+            
+            messageLabel.font = UIFont(name: "Muli-Regular", size: 14.0)
+            
+            replySubView.addSubview(messageLabel)
+            
+        })
     }
 }
 
@@ -1227,22 +1484,29 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
 
 extension MainChatScreenController {
     
-    func groupButtonOrClose(sender: UIButton) {
+    @objc func groupButtonOrClose(sender: UIButton) {
         
-        isLongPressed = true
+        isLongPressed = false
         
         if groupButton.imageView?.image == UIImage(named: "Cross_close") {
             
-            dismiss(animated: true, completion: nil)
+            groupButton.setImage(UIImage(named: "Group"), for: .normal)
             
-            groupButton.imageView?.image = UIImage(named: "Group")
+            chatTableView.reloadData()
             
         }else {
             
-            groupButton.imageView?.image = UIImage(named: "Cross_close")
+            groupButton.setImage(UIImage(named: "Cross_close"), for: .normal)
+            
         }
     
     }
 }
+
+//extension Date {
+//    var ticks: UInt64 {
+//        return UInt64((self.timeIntervalSince1970 + 62_135_596_800) * 10_000_000)
+//    }
+//}
 
 

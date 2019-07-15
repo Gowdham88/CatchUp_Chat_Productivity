@@ -14,12 +14,12 @@ import FirebaseDatabase
 
 class mainChatScreenTableViewCell: UITableViewCell {
     
-    
-    @IBOutlet weak var recievedMessageLbl: UILabel!
+//    PaddingLabel
+    @IBOutlet weak var recievedMessageLbl: BorderedLabel!
     
     @IBOutlet weak var recievedMessageView: UIView!
     
-    @IBOutlet weak var sentMessageLbl: UILabel!
+    @IBOutlet weak var sentMessageLbl: BorderedLabel!
     
     @IBOutlet weak var sentMessageView: UIView!
     
@@ -36,14 +36,34 @@ class mainChatScreenTableViewCell: UITableViewCell {
     var message: Message!
     
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
-
+    
+    // reply view properties
+    @IBOutlet var replyView: UIView!
+    @IBOutlet var replyTop: UIView!
+    @IBOutlet var messageToBeRepliedLabel: UILabel!
+    @IBOutlet var replyLabel: UILabel!
+    @IBOutlet var replyTimeLabel: UILabel!
+    @IBOutlet var replyMessageStatusImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
+        replyView.isHidden = true
+        
         sentMessageView.layer.masksToBounds  = true
         recievedMessageView.layer.masksToBounds = true
-       
+        
+//        recievedMessageLbl.textAlignment = .left
+        recievedMessageLbl.sizeToFit()
+
+
+//        sentMessageLbl.textAlignment = .right
+        sentMessageLbl.sizeToFit()
+
+
+        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -52,37 +72,18 @@ class mainChatScreenTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configCell(message: Message) {
+    func configCell(message: Message,isReplyMessage: Bool) {
         
         self.message = message
         
-        print("message label::\(message.message.count)")
-        
-        print("sender id : \(message.sender) receiver id: \(String(describing: currentUser))")
-
-        
-        print("sender id \(message.sender) and current user \(String(describing: currentUser))")
+//        print("message label::\(message.message.count)")
+//
+//        print("sender id : \(message.sender) receiver id: \(String(describing: currentUser))")
+//
+//
+//        print("sender id \(message.sender) and current user \(String(describing: currentUser))")
         
         if message.sender == currentUser {
-            
-
-            
-            let time = message.receivedTimeStamp
-            let timeinterval : TimeInterval = time
-            let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
-            let formatter = DateFormatter()
-            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601) as Calendar?
-            formatter.locale = NSLocale(localeIdentifier: "en_IN") as Locale
-            //            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
-            formatter.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
-            
-            formatter.dateFormat = "h:mm a"
-            formatter.amSymbol = "AM"
-            formatter.pmSymbol = "PM"
-            //            let dateString = formatter.stringFromDate(modfl.courseDate)
-            let dateString: String = formatter.string(from: dateFromServer as Date)
-            
-            print("dateString:::\(dateString)")
             
             sentMessageView.isHidden = true
             sentMessageLbl.isHidden = true
@@ -98,49 +99,39 @@ class mainChatScreenTableViewCell: UITableViewCell {
             let strValue = message.message
             recievedMessageLbl?.text = " \(strValue)"
             
-            receivedTimeLabel.text =  dateString
-            
+            let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
+            print("new time1:::\(String(describing: timeNew1))")
+            receivedTimeLabel.text =  timeNew1
             recievedMessageLbl.isHidden = false
             
             recievedMessageView.layer.backgroundColor = UIColor.clear.cgColor
             
         } else {
             
-            
-            let time = message.receivedTimeStamp
-            let timeinterval : TimeInterval = time
-            let dateFromServer = NSDate(timeIntervalSince1970:timeinterval)
-            let formatter = DateFormatter()
-            formatter.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.ISO8601) as Calendar?
-            formatter.locale = NSLocale(localeIdentifier: "en_IN") as Locale
-            //            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
-            formatter.timeZone = NSTimeZone(name: "GMT+5:30") as TimeZone?
-            
-            formatter.dateFormat = "h:mm a"
-            formatter.amSymbol = "AM"
-            formatter.pmSymbol = "PM"
-            //            let dateString = formatter.stringFromDate(modfl.courseDate)
-            let dateString: String = formatter.string(from: dateFromServer as Date)
-            
-            print("dateString:::\(dateString)")
-            
             sentMessageView.isHidden = false
+            recievedMessageLbl.isHidden = true
+            recievedMessageView.isHidden = true
             
             sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
-//           sentMessageLbl.frame.size.width = sentMessageLbl.intrinsicContentSize.width + 10
-//           sentMessageLbl.frame.size.height = sentMessageLbl.intrinsicContentSize.height + 10
-            print("sent messages",message.message)
-//            sentMessageLbl.text =  message.message
-            sentTimeLabel.text =  dateString
-            
             recievedMessageLbl.text = ""
-            let strValue = message.message
-            sentMessageLbl?.text = " \(strValue)"
-            
-            recievedMessageLbl.isHidden = true
-            
-            recievedMessageView.isHidden = true
+  
+            if isReplyMessage {
+                
+                sentMessageView.isHidden = true
+                recievedMessageLbl.isHidden = true
+                recievedMessageView.isHidden = true
+                
+                
+                
+            }else {
+                
+                let strValue = message.message
+                sentMessageLbl?.text = "\(strValue)"
+                let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
+                sentTimeLabel.text =  timeNew1
 
+            }
+            
             
             
    
@@ -148,20 +139,39 @@ class mainChatScreenTableViewCell: UITableViewCell {
         }
     }
     
-    func getCurrentTimeZone() -> String{
-        
-        return TimeZone.current.identifier
-        
-    }
-    
   
-
-}
-
-class PaddingLabel: UILabel {
-    
-    override func drawText(in rect: CGRect) {
-        let insets = UIEdgeInsets(top: 20, left: 28, bottom: 20, right: 20)//CGRect.inset(by:)
-        super.drawText(in: rect.inset(by: insets))
+    func getReadableDate(timeStamp: TimeInterval) -> String? {
+        let date = Date(timeIntervalSince1970: timeStamp)
+        let dateFormatter = DateFormatter()
+        let timezone = TimeZone.current.abbreviation()   // get current TimeZone abbreviation or set to GMT+5:30
+        print("current time zone data:::\(String(describing: timezone))")
+        dateFormatter.timeZone = TimeZone(abbreviation: timezone!) //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        if Calendar.current.isDateInTomorrow(date) {
+            return "Tomorrow"
+        } else if Calendar.current.isDateInYesterday(date) {
+            return "Yesterday"
+        } else if dateFallsInCurrentWeek(date: date) {
+            if Calendar.current.isDateInToday(date) {
+                dateFormatter.dateFormat = "h:mm a"
+                return dateFormatter.string(from: date)
+            } else {
+                dateFormatter.dateFormat = "EEEE"
+                return dateFormatter.string(from: date)
+            }
+        } else {
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            return dateFormatter.string(from: date)
+        }
     }
+    
+    func dateFallsInCurrentWeek(date: Date) -> Bool {
+        let currentWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: Date())
+        let datesWeek = Calendar.current.component(Calendar.Component.weekOfYear, from: date)
+        return (currentWeek == datesWeek)
+    }
+    
+
+
 }
+

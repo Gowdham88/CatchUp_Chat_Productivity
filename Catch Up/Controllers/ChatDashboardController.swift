@@ -12,6 +12,7 @@ import FirebaseStorage
 import Firebase
 import SwiftKeychainWrapper
 import SDWebImage
+import RealmSwift
 
 
 class ChatDashboardController: UIViewController {

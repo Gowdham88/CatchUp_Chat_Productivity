@@ -11,6 +11,9 @@ import Firebase
 import FirebaseMessaging
 import UserNotifications
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
+import FirebaseInstanceID
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {

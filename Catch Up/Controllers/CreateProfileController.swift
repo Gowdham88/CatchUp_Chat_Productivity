@@ -9,6 +9,9 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
+import FirebaseStorage
+
 
 class CreateProfileController: UIViewController {
 

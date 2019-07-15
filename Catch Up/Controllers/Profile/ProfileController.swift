@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import BottomPopup
+import FirebaseStorage
+
 
 class ProfileController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 

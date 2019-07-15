@@ -512,7 +512,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if btnRecordOrSend.imageView?.image == UIImage(named: "btn_send2") {
             
-            messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
+//            messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
             
             recordView.isHidden = true
             
@@ -734,9 +734,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //        return true
 //    }
-    func messageSendnew(messageType: String){
+    func messageSendnew(){
         
-        
+//        randomStringWithLength(len: 32)
         
         if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
             
@@ -748,13 +748,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let post: Dictionary<String, AnyObject> = [
                     "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject,
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
                     "from": userContactNumber as AnyObject,
                     "chatMessageId": messageId as AnyObject,
                     "chatAttachment": "" as AnyObject,
                     "chatAttachmentCaption": "" as AnyObject,
-                    "chatMessageType": messageType as AnyObject
+//                   "chatMessageType": messageType as AnyObject
+                    "to": ["1", "2"] as AnyObject
+                    
                     
                     
                 ]
@@ -762,13 +764,13 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
-                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
-                    "timestamp":NSDate().timeIntervalSince1970 as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                 ]
                 
 //                messageId = Database.database().reference().child("messages").childByAutoId().key
@@ -807,25 +809,27 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
 //                    "timestamp": ServerValue.timestamp() as AnyObject,
-                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject,
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
                     "from": userContactNumber as AnyObject,
-                    "chatMessageType": "TEXT" as AnyObject,
+//                    "chatMessageType": "TEXT" as AnyObject,
                     "chatMessageId": messageId as AnyObject,
+                    "to": ["1", "2"] as AnyObject
+
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
 //                    "timestamp": ServerValue.timestamp() as AnyObject
-                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                 ]
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": currentUser as AnyObject,
 //                    "timestamp": ServerValue.timestamp() as AnyObject
-                    "timestamp": NSDate().timeIntervalSince1970 as AnyObject
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                 ]
                 
                 
@@ -1012,6 +1016,21 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     }
 
     
+    func randomStringWithLength(len: Int) -> NSString {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyz0123456789"
+        
+        let randomString : NSMutableString = NSMutableString(capacity: len)
+        
+        for _ in 1...len{
+            let length = UInt32 (letters.length)
+            let rand = arc4random_uniform(length)
+            randomString.appendFormat("%C", letters.character(at: Int(rand)))
+        }
+        
+        return randomString
+    }
+
    
     
 }//class
@@ -1143,7 +1162,7 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
     
     @objc func sendRecord(sender: UIButton) {
         
-        messageSend(messageType: "AUDIO", chatAttachment: "")
+//        messageSend(messageType: "AUDIO", chatAttachment: "")
         
     }
     
@@ -1343,7 +1362,7 @@ extension MainChatScreenController: UITextFieldDelegate {
         
 //        messageSend()
         
-//        messageSendnew()
+        messageSendnew()
 
         return true
     }
@@ -1503,10 +1522,6 @@ extension MainChatScreenController {
     }
 }
 
-//extension Date {
-//    var ticks: UInt64 {
-//        return UInt64((self.timeIntervalSince1970 + 62_135_596_800) * 10_000_000)
-//    }
-//}
+
 
 

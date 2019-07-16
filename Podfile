@@ -23,7 +23,7 @@ target 'Catch Up' do
   pod 'IDMPhotoBrowser'
   pod 'SwiftKeychainWrapper'
   pod 'SDWebImage'
- 
+  pod 'RealmSwift' 
 
 
 end

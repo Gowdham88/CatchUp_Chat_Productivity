@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2A59C18022D73EF6006DEBDD /* BorderedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A59C17F22D73EF6006DEBDD /* BorderedLabel.swift */; };
 		2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */; };
 		2A6D63862295100600D2CE63 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */; };
+		2AE52F3D22DDC8BE0071278E /* RealmMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE52F3C22DDC8BE0071278E /* RealmMessage.swift */; };
 		4728295122C495AB00E473A5 /* mainChatScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728295022C495AB00E473A5 /* mainChatScreenTableViewCell.swift */; };
 		4728295322C4963F00E473A5 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728295222C4963F00E473A5 /* Message.swift */; };
 		4760B3B622C3710900A627C3 /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4760B3B522C3710900A627C3 /* MessageDetail.swift */; };
@@ -94,6 +95,7 @@
 		2A59C17F22D73EF6006DEBDD /* BorderedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedLabel.swift; sourceTree = "<group>"; };
 		2A6D63832295100600D2CE63 /* SelectContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectContactTableViewCell.swift; sourceTree = "<group>"; };
 		2A6D63842295100600D2CE63 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		2AE52F3C22DDC8BE0071278E /* RealmMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMessage.swift; sourceTree = "<group>"; };
 		2AF9670722DDAFC10082F92D /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B68C07F505CCE480F1AA41C /* Pods-Catch Up.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catch Up.release.xcconfig"; path = "Target Support Files/Pods-Catch Up/Pods-Catch Up.release.xcconfig"; sourceTree = "<group>"; };
 		4728295022C495AB00E473A5 /* mainChatScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainChatScreenTableViewCell.swift; sourceTree = "<group>"; };
@@ -251,9 +253,18 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		2AE52F3B22DDC8770071278E /* RealmModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AE52F3C22DDC8BE0071278E /* RealmMessage.swift */,
+			);
+			path = RealmModel;
+			sourceTree = "<group>";
+		};
 		4760B3B422C370B600A627C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2AE52F3B22DDC8770071278E /* RealmModel */,
 				4760B3B522C3710900A627C3 /* MessageDetail.swift */,
 				4728295222C4963F00E473A5 /* Message.swift */,
 				4798D9B422C61E9900C0D82B /* Contacts.swift */,
@@ -579,6 +590,7 @@
 				B48C2809229547F200426E48 /* GroupingViewController.swift in Sources */,
 				B48205FE228A8883003A1680 /* CurveView.swift in Sources */,
 				2A6D63852295100600D2CE63 /* SelectContactTableViewCell.swift in Sources */,
+				2AE52F3D22DDC8BE0071278E /* RealmMessage.swift in Sources */,
 				8E51DAA6229BFA2C00554F42 /* ChatpopupCollectionViewCell.swift in Sources */,
 				B48205FA228A86E4003A1680 /* LoginWithNumberController.swift in Sources */,
 				B40A888F22B8E5580087DDFB /* MapViewController.swift in Sources */,

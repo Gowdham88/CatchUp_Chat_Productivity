@@ -32,6 +32,16 @@ class ChatDashboardController: UIViewController {
     var messageId: String!
 //    var userContactName: String!
 //    var userContactImage: String!
+    var dic : [String : String] = [:]
+    var cont = ["one",
+                "two",
+                "three"]
+    
+    let groupMembersDict = [
+        "919": "participant",
+        "111": "observer",
+        "222": "participant"
+    ]
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         
@@ -44,6 +54,44 @@ class ChatDashboardController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+        let realm = try! Realm()
+        
+        print("realm location:::\(String(describing: Realm.Configuration.defaultConfiguration.fileURL))")
+        
+        
+        let myMessage = RealmMessages()
+        
+        myMessage.messageText = "Diva"
+        myMessage.sender = "yIvq1mQxjfZpjs1ybRTTlDOmUKV2"
+
+        let timevalue = timeStampValue()
+        timevalue.timestamp.value = 123123131
+
+        myMessage.chatId = "+918000080000"
+        myMessage.from = "+918000080000"
+       
+        
+        for member in groupMembersDict {
+            let aGroup = GroupData(withNum: member.key, andType: member.value)
+            myMessage.groupMemberss.append(aGroup)
+        }
+        
+    
+        for toMember in cont {
+            let toDataValue = toData(withNum: toMember)
+            myMessage.to.append(toDataValue)
+        }
+        
+
+
+    
+        try! realm.write {
+
+            realm.add(myMessage)
+        }
         
         
         if self.style == .default {
@@ -65,6 +113,8 @@ class ChatDashboardController: UIViewController {
         
         
     }//viewdidload
+    
+  
     
     override func viewDidAppear(_ animated: Bool) {
         

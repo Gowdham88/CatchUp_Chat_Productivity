@@ -173,8 +173,14 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var messageTypeArray: String?
     
+    var groupMemebersArray = [String:String]()
+    
+    var toArray = [String:String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     
         self.longPressView.isHidden = true
         recordView.isHidden = true
@@ -516,7 +522,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             recordView.isHidden = true
             
+            messageType = "TEXT"
+            
         }else {
+            
+            messageType = "AUDIO"
             
              recordView.isHidden = false
         }
@@ -701,6 +711,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
                 self.messages.removeAll()
+                self.checkImageArray.removeAll()
                 
                 for data in snapshot {
                     
@@ -736,31 +747,101 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //    }
     func messageSendnew(){
         
-//        randomStringWithLength(len: 32)
+        let chatTaskArray = NSMutableArray()
+        let deliveredListArray = NSMutableArray()
+        let messageStatusRecipientWiseArray = NSMutableArray()
+        let readListArray = NSMutableArray()
+        let recipientsArray = NSMutableArray()
+        let replyChatMessage = [String: AnyObject]()
+        
+        print("printing message id here \(messageId)")
         
         if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
             
             print("recipient id::::\(String(describing: recipient))")
             
-            
             if messageId == nil {
                 
+                 messageId = Database.database().reference().child(recipient).child("inbox_new").childByAutoId().key
+                
+//                let post: Dictionary<String, AnyObject> = [
+//                    "messageText": typeMessageTextField.text as AnyObject,
+//                    "sender": recipient as AnyObject,
+//                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+//                    "chatId" : userContactNumber as AnyObject,
+//                    "from": userContactNumber as AnyObject,
+//                    "chatMessageId": messageId as AnyObject,
+//                    "chatAttachment": "" as AnyObject,
+//                    "chatAttachmentCaption": "" as AnyObject,
+//                    "chatMessageType": messageType as AnyObject,
+//                    "to": ["1", "2"] as AnyObject
+//
+//
+//
+//                ]
+//
                 let post: Dictionary<String, AnyObject> = [
-                    "messageText": typeMessageTextField.text as AnyObject,
                     "sender": recipient as AnyObject,
-                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+                    "chatCreatedDateTime": ["timestamp":Int(NSDate().timeIntervalSince1970)] as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
-                    "from": userContactNumber as AnyObject,
                     "chatMessageId": messageId as AnyObject,
                     "chatAttachment": "" as AnyObject,
                     "chatAttachmentCaption": "" as AnyObject,
-//                   "chatMessageType": messageType as AnyObject
-                    "to": ["1", "2"] as AnyObject
-                    
-                    
-                    
+                    "chatMessageType": messageType as AnyObject,
+                    "chatWindowName": userContactName as AnyObject,
+                    "deleted": false as AnyObject,
+                    "from": userContactNumber as AnyObject,
+                    "group": false as AnyObject,
+                    "groupMembers": groupMemebersArray as AnyObject,
+                    "groupMemebersCount": groupMemebersArray.count as AnyObject,
+                    "hightlight": 0 as AnyObject,
+                    "messageChatStatus": "INPROGRESS" as AnyObject,
+                    "messageOrigin": "OTHER" as AnyObject,
+                    "messageText": typeMessageTextField.text as AnyObject,
+                    "participantAllowedToEditGroupInfo": true as AnyObject,
+                    "participantAllowedToMessage": true as AnyObject,
+                    "task": false as AnyObject,
+                    "to": toArray as AnyObject,
+                    "uploadComplete": true as AnyObject
                 ]
                 
+                let outbox: Dictionary<String, AnyObject> = [
+                    "sender": recipient as AnyObject,
+                    "addOns": "" as AnyObject,
+                    "chatCreatedDateTime": ["timestamp":Int(NSDate().timeIntervalSince1970)] as AnyObject,
+                    "chatId" : userContactNumber as AnyObject,
+                    "chatAttachmentDownloadFileDir": "" as AnyObject,
+                    "chatMessageId": messageId as AnyObject,
+                    "chatAttachment": "" as AnyObject,
+                    "chatAttachmentFileName": "" as AnyObject,
+                    "chatAttachmentSize": "" as AnyObject,
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageThumbnail": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject,
+                    "chatWindowName": userContactName as AnyObject,
+                    "chatTask": chatTaskArray as AnyObject,
+                    "deliveredList": deliveredListArray as AnyObject,
+                    "isDeleted": false as AnyObject,
+                    "from": userContactNumber as AnyObject,
+                    "isGroup": false as AnyObject,
+                    "groupDescription": "" as AnyObject,
+                    "groupMembers": groupMemebersArray as AnyObject,
+                    "groupMemebersCount": groupMemebersArray.count as AnyObject,
+                    "hightlight": 0 as AnyObject,
+                    "messageChatStatus": "INPROGRESS" as AnyObject,
+                    "messageOrigin": "SELF" as AnyObject,
+                    "messageText": typeMessageTextField.text as AnyObject,
+                    "messageStatusRecipientWise": messageStatusRecipientWiseArray as AnyObject,
+                    "participantAllowedToEditGroupInfo": true as AnyObject,
+                    "participantAllowedToMessage": true as AnyObject,
+                    "readList": readListArray as AnyObject,
+                    "recipients" : recipientsArray as AnyObject,
+                    "replyChatMessage": replyChatMessage as AnyObject,
+                    "isTask": false as AnyObject,
+                    "to": toArray as AnyObject,
+                    "isUploadComplete": true as AnyObject
+                ]
+            
                 let message: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
@@ -778,8 +859,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
 //                print("message id::::\(String(describing: messageId))")
                 
-                messageId = Database.database().reference().child(recipient).child("inbox_new").childByAutoId().key
-                
+               
                 
                 let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox_new").child(messageId)
                     
@@ -789,7 +869,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
                     let firebase_currentUser_Message = Database.database().reference().child("user").child(currentUser!).child("outbox_new").child(messageId)
                     
-                    firebase_currentUser_Message.setValue(post)
+                    firebase_currentUser_Message.setValue(outbox)
                 }
                 
                 let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
@@ -804,18 +884,107 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
             } else if messageId != "" {
                 
-                let post: Dictionary<String, AnyObject> = [
-                    
-                    "messageText": typeMessageTextField.text as AnyObject,
-                    "sender": recipient as AnyObject,
-//                    "timestamp": ServerValue.timestamp() as AnyObject,
-                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
-                    "chatId" : userContactNumber as AnyObject,
-                    "from": userContactNumber as AnyObject,
+//                let post: Dictionary<String, AnyObject> = [
+//
+//                    "messageText": typeMessageTextField.text as AnyObject,
+//                    "sender": recipient as AnyObject,
+//                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+//                    "chatId" : userContactNumber as AnyObject,
+//                    "from": userContactNumber as AnyObject,
 //                    "chatMessageType": "TEXT" as AnyObject,
+//                    "chatMessageId": messageId as AnyObject,
+//                    "to": ["1", "2"] as AnyObject
+//
+//                ]
+                
+                messageId = Database.database().reference().child(recipient).child("inbox_new").childByAutoId().key
+                
+                // send attachment
+                let postAttachment: Dictionary<String,AnyObject> = ["chatAttachment": "" as AnyObject,
+                                                                    "chatAttachmentFileName": "" as AnyObject,
+                                                                    "chatAttachmentSize": "" as AnyObject,
+                                                                    "sender": recipient as AnyObject,
+                                                                    "chatCreatedDateTime": ["timestamp":Int(NSDate().timeIntervalSince1970)] as AnyObject,
+                                                                    "chatId" : userContactNumber as AnyObject,
+                                                                    "chatMessageId": messageId as AnyObject,
+                                                                    "chatAttachmentCaption": "" as AnyObject,
+                                                                    "chatMessageType": messageType as AnyObject,
+                                                                    "chatWindowName": userContactName as AnyObject,
+                                                                    "deleted": false as AnyObject,
+                                                                    "from": userContactNumber as AnyObject,
+                                                                    "group": false as AnyObject,
+                                                                    "groupMembers": groupMemebersArray as AnyObject,
+                                                                    "groupMemebersCount": groupMemebersArray.count as AnyObject,
+                                                                    "hightlight": 0 as AnyObject,
+                                                                    "messageChatStatus": "INPROGRESS" as AnyObject,
+                                                                    "messageOrigin": "OTHER" as AnyObject,
+                                                                    "messageText": typeMessageTextField.text as AnyObject,
+                                                                    "participantAllowedToEditGroupInfo": true as AnyObject,
+                                                                    "participantAllowedToMessage": true as AnyObject,
+                                                                    "task": false as AnyObject,
+                                                                    "to": toArray as AnyObject,
+                                                                    "uploadComplete": true as AnyObject]
+                
+                let post: Dictionary<String, AnyObject> = [
+                    "sender": recipient as AnyObject,
+                    "chatCreatedDateTime": ["timestamp":Int(NSDate().timeIntervalSince1970)] as AnyObject,
+                    "chatId" : userContactNumber as AnyObject,
                     "chatMessageId": messageId as AnyObject,
-                    "to": ["1", "2"] as AnyObject
-
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject,
+                    "chatWindowName": userContactName as AnyObject,
+                    "deleted": false as AnyObject,
+                    "from": userContactNumber as AnyObject,
+                    "group": false as AnyObject,
+                    "groupMembers": groupMemebersArray as AnyObject,
+                    "groupMemebersCount": groupMemebersArray.count as AnyObject,
+                    "hightlight": 0 as AnyObject,
+                    "messageChatStatus": "INPROGRESS" as AnyObject,
+                    "messageOrigin": "OTHER" as AnyObject,
+                    "messageText": typeMessageTextField.text as AnyObject,
+                    "participantAllowedToEditGroupInfo": true as AnyObject,
+                    "participantAllowedToMessage": true as AnyObject,
+                    "task": false as AnyObject,
+                    "to": toArray as AnyObject,
+                    "uploadComplete": true as AnyObject
+                ]
+                
+                // send outbox
+                let outbox: Dictionary<String, AnyObject> = [
+                    "sender": recipient as AnyObject,
+                    "addOns": "" as AnyObject,
+                    "chatCreatedDateTime": ["timestamp":Int(NSDate().timeIntervalSince1970)] as AnyObject,
+                    "chatId" : userContactNumber as AnyObject,
+                    "chatAttachmentDownloadFileDir": "" as AnyObject,
+                    "chatMessageId": messageId as AnyObject,
+                    "chatAttachment": "" as AnyObject,
+                    "chatAttachmentFileName": "" as AnyObject,
+                    "chatAttachmentSize": "" as AnyObject,
+                    "chatAttachmentCaption": "" as AnyObject,
+                    "chatMessageThumbnail": "" as AnyObject,
+                    "chatMessageType": messageType as AnyObject,
+                    "chatWindowName": userContactName as AnyObject,
+                    "chatTask": chatTaskArray as AnyObject,
+                    "deliveredList": deliveredListArray as AnyObject,
+                    "isDeleted": false as AnyObject,
+                    "from": userContactNumber as AnyObject,
+                    "isGroup": false as AnyObject,
+                    "groupDescription": "" as AnyObject,
+                    "groupMembers": groupMemebersArray as AnyObject,
+                    "groupMemebersCount": groupMemebersArray.count as AnyObject,
+                    "hightlight": 0 as AnyObject,
+                    "messageChatStatus": "INPROGRESS" as AnyObject,
+                    "messageOrigin": "SELF" as AnyObject,
+                    "messageText": typeMessageTextField.text as AnyObject,
+                    "messageStatusRecipientWise": messageStatusRecipientWiseArray as AnyObject,
+                    "participantAllowedToEditGroupInfo": true as AnyObject,
+                    "participantAllowedToMessage": true as AnyObject,
+                    "readList": readListArray as AnyObject,
+                    "recipients" : recipientsArray as AnyObject,
+                    "replyChatMessage": replyChatMessage as AnyObject,
+                    "isTask": false as AnyObject,
+                    "to": toArray as AnyObject,
+                    "isUploadComplete": true as AnyObject
                 ]
                 
                 let message: Dictionary<String, AnyObject> = [
@@ -832,8 +1001,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                 ]
                 
-                
-                
 //                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
 //                //                   let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
 //
@@ -847,15 +1014,23 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //                userMessage.setValue(message)
                 
-                messageId = Database.database().reference().child(recipient).child("inbox_new").childByAutoId().key
+                
                 
                 let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox_new").child(messageId)
                 
-                firebase_recipient_Message.setValue(post)
+                if messageType == "TEXT" {
+                    
+                    firebase_recipient_Message.setValue(post)
+                    
+                }else {
+                    
+                    firebase_recipient_Message.setValue(postAttachment)
+                }
+                
                 
                 let firebase_currentUser_Message = Database.database().reference().child("user").child(currentUser!).child("outbox_new").child(messageId)
                 
-                firebase_currentUser_Message.setValue(post)
+                firebase_currentUser_Message.setValue(outbox)
                 
                 let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
 
@@ -872,9 +1047,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             typeMessageTextField.text = ""
         }
         
+        
         self.typeMessageTextField.resignFirstResponder()
         
-        self.chatTableView.reloadData()
+//        self.chatTableView.reloadData()
         
         moveToBottom()
         
@@ -995,8 +1171,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
 
             }
-        
-            
         }
     }
     
@@ -1022,9 +1196,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let randomString : NSMutableString = NSMutableString(capacity: len)
         
-        for _ in 1...len{
+        for _ in 1...len {
+          
             let length = UInt32 (letters.length)
+           
             let rand = arc4random_uniform(length)
+           
             randomString.appendFormat("%C", letters.character(at: Int(rand)))
         }
         
@@ -1035,16 +1212,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
 }//class
 
-//extension MainChatScreenController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-//
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//
-//
-//
-//
-//    }
-//
-//}
+extension MainChatScreenController {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        messageType = "IMAGE"
+        
+    }
+
+}
 
 extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegate {
     
@@ -1342,12 +1518,16 @@ extension MainChatScreenController: UITextFieldDelegate {
             
             recordView.isHidden = true
             
+            messageType = "TEXT"
+            
             btnRecordOrSend.setImage(UIImage(named: "btn_send2"), for: .normal)
             
             
         }else {
             
             recordView.isHidden = false
+            
+            messageType = "AUDIO"
             
             btnRecordOrSend.setImage(UIImage(named: "btn voice"), for: .normal)
         }

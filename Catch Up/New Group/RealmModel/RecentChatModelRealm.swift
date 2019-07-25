@@ -16,11 +16,11 @@ class RecentChatModelRealm: Object {
     @objc dynamic var toId = String()
     @objc dynamic var lastMessage = String()
     @objc dynamic var profileImage = NSData()
-//    let msgs = List<InboxMessages>()
+    let msgs = List<InboxMessages>()
   
-//    override class func primaryKey() -> String {
-//        return "sender"
-//    }
+    override class func primaryKey() -> String {
+        return "sender"
+    }
 
     
 }

@@ -43,6 +43,11 @@ class ChatDashboardController: UIViewController {
         "222": "participant"
     ]
     
+    let time = [12312213132]
+    var inboxMessage = InboxMessages()
+    var outboxMessage = OutboxMessages()
+    var messageTEXT :String?
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         
         return self.style
@@ -61,36 +66,85 @@ class ChatDashboardController: UIViewController {
         
         print("realm location:::\(String(describing: Realm.Configuration.defaultConfiguration.fileURL))")
         
+        // inbox messages
         
-        let myMessage = RealmMessages()
-        
-        myMessage.messageText = "Diva"
-        myMessage.sender = "yIvq1mQxjfZpjs1ybRTTlDOmUKV2"
-
-        let timevalue = timeStampValue()
-        timevalue.timestamp.value = 123123131
-
-        myMessage.chatId = "+918000080000"
-        myMessage.from = "+918000080000"
-       
+        inboxMessage.messageText = "Diva"
+        inboxMessage.sender = "yIvq1mQxjfZpjs1ybRTTlDOmUKV2"
+        //timestamp
+//        for timeDataa in time {
+//            inboxMessage.chatCreatedDateTimee.append(timeDataa)
+//        }
+        inboxMessage.chatCreatedDateTimee = Date()
+        inboxMessage.chatId = "+918000080000"
+        inboxMessage.from = "+918000080000"
+        inboxMessage.chatMessageId = "medbef3c589f0bf2bf05cea434b5ee913"
+        inboxMessage.chatAttachment = "1GKxkrl8nRdA3nt86HGMx6upovX2/7675800694735984919_IMG-20190716025133-1563268893829.jpg"
+        inboxMessage.chatAttachmentCaption = ""
+        inboxMessage.chatMessageType = "TEXT"
+        inboxMessage.chatWindowName = "Siva Ns"
+        inboxMessage.deleted.value = false
+        inboxMessage.group.value = false
         
         for member in groupMembersDict {
             let aGroup = GroupData(withNum: member.key, andType: member.value)
-            myMessage.groupMemberss.append(aGroup)
+            inboxMessage.groupMemberss.append(aGroup)
         }
-        
-    
+        inboxMessage.groupMemebersCount.value = 1
+        inboxMessage.hightlight = 213123
+        inboxMessage.messageChatStatus = "INPROGRESS"
+        inboxMessage.messageOrigin = "OTHER"
+        inboxMessage.participantAllowedToEditGroupInfo.value = true
+        inboxMessage.participantAllowedToMessage.value = true
+        inboxMessage.task.value = true
+        //to
         for toMember in cont {
-            let toDataValue = toData(withNum: toMember)
-            myMessage.to.append(toDataValue)
+//            let toDataValue = toData(withNum: toMember)
+            inboxMessage.to.append(toMember)
         }
+        inboxMessage.uploadComplete.value = true
+
+
+        // outbox messages
         
-
-
+        outboxMessage.messageText = "Diva"
+        outboxMessage.sender = "yIvq1mQxjfZpjs1ybRTTlDOmUKV2"
+        //timestamp
+//        for timeDataa in time {
+//            outboxMessage.chatCreatedDateTimee.append(timeDataa)
+//        }
+        outboxMessage.chatCreatedDateTimee = Date()
+        outboxMessage.chatId = "+918000080000"
+        outboxMessage.from = "+918000080000"
+        outboxMessage.chatMessageId = "medbef3c589f0bf2bf05cea434b5ee913"
+        outboxMessage.chatAttachment = "1GKxkrl8nRdA3nt86HGMx6upovX2/7675800694735984919_IMG-20190716025133-1563268893829.jpg"
+        outboxMessage.chatAttachmentCaption = ""
+        outboxMessage.chatMessageType = "TEXT"
+        outboxMessage.chatWindowName = "Siva Ns"
+        outboxMessage.deleted.value = false
+        outboxMessage.group.value = false
+        
+        for member in groupMembersDict {
+            let aGroup = GroupDataOutbox(withNum: member.key, andType: member.value)
+            outboxMessage.groupMemberss.append(aGroup)
+        }
+        outboxMessage.groupMemebersCount.value = 1
+        outboxMessage.hightlight = 213123
+        outboxMessage.messageChatStatus = "INPROGRESS"
+        outboxMessage.messageOrigin = "OTHER"
+        outboxMessage.participantAllowedToEditGroupInfo.value = true
+        outboxMessage.participantAllowedToMessage.value = true
+        outboxMessage.task.value = true
+        //to
+        for toMember in cont {
+            //            let toDataValue = toData(withNum: toMember)
+            outboxMessage.to.append(toMember)
+        }
+        outboxMessage.uploadComplete.value = true
     
         try! realm.write {
 
-            realm.add(myMessage)
+            realm.add(inboxMessage)
+            realm.add(outboxMessage)
         }
         
         
@@ -110,11 +164,50 @@ class ChatDashboardController: UIViewController {
         tempView.roundCorners(corners: [.topLeft, .topRight], radius: 17.0)
         chatTableView.roundCorners(corners: [.topLeft, .topRight], radius: 17.0)
         userProfileImage.layer.cornerRadius = userProfileImage.frame.height / 2
-        
+       
+        samplerealmDataRetrieve()
+        sampleMessageFilterRealm()
         
     }//viewdidload
     
-  
+    func samplerealmDataRetrieve(){
+
+        let realm = try! Realm()
+
+        let messageResults = realm.objects(InboxMessages.self)
+        
+        for msg in messageResults {
+            print("message text",msg.messageText!)
+            messageTEXT = msg.chatMessageId
+            for group in msg.groupMemberss {
+                print("message group data",group.num, group.type)
+            }
+        }
+        
+    }
+    
+    func sampleMessageFilterRealm(){
+        let realm = try! Realm()
+//        let primaryKey = "medbef3c589f0bf2bf05cea434b5ee913"
+
+        let data = realm.objects(InboxMessages.self).filter("chatMessageId == medbef3c589f0bf2bf05cea434b5ee913")
+        
+        if data != nil{
+
+            print("data values exists")
+            
+        }else{
+
+            print("data values not found")
+
+            
+        }
+//        outboxMessage  = realm.where(inboxMessage.chatMessageId).equalTo("account.accountNumber", 1234567890).findAll();
+        
+        
+//        print("filter query::", myFilter!)
+
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         

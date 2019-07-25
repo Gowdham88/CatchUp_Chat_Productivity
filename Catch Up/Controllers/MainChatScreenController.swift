@@ -177,6 +177,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var toArray = [String:String]()
     
+    var replyView: UIView!
+    
+     var selectedCount: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -632,6 +636,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+       
+        
         if isLongPressed {
 //
             let cell = chatTableView.cellForRow(at: indexPath) as! mainChatScreenTableViewCell
@@ -645,8 +651,12 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 checkImageArray[indexPath.row] = UIImage(named: "Check")!
                 
                 cell.contentView.alpha = 0.5
+                
+                selectedCount += 1
 
                 // open pop up view
+                
+                
 
             }else {
 
@@ -657,6 +667,21 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 checkImageArray[indexPath.row] = UIImage(named: "un-check")!
                 
                 cell.contentView.alpha = 1.0
+                
+                selectedCount -= 1
+            }
+            
+            if selectedCount > 0 {
+                
+                self.longPressView.isHidden = false
+                
+                self.bottomBarView.isHidden = true
+                
+            }else {
+                
+                self.longPressView.isHidden = true
+                
+                self.bottomBarView.isHidden = false
             }
 
     }
@@ -1627,7 +1652,7 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             let cell = self.chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
             
-            print("cell text",self.messages[(indexpath?.row)!].message)
+//            print("cell text",self.messages[(indexpath?.row)!].message)
             
             self.bottomBarView.roundCorners(corners: [], radius: 1.0)
           
@@ -1635,21 +1660,21 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             let viewHeight = 80
             
-            let replyView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: Int(self.bottomBarView.frame.minY) - Int(self.bottomBarView.frame.size.height - 10)), size: CGSize(width: Int(self.bottomBarView.frame.width), height: viewHeight)))
+            self.replyView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: Int(self.bottomBarView.frame.minY) - Int(self.bottomBarView.frame.size.height - 10)), size: CGSize(width: Int(self.bottomBarView.frame.width), height: viewHeight)))
             
-            let replySubView = UIView(frame: CGRect(x: 10, y: 10, width: replyView.frame.width - (20), height: 60))
+            let replySubView = UIView(frame: CGRect(x: 10, y: 10, width: self.replyView.frame.width - (20), height: 60))
             
-            replyView.backgroundColor = .white
+            self.replyView.backgroundColor = .white
             
             replySubView.backgroundColor = UIColor(hex: "EAF4FF")
             
-            self.view.addSubview(replyView)
             
-            replyView.addSubview(replySubView)
+            
+            self.replyView.addSubview(replySubView)
             
             // rounded corners
             
-            replyView.roundCorners(corners: [.topLeft,.topRight], radius: 15.0)
+            self.replyView.roundCorners(corners: [.topLeft,.topRight], radius: 15.0)
             
             replySubView.roundCorners(corners: [.topLeft,.topRight,.bottomLeft,.bottomRight], radius: 5.0)
             
@@ -1681,7 +1706,33 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             replySubView.addSubview(messageLabel)
             
+            
+            // close view
+            
+            print("getting frame of the reply view \(replySubView.frame.maxX)")
+            
+            let closeButton = UIButton(frame: CGRect(x: replySubView.frame.maxX - 40, y: 12, width: 20, height: 20))
+            
+            closeButton.setImage(UIImage(named: "x"), for: .normal)
+            
+            closeButton.backgroundColor = .clear
+            
+            replySubView.addSubview(closeButton)
+            
+            
+            closeButton.addTarget(self, action: #selector(self.replyCloseButton(sender:)), for: .touchUpInside)
+            
+            
+            self.view.addSubview(self.replyView)
+            
+            
         })
+    }
+    
+    @objc func replyCloseButton(sender: UIButton) {
+        
+        self.replyView.isHidden = true
+        
     }
 }
 

@@ -282,7 +282,6 @@ class ChatDashboardController: UIViewController {
     
     func NavProfileData(){
         
-        self.userProfileImage.backgroundColor = .red
         let recipientData = Database.database().reference().child("user").child(currentUser!)
         
         recipientData.observeSingleEvent(of: .value) { (snapshot) in

@@ -981,9 +981,91 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WOK-Vr-PDb">
-                                        <rect key="frame" x="420" y="523" width="414" height="213"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnR-DI-Uf4">
+                                        <rect key="frame" x="0.0" y="676" width="414" height="60"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qUd-gi-fBo">
+                                                <rect key="frame" x="0.0" y="0.0" width="264" height="60"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngW-Lt-qJY">
+                                                        <rect key="frame" x="15" y="19" width="21" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="smile"/>
+                                                        <connections>
+                                                            <action selector="didTappedEmoji:" destination="PEs-1i-fPb" eventType="touchUpInside" id="U1Y-Mh-XFu"/>
+                                                        </connections>
+                                                    </button>
+                                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   Message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D4a-IP-u3j">
+                                                        <rect key="frame" x="45" y="0.0" width="219" height="60"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="didEditingChanged:" destination="PEs-1i-fPb" eventType="editingChanged" id="ei4-pd-9Vp"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Va-TJ-Eps">
+                                                <rect key="frame" x="266" y="0.0" width="148" height="60"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ce-9c-kGV">
+                                                        <rect key="frame" x="12" y="18" width="22" height="23"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="attachment"/>
+                                                        <connections>
+                                                            <action selector="didTappedAttchments:" destination="PEs-1i-fPb" eventType="touchUpInside" id="tDO-L5-J5N"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uio-xG-WRf">
+                                                        <rect key="frame" x="54" y="19" width="24" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="camera_bottom"/>
+                                                        <connections>
+                                                            <action selector="didTappedCamera:" destination="PEs-1i-fPb" eventType="touchUpInside" id="TeJ-iH-SZ3"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHs-pA-r8e">
+                                                        <rect key="frame" x="92" y="10" width="45" height="42"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="btn voice"/>
+                                                        <connections>
+                                                            <action selector="recordOrSendButton:" destination="PEs-1i-fPb" eventType="touchUpInside" id="Ec9-hE-gkq"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="1MS-rX-hnb"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOK-Vr-PDb">
+                                        <rect key="frame" x="0.0" y="523" width="414" height="213"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TTV-Bo-ueu">
                                                 <rect key="frame" x="20" y="14" width="56" height="56"/>
@@ -1122,77 +1204,11 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnR-DI-Uf4">
-                                        <rect key="frame" x="0.0" y="676" width="414" height="60"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qUd-gi-fBo">
-                                                <rect key="frame" x="0.0" y="0.0" width="264" height="60"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngW-Lt-qJY">
-                                                        <rect key="frame" x="15" y="19" width="21" height="22"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="smile"/>
-                                                        <connections>
-                                                            <action selector="didTappedEmoji:" destination="PEs-1i-fPb" eventType="touchUpInside" id="U1Y-Mh-XFu"/>
-                                                        </connections>
-                                                    </button>
-                                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="   Message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D4a-IP-u3j">
-                                                        <rect key="frame" x="45" y="0.0" width="219" height="60"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                        <connections>
-                                                            <action selector="didEditingChanged:" destination="PEs-1i-fPb" eventType="editingChanged" id="ei4-pd-9Vp"/>
-                                                        </connections>
-                                                    </textField>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Va-TJ-Eps">
-                                                <rect key="frame" x="266" y="0.0" width="148" height="60"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ce-9c-kGV">
-                                                        <rect key="frame" x="12" y="18" width="22" height="23"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="attachment"/>
-                                                        <connections>
-                                                            <action selector="didTappedAttchments:" destination="PEs-1i-fPb" eventType="touchUpInside" id="tDO-L5-J5N"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uio-xG-WRf">
-                                                        <rect key="frame" x="54" y="19" width="24" height="22"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="camera_bottom"/>
-                                                        <connections>
-                                                            <action selector="didTappedCamera:" destination="PEs-1i-fPb" eventType="touchUpInside" id="TeJ-iH-SZ3"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHs-pA-r8e">
-                                                        <rect key="frame" x="92" y="10" width="45" height="42"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="btn voice"/>
-                                                        <connections>
-                                                            <action selector="recordOrSendButton:" destination="PEs-1i-fPb" eventType="touchUpInside" id="Ec9-hE-gkq"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="1MS-rX-hnb"/>
+                                            <constraint firstAttribute="width" constant="414" id="d9S-Eb-POP"/>
+                                            <constraint firstAttribute="height" constant="213" id="h8s-fi-YGR"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                                 <real key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
@@ -1200,10 +1216,16 @@
                                                 <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                                <size key="value" width="0.0" height="1"/>
+                                                <size key="value" width="1" height="1"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -1216,12 +1238,15 @@
                                     <constraint firstItem="RSO-JI-Smt" firstAttribute="leading" secondItem="JN4-pc-T60" secondAttribute="leading" id="EbK-ZW-Xdq"/>
                                     <constraint firstItem="BW2-lO-1lp" firstAttribute="leading" secondItem="JN4-pc-T60" secondAttribute="leading" id="Ehd-gw-jpA"/>
                                     <constraint firstItem="BW2-lO-1lp" firstAttribute="top" secondItem="RSO-JI-Smt" secondAttribute="bottom" id="HNe-cj-Nn7"/>
+                                    <constraint firstAttribute="bottom" secondItem="WOK-Vr-PDb" secondAttribute="bottom" id="KRn-mU-I36"/>
                                     <constraint firstItem="AnR-DI-Uf4" firstAttribute="trailing" secondItem="BW2-lO-1lp" secondAttribute="trailing" id="LFw-Zs-k6b"/>
                                     <constraint firstAttribute="height" constant="736" id="Wxt-BF-NY4"/>
+                                    <constraint firstAttribute="trailing" secondItem="WOK-Vr-PDb" secondAttribute="trailing" id="YQB-rI-83K"/>
                                     <constraint firstAttribute="trailing" secondItem="BW2-lO-1lp" secondAttribute="trailing" id="dK8-Oe-ylw"/>
                                     <constraint firstAttribute="trailing" secondItem="RSO-JI-Smt" secondAttribute="trailing" id="izC-Vb-rV4"/>
                                     <constraint firstItem="RSO-JI-Smt" firstAttribute="top" secondItem="JN4-pc-T60" secondAttribute="top" constant="20" id="nxC-nX-eCN"/>
                                     <constraint firstItem="AnR-DI-Uf4" firstAttribute="bottom" secondItem="BW2-lO-1lp" secondAttribute="bottom" id="oIu-ka-wqW"/>
+                                    <constraint firstItem="WOK-Vr-PDb" firstAttribute="leading" secondItem="JN4-pc-T60" secondAttribute="leading" id="tMT-W0-WDS"/>
                                     <constraint firstAttribute="bottom" secondItem="BW2-lO-1lp" secondAttribute="bottom" id="vgP-dC-mJQ"/>
                                     <constraint firstAttribute="trailing" secondItem="8vO-dJ-kyB" secondAttribute="trailing" id="y30-xi-5ZL"/>
                                 </constraints>

@@ -166,7 +166,7 @@ class ChatDashboardController: UIViewController {
         userProfileImage.layer.cornerRadius = userProfileImage.frame.height / 2
        
         samplerealmDataRetrieve()
-        sampleMessageFilterRealm()
+//        sampleMessageFilterRealm()
         
     }//viewdidload
     
@@ -189,19 +189,22 @@ class ChatDashboardController: UIViewController {
     func sampleMessageFilterRealm(){
         let realm = try! Realm()
 //        let primaryKey = "medbef3c589f0bf2bf05cea434b5ee913"
-
-        let data = realm.objects(InboxMessages.self).filter("chatMessageId == medbef3c589f0bf2bf05cea434b5ee913")
-        
-        if data != nil{
-
-            print("data values exists")
-            
-        }else{
-
-            print("data values not found")
-
-            
+        for item in realm.objects(InboxMessages.self).filter("chatMessageId == primaryKey") {
+            print("item",item)
         }
+
+//        let data = realm.objects(InboxMessages.self).filter("chatMessageId == medbef3c589f0bf2bf05cea434b5ee913")
+//
+//        if data != nil{
+//
+//            print("data values exists")
+//
+//        }else{
+//
+//            print("data values not found")
+//
+//
+//        }
 //        outboxMessage  = realm.where(inboxMessage.chatMessageId).equalTo("account.accountNumber", 1234567890).findAll();
         
         

@@ -40,8 +40,9 @@ class InboxMessages: Object {
     let to = List<String>()
 
     let uploadComplete = RealmOptional<Bool>()
-    
-    let userSelect = List<RecentChatModelRealm>()
+//    let msgs = List<OutboxMessages>()
+//
+//    let userSelect = List<RecentChatModelRealm>()
 //    override class func primaryKey() -> String? {
 //        return "chatMessageId"
 //    }

@@ -518,7 +518,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if btnRecordOrSend.imageView?.image == UIImage(named: "btn_send2") {
             
-//            messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
+            messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
+            
+            
+//            messageSendnew()
             
             recordView.isHidden = true
             
@@ -558,6 +561,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        print("returining number of messages \(messages.count)")
         
             return messages.count
         
@@ -740,7 +745,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //        recordView.isHidden = true
 //
-////        messageSend()
+//        messageSend()
 //        messageSendnew()
 //
 //        return true
@@ -781,6 +786,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                ]
 //
                 let post: Dictionary<String, AnyObject> = [
+                    "messageText": typeMessageTextField.text as AnyObject,
+                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                     "sender": recipient as AnyObject,
                     "chatCreatedDateTime": ["timestamp":Int(NSDate().timeIntervalSince1970)] as AnyObject,
                     "chatId" : userContactNumber as AnyObject,
@@ -1540,9 +1547,9 @@ extension MainChatScreenController: UITextFieldDelegate {
         
         recordView.isHidden = true
         
-//        messageSend()
+        messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
         
-        messageSendnew()
+//        messageSendnew()
 
         return true
     }

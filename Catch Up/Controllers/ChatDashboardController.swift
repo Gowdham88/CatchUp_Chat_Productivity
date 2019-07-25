@@ -56,6 +56,10 @@ class ChatDashboardController: UIViewController {
     @IBOutlet weak var addContactButton: UIButton!
     
     var style: UIStatusBarStyle = .lightContent
+    
+    var sendPhotoURL: URL?
+    
+    var sendUserName: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,11 +168,28 @@ class ChatDashboardController: UIViewController {
         tempView.roundCorners(corners: [.topLeft, .topRight], radius: 17.0)
         chatTableView.roundCorners(corners: [.topLeft, .topRight], radius: 17.0)
         userProfileImage.layer.cornerRadius = userProfileImage.frame.height / 2
+        
+        // tap gesture
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapUserImage(gesture:)))
+        tap.numberOfTapsRequired = 1
+        self.userProfileImage.isUserInteractionEnabled = true
+        self.userProfileImage.addGestureRecognizer(tap)
        
         samplerealmDataRetrieve()
 //        sampleMessageFilterRealm()
         
     }//viewdidload
+    
+    
+    @objc func tapUserImage(gesture: UITapGestureRecognizer) {
+        
+            let sb = UIStoryboard(name: "Profile", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "ProfileController") as! ProfileController
+            vc.userImageURL = sendPhotoURL ?? nil
+            vc.userName = sendUserName ?? "clay"
+            self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
     func samplerealmDataRetrieve(){
 
@@ -241,8 +262,8 @@ class ChatDashboardController: UIViewController {
                         let key = data.key
                         
                         let info = MessageDetail(messageKey: key, messageData: messageDict)
-                        print("info::\(info.messageKey)")
                         
+                        print("info::\(info.messageKey)")
             
                         self.messageDetail.append(info)
                         
@@ -250,35 +271,34 @@ class ChatDashboardController: UIViewController {
                     }
                 }
                 
+                 self.chatTableView.reloadData()
+                
             }
 
-            self.chatTableView.reloadData()
-
         }
-        
-
         
     }//viewdidappear
     
     
     func NavProfileData(){
         
-        
+        self.userProfileImage.backgroundColor = .red
         let recipientData = Database.database().reference().child("user").child(currentUser!)
         
         recipientData.observeSingleEvent(of: .value) { (snapshot) in
             
             let data = snapshot.value as! Dictionary<String, AnyObject>
             
-            print("printing whole user data",data)
+            print("printing user nav data",data)
             
             for item in data {
                 
              
                 if item.key == "userPhotoThumbnail" {
                     
-                    
                     if let photoUrl = URL(string: item.value as! String) {
+                        
+                        self.sendPhotoURL = photoUrl
                         
                         self.userProfileImage.sd_setImage(with: photoUrl)
                         
@@ -287,6 +307,13 @@ class ChatDashboardController: UIViewController {
                     
                 }
                 
+                if item.key == "userName" {
+                    
+                    if let username = item.value as? String {
+                        
+                        self.sendUserName = username
+                    }
+                }
                 
             }
             
@@ -323,6 +350,8 @@ extension UIView {
 extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        print("message detail count \(messageDetail.count)")
         
         return messageDetail.count
     }

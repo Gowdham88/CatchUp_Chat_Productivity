@@ -24,10 +24,16 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     var updatedImage: UIImage?
     
     @IBOutlet var userNameField: UITextField!
+    
+    var userImageURL: URL?
+    
+    var userName: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         userNameField.delegate = self
+
 
 //        profileImage.layer.borderWidth = 1
 //        profileImage.layer.masksToBounds = false
@@ -38,6 +44,16 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
         profileImage.roundCorners(corners: [.topRight, .topLeft, .bottomLeft, .bottomRight], radius: profileImage.frame.height/2)
         
         supportView.roundCorners(corners: [.topRight, .topLeft], radius: 20)
+        
+        if let photoURL = userImageURL {
+            
+            self.profileImage.sd_setImage(with: photoURL)
+        }
+        
+        if let name = userName {
+            
+            userNameField.text = name
+        }
         
         
         // Do any additional setup after loading the view.
@@ -106,7 +122,7 @@ class ProfileController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     @IBAction func backPressed(_ sender: Any) {
         
-        
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func editPressed(_ sender: Any) {

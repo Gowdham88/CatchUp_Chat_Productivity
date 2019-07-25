@@ -9,11 +9,15 @@
 import Foundation
 import RealmSwift
 
-class RealmMessages: Object {
+class InboxMessages: Object {
     
     @objc dynamic var messageText : String?
     @objc dynamic var sender: String?
-    let chatCreatedDateTimee = List<timeStampValue>()
+//    let chatCreatedDateTimee = List<timeStampValue>()
+//    let chatCreatedDateTimee = List<Int>()
+    @objc dynamic var chatCreatedDateTimee = Date()
+
+//    let chatCreatedDateTimee = RealmOptional<Int>()
     @objc dynamic var chatId: String?
     @objc dynamic var from: String?
     @objc dynamic var chatMessageId: String?
@@ -31,29 +35,39 @@ class RealmMessages: Object {
     @objc dynamic var messageOrigin: String?
     let participantAllowedToEditGroupInfo = RealmOptional<Bool>()
     let participantAllowedToMessage = RealmOptional<Bool>()
-    @objc dynamic var task: Bool = false
-    let to = List<toData>()
-//    let to = List<String>()
+    let task = RealmOptional<Bool>()
+//    let to = List<toData>()
+    let to = List<String>()
 
     let uploadComplete = RealmOptional<Bool>()
+    
+    let userSelect = List<RecentChatModelRealm>()
+//    override class func primaryKey() -> String? {
+//        return "chatMessageId"
+//    }
 
 }
 
-class timeStampValue: Object {
-    
-    let timestamp = RealmOptional<Int>()
-    
-}
+//class timeStampValue: Object {
+//
+//
+//    let num1 = RealmOptional<Int>()
+////    convenience init(withNum: Int) {
+////        self.init()
+////        self.num1 = withNum
+////    }
+//
+//}
 
-class toData: Object {
-    
-    @objc dynamic var num1 = ""
-    convenience init(withNum: String) {
-        self.init()
-        self.num1 = withNum
-    }
-  
-}
+//class toData: Object {
+//
+//    @objc dynamic var num1 = ""
+//    convenience init(withNum: String) {
+//        self.init()
+//        self.num1 = withNum
+//    }
+//
+//}
 
 class GroupData: Object {
     @objc dynamic var num = ""

@@ -184,10 +184,18 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+    
+
     
         self.longPressView.isHidden = true
         recordView.isHidden = true
+        
+//        self.longPressView.layer.masksToBounds = false
+        
+//        longPressView.layer.shadowPath = UIBezierPath(rect: longPressView.bounds).cgPath
+//        longPressView.layer.shadowRadius = 5
+//        longPressView.layer.shadowOffset = .zero
+//        longPressView.layer.shadowOpacity = 1
         
         chatTableView.rowHeight = UITableView.automaticDimension
         chatTableView.estimatedRowHeight = 650
@@ -197,7 +205,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
         // Do any additional setup after loading the view.
         
-        print("selected recipient id ::\(recipient)")
+//        print("selected recipient id ::\(recipient)")
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
@@ -1759,7 +1767,5 @@ extension MainChatScreenController {
     
     }
 }
-
-
 
 

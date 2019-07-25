@@ -174,6 +174,8 @@ class ChatDashboardController: UIViewController {
         tap.numberOfTapsRequired = 1
         self.userProfileImage.isUserInteractionEnabled = true
         self.userProfileImage.addGestureRecognizer(tap)
+        
+        
        
         samplerealmDataRetrieve()
 //        sampleMessageFilterRealm()

@@ -679,18 +679,20 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 selectedCount -= 1
             }
             
-            if selectedCount > 0 {
-                
-                self.longPressView.isHidden = false
-                
-                self.bottomBarView.isHidden = true
-                
-            }else {
-                
-                self.longPressView.isHidden = true
-                
-                self.bottomBarView.isHidden = false
-            }
+            //dont delete this comment
+            
+//            if selectedCount > 0 {
+//
+//                self.longPressView.isHidden = false
+//
+//                self.bottomBarView.isHidden = true
+//
+//            }else {
+//
+//                self.longPressView.isHidden = true
+//
+//                self.bottomBarView.isHidden = false
+//            }
 
     }
     

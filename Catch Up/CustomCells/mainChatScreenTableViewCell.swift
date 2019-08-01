@@ -33,23 +33,23 @@ class mainChatScreenTableViewCell: UITableViewCell {
         
     @IBOutlet var checkImage: UIImageView!
     
-    var message: Message!
-    
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     
     // reply view properties
-    @IBOutlet var replyView: UIView!
+    @IBOutlet var replyMainView: UIView!
     @IBOutlet var replyTop: UIView!
     @IBOutlet var messageToBeRepliedLabel: UILabel!
     @IBOutlet var replyLabel: UILabel!
     @IBOutlet var replyTimeLabel: UILabel!
     @IBOutlet var replyMessageStatusImage: UIImageView!
     
+    var message: Message!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        replyView.isHidden = true
+        replyMainView.isHidden = true
         
         sentMessageView.layer.masksToBounds  = true
         recievedMessageView.layer.masksToBounds = true
@@ -72,14 +72,13 @@ class mainChatScreenTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configCell(message: Message,isReplyMessage: Bool) {
+    func configCell(message: Message,isReplyMessage: Bool,repliedMessage: String,messageType: String) {
         
         self.message = message
         
 //        print("message label::\(message.message.count)")
 //
 //        print("sender id : \(message.sender) receiver id: \(String(describing: currentUser))")
-//
 //
 //        print("sender id \(message.sender) and current user \(String(describing: currentUser))")
         
@@ -103,40 +102,49 @@ class mainChatScreenTableViewCell: UITableViewCell {
             print("new time1:::\(String(describing: timeNew1))")
             receivedTimeLabel.text =  timeNew1
             recievedMessageLbl.isHidden = false
-            
             recievedMessageView.layer.backgroundColor = UIColor.clear.cgColor
             
         } else {
             
-            sentMessageView.isHidden = false
-            recievedMessageLbl.isHidden = true
-            recievedMessageView.isHidden = true
-            
-            sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
-            recievedMessageLbl.text = ""
-  
             if isReplyMessage {
                 
                 sentMessageView.isHidden = true
                 recievedMessageLbl.isHidden = true
                 recievedMessageView.isHidden = true
+                replyMainView.isHidden = false
+                messageToBeRepliedLabel.text = repliedMessage
+                replyLabel.text = message.message
                 
+            }else if messageType == "FORWARD" {
                 
+                sentMessageView.isHidden = false
+                recievedMessageLbl.isHidden = true
+                recievedMessageView.isHidden = true
+                sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
+                recievedMessageLbl.text = ""
                 
-            }else {
-                
-                let strValue = message.message
-                sentMessageLbl?.text = "\(strValue)"
-                let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
+                //                    let strValue = message.message
+                sentMessageLbl?.text = "forwarded message)"
+                let timeNew1 = getReadableDate(timeStamp: NSDate().timeIntervalSince1970)
                 sentTimeLabel.text =  timeNew1
-
+                
+            } else {
+                
+                    sentMessageView.isHidden = false
+                    recievedMessageLbl.isHidden = true
+                    recievedMessageView.isHidden = true
+                    sentMessageView.layer.backgroundColor = UIColor.clear.cgColor
+                    recievedMessageLbl.text = ""
+                    
+                    let strValue = message.message
+                    sentMessageLbl?.text = "\(strValue)"
+                    let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
+                    sentTimeLabel.text =  timeNew1
+    
             }
-            
-            
-            
-   
-
         }
+        
+//        forwardMessageArray.removeAll()
     }
     
   

@@ -26,7 +26,7 @@ import CoreFoundation
 //import CameraManager
 
 
-
+ var forwardMessageArray = [Message]()
 
 class MainChatScreenController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource {
   
@@ -64,7 +64,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //    var messages = [Message]()
     
     var messages = [Message]()
-      
     
     var message: Message!
 
@@ -180,6 +179,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var replyView: UIView!
     
      var selectedCount: Int = 0
+    
+    var replyBool = false
+    
+    var toBeReplied: String?
+    
+    var swipedIndexPath: IndexPath?
+    
+    var isForwardMessage: Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -445,7 +453,9 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func didTappedBack(_ sender: Any) {
         
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func didTappedEmoji(_ sender: Any) {
@@ -537,7 +547,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             recordView.isHidden = true
             
-            messageType = "TEXT"
+//            messageType = "TEXT"
             
         }else {
             
@@ -567,16 +577,22 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     //chat table view
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-       
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         print("returining number of messages \(messages.count)")
         
+        print("forward messages \(forwardMessageArray.count)")
+        
+        if isForwardMessage {
+            
+            return forwardMessageArray.count
+            
+        }else {
+            
             return messages.count
+        }
+        
+        
         
 //        return dummyMessageArray.count
         
@@ -584,7 +600,18 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let message = messages[indexPath.row]
+        var message : Message?
+        
+        if isForwardMessage {
+            
+            message = forwardMessageArray[indexPath.row]
+            
+        }else {
+            
+            message = messages[indexPath.row]
+        }
+        
+//        let message = messages[indexPath.row]
         
         if let cell = chatTableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
             
@@ -608,11 +635,41 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             }
             
             
-            cell.configCell(message: message, isReplyMessage: false)
+//            if messageType == "REPLY" {
+//
+//                replyBool = true
+//
+//            }else {
+//
+//                replyBool = false
+//            }
+            
+            print("swipped indexpath \(swipedIndexPath?.row)")
+            
+            DispatchQueue.main.async {
+                
+//                if self.swipedIndexPath?.row == indexPath.row {
+                
+//                    cell.configCell(message: message!, isReplyMessage: self.replyBool, repliedMessage: self.toBeReplied ?? "empty")
+                    
+//                }else {
+                
+                print("message type is",self.messageType)
+                
+                
+                    cell.configCell(message: message!, isReplyMessage: false, repliedMessage: self.toBeReplied ?? "empty", messageType: self.messageType ?? "")
+                
+//                else {
+//
+//                         cell.configCell(message: message!, isReplyMessage: false, repliedMessage: self.toBeReplied ?? "empty", messageType: self.messageType ?? "TEXT")
+//                }
+                
+           
+//                }
+            }
 
             cell.backgroundColor = .clear
 
-            
             //swipe to reply
             let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeToReply(gesture:)))
             
@@ -644,9 +701,25 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       
-        
         if isLongPressed {
+            
+            print("long pressed message detail ",messages[indexPath.row].message,messages[indexPath.row].messageKey)
+            
+//            let message = messages[indexPath.row]
+            
+//            let messageKey = Database.database().reference().child("user").child(currentUser!).child("messages").childByAutoId()
+//
+//            var forwardDict = Dictionary<String, AnyObject>()
+//
+//            forwardDict = [ "message": message.message,
+//                            "lastmessage": message
+//
+//
+//            ]
+            
+            
+            
+            forwardMessageArray.append(messages[indexPath.row])
 //
             let cell = chatTableView.cellForRow(at: indexPath) as! mainChatScreenTableViewCell
 //
@@ -674,6 +747,16 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 checkImageArray[indexPath.row] = UIImage(named: "un-check")!
                 
+                let messagess = messages[indexPath.row]
+                
+                if forwardMessageArray.count > 0 {
+                    
+                   let indexToRemove = forwardMessageArray.index(where: { $0.message == messagess.message })
+                    
+                    forwardMessageArray.remove(at: indexToRemove!)
+                    
+                }
+                
                 cell.contentView.alpha = 1.0
                 
                 selectedCount -= 1
@@ -681,18 +764,18 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             //dont delete this comment
             
-//            if selectedCount > 0 {
-//
-//                self.longPressView.isHidden = false
-//
-//                self.bottomBarView.isHidden = true
-//
-//            }else {
-//
-//                self.longPressView.isHidden = true
-//
-//                self.bottomBarView.isHidden = false
-//            }
+            if selectedCount > 0 {
+
+                self.longPressView.isHidden = false
+
+                self.bottomBarView.isHidden = true
+
+            }else {
+
+                self.longPressView.isHidden = true
+
+                self.bottomBarView.isHidden = false
+            }
 
     }
     
@@ -706,35 +789,34 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func addTaskAction(_ sender: Any) {
    
-        print("add task btn pressed")
         self.longPressView.isHidden = true
     
     }
     
     @IBAction func replyAction(_ sender: Any) {
         
-        print("reply btn pressed")
         self.longPressView.isHidden = true
         
     }
     
     @IBAction func forwardAction(_ sender: Any) {
         
-        print("forward btn pressed")
         self.longPressView.isHidden = true
+        let sb = UIStoryboard(name: "Chat", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SelectContactController") as! SelectContactController
+        vc.isForward = true
+        messageType = "FORWARD"
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     @IBAction func copAction(_ sender: Any) {
         
-        print("copy btn pressed")
         self.longPressView.isHidden = true
     }
     
     @IBAction func deleteAction(_ sender: Any) {
         
-        print("delete btn pressed")
         self.longPressView.isHidden = true
-        
         
     }
     
@@ -1056,8 +1138,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //                userMessage.setValue(message)
                 
-                
-                
                 let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox_new").child(messageId)
                 
                 if messageType == "TEXT" {
@@ -1153,18 +1233,51 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
             } else if messageId != "" {
                 
-                let post: Dictionary<String, AnyObject> = [
-                    "message": typeMessageTextField.text as AnyObject,
-                    "sender": recipient as AnyObject,
-                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
-
-                ]
+               
                 
-                let message: Dictionary<String, AnyObject> = [
+                var message = Dictionary<String, AnyObject>()
+                
+                var post = Dictionary<String, AnyObject>()
+                
+                if isForwardMessage {
+                    
+                     post = [
+                        "message": forwardMessageArray.last?.message as AnyObject,
+                        "sender": recipient as AnyObject,
+                        "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+                        
+                    ]
+                    
+                     message = [
+                        "lastmessage": forwardMessageArray.last?.message as AnyObject,
+                        "recipient": recipient as AnyObject,
+                        //                    "timestamp": ServerValue.timestamp() as AnyObject
+                        "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+                        "chatMessageId": messageId as AnyObject,
+                        "chatAttachment": "" as AnyObject,
+                        "chatAttachmentCaption": "" as AnyObject,
+                        "chatMessageType": messageType as AnyObject
+                    ]
+                }else {
+                    
+                    
+                    post = [
+                        "message": typeMessageTextField.text as AnyObject,
+                        "sender": recipient as AnyObject,
+                        "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+                        
+                    ]
+                    
+                    message = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
                     "recipient": recipient as AnyObject,
                     "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
-                ]
+                    ]
+                }
+                
+                
+                
+
                 
                 let recipientMessage: Dictionary<String, AnyObject> = [
                     "lastmessage": typeMessageTextField.text as AnyObject,
@@ -1173,6 +1286,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 ]
                 
                 let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                
 //                   let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
@@ -1353,6 +1467,7 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
         }else {
             
             var error : NSError?
+            
             do {
                 
                 let recordedUrl = audioRecorder.url
@@ -1644,6 +1759,10 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
     
     @objc func swipeToReply(gesture: UISwipeGestureRecognizer) {
         
+        messageType = "REPLY"
+        
+        replyBool = true
+        
         UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
     
 //            self.bottomBarView.frame.origin.y = self.bottomBarView.frame.origin.y - (120 - self.bottomBarHeightConstant.constant)
@@ -1658,9 +1777,9 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             let touchPoint = gesture.location(in: self.chatTableView)
             
-            let indexpath = self.chatTableView.indexPathForRow(at: touchPoint)
+            self.swipedIndexPath = self.chatTableView.indexPathForRow(at: touchPoint)
             
-            let cell = self.chatTableView.cellForRow(at: indexpath!) as! mainChatScreenTableViewCell
+            let cell = self.chatTableView.cellForRow(at: self.swipedIndexPath!) as! mainChatScreenTableViewCell
             
 //            print("cell text",self.messages[(indexpath?.row)!].message)
             
@@ -1692,7 +1811,7 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             nameLabel.textColor = UIColor(hex: "1183FF")
             
-            if self.messages[(indexpath?.row)!].sender == self.messages[(indexpath?.row)!].currentUser {
+            if self.messages[(self.swipedIndexPath?.row)!].sender == self.messages[(self.swipedIndexPath?.row)!].currentUser {
                 
                nameLabel.text = chatUserName
                 
@@ -1710,7 +1829,9 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             messageLabel.textColor = UIColor(hex: "5B799C")
             
-            messageLabel.text = self.messages[(indexpath?.row)!].message
+            messageLabel.text = self.messages[(self.swipedIndexPath?.row)!].message
+            
+            self.toBeReplied = self.messages[(self.swipedIndexPath?.row)!].message
             
             messageLabel.font = UIFont(name: "Muli-Regular", size: 14.0)
             
@@ -1741,6 +1862,8 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
     
     @objc func replyCloseButton(sender: UIButton) {
         
+        messageType = "TEXT"
+        
         self.replyView.isHidden = true
         
     }
@@ -1759,6 +1882,8 @@ extension MainChatScreenController {
             
             groupButton.setImage(UIImage(named: "Group"), for: .normal)
             
+            forwardMessageArray.removeAll()
+            
             chatTableView.reloadData()
             
         }else {
@@ -1768,6 +1893,13 @@ extension MainChatScreenController {
         }
     
     }
+}
+
+extension MainChatScreenController {
+    
+    // long press view button actions
+    
+    
 }
 
 

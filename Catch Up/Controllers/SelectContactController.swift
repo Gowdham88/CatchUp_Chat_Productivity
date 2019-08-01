@@ -77,10 +77,7 @@ var contacts = [CNContact]()
                 self.getContacts()
             }
         }
-        
-        
-        
-        
+
         Database.database().reference().child("user").observe(.value, with: { (snapshot) in
             
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
@@ -147,8 +144,6 @@ var contacts = [CNContact]()
     }
     
 
-    
-    
     @IBAction func didTappedAddPeople(_ sender: Any) {
     }
     
@@ -218,12 +213,9 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
 //        let cell = selectContactTableView.dequeueReusableCell(withIdentifier: "cell") as! SelectContactTableViewCell
         let searchData: Contacts!
 
-        
         if let cell = selectContactTableView.dequeueReusableCell(withIdentifier: "cell") as? SelectContactTableViewCell {
-        
             searchData = searchDetail[indexPath.row]
             cell.configCell(searchDetail: searchData)
-            
             return cell
             
         } else {
@@ -262,12 +254,11 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        recipient = searchDetail[indexPath.row].userKey
+        recipient         = searchDetail[indexPath.row].userKey
         userContactNumber = searchDetail[indexPath.row].userContactNumber
         
-        userContactName = searchDetail[indexPath.row].userName
-        userContactImage = searchDetail[indexPath.row].userPhotoThumbnail
-
+        userContactName   = searchDetail[indexPath.row].userName
+        userContactImage  = searchDetail[indexPath.row].userPhotoThumbnail
         
         print("recipient contact id::\(String(describing: recipient))")
         print("message id::\(String(describing: messageId))")
@@ -275,28 +266,31 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
         print("user Contact Name::\(String(describing: userContactName))")
         print("user Contact Image::\(String(describing: userContactImage))")
 
-        
-        
         if isForward == false {
-            
-            let sb = UIStoryboard(name: "Chat", bundle: nil)
-            
-            let vc = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController
-         
-
-            vc.recipient = recipient
-            vc.messageId = messageId
+        
+            let sb               = UIStoryboard(name: "Chat", bundle: nil)
+            let vc               = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController
+            vc.recipient         = recipient
+            vc.messageId         = messageId
             vc.userContactNumber = userContactNumber
-            vc.userContactName = userContactName
-            vc.userContactImage = userContactImage
-            
-            
+            vc.userContactName   = userContactName
+            vc.userContactImage  = userContactImage
+            vc.isForwardMessage  = false
             self.navigationController?.pushViewController(vc, animated: true)
             
+        }else {
+            
+            let sb               = UIStoryboard(name: "Chat", bundle: nil)
+            let vc               = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController
+            vc.recipient         = recipient
+//            vc.messageId         = messageId
+            vc.userContactNumber = userContactNumber
+            vc.userContactName   = userContactName
+            vc.userContactImage  = userContactImage
+            vc.isForwardMessage  = true
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-        
     }
-   
 }
 
 extension SelectContactController {

@@ -74,7 +74,13 @@ class Message {
         
         _messageKey = messageKey
         
-        if let message = postData["message"] as? String {
+        
+//        if let message = postData["message"] as? String {
+//            
+//            _message = message
+//        }
+        
+        if let message = postData["lastmessage"] as? String {
             
             _message = message
         }
@@ -84,7 +90,13 @@ class Message {
             _photoMessage = photo
         }
         
-        if let sender = postData["sender"] as? String {
+//        if let sender = postData["sender"] as? String {
+//
+//            _sender = sender
+//        }
+
+        
+        if let sender = postData["recipient"] as? String {
             
             _sender = sender
         }

@@ -216,13 +216,15 @@ extension SelectContactController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 //        let cell = selectContactTableView.dequeueReusableCell(withIdentifier: "cell") as! SelectContactTableViewCell
-        let searchData: Contacts!
+//        let searchData: Contacts!
+        
+        print("search detail model val",searchDetail[indexPath.row].currentUser,searchDetail[indexPath.row].userContactNumber,searchDetail[indexPath.row].userName)
 
         
         if let cell = selectContactTableView.dequeueReusableCell(withIdentifier: "cell") as? SelectContactTableViewCell {
         
-            searchData = searchDetail[indexPath.row]
-            cell.configCell(searchDetail: searchData)
+//            searchData = searchDetail[indexPath.row]
+            cell.configCell(searchDetail: searchDetail[indexPath.row])
             
             return cell
             

@@ -181,11 +181,21 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
      var selectedCount: Int = 0
     
+     let reff = Database.database().reference()
+    
+    var savedAutoIDArray = [String]()
+    
+    var selectedMessage = ""
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     
-
+        // read from clipboard
+        let content = UIPasteboard.general.string
+        
+        print("clip board text \(content ?? "")")
     
         self.longPressView.isHidden = true
         recordView.isHidden = true
@@ -664,6 +674,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
                 // open pop up view
                 
+                print("message keys",messages[indexPath.row].messageKey)
+                
+                savedAutoIDArray.append(messages[indexPath.row].messageKey)
+                
+                selectedMessage = messages[indexPath.row].message
                 
 
             }else {
@@ -681,18 +696,18 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             //dont delete this comment
             
-//            if selectedCount > 0 {
-//
-//                self.longPressView.isHidden = false
-//
-//                self.bottomBarView.isHidden = true
-//
-//            }else {
-//
-//                self.longPressView.isHidden = true
-//
-//                self.bottomBarView.isHidden = false
-//            }
+            if selectedCount > 0 {
+
+                self.longPressView.isHidden = false
+
+                self.bottomBarView.isHidden = true
+
+            }else {
+
+                self.longPressView.isHidden = true
+
+                self.bottomBarView.isHidden = false
+            }
 
     }
     
@@ -728,6 +743,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         print("copy btn pressed")
         self.longPressView.isHidden = true
+        
+        // write to clipboard
+        UIPasteboard.general.string = selectedMessage
+        
     }
     
     @IBAction func deleteAction(_ sender: Any) {
@@ -735,6 +754,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         print("delete btn pressed")
         self.longPressView.isHidden = true
         
+        let mainChild = "user"
+        let firstParent = currentUser!
+        let secondParent = "messages"
+        
+        for item in savedAutoIDArray {
+            
+            remove(mainParent: mainChild, parentA: firstParent, parentB: secondParent, lastChild: item)
+            
+        }
         
     }
     
@@ -746,7 +774,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //        Database.database().reference().child("user").child(currentUser!).child("outbox_new").queryEqual(toValue: messageId).observe(.value, with: { (snapshot) in
     
         
-        Database.database().reference().child("messages").child(messageId).observe(.value, with: { (snapshot) in
+        Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value, with: { (snapshot) in
         
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
@@ -1133,11 +1161,11 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
                 
-                messageId = Database.database().reference().child("messages").childByAutoId().key
-//                messageId = Database.database().reference().child("user").child(currentUser!).child("outbox").childByAutoId().key
+//                messageId = Database.database().reference().child("messages").childByAutoId().key
+                messageId = Database.database().reference().child("user").child(currentUser!).child("messages").childByAutoId().key
                 
-                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
-//                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
+//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 
@@ -1171,17 +1199,17 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "recipient": currentUser as AnyObject,
                     "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
                 ]
-                
-                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
-//                   let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
+                let messageId = Database.database().reference().child("user").child(currentUser!).child("messages").childByAutoId().key
+//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId!).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 
-                let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
+                let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId!)
                 
                 recipentMessage.setValue(recipientMessage)
                 
-                let userMessage = Database.database().reference().child("user").child(currentUser!).child("messages").child(messageId)
+                let userMessage = Database.database().reference().child("user").child(currentUser!).child("messages").child(messageId!)
                 
                 userMessage.setValue(message)
                 
@@ -1458,25 +1486,25 @@ extension MainChatScreenController: AVAudioRecorderDelegate,AVAudioPlayerDelegat
                                   AVSampleRateKey: 44100.0] as [String : Any]
             var error : NSError?
             let audioSession = AVAudioSession.sharedInstance()
-            
-            do {
-               try audioSession.setCategory(.playAndRecord)
-                //            audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, error: &error)
-                if let err = error{
-                    print("audioSession error: \(err.localizedDescription)")
-                }
-                audioRecorder = try AVAudioRecorder(url: soundFileURL as URL, settings: recordSettings )
-                audioRecorder.delegate = self
-                audioRecorder.isMeteringEnabled = true
-                if let err = error{
-                    print("audioSession error: \(err.localizedDescription)")
-                }else{
-                    audioRecorder?.prepareToRecord()
-                }
-            }catch{
-                
-                print("catched some error during recording",error)
-            }
+     // temp comment
+//            do {
+//               try audioSession.setCategory(.playAndRecord)
+//                //            audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, error: &error)
+//                if let err = error{
+//                    print("audioSession error: \(err.localizedDescription)")
+//                }
+//                audioRecorder = try AVAudioRecorder(url: soundFileURL as URL, settings: recordSettings )
+//                audioRecorder.delegate = self
+//                audioRecorder.isMeteringEnabled = true
+//                if let err = error{
+//                    print("audioSession error: \(err.localizedDescription)")
+//                }else{
+//                    audioRecorder?.prepareToRecord()
+//                }
+//            }catch{
+//
+//                print("catched some error during recording",error)
+//            }
            
             
             
@@ -1767,6 +1795,19 @@ extension MainChatScreenController {
             
         }
     
+    }
+}
+
+extension MainChatScreenController {
+    
+    func remove(mainParent: String,parentA: String,parentB: String,lastChild:String) {
+    
+        self.reff.child(mainParent).child(parentA).child(parentB).child(lastChild)
+        
+        reff.removeValue { error, _ in
+            
+            print("error occured while removing data \(error)")
+        }
     }
 }
 

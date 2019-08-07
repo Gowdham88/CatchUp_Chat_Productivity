@@ -26,7 +26,7 @@ class ChatDashboardController: UIViewController {
     @IBOutlet weak var tempView: UIView!
     
     var messageDetail = [MessageDetail]()
-    var detail: MessageDetail!
+//    var detail: MessageDetail!
     var currentUser = KeychainWrapper.standard.string(forKey: "uid")
     var recipient : String!
     var messageId: String!
@@ -63,8 +63,8 @@ class ChatDashboardController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+       
+        /* As of now Commenting the realm codes
         
         let realm = try! Realm()
         
@@ -151,6 +151,10 @@ class ChatDashboardController: UIViewController {
             realm.add(outboxMessage)
         }
         
+          samplerealmDataRetrieve()
+        
+        */
+        
         
         if self.style == .default {
             
@@ -177,7 +181,7 @@ class ChatDashboardController: UIViewController {
         
         
        
-        samplerealmDataRetrieve()
+      
 //        sampleMessageFilterRealm()
         
     }//viewdidload
@@ -200,7 +204,7 @@ class ChatDashboardController: UIViewController {
         let messageResults = realm.objects(InboxMessages.self)
         
         for msg in messageResults {
-            print("message text",msg.messageText!)
+//            print("message text",msg.messageText!)
             messageTEXT = msg.chatMessageId
             for group in msg.groupMemberss {
                 print("message group data",group.num, group.type)
@@ -289,11 +293,8 @@ class ChatDashboardController: UIViewController {
         recipientData.observeSingleEvent(of: .value) { (snapshot) in
             
             let data = snapshot.value as! Dictionary<String, AnyObject>
-            
-            print("printing user nav data",data)
-            
+                        
             for item in data {
-                
              
                 if item.key == "userPhotoThumbnail" {
                     
@@ -304,8 +305,6 @@ class ChatDashboardController: UIViewController {
                         self.userProfileImage.sd_setImage(with: photoUrl)
                         
                     }
-                    
-                    
                 }
                 
                 if item.key == "userName" {
@@ -388,6 +387,7 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
 //
 //        print("user Contact Name:: recent \(String(describing: userContactName))")
 //        print("user Contact Image:: recent \(String(describing: userContactImage))")
+        
         let sb = UIStoryboard(name: "Chat", bundle: nil)
         
         let vc = sb.instantiateViewController(withIdentifier: "MainChatScreenController") as! MainChatScreenController

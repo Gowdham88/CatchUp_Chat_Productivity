@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "792"
             endingLineNumber = "792"
-            landmarkName = "loadData()"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "777"
             endingLineNumber = "777"
-            landmarkName = "loadData()"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "779"
             endingLineNumber = "779"
-            landmarkName = "loadData()"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1135"
             endingLineNumber = "1135"
-            landmarkName = "messageSend(messageType:chatAttachment:)"
+            landmarkName = "messageSendnew()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1184"
             endingLineNumber = "1184"
-            landmarkName = "messageSend(messageType:chatAttachment:)"
+            landmarkName = "messageSendnew()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "763"
             endingLineNumber = "763"
-            landmarkName = "deleteAction(_:)"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -111,7 +111,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1805"
             endingLineNumber = "1805"
-            landmarkName = "remove(mainParent:parentA:parentB:lastChild:)"
+            landmarkName = "swipeToReply(gesture:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

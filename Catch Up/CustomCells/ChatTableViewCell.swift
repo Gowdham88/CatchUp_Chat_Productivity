@@ -43,51 +43,35 @@ class ChatTableViewCell: UITableViewCell {
     func configureCell(messageDetail: MessageDetail){
         
         self.messageDetail = messageDetail
-    
         let recipientData = Database.database().reference().child("user").child(messageDetail.recipient)
-       
         recipientData.observeSingleEvent(of: .value) { (snapshot) in
             
             let data = snapshot.value as! Dictionary<String, AnyObject>
-            
-            print("printing whole user data",data)
             
             for item in data {
                 
                 if item.key == "userName" {
                     
                     self.recipientName.text = item.value as? String
-                    
                     chatUserName = item.value as? String
                 }
                 
                 if item.key == "userPhotoThumbnail" {
                     
-                    
                     if let photoUrl = URL(string: item.value as! String) {
                         
                         chatUserImg = photoUrl.absoluteString
-
-                        
                         self.recipientImg.sd_setImage(with: photoUrl)
                     }
-            
-                    
                 }
                 
                 if item.key == "messages" {
                     
                     let chatMessages = item.value as? Dictionary<String, AnyObject>
                     
-                    print("chat messagessss",chatMessages)
-                    
                     for val in chatMessages! {
                         
-                        print("key is \(val.key) and val is \(val.value)")
-                        
                         if val.key == messageDetail.messageKey {
-                            
-                            print("recent chat is",val.value)
                             
                             for itemm in (val.value as? Dictionary<String,AnyObject>)! {
                                 
@@ -99,25 +83,15 @@ class ChatTableViewCell: UITableViewCell {
                                 if itemm.key == "timestamp" {
                                     
                                     let newTime = self.getReadableDate(timeStamp: itemm.value as! TimeInterval)
-                                    print("new time :::\(String(describing: newTime))")
                                     
-                                      self.timeStampLabel.text = newTime
-                                    
- 
-
+                                    self.timeStampLabel.text = newTime
                                 }
                             }
-                            
-                        
                         }
                     }
-                    
-                    //                    self.chatPreview.text = chatMessages.
                 }
             }
-
         }
-        
     }//configureCell
     
     
@@ -236,7 +210,4 @@ class ChatTableViewCell: UITableViewCell {
             return strDate
         }
     }
-    
-    
-
 }

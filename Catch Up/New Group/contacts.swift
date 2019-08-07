@@ -79,9 +79,9 @@ class Contacts {
         
 //          _userRef = FIRDatabase.database().reference().child("messages").child(_userKey)
 
-            _userRef = Database.database().reference().child("messages").child(_userKey)
+//            _userRef = Database.database().reference().child("messages").child(_userKey)
 //          _userRef = Database.database().reference().child("user").child(currentUser!).child("messages").child(_userKey)
-        
+        _userRef = Database.database().reference().child("user").child(currentUser!)
         
         }
     }

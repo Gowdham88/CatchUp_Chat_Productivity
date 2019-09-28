@@ -142,6 +142,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate {
         self.window?.makeKeyAndVisible()
     }
     
+  
+    
     func moveToDashboard() {
         
         let storyboard = UIStoryboard(name: "Chat", bundle: nil)

@@ -43,6 +43,7 @@ class ChatTableViewCell: UITableViewCell {
     func configureCell(messageDetail: MessageDetail){
         
         self.messageDetail = messageDetail
+        
         let recipientData = Database.database().reference().child("user").child(messageDetail.recipient)
         recipientData.observeSingleEvent(of: .value) { (snapshot) in
             
@@ -65,7 +66,7 @@ class ChatTableViewCell: UITableViewCell {
                     }
                 }
                 
-                if item.key == "messages" {
+                if item.key == "inbox" {
                     
                     let chatMessages = item.value as? Dictionary<String, AnyObject>
                     
@@ -99,7 +100,7 @@ class ChatTableViewCell: UITableViewCell {
         let date = Date(timeIntervalSince1970: timeStamp)
         let dateFormatter = DateFormatter()
         let timezone = TimeZone.current.abbreviation()   // get current TimeZone abbreviation or set to GMT+5:30
-        print("current time zone data:::\(String(describing: timezone))")
+//        print("current time zone data:::\(String(describing: timezone))")
         dateFormatter.timeZone = TimeZone(abbreviation: timezone!) //Set timezone that you want
         dateFormatter.locale = NSLocale.current
         if Calendar.current.isDateInTomorrow(date) {

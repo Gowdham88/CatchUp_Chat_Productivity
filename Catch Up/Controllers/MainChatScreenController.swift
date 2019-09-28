@@ -548,10 +548,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if btnRecordOrSend.imageView?.image == UIImage(named: "btn_send2") {
             
-            messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
+//            messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
             
             
-//            messageSendnew()
+            messageSendnew()
             
             recordView.isHidden = true
             
@@ -619,15 +619,16 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             message = messages[indexPath.row]
         }
         
+        print("message id load data::\(String(describing: message?.message))")
+
+        
 //        let message = messages[indexPath.row]
         
         if let cell = chatTableView.dequeueReusableCell(withIdentifier: "Message") as? mainChatScreenTableViewCell {
             
             cell.tag = indexPath.row
             
-            cell.sentMessageLbl.roundCorners(corners: [.topLeft,.bottomLeft,.bottomRight], radius: 5.0)
-            
-            cell.recievedMessageLbl.roundCorners(corners: [.topRight,.bottomLeft,.bottomRight], radius: 5.0)
+         
             
             if isLongPressed  {
                 
@@ -652,7 +653,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                replyBool = false
 //            }
             
-            print("swipped indexpath \(swipedIndexPath?.row)")
+//            print("swipped indexpath \(swipedIndexPath?.row)")
             
             DispatchQueue.main.async {
                 
@@ -662,7 +663,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     
 //                }else {
                 
-                print("message type is",self.messageType)
+//                print("message type is",self.messageType)
                 
                 
                     cell.configCell(message: message!, isReplyMessage: false, repliedMessage: self.toBeReplied ?? "empty", messageType: self.messageType ?? "")
@@ -837,7 +838,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let mainChild = "user"
         let firstParent = currentUser!
-        let secondParent = "messages"
+        let secondParent = "inbox"
         
         for item in savedAutoIDArray {
             
@@ -850,17 +851,13 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     
     func loadData() {
-        
-        print("message id load data::\(String(describing: messageId))")
-        
-//        Database.database().reference().child("user").child(currentUser!).child("outbox_new").queryEqual(toValue: messageId).observe(.value, with: { (snapshot) in
-    
-        
-        Database.database().reference().child("user").child(currentUser!).child("messages").observe(.value, with: { (snapshot) in
+//        Database.database().reference().child("user").child(currentUser!).child("outbox").queryEqual(toValue: messageId).observe(.value, with: { (snapshot) in
+    Database.database().reference().child("user").child(currentUser!).child("inbox").observe(.value, with: { (snapshot) in
         
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 
                 self.messages.removeAll()
+               
                 self.checkImageArray.removeAll()
                 
                 for data in snapshot {
@@ -912,24 +909,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             if messageId == nil {
                 
-                 messageId = Database.database().reference().child(recipient).child("inbox_new").childByAutoId().key
+                 messageId = Database.database().reference().child(recipient).child("inbox").childByAutoId().key
                 
-//                let post: Dictionary<String, AnyObject> = [
-//                    "messageText": typeMessageTextField.text as AnyObject,
-//                    "sender": recipient as AnyObject,
-//                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
-//                    "chatId" : userContactNumber as AnyObject,
-//                    "from": userContactNumber as AnyObject,
-//                    "chatMessageId": messageId as AnyObject,
-//                    "chatAttachment": "" as AnyObject,
-//                    "chatAttachmentCaption": "" as AnyObject,
-//                    "chatMessageType": messageType as AnyObject,
-//                    "to": ["1", "2"] as AnyObject
-//
-//
-//
-//                ]
-//
                 let post: Dictionary<String, AnyObject> = [
                     "messageText": typeMessageTextField.text as AnyObject,
                     "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
@@ -1006,29 +987,23 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
                 ]
                 
-//                messageId = Database.database().reference().child("messages").childByAutoId().key
-//
-//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
-//                print("message id::::\(String(describing: messageId))")
                 
-               
-                
-                let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox_new").child(messageId)
+                let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox").child(messageId)
                     
                     firebase_recipient_Message.setValue(post)
                 
                 if currentUser != nil {
                     
-                    let firebase_currentUser_Message = Database.database().reference().child("user").child(currentUser!).child("outbox_new").child(messageId)
+                    let firebase_currentUser_Message = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId)
                     
                     firebase_currentUser_Message.setValue(outbox)
                 }
                 
-                let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
+                let recipentMessage = Database.database().reference().child("user").child(recipient).child("inbox").child(messageId)
 
                 recipentMessage.setValue(recipientMessage)
 
-                let userMessage = Database.database().reference().child("user").child(currentUser!).child("messages").child(messageId)
+                let userMessage = Database.database().reference().child("user").child(currentUser!).child("inbox").child(messageId)
 
                 userMessage.setValue(message)
                 
@@ -1049,7 +1024,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //                ]
                 
-                messageId = Database.database().reference().child(recipient).child("inbox_new").childByAutoId().key
+                messageId = Database.database().reference().child(recipient).child("inbox").childByAutoId().key
                 
                 // send attachment
                 let postAttachment: Dictionary<String,AnyObject> = ["chatAttachment": "" as AnyObject,
@@ -1166,7 +1141,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //
 //                userMessage.setValue(message)
                 
-                let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox_new").child(messageId)
+                let firebase_recipient_Message = Database.database().reference().child("user").child(recipient).child("inbox").child(messageId)
                 
                 if messageType == "TEXT" {
                     
@@ -1178,15 +1153,15 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 }
                 
                 
-                let firebase_currentUser_Message = Database.database().reference().child("user").child(currentUser!).child("outbox_new").child(messageId)
+                let firebase_currentUser_Message = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId)
                 
                 firebase_currentUser_Message.setValue(outbox)
                 
-                let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
+                let recipentMessage = Database.database().reference().child("user").child(recipient).child("inbox").child(messageId)
 
                 recipentMessage.setValue(recipientMessage)
 
-                let userMessage = Database.database().reference().child("user").child(currentUser!).child("messages").child(messageId)
+                let userMessage = Database.database().reference().child("user").child(currentUser!).child("inbox").child(messageId)
 
                 userMessage.setValue(message)
                 
@@ -1200,8 +1175,6 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         self.typeMessageTextField.resignFirstResponder()
         
-//        self.chatTableView.reloadData()
-        
         moveToBottom()
         
     }
@@ -1209,6 +1182,8 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
     func messageSend(messageType:String,chatAttachment: String){
         
         if (typeMessageTextField.text != nil && typeMessageTextField.text != "") {
+            
+            print("printing message id here \(messageId)")
             
             if messageId == nil {
                 
@@ -1242,18 +1217,18 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 ]
                 
 //                messageId = Database.database().reference().child("messages").childByAutoId().key
-                messageId = Database.database().reference().child("user").child(currentUser!).child("messages").childByAutoId().key
+                messageId = Database.database().reference().child("user").child(currentUser!).child("inbox").childByAutoId().key
                 
 //                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
                 let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId).childByAutoId()
                 
                 firebaseMessage.setValue(post)
                 
-                let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId)
+                let recipentMessage = Database.database().reference().child("user").child(recipient).child("inbox").child(messageId)
                 
                 recipentMessage.setValue(recipientMessage)
                 
-                let userMessage = Database.database().reference().child("user").child(currentUser!).child("messages").child(messageId)
+                let userMessage = Database.database().reference().child("user").child(currentUser!).child("inbox").child(messageId)
                 
                 userMessage.setValue(message)
                 
@@ -1261,74 +1236,10 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
             } else if messageId != "" {
                 
-                 let messageId = Database.database().reference().child("user").child(currentUser!).child("messages").childByAutoId().key
+                pushMessage(forward: isForwardMessage)
                 
-                var message = Dictionary<String, AnyObject>()
-                
-                var post = Dictionary<String, AnyObject>()
-                
-                if isForwardMessage {
-                    
-                     post = [
-                        "message": forwardMessageArray.last?.message as AnyObject,
-                        "sender": recipient as AnyObject,
-                        "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
-                        
-                    ]
-                    
-                     message = [
-                        "lastmessage": forwardMessageArray.last?.message as AnyObject,
-                        "recipient": recipient as AnyObject,
-                        //                    "timestamp": ServerValue.timestamp() as AnyObject
-                        "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
-                        "chatMessageId": messageId as AnyObject,
-                        "chatAttachment": "" as AnyObject,
-                        "chatAttachmentCaption": "" as AnyObject,
-                        "chatMessageType": messageType as AnyObject
-                    ]
-                }else {
-                    
-                    
-                    post = [
-                        "message": typeMessageTextField.text as AnyObject,
-                        "sender": recipient as AnyObject,
-                        "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
-                        
-                    ]
-                    
-                    message = [
-                    "lastmessage": typeMessageTextField.text as AnyObject,
-                    "recipient": recipient as AnyObject,
-                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
-                    ]
-                }
-                
-                
-                
-
-                
-                let recipientMessage: Dictionary<String, AnyObject> = [
-                    "lastmessage": typeMessageTextField.text as AnyObject,
-                    "recipient": currentUser as AnyObject,
-                    "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
-                ]
-              
-//                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
-                let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId!).childByAutoId()
-
-                
-                firebaseMessage.setValue(post)
-                
-                let recipentMessage = Database.database().reference().child("user").child(recipient).child("messages").child(messageId!)
-                
-                recipentMessage.setValue(recipientMessage)
-                
-                let userMessage = Database.database().reference().child("user").child(currentUser!).child("messages").child(messageId!)
-                
-                userMessage.setValue(message)
-                
-                loadData()
             }
+            
             
             typeMessageTextField.text = ""
         }
@@ -1337,10 +1248,97 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         self.typeMessageTextField.resignFirstResponder()
         
-        self.chatTableView.reloadData()
+//        self.chatTableView.reloadData()
       
         moveToBottom()
 
+
+    }
+    
+    func pushMessage(forward: Bool) {
+        
+        
+        let messageId = Database.database().reference().child("user").child(currentUser!).child("inbox").childByAutoId().key
+        
+        self.messageId = messageId
+        
+        var message = Dictionary<String, AnyObject>()
+        
+        var post = Dictionary<String, AnyObject>()
+        
+        var recipientMessage =  Dictionary<String, AnyObject>()
+
+        
+        if forward {
+            
+            post = [
+                "message": forwardMessageArray.last?.message as AnyObject,
+                "sender": recipient as AnyObject,
+                "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+                
+            ]
+            
+            message = [
+                "lastmessage": forwardMessageArray.last?.message as AnyObject,
+                "recipient": recipient as AnyObject,
+                //                    "timestamp": ServerValue.timestamp() as AnyObject
+                "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+                "chatMessageId": messageId as AnyObject,
+                "chatAttachment": "" as AnyObject,
+                "chatAttachmentCaption": "" as AnyObject,
+                "chatMessageType": messageType as AnyObject
+            ]
+            
+            recipientMessage = [
+                "lastmessage": forwardMessageArray.last?.message as AnyObject,
+                "recipient": currentUser as AnyObject,
+                "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+            ]
+            
+        }else {
+            
+            post = [
+                "message": typeMessageTextField.text as AnyObject,
+                "sender": recipient as AnyObject,
+                "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+                
+            ]
+            
+            message = [
+                "lastmessage": typeMessageTextField.text as AnyObject,
+                "recipient": recipient as AnyObject,
+                //                    "timestamp": ServerValue.timestamp() as AnyObject
+                "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject,
+                "chatMessageId": messageId as AnyObject,
+                "chatAttachment": "" as AnyObject,
+                "chatAttachmentCaption": "" as AnyObject,
+                "chatMessageType": messageType as AnyObject
+            ]
+            
+            recipientMessage = [
+                "lastmessage": typeMessageTextField.text as AnyObject,
+                "recipient": currentUser as AnyObject,
+                "timestamp": Int(NSDate().timeIntervalSince1970) as AnyObject
+            ]
+        }
+        
+
+        
+        //                let firebaseMessage = Database.database().reference().child("messages").child(messageId).childByAutoId()
+        let firebaseMessage = Database.database().reference().child("user").child(currentUser!).child("outbox").child(messageId!).childByAutoId()
+        
+        
+        firebaseMessage.setValue(post)
+        
+        let recipentMessage = Database.database().reference().child("user").child(recipient).child("inbox").child(messageId!)
+        
+        recipentMessage.setValue(recipientMessage)
+        
+        let userMessage = Database.database().reference().child("user").child(currentUser!).child("inbox").child(messageId!)
+        
+        userMessage.setValue(message)
+        
+        loadData()
 
     }
     
@@ -1725,9 +1723,9 @@ extension MainChatScreenController: UITextFieldDelegate {
         
         recordView.isHidden = true
         
-        messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
+//        messageSend(messageType: messageType ?? "TEXT", chatAttachment: "")
         
-//        messageSendnew()
+        messageSendnew()
 
         return true
     }
@@ -1787,21 +1785,26 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
     
     @objc func swipeToReply(gesture: UISwipeGestureRecognizer) {
         
+        swipeToReply(gesture: gesture)
+    }
+    
+    func swipeAndReply(gesture: UISwipeGestureRecognizer) {
+        
         messageType = "REPLY"
         
-        replyBool = true
+        replyBool   = true
         
         UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
-    
-//            self.bottomBarView.frame.origin.y = self.bottomBarView.frame.origin.y - (120 - self.bottomBarHeightConstant.constant)
-//
-//            self.bottomBarHeightConstant.constant = 120
-//
-//            self.bottomBarView.frame.size.height = 120
+            
+            //            self.bottomBarView.frame.origin.y = self.bottomBarView.frame.origin.y - (120 - self.bottomBarHeightConstant.constant)
+            //
+            //            self.bottomBarHeightConstant.constant = 120
+            //
+            //            self.bottomBarView.frame.size.height = 120
             
             // alternate method
             
-//            self.bottomBarView.layer.cornerRadius = 1
+            //            self.bottomBarView.layer.cornerRadius = 1
             
             let touchPoint = gesture.location(in: self.chatTableView)
             
@@ -1809,10 +1812,10 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             let cell = self.chatTableView.cellForRow(at: self.swipedIndexPath!) as! mainChatScreenTableViewCell
             
-//            print("cell text",self.messages[(indexpath?.row)!].message)
+            //            print("cell text",self.messages[(indexpath?.row)!].message)
             
             self.bottomBarView.roundCorners(corners: [], radius: 1.0)
-          
+            
             self.bottomBarView.clipsToBounds = true
             
             let viewHeight = 80
@@ -1841,14 +1844,14 @@ extension MainChatScreenController: UIGestureRecognizerDelegate {
             
             if self.messages[(self.swipedIndexPath?.row)!].sender == self.messages[(self.swipedIndexPath?.row)!].currentUser {
                 
-               nameLabel.text = chatUserName
+                nameLabel.text = chatUserName
                 
             }else {
                 
-                 nameLabel.text = "You"
+                nameLabel.text = "You"
                 
             }
-       
+            
             nameLabel.font = UIFont(name: "Muli-Bold", size: 15.0)
             
             replySubView.addSubview(nameLabel)

@@ -62,7 +62,11 @@ class ChatDashboardController: UIViewController {
     var sendUserName: String?
     
     var receipientArray = [String]()
-
+    
+    @IBOutlet var topNavView: GradientView!
+    
+    @IBOutlet var tableBackUpView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -182,7 +186,17 @@ class ChatDashboardController: UIViewController {
         self.userProfileImage.addGestureRecognizer(tap)
         
         
-       
+//       print("max y of nav view \(topNavView.frame.maxY) and view frame \(self.view.frame.height)")
+//        
+//        let tableBackUpHeight = self.view.frame.height - topNavView.frame.maxY
+//        
+//        chatTableView.frame.size.height = tableBackUpHeight
+//        
+//        print("chat table view frame \(chatTableView.frame.size.height)")
+//        
+//        tableBackUpView.frame = CGRect(x: 0, y: topNavView.frame.maxY, width: self.view.frame.width, height: tableBackUpHeight)
+        
+        
       
 //        sampleMessageFilterRealm()
         
@@ -294,31 +308,33 @@ class ChatDashboardController: UIViewController {
         
         recipientData.observeSingleEvent(of: .value) { (snapshot) in
             
-            let data = snapshot.value as! Dictionary<String, AnyObject>
-                        
-            for item in data {
-             
-                if item.key == "userPhotoThumbnail" {
-                    
-                    if let photoUrl = URL(string: item.value as! String) {
-                        
-                        self.sendPhotoURL = photoUrl
-                        
-                        self.userProfileImage.sd_setImage(with: photoUrl)
-                        
-                    }
-                }
-                
-                if item.key == "userName" {
-                    
-                    if let username = item.value as? String {
-                        
-                        self.sendUserName = username
-                    }
-                }
-                
-            }
+//            let data = snapshot.value as! Dictionary<String, AnyObject>
             
+            if let data = snapshot.value as? Dictionary<String, AnyObject> {
+                
+                for item in data {
+                    
+                    if item.key == "userPhotoThumbnail" {
+                        
+                        if let photoUrl = URL(string: item.value as! String) {
+                            
+                            self.sendPhotoURL = photoUrl
+                            
+                            self.userProfileImage.sd_setImage(with: photoUrl)
+                            
+                        }
+                    }
+                    
+                    if item.key == "userName" {
+                        
+                        if let username = item.value as? String {
+                            
+                            self.sendUserName = username
+                        }
+                    }
+                    
+                }
+            }
         }
         
     }

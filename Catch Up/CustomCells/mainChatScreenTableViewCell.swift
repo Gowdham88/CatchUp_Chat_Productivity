@@ -54,15 +54,13 @@ class mainChatScreenTableViewCell: UITableViewCell {
         sentMessageView.layer.masksToBounds  = true
         recievedMessageView.layer.masksToBounds = true
         
-//        recievedMessageLbl.textAlignment = .left
         recievedMessageLbl.sizeToFit()
-
-
-//        sentMessageLbl.textAlignment = .right
         sentMessageLbl.sizeToFit()
 
 
+        sentMessageLbl.roundCorners(corners: [.topLeft,.bottomLeft,.bottomRight], radius: 5.0)
         
+        recievedMessageLbl.roundCorners(corners: [.topRight,.bottomLeft,.bottomRight], radius: 5.0)
 
     }
 
@@ -80,7 +78,7 @@ class mainChatScreenTableViewCell: UITableViewCell {
 //
 //        print("sender id : \(message.sender) receiver id: \(String(describing: currentUser))")
 //
-//        print("sender id \(message.sender) and current user \(String(describing: currentUser))")
+        print("sender id \(message.sender) and current user \(String(describing: currentUser))")
         
         if message.sender == currentUser {
             
@@ -137,6 +135,7 @@ class mainChatScreenTableViewCell: UITableViewCell {
                     recievedMessageLbl.text = ""
                     
                     let strValue = message.message
+                print("str value in lable \(strValue)")
                     sentMessageLbl?.text = "\(strValue)"
                     let timeNew1 = getReadableDate(timeStamp: message.receivedTimeStamp)
                     sentTimeLabel.text =  timeNew1

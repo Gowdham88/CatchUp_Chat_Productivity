@@ -60,6 +60,8 @@ class ChatDashboardController: UIViewController {
     var sendPhotoURL: URL?
     
     var sendUserName: String?
+    
+    var receipientArray = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -250,10 +252,10 @@ class ChatDashboardController: UIViewController {
         let idss = UUID().uuidString
         
         print("idss:::\(String(describing: idss))")
-//        let ref = Database.database().reference().child("user").child(currentUser!).child("inbox_new").queryOrdered(byChild: "timestamp")
+        let ref = Database.database().reference().child("user").child(currentUser!).child("inbox").queryOrdered(byChild: "timestamp")
 
         
-        let ref = Database.database().reference().child("user").child(currentUser!).child("messages").queryOrdered(byChild: "timestamp") //original
+//        let ref = Database.database().reference().child("user").child(currentUser!).child("messages").queryOrdered(byChild: "timestamp") //original
     
         ref.observe(.value) { (snapshot) in
             
@@ -360,9 +362,17 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
         
         let messageDet = messageDetail[indexPath.row]
         
+        print("message det \(messageDet.recipient)")
+        
         if let cell = chatTableView.dequeueReusableCell(withIdentifier: "cell") as? ChatTableViewCell {
             
-            cell.configureCell(messageDetail: messageDet)
+            if receipientArray.contains(messageDet.recipient) {
+                
+                cell.configureCell(messageDetail: messageDet)
+
+            }
+            
+            receipientArray.append(messageDet.recipient)
             
             return cell
             
@@ -371,10 +381,7 @@ extension ChatDashboardController: UITableViewDataSource,UITableViewDelegate {
             return ChatTableViewCell()
 
         }
-        
-        
-        
-        
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

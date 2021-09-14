@@ -108,7 +108,7 @@ class Message {
         
         
         
-        _messageRef = Database.database().reference().child("messages").child(_messageKey)
+        _messageRef = Database.database().reference().child("inbox").child(_messageKey)
         
 //        _messageRef = Database.database().reference().child("user").child("messages").child(_messageKey)
 //        Database.database().reference().child("user").child(currentUser!).child("messages").child(_messageKey)
